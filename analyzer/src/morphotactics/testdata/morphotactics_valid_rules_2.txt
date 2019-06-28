@@ -1,0 +1,37 @@
+################################################################################
+# Begin: PoS
+
+################################# START STATES #################################
+
+############ Base Categories ############
+NN              STATE-2  <EpS>  <eps>
+NOMP            STATE-3  <eps>  <EPS>
+NOMP-WITH-APOS  STATE-3  <eps>  <eps>
+PRI             STATE-2  <EPS>  <eps>
+
+
+############ Derived Categories ############
+DERIVED-STATE-1  STATE-3  <eps>  <ePs>
+
+
+################################# INFLECTIONS ##################################
+
+############ Derivation Point: inflection1 ############
+STATE-2  STATE-10  7[NN]+'[Apostrophe=True]  <eps>
+
+############ Inflection1 ############
+STATE-4  sTaTe-5  +[Case=Bare]      <eps>
+STATE-6  STATE-8  +HmHz[Possessive=P1pl]  +HmHz
+
+############ Derivation Point: inflection2 ############
+STATE-7  STATE-9  <eps>  <ePs>
+
+
+################################# DERIVATIONS ##################################
+
+############ pos1-to-pos1 ############
+state-10  DERIVED-STATE-2  )([PRI]-ki[Derivation=Rel]+[PersonNumber=A1sg] +ki
+
+
+# End: PoS
+################################################################################

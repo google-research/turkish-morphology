@@ -1,0 +1,3 @@
+tag	root	morphophonemics	features	is_compound
+PRP-CASE	bana	~	+[PersonNumber=A1sg]+[Possessive=Pnon]+[Case=Dat]	FALSE
+PRP-CASE	sana	~	+[PersonNumber=A2sg]+[Possessive=Pnon]+[Case=Dat]	FALSE

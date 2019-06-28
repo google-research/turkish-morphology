@@ -1,0 +1,8 @@
+tag	morphophonemics	features	is_compound
+Nn	~	~	FALSE
+nN	âhî?t~	~	FaLsE
+nn	ördekbaş	~	true
+				
+Jj	~	~	FALSE
+jJ	~	+[Emphasis=True]	false
+in	~	+[ComplementType=CGen]	FALSE

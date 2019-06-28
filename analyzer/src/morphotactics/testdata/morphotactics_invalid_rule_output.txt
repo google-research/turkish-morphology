@@ -1,0 +1,39 @@
+################################################################################
+# Begin: PoS
+
+################################# START STATES #################################
+
+############ Base Categories ############
+JJ  STATE-2  <eps>  <ePs>
+IN  STATE-3  <EpS>  <eps>
+
+
+############ Derived Categories ############
+DERIVED-STATE-2  STATE-2  <eps>  <EPS>
+
+
+################################# INFLECTIONS ##################################
+
+############ Derivation Point: inflection1 ############
+state-3  STATE-9   <EPS>  <eps>
+
+############ Inflection1 ############
+STATE-5  StAtE-7  +DA[Case=Loc]    +DA
+STATE-6  STATE-8  +HmHz[Possessive=P1pl]  +HmHz
+
+############ Derivation Point: inflection2 ############
+StAtE-8  state-10  1[CD]  1*ir*
+
+
+################################# DERIVATIONS ##################################
+
+############ pos1-to-pos1 ############
+STATE-9  DERIVED-STATE-1  )([JJ]-cHk[Derivation=Dim]  cHk
+
+
+################################# ACCEPT #######################################
+STATE-11  ACCEPT  )+[Proper=True]  <eps>
+
+
+# End: PoS
+################################################################################

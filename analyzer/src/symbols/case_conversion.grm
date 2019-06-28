@@ -1,0 +1,91 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import 'alphabet.grm' as alphabet;
+import 'unicode.grm' as unicode;
+
+upper_lower = Optimize[
+  ("A".utf8 : "a".utf8)
+| ("B".utf8 : "b".utf8)
+| ("C".utf8 : "c".utf8)
+| ("D".utf8 : "d".utf8)
+| ("E".utf8 : "e".utf8)
+| ("F".utf8 : "f".utf8)
+| ("G".utf8 : "g".utf8)
+| ("H".utf8 : "h".utf8)
+| ("I".utf8 : "ı".utf8)  # Turkish-specific case conversion
+| ("J".utf8 : "j".utf8)
+| ("K".utf8 : "k".utf8)
+| ("L".utf8 : "l".utf8)
+| ("M".utf8 : "m".utf8)
+| ("N".utf8 : "n".utf8)
+| ("O".utf8 : "o".utf8)
+| ("P".utf8 : "p".utf8)
+| ("Q".utf8 : "q".utf8)
+| ("R".utf8 : "r".utf8)
+| ("S".utf8 : "s".utf8)
+| ("T".utf8 : "t".utf8)
+| ("U".utf8 : "u".utf8)
+| ("V".utf8 : "v".utf8)
+| ("W".utf8 : "w".utf8)
+| ("X".utf8 : "x".utf8)
+| ("Y".utf8 : "y".utf8)
+| ("Z".utf8 : "z".utf8)
+| ("À".utf8 : "à".utf8)
+| ("Á".utf8 : "á".utf8)
+| ("Â".utf8 : "â".utf8)
+| ("Ã".utf8 : "ã".utf8)
+| ("Ä".utf8 : "ä".utf8)
+| ("Å".utf8 : "å".utf8)
+| ("Æ".utf8 : "æ".utf8)
+| ("Ç".utf8 : "ç".utf8)
+| ("È".utf8 : "è".utf8)
+| ("É".utf8 : "é".utf8)
+| ("Ê".utf8 : "ê".utf8)
+| ("Ë".utf8 : "ë".utf8)
+| ("Ì".utf8 : "ì".utf8)
+| ("Í".utf8 : "í".utf8)
+| ("Î".utf8 : "î".utf8)
+| ("Ï".utf8 : "ï".utf8)
+| ("Ð".utf8 : "ð".utf8)
+| ("Ñ".utf8 : "ñ".utf8)
+| ("Ò".utf8 : "ò".utf8)
+| ("Ó".utf8 : "ó".utf8)
+| ("Ô".utf8 : "ô".utf8)
+| ("Õ".utf8 : "õ".utf8)
+| ("Ö".utf8 : "ö".utf8)
+| ("Ø".utf8 : "ø".utf8)
+| ("Ù".utf8 : "ù".utf8)
+| ("Ú".utf8 : "ú".utf8)
+| ("Û".utf8 : "û".utf8)
+| ("Ü".utf8 : "ü".utf8)
+| ("Ý".utf8 : "ý".utf8)
+| ("Þ".utf8 : "þ".utf8)
+| ("Ğ".utf8 : "ğ".utf8)
+| ("İ".utf8 : "i".utf8)  # Turkish-specific case conversion
+| ("Œ".utf8 : "œ".utf8)
+| ("Ş".utf8 : "ş".utf8)
+| ("Š".utf8 : "š".utf8)
+| ("Ÿ".utf8 : "ÿ".utf8)
+];
+
+export TO_LOWER = CDRewrite[upper_lower, "", "", alphabet.kSigmaStar];
+
+# Only used for testing.
+export TO_LOWER_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to TO_LOWER should be Unicode codepoints.
+@ TO_LOWER
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];

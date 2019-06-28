@@ -1,0 +1,122 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file defines a grammar that;
+#   1. rewrites stem final p as b and t as d, if the word stem is followed by a
+#      morpheme that starts with a vowel, and if the word stem final consonant
+#      is annotated for voicing using the '~' annotation markup.
+#   2. rewrites morpheme final ç as c, k as ğ, and nk as ng, if it is followed
+#      by a morpheme that starts with a vowel.
+#   3. resolves stem final voicing exception annotation markup K as k, and Ç as
+#      ç.
+#   4. resolves suffix initial C meta-phoneme as ç, if the last phoneme of the
+#      preceeding morpheme is one of {f, s, t, k, ç, ş, h, p}. Otherwise, it is
+#      resolved as c.
+
+import 'alphabet.grm' as alphabet;
+import 'common.grm' as common;
+import 'unicode.grm' as unicode;
+
+voice_pt =
+  ("p".utf8 common.kConsonantVoicingMarkup : "b".utf8)
+| ("t".utf8 common.kConsonantVoicingMarkup : "d".utf8)
+;
+keep_pt =
+  ("p".utf8 common.kConsonantVoicingMarkup : "p".utf8)
+| ("t".utf8 common.kConsonantVoicingMarkup : "t".utf8)
+;
+
+devoice_kc =
+  ("ç".utf8  : "c".utf8)
+| ("k".utf8  : "ğ".utf8)
+| ("n".utf8 "k".utf8 : "n".utf8 "g".utf8)
+;
+keep_kc =
+  (common.kStemFinalVoicedKMetaPhoneme : "k".utf8)
+| (common.kStemFinalVoicedCMetaPhoneme : "ç".utf8)
+;
+
+voice_c =
+  (common.kSuffixInitialCMetaPhoneme : "ç".utf8)
+;
+keep_c =
+  (common.kSuffixInitialCMetaPhoneme : "c".utf8)
+;
+
+# Word stems that are annotated for consonant voicing exception, might also
+# be annotated for other morphophonemic processes (e.g. gemination), thus
+# expecting additional optional stem final annotation markups in right context.
+voice_stem_final_p_and_t = CDRewrite[
+  voice_pt,
+  common.kWordStem,
+  common.kStemFinalAnnotationMarkup* common.kMorphemeStartsWithVowel,
+  alphabet.kSigmaStar
+];
+keep_stem_final_p_and_t = CDRewrite[
+  keep_pt,
+  common.kWordStem,
+  common.kEndOfMorpheme,
+  alphabet.kSigmaStar
+];
+
+# We do not devoice stem final k an ç for proper nouns, thus not expecting an
+# optional apostrophe in right context (which only separates the suffixes from
+# proper noun word stems). Also, expecting a character in left context not to
+# devoice standalone k and ç.
+devoice_morpheme_final_k_and_c = CDRewrite[
+  devoice_kc,
+  alphabet.kCharacter,
+  common.kMorphemeStartsWithVowel,
+  alphabet.kSigmaStar
+];
+# Voiced consonant annotation markup can only occur at the end of word stems,
+# thus expecting word stem in left context.
+keep_morpheme_final_k_and_c = CDRewrite[
+  keep_kc,
+  common.kWordStem,
+  common.kEndOfMorpheme,
+  alphabet.kSigmaStar
+];
+
+# C might occur right after a dropping consonant annotation markup (e.g. +NCA
+# noun-to-adverb derivational morpheme which is affixed to nouns).
+voice_morpheme_initial_c = CDRewrite[
+  voice_c,
+  common.kMorphemeEndsWithFstkcshp common.kDroppingConsonantMetaPhoneme?,
+  "",
+  alphabet.kSigmaStar
+];
+keep_morpheme_initial_c = CDRewrite[
+  keep_c,
+  common.kMorphemeBoundary common.kDroppingConsonantMetaPhoneme?,
+  "",
+  alphabet.kSigmaStar
+];
+
+export RESOLVE = Optimize[
+  voice_stem_final_p_and_t
+@ keep_stem_final_p_and_t
+@ devoice_morpheme_final_k_and_c
+@ keep_morpheme_final_k_and_c
+@ voice_morpheme_initial_c
+@ keep_morpheme_initial_c
+];
+
+# Only used for testing.
+export RESOLVE_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to RESOLVE should be Unicode codepoints.
+@ RESOLVE
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];

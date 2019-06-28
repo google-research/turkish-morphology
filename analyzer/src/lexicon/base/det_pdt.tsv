@@ -1,0 +1,6 @@
+tag	root	morphophonemics	features	is_compound
+PDT	bir	~	~	FALSE
+PDT	her	~	~	FALSE
+PDT	herhangi	~	~	FALSE
+PDT	hiç	~	~	FALSE
+PDT	tek	~	~	FALSE

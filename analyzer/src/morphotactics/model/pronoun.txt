@@ -1,0 +1,415 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# 1. Start States
+
+# 1.1. Base Categories
+
+PRD         PRD-DERIVATION-STEM                  <eps>  <eps>
+PRD-PNON    PRD-DERIVATION-POSS-PNON             <eps>  <eps>
+PRD-PNPOSS  PRD-PNPOSS-DERIVATION-PERSON-NUMBER  <eps>  <eps>
+PRI         PRI-DERIVATION-STEM                  <eps>  <eps>
+PRP         PRP-DERIVATION-PERSON-NUMBER         <eps>  <eps>
+PRP$        PRP$-DERIVATION-POSS-PNON            <eps>  <eps>
+PRP-CASE    PRP-DERIVATION-CASE-MARKED           <eps>  <eps>
+PRP-IRR     PRP-IRR-DERIVATION-POSS-PNON         <eps>  <eps>
+PRR         PRR-DERIVATION-STEM                  <eps>  <eps>
+WP          WP-DERIVATION-STEM                   <eps>  <eps>
+
+# 1.2. Derived Categories
+
+PRF  PRF-DERIVATION-STEM  <eps>  <eps>
+
+# 2. Inflections
+
+# 2.1. Derivation Slot: After Stem
+
+PRD-DERIVATION-STEM  PRD-PERSON-NUMBER  <eps>  <eps>
+PRF-DERIVATION-STEM  PRF-PERSON-NUMBER  <eps>  <eps>
+PRI-DERIVATION-STEM  PRI-PERSON-NUMBER  <eps>  <eps>
+PRR-DERIVATION-STEM  PRR-PERSON-NUMBER  <eps>  <eps>
+WP-DERIVATION-STEM   WP-PERSON-NUMBER   <eps>  <eps>
+
+# 2.2. Person-Number
+
+PRF-PERSON-NUMBER  PRF-DERIVATION-PERSON-NUMBER  +[PersonNumber=A3sg]     <eps>
+PRF-PERSON-NUMBER  PRF-DERIVATION-PERSON-NUMBER  +lAr[PersonNumber=A3sg]  +lAr
+
+PRD-PERSON-NUMBER  PRD-DERIVATION-PERSON-NUMBER  +[PersonNumber=A3sg]     <eps>
+PRD-PERSON-NUMBER  PRD-DERIVATION-PERSON-NUMBER  +lAr[PersonNumber=A3sg]  +lAr
+
+PRI-PERSON-NUMBER  PRI-DERIVATION-PERSON-NUMBER  +[PersonNumber=A3sg]     <eps>
+PRI-PERSON-NUMBER  PRI-DERIVATION-PERSON-NUMBER  +lAr[PersonNumber=A3sg]  +lAr
+
+PRR-PERSON-NUMBER  PRR-DERIVATION-PERSON-NUMBER  +[PersonNumber=A3sg]     <eps>
+PRR-PERSON-NUMBER  PRR-DERIVATION-PERSON-NUMBER  +lAr[PersonNumber=A3sg]  +lAr
+
+WP-PERSON-NUMBER   WP-DERIVATION-PERSON-NUMBER   +[PersonNumber=A3sg]     <eps>
+WP-PERSON-NUMBER   WP-DERIVATION-PERSON-NUMBER   +lAr[PersonNumber=A3sg]  +lAr
+
+# 2.3. Derivation Slot: After Person-Number
+
+PRD-DERIVATION-PERSON-NUMBER         PRD-POSSESSIVE         <eps>                           <eps>
+
+PRD-PNPOSS-DERIVATION-PERSON-NUMBER  PRD-PNPOSS-POSSESSIVE  <eps>                           <eps>
+
+PRF-DERIVATION-PERSON-NUMBER         PRF-POSSESSIVE         <eps>                           <eps>
+
+PRI-DERIVATION-PERSON-NUMBER         PRI-POSSESSIVE         <eps>                           <eps>
+
+PRP-DERIVATION-PERSON-NUMBER         PRP-POSSESSIVE         <eps>                           <eps>
+
+PRP-DERIVATION-PERSON-NUMBER         DER-PRONOUN-RB-ACT     +[Possessive=Pnon]+[Case=Bare]  <eps>
+
+PRR-DERIVATION-PERSON-NUMBER         PRR-POSSESSIVE         <eps>                           <eps>
+
+WP-DERIVATION-PERSON-NUMBER          WP-POSSESSIVE          <eps>                           <eps>
+
+# 2.4. Possessive
+
+PRD-PNPOSS-POSSESSIVE  PRD-DERIVATION-POSS-POSS  +[Possessive=Pnon]      <eps>
+PRD-PNPOSS-POSSESSIVE  PRD-DERIVATION-POSS-POSS  +Hm[Possessive=P1sg]    +Hm
+PRD-PNPOSS-POSSESSIVE  PRD-DERIVATION-POSS-POSS  +Hn[Possessive=P2sg]    +Hn
+PRD-PNPOSS-POSSESSIVE  PRD-DERIVATION-POSS-POSS  +HnHz[Possessive=P2sg]  +HnHz
+PRD-PNPOSS-POSSESSIVE  PRD-DERIVATION-POSS-POSS  +SH[Possessive=P3sg]    +SH
+PRD-PNPOSS-POSSESSIVE  PRD-DERIVATION-POSS-POSS  +HmHz[Possessive=P1pl]  +HmHz
+PRD-PNPOSS-POSSESSIVE  PRD-DERIVATION-POSS-POSS  +lArH[Possessive=P3pl]  +lArH
+
+PRD-POSSESSIVE         PRD-DERIVATION-POSS-PNON  +[Possessive=Pnon]      <eps>
+PRD-POSSESSIVE         PRD-DERIVATION-POSS-POSS  +Hm[Possessive=P1sg]    +Hm
+PRD-POSSESSIVE         PRD-DERIVATION-POSS-POSS  +Hn[Possessive=P2sg]    +Hn
+PRD-POSSESSIVE         PRD-DERIVATION-POSS-POSS  +HnHz[Possessive=P2sg]  +HnHz
+PRD-POSSESSIVE         PRD-DERIVATION-POSS-POSS  +SH[Possessive=P3sg]    +SH
+PRD-POSSESSIVE         PRD-DERIVATION-POSS-POSS  +HmHz[Possessive=P1pl]  +HmHz
+PRD-POSSESSIVE         PRD-DERIVATION-POSS-POSS  +lArH[Possessive=P3pl]  +lArH
+
+PRI-POSSESSIVE         PRI-DERIVATION-POSS-PNON  +[Possessive=Pnon]      <eps>
+PRI-POSSESSIVE         PRI-DERIVATION-POSS-POSS  +Hm[Possessive=P1sg]    +Hm
+PRI-POSSESSIVE         PRI-DERIVATION-POSS-POSS  +Hn[Possessive=P2sg]    +Hn
+PRI-POSSESSIVE         PRI-DERIVATION-POSS-POSS  +HnHz[Possessive=P2sg]  +HnHz
+PRI-POSSESSIVE         PRI-DERIVATION-POSS-POSS  +SH[Possessive=P3sg]    +SH
+PRI-POSSESSIVE         PRI-DERIVATION-POSS-POSS  +HmHz[Possessive=P1pl]  +HmHz
+PRI-POSSESSIVE         PRI-DERIVATION-POSS-POSS  +lArH[Possessive=P3pl]  +lArH
+
+PRF-POSSESSIVE         PRF-DERIVATION-POSS-PNON  +[Possessive=Pnon]      <eps>
+
+PRP-POSSESSIVE         PRP-DERIVATION-POSS-PNON  +[Possessive=Pnon]      <eps>
+PRR-POSSESSIVE         PRR-DERIVATION-POSS-PNON  +[Possessive=Pnon]      <eps>
+PRR-POSSESSIVE         PRR-DERIVATION-POSS-POSS  +Hm[Possessive=P1sg]    +Hm
+PRR-POSSESSIVE         PRR-DERIVATION-POSS-POSS  +Hn[Possessive=P2sg]    +Hn
+PRR-POSSESSIVE         PRR-DERIVATION-POSS-POSS  +HnHz[Possessive=P2sg]  +HnHz
+PRR-POSSESSIVE         PRR-DERIVATION-POSS-POSS  +SH[Possessive=P3sg]    +SH
+PRR-POSSESSIVE         PRR-DERIVATION-POSS-POSS  +HmHz[Possessive=P1pl]  +HmHz
+PRR-POSSESSIVE         PRR-DERIVATION-POSS-POSS  +lArH[Possessive=P3pl]  +lArH
+
+WP-POSSESSIVE          WP-DERIVATION-POSS-PNON   +[Possessive=Pnon]      <eps>
+WP-POSSESSIVE          WP-DERIVATION-POSS-POSS   +Hm[Possessive=P1sg]    +Hm
+WP-POSSESSIVE          WP-DERIVATION-POSS-POSS   +Hn[Possessive=P2sg]    +Hn
+WP-POSSESSIVE          WP-DERIVATION-POSS-POSS   +HnHz[Possessive=P2sg]  +HnHz
+WP-POSSESSIVE          WP-DERIVATION-POSS-POSS   +SH[Possessive=P3sg]    +SH
+WP-POSSESSIVE          WP-DERIVATION-POSS-POSS   +HmHz[Possessive=P1pl]  +HmHz
+WP-POSSESSIVE          WP-DERIVATION-POSS-POSS   +lArH[Possessive=P3pl]  +lArH
+
+# 2.5. Derivation Slot: After Possessive
+
+PRD-DERIVATION-POSS-PNON      DER-PRONOUN-RB-ACT  +[Case=Bare]  <eps>
+PRD-DERIVATION-POSS-PNON      FINAL-PNON          +[Case=Bare]  <eps>
+PRD-DERIVATION-POSS-PNON      FINAL-STEM          +[Case=Bare]  <eps>
+PRD-DERIVATION-POSS-PNON      PRD-CASE-PNON       <eps>         <eps>
+
+PRD-DERIVATION-POSS-POSS      DER-PRONOUN-RB-ACT  +[Case=Bare]  <eps>
+PRD-DERIVATION-POSS-POSS      FINAL-POSS          +[Case=Bare]  <eps>
+PRD-DERIVATION-POSS-POSS      FINAL-STEM          +[Case=Bare]  <eps>
+PRD-DERIVATION-POSS-POSS      PRD-CASE-POSS       <eps>         <eps>
+
+PRF-DERIVATION-POSS-PNON      FINAL-PNON          +[Case=Bare]  <eps>
+PRF-DERIVATION-POSS-PNON      FINAL-STEM          +[Case=Bare]  <eps>
+PRF-DERIVATION-POSS-PNON      PRF-CASE-PNON       <eps>         <eps>
+
+PRI-DERIVATION-POSS-PNON      FINAL-PNON          +[Case=Bare]  <eps>
+PRI-DERIVATION-POSS-PNON      FINAL-STEM          +[Case=Bare]  <eps>
+PRI-DERIVATION-POSS-PNON      PRI-CASE-PNON       <eps>         <eps>
+
+PRI-DERIVATION-POSS-POSS      FINAL-POSS          +[Case=Bare]  <eps>
+PRI-DERIVATION-POSS-POSS      FINAL-STEM          +[Case=Bare]  <eps>
+PRI-DERIVATION-POSS-POSS      PRI-CASE-POSS       <eps>         <eps>
+
+PRP-DERIVATION-POSS-PNON      FINAL-PNON          +[Case=Bare]  <eps>
+PRP-DERIVATION-POSS-PNON      FINAL-STEM          +[Case=Bare]  <eps>
+PRP-DERIVATION-POSS-PNON      PRP-CASE-PNON       <eps>         <eps>
+
+PRP-IRR-DERIVATION-POSS-PNON  DER-PRONOUN-RB-ACT  +[Case=Bare]  <eps>
+PRP-IRR-DERIVATION-POSS-PNON  FINAL-PNON          +[Case=Bare]  <eps>
+PRP-IRR-DERIVATION-POSS-PNON  FINAL-STEM          +[Case=Bare]  <eps>
+PRP-IRR-DERIVATION-POSS-PNON  PRP-IRR-CASE-PNON   <eps>         <eps>
+
+PRP$-DERIVATION-POSS-PNON     FINAL-PNON          +[Case=Bare]  <eps>
+PRP$-DERIVATION-POSS-PNON     FINAL-STEM          +[Case=Bare]  <eps>
+PRP$-DERIVATION-POSS-PNON     PRP$-CASE-PNON      <eps>         <eps>
+
+PRR-DERIVATION-POSS-PNON      FINAL-PNON          +[Case=Bare]  <eps>
+PRR-DERIVATION-POSS-PNON      FINAL-STEM          +[Case=Bare]  <eps>
+PRR-DERIVATION-POSS-PNON      PRR-CASE-PNON       <eps>         <eps>
+
+PRR-DERIVATION-POSS-POSS      FINAL-POSS          +[Case=Bare]  <eps>
+PRR-DERIVATION-POSS-POSS      FINAL-STEM          +[Case=Bare]  <eps>
+PRR-DERIVATION-POSS-POSS      PRR-CASE-POSS       <eps>         <eps>
+
+WP-DERIVATION-POSS-PNON       FINAL-PNON          +[Case=Bare]  <eps>
+WP-DERIVATION-POSS-PNON       FINAL-STEM          +[Case=Bare]  <eps>
+WP-DERIVATION-POSS-PNON       WP-CASE-PNON        <eps>         <eps>
+
+WP-DERIVATION-POSS-POSS       FINAL-POSS          +[Case=Bare]  <eps>
+WP-DERIVATION-POSS-POSS       FINAL-STEM          +[Case=Bare]  <eps>
+WP-DERIVATION-POSS-POSS       WP-CASE-POSS        <eps>         <eps>
+
+# 2.6. Case
+
+PRD-CASE-PNON      PRD-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRD-CASE-PNON      PRD-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRD-CASE-PNON      PRD-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+PRD-CASE-PNON      PRD-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+PRD-CASE-PNON      PRD-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+PRD-CASE-PNON      PRD-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+PRD-CASE-PNON      PRD-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+PRD-CASE-PNON      PRD-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRD-CASE-POSS      PRD-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRD-CASE-POSS      PRD-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRD-CASE-POSS      PRD-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+PRD-CASE-POSS      PRD-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+PRD-CASE-POSS      PRD-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+PRD-CASE-POSS      PRD-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+PRD-CASE-POSS      PRD-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+PRD-CASE-POSS      PRD-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRF-CASE-PNON      PRF-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRF-CASE-PNON      PRF-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRF-CASE-PNON      PRF-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+PRF-CASE-PNON      PRF-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+PRF-CASE-PNON      PRF-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+PRF-CASE-PNON      PRF-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+PRF-CASE-PNON      PRF-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+PRF-CASE-PNON      PRF-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRI-CASE-PNON      PRI-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRI-CASE-PNON      PRI-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRI-CASE-PNON      PRI-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+PRI-CASE-PNON      PRI-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+PRI-CASE-PNON      PRI-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+PRI-CASE-PNON      PRI-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+PRI-CASE-PNON      PRI-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+PRI-CASE-PNON      PRI-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRI-CASE-POSS      PRI-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRI-CASE-POSS      PRI-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRI-CASE-POSS      PRI-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+PRI-CASE-POSS      PRI-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+PRI-CASE-POSS      PRI-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+PRI-CASE-POSS      PRI-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+PRI-CASE-POSS      PRI-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+PRI-CASE-POSS      PRI-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRP-CASE-PNON      PRP-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRP-CASE-PNON      PRP-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRP-CASE-PNON      PRP-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+PRP-CASE-PNON      PRP-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+PRP-CASE-PNON      PRP-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+PRP-CASE-PNON      PRP-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+PRP-CASE-PNON      PRP-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRP-IRR-CASE-PNON  PRP-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRP-IRR-CASE-PNON  PRP-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRP-IRR-CASE-PNON  PRP-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+PRP-IRR-CASE-PNON  PRP-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+PRP-IRR-CASE-PNON  PRP-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+PRP-IRR-CASE-PNON  PRP-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRP$-CASE-PNON     PRP$-DERIVATION-CASE-BARE    +[Case=Bare]     <eps>
+PRP$-CASE-PNON     PRP$-DERIVATION-CASE-MARKED  +YlA[Case=Ins]   +YlA
+
+PRR-CASE-PNON      PRR-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRR-CASE-PNON      PRR-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRR-CASE-PNON      PRR-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+PRR-CASE-PNON      PRR-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+PRR-CASE-PNON      PRR-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+PRR-CASE-PNON      PRR-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+PRR-CASE-PNON      PRR-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+PRR-CASE-PNON      PRR-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+PRR-CASE-POSS      PRR-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+PRR-CASE-POSS      PRR-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+PRR-CASE-POSS      PRR-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+PRR-CASE-POSS      PRR-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+PRR-CASE-POSS      PRR-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+PRR-CASE-POSS      PRR-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+PRR-CASE-POSS      PRR-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+PRR-CASE-POSS      PRR-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+
+WP-CASE-PNON       WP-DERIVATION-CASE-BARE      +[Case=Bare]     <eps>
+WP-CASE-PNON       WP-DERIVATION-CASE-NOM       +[Case=Nom]      <eps>
+WP-CASE-PNON       WP-DERIVATION-CASE-MARKED    +YH[Case=Acc]    +YH
+WP-CASE-PNON       WP-DERIVATION-CASE-MARKED    +YA[Case=Dat]    +YA
+WP-CASE-PNON       WP-DERIVATION-CASE-LOC       +DA[Case=Loc]    +DA
+WP-CASE-PNON       WP-DERIVATION-CASE-MARKED    +DAn[Case=Abl]   +DAn
+WP-CASE-PNON       WP-DERIVATION-CASE-GEN       +NHn[Case=Gen]   +NHn
+WP-CASE-PNON       WP-DERIVATION-CASE-MARKED    +YlA[Case=Ins]   +YlA
+
+WP-CASE-POSS       WP-DERIVATION-CASE-BARE      +[Case=Bare]     <eps>
+WP-CASE-POSS       WP-DERIVATION-CASE-NOM       +[Case=Nom]      <eps>
+WP-CASE-POSS       WP-DERIVATION-CASE-MARKED    +NH[Case=Acc]    +NH
+WP-CASE-POSS       WP-DERIVATION-CASE-MARKED    +NA[Case=Dat]    +NA
+WP-CASE-POSS       WP-DERIVATION-CASE-LOC       +NDA[Case=Loc]   +NDA
+WP-CASE-POSS       WP-DERIVATION-CASE-MARKED    +NDAn[Case=Abl]  +NDAn
+WP-CASE-POSS       WP-DERIVATION-CASE-GEN       +NHn[Case=Gen]   +NHn
+WP-CASE-POSS       WP-DERIVATION-CASE-MARKED    +YlA[Case=Ins]   +YlA
+
+# 2.7. Derivation Slot: After Case
+
+PRD-DERIVATION-CASE-BARE     CONTRAST              <eps>  <eps>
+PRD-DERIVATION-CASE-BARE     FINAL                 <eps>  <eps>
+PRD-DERIVATION-CASE-GEN      CONTRAST              <eps>  <eps>
+PRD-DERIVATION-CASE-GEN      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRD-DERIVATION-CASE-GEN      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRD-DERIVATION-CASE-GEN      FINAL                 <eps>  <eps>
+PRD-DERIVATION-CASE-GEN      FINAL-STEM            <eps>  <eps>
+PRD-DERIVATION-CASE-LOC      CONTRAST              <eps>  <eps>
+PRD-DERIVATION-CASE-LOC      DER-PRONOUN-JJ-REL    <eps>  <eps>
+PRD-DERIVATION-CASE-LOC      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRD-DERIVATION-CASE-LOC      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRD-DERIVATION-CASE-LOC      FINAL                 <eps>  <eps>
+PRD-DERIVATION-CASE-LOC      FINAL-STEM            <eps>  <eps>
+PRD-DERIVATION-CASE-MARKED   CONTRAST              <eps>  <eps>
+PRD-DERIVATION-CASE-MARKED   FINAL                 <eps>  <eps>
+PRD-DERIVATION-CASE-MARKED   FINAL-STEM            <eps>  <eps>
+PRD-DERIVATION-CASE-NOM      CONTRAST              <eps>  <eps>
+PRD-DERIVATION-CASE-NOM      FINAL                 <eps>  <eps>
+
+PRF-DERIVATION-CASE-BARE     CONTRAST              <eps>  <eps>
+PRF-DERIVATION-CASE-BARE     FINAL                 <eps>  <eps>
+PRF-DERIVATION-CASE-GEN      CONTRAST              <eps>  <eps>
+PRF-DERIVATION-CASE-GEN      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRF-DERIVATION-CASE-GEN      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRF-DERIVATION-CASE-GEN      FINAL                 <eps>  <eps>
+PRF-DERIVATION-CASE-GEN      FINAL-STEM            <eps>  <eps>
+PRF-DERIVATION-CASE-LOC      CONTRAST              <eps>  <eps>
+PRF-DERIVATION-CASE-LOC      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRF-DERIVATION-CASE-LOC      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRF-DERIVATION-CASE-LOC      FINAL                 <eps>  <eps>
+PRF-DERIVATION-CASE-LOC      FINAL-STEM            <eps>  <eps>
+PRF-DERIVATION-CASE-MARKED   CONTRAST              <eps>  <eps>
+PRF-DERIVATION-CASE-MARKED   FINAL                 <eps>  <eps>
+PRF-DERIVATION-CASE-MARKED   FINAL-STEM            <eps>  <eps>
+PRF-DERIVATION-CASE-NOM      CONTRAST              <eps>  <eps>
+PRF-DERIVATION-CASE-NOM      FINAL                 <eps>  <eps>
+
+PRI-DERIVATION-CASE-BARE     CONTRAST              <eps>  <eps>
+PRI-DERIVATION-CASE-BARE     FINAL                 <eps>  <eps>
+PRI-DERIVATION-CASE-GEN      CONTRAST              <eps>  <eps>
+PRI-DERIVATION-CASE-GEN      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRI-DERIVATION-CASE-GEN      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRI-DERIVATION-CASE-GEN      FINAL                 <eps>  <eps>
+PRI-DERIVATION-CASE-GEN      FINAL-STEM            <eps>  <eps>
+PRI-DERIVATION-CASE-LOC      CONTRAST              <eps>  <eps>
+PRI-DERIVATION-CASE-LOC      DER-PRONOUN-JJ-REL    <eps>  <eps>
+PRI-DERIVATION-CASE-LOC      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRI-DERIVATION-CASE-LOC      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRI-DERIVATION-CASE-LOC      FINAL                 <eps>  <eps>
+PRI-DERIVATION-CASE-LOC      FINAL-STEM            <eps>  <eps>
+PRI-DERIVATION-CASE-MARKED   CONTRAST              <eps>  <eps>
+PRI-DERIVATION-CASE-MARKED   FINAL                 <eps>  <eps>
+PRI-DERIVATION-CASE-MARKED   FINAL-STEM            <eps>  <eps>
+PRI-DERIVATION-CASE-NOM      CONTRAST              <eps>  <eps>
+PRI-DERIVATION-CASE-NOM      FINAL                 <eps>  <eps>
+
+PRP-DERIVATION-CASE-BARE     CONTRAST              <eps>  <eps>
+PRP-DERIVATION-CASE-BARE     FINAL                 <eps>  <eps>
+PRP-DERIVATION-CASE-LOC      CONTRAST              <eps>  <eps>
+PRP-DERIVATION-CASE-LOC      DER-PRONOUN-JJ-REL    <eps>  <eps>
+PRP-DERIVATION-CASE-LOC      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRP-DERIVATION-CASE-LOC      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRP-DERIVATION-CASE-LOC      FINAL                 <eps>  <eps>
+PRP-DERIVATION-CASE-LOC      FINAL-STEM            <eps>  <eps>
+PRP-DERIVATION-CASE-MARKED   CONTRAST              <eps>  <eps>
+PRP-DERIVATION-CASE-MARKED   FINAL                 <eps>  <eps>
+PRP-DERIVATION-CASE-MARKED   FINAL-STEM            <eps>  <eps>
+PRP-DERIVATION-CASE-NOM      CONTRAST              <eps>  <eps>
+PRP-DERIVATION-CASE-NOM      FINAL                 <eps>  <eps>
+
+PRP$-DERIVATION-CASE-BARE    CONTRAST              <eps>  <eps>
+PRP$-DERIVATION-CASE-BARE    DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRP$-DERIVATION-CASE-BARE    DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRP$-DERIVATION-CASE-BARE    FINAL                 <eps>  <eps>
+PRP$-DERIVATION-CASE-MARKED  CONTRAST              <eps>  <eps>
+PRP$-DERIVATION-CASE-MARKED  DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRP$-DERIVATION-CASE-MARKED  DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRP$-DERIVATION-CASE-MARKED  FINAL                 <eps>  <eps>
+PRP$-DERIVATION-CASE-MARKED  FINAL-STEM            <eps>  <eps>
+
+PRR-DERIVATION-CASE-BARE     CONTRAST              <eps>  <eps>
+PRR-DERIVATION-CASE-BARE     FINAL                 <eps>  <eps>
+PRR-DERIVATION-CASE-GEN      CONTRAST              <eps>  <eps>
+PRR-DERIVATION-CASE-GEN      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRR-DERIVATION-CASE-GEN      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRR-DERIVATION-CASE-GEN      FINAL                 <eps>  <eps>
+PRR-DERIVATION-CASE-GEN      FINAL-STEM            <eps>  <eps>
+PRR-DERIVATION-CASE-LOC      CONTRAST              <eps>  <eps>
+PRR-DERIVATION-CASE-LOC      DER-PRONOUN-JJ-REL    <eps>  <eps>
+PRR-DERIVATION-CASE-LOC      DER-PRONOUN-NOMP-REL  <eps>  <eps>
+PRR-DERIVATION-CASE-LOC      DER-PRONOUN-PRF-PRON  <eps>  <eps>
+PRR-DERIVATION-CASE-LOC      FINAL                 <eps>  <eps>
+PRR-DERIVATION-CASE-LOC      FINAL-STEM            <eps>  <eps>
+PRR-DERIVATION-CASE-MARKED   CONTRAST              <eps>  <eps>
+PRR-DERIVATION-CASE-MARKED   FINAL                 <eps>  <eps>
+PRR-DERIVATION-CASE-MARKED   FINAL-STEM            <eps>  <eps>
+PRR-DERIVATION-CASE-NOM      CONTRAST              <eps>  <eps>
+PRR-DERIVATION-CASE-NOM      FINAL                 <eps>  <eps>
+
+WP-DERIVATION-CASE-BARE      CONTRAST              <eps>  <eps>
+WP-DERIVATION-CASE-BARE      FINAL                 <eps>  <eps>
+WP-DERIVATION-CASE-GEN       CONTRAST              <eps>  <eps>
+WP-DERIVATION-CASE-GEN       DER-PRONOUN-NOMP-REL  <eps>  <eps>
+WP-DERIVATION-CASE-GEN       DER-PRONOUN-PRF-PRON  <eps>  <eps>
+WP-DERIVATION-CASE-GEN       FINAL                 <eps>  <eps>
+WP-DERIVATION-CASE-GEN       FINAL-STEM            <eps>  <eps>
+WP-DERIVATION-CASE-LOC       CONTRAST              <eps>  <eps>
+WP-DERIVATION-CASE-LOC       DER-PRONOUN-JJ-REL    <eps>  <eps>
+WP-DERIVATION-CASE-LOC       DER-PRONOUN-NOMP-REL  <eps>  <eps>
+WP-DERIVATION-CASE-LOC       DER-PRONOUN-PRF-PRON  <eps>  <eps>
+WP-DERIVATION-CASE-LOC       FINAL                 <eps>  <eps>
+WP-DERIVATION-CASE-LOC       FINAL-STEM            <eps>  <eps>
+WP-DERIVATION-CASE-MARKED    CONTRAST              <eps>  <eps>
+WP-DERIVATION-CASE-MARKED    FINAL                 <eps>  <eps>
+WP-DERIVATION-CASE-MARKED    FINAL-STEM            <eps>  <eps>
+WP-DERIVATION-CASE-NOM       CONTRAST              <eps>  <eps>
+WP-DERIVATION-CASE-NOM       FINAL                 <eps>  <eps>
+
+# 3. Derivations
+
+# 3.1. Pronoun-to-Adjective
+
+DER-PRONOUN-JJ-REL  JJ  )([JJ]-ki[Derivation=Rel]  +ki
+
+# 3.2. Pronoun-to-Adverb
+
+DER-PRONOUN-RB-ACT  RB  )([RB]-NCA[Derivation=Act]  +NCA
+
+# 3.1. Pronoun-to-Pronoun
+
+DER-PRONOUN-PRF-PRON PRF  )([PRF]-ki[Derivation=Pron]  +ki
+
+# 3.4. Pronoun-to-Verb
+
+DER-PRONOUN-NOMP-REL NOMP-REL  )([NOMP]-ki[Derivation=Rel]  +ki

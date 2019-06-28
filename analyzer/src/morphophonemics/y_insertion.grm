@@ -1,0 +1,67 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file defines a grammar that inserts y consonant at the end of the word
+# stem, if the word stem;
+#   - ends with "su",
+#   - is annnotated for y insertion with stem final y insertion markup "^",
+#   - is followed by a suffix which starts with a high vowel meta-phoneme H, or
+#     a consonant that can drop {N, Y, S}.
+
+import 'alphabet.grm' as alphabet;
+import 'common.grm' as common;
+import 'unicode.grm' as unicode;
+
+word_stem_before_su =
+  "[BOS]" (alphabet.kCharacter - common.kMorphemeBoundary)*
+;
+morpheme_cause_y_insertion =
+  common.kMorphemeBoundary (
+    common.kHighVowelMetaPhoneme
+  | common.kDroppingConsonantMetaPhoneme
+  )
+;
+
+insert_y =
+  "s".utf8 "u".utf8 common.kYInsertionMarkup : "s".utf8 "u".utf8 "y".utf8
+;
+remove_markup =
+  "s".utf8 "u".utf8 common.kYInsertionMarkup : "s".utf8 "u".utf8
+;
+
+insert_stem_final_y = CDRewrite[
+  insert_y,
+  word_stem_before_su,
+  morpheme_cause_y_insertion,
+  alphabet.kSigmaStar
+];
+remove_y_insertion_markup = CDRewrite[
+  remove_markup,
+  word_stem_before_su,
+  common.kEndOfMorpheme,
+  alphabet.kSigmaStar
+];
+
+export RESOLVE = Optimize[
+  insert_stem_final_y
+@ remove_y_insertion_markup
+];
+
+# Only used for testing.
+export RESOLVE_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to RESOLVE should be Unicode codepoints.
+@ RESOLVE
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];

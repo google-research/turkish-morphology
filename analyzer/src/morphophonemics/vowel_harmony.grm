@@ -1,0 +1,101 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file defines a grammar that resolves meta-phonemes A (which represents
+# the set of low unrounded vowels {a, e}) and H (which represents the set of
+# high vowels {u, ü, ı, i}).
+#
+# A meta-phoneme is realized as;
+#   - 'a' if last vowel that preceeds it is a back vowel.
+#   - 'e' if last vowel that preceeds it is a front vowel.
+#
+# H meta-phoneme is realized as;
+#   - 'u' if the last vowel that preceeds it is a back rounded vowel.
+#   - 'ü' if the last vowel that preceeds it is a front rounded vowel.
+#   - 'ı' if the last vowel that preceeds it is a back unrounded vowel.
+#   - 'i' if the last vowel that preceeds it is a front unrounded vowel.
+
+import 'alphabet.grm' as alphabet;
+import 'common.grm' as common;
+import 'unicode.grm' as unicode;
+
+last_vowel_is_back_rounded =
+  common.kBackRoundedVowel (alphabet.kCharacter - common.kVowel)*
+;
+last_vowel_is_back_unrounded =
+  common.kBackUnroundedVowel (alphabet.kCharacter - common.kVowel)*
+;
+last_vowel_is_front_rounded =
+  common.kFrontRoundedVowel (alphabet.kCharacter - common.kVowel)*
+;
+last_vowel_is_front_unrounded =
+  common.kFrontUnroundedVowel (alphabet.kCharacter - common.kVowel)*
+;
+
+realise_back_rounded =
+  (common.kLowUnroundedVowelMetaPhoneme : "a".utf8)
+| (common.kHighVowelMetaPhoneme : "u".utf8)
+;
+realise_back_unrounded =
+  (common.kLowUnroundedVowelMetaPhoneme: "a".utf8)
+| (common.kHighVowelMetaPhoneme : "ı".utf8)
+;
+realise_front_rounded =
+  (common.kLowUnroundedVowelMetaPhoneme : "e".utf8)
+| (common.kHighVowelMetaPhoneme : "ü".utf8)
+;
+realise_front_unrounded =
+  (common.kLowUnroundedVowelMetaPhoneme : "e".utf8)
+| (common.kHighVowelMetaPhoneme : "i".utf8)
+;
+
+realise_as_a_and_u = CDRewrite[
+  realise_back_rounded,
+  last_vowel_is_back_rounded,
+  "",
+  alphabet.kSigmaStar
+];
+realise_as_a_and_i = CDRewrite[
+  realise_back_unrounded,
+  last_vowel_is_back_unrounded,
+  "",
+  alphabet.kSigmaStar
+];
+realise_as_e_and_ue = CDRewrite[
+  realise_front_rounded,
+  last_vowel_is_front_rounded,
+  "",
+  alphabet.kSigmaStar
+];
+realise_as_e_and_ie = CDRewrite[
+  realise_front_unrounded,
+  last_vowel_is_front_unrounded,
+  "",
+  alphabet.kSigmaStar
+];
+
+export RESOLVE = Optimize[
+  realise_as_a_and_u
+@ realise_as_a_and_i
+@ realise_as_e_and_ue
+@ realise_as_e_and_ie
+];
+
+# Only used for testing.
+export RESOLVE_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to RESOLVE should be Unicode codepoints.
+@ RESOLVE
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];

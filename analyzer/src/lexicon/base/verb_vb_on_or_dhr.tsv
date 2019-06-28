@@ -1,0 +1,8 @@
+tag	root	morphophonemics	features	is_compound
+VB-ON-OR-DHR	de	dE	~	FALSE
+VB-ON-OR-DHR	evse	~	~	FALSE
+VB-ON-OR-DHR	ıh	~	~	FALSE
+VB-ON-OR-DHR	ıraksın	~	~	FALSE
+VB-ON-OR-DHR	ye	yE	~	FALSE
+VB-ON-OR-DHR	ye	~	~	FALSE
+VB-ON-OR-DHR	yükseltge	~	~	FALSE

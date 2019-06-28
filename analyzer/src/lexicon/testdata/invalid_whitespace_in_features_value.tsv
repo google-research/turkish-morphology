@@ -1,0 +1,8 @@
+tag	root	morphophonemics	features	is_compound
+Nn	ABANOZ	~	~	FALSE
+nN	âhît	âhî?t~	~	FaLsE
+nn	ördekbaşı	ördekbaş	~	true
+				
+Jj	KIZIL	~	~	FALSE
+jJ	kopkoyu	~	+[Em  phasis=True]	false
+in	ArT	~	+[ComplementType=CGen]	FALSE

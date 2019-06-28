@@ -1,0 +1,10 @@
+tag	root	morphophonemics	features	is_compound
+PRD	bur	~	~	FALSE
+PRD	bura	~	~	FALSE
+PRD	buracık	~	~	FALSE
+PRD	or	~	~	FALSE
+PRD	ora	~	~	FALSE
+PRD	oracık	~	~	FALSE
+PRD	şur	~	~	FALSE
+PRD	şura	~	~	FALSE
+PRD	şuracık	~	~	FALSE

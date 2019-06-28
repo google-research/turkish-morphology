@@ -1,0 +1,2 @@
+tag	root	morphophonemics	features	is_compound
+NN-TEMP	süre	~	+[Temporal=True]	FALSE

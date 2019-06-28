@@ -1,0 +1,3 @@
+tag	root	morphophonemics	features	is_compound
+PRP-IRR	ben	~	+[PersonNumber=A1sg]+[Possessive=Pnon]	FALSE
+PRP-IRR	sen	~	+[PersonNumber=A2sg]+[Possessive=Pnon]	FALSE

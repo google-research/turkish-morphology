@@ -1,0 +1,4 @@
+tag	root	morphophonemics	features	is_compound
+WDT	hangi	~	~	FALSE
+WDT	kaç	kaÇ	~	FALSE
+WDT	ne	~	~	FALSE

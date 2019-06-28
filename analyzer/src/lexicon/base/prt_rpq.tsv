@@ -1,0 +1,5 @@
+tag	root	morphophonemics	features	is_compound
+RPQ	mi	~	~	FALSE
+RPQ	mı	~	~	FALSE
+RPQ	mu	~	~	FALSE
+RPQ	mü	~	~	FALSE

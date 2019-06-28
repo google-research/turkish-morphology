@@ -1,0 +1,6 @@
+tag	root	morphophonemics	features	is_compound
+PRD-PNON	bunlar	~	+[PersonNumber=A3pl]+[Possessive=Pnon]	FALSE
+PRD-PNON	hepimiz	~	+[PersonNumber=A1pl]+[Possessive=Pnon]	FALSE
+PRD-PNON	hepiniz	~	+[PersonNumber=A2pl]+[Possessive=Pnon]	FALSE
+PRD-PNON	onlar	~	+[PersonNumber=A3pl]+[Possessive=Pnon]	FALSE
+PRD-PNON	şunlar	~	+[PersonNumber=A3pl]+[Possessive=Pnon]	FALSE

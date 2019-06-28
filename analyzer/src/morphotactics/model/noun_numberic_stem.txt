@@ -1,0 +1,209 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# 1. Start States
+
+# 1.1. Base Categories
+
+START  NN-CD-ARABIC-MULTI-FIRST   (  <eps>
+START  NN-CD-ARABIC-SINGLE        (  <eps>
+START  NN-CD-ARABIC-SINGLE-ZERO   (  <eps>
+START  NN-ORD-ARABIC-SINGLE       (  <eps>
+START  NN-ORD-ARABIC-SINGLE-ZERO  (  <eps>
+
+# 2. Numeric Combinations
+
+# 2.1. Prefix Numbers
+
+NN-CD-ARABIC-SINGLE        NN-ABBR  1[NN]                                           1*ir*
+NN-CD-ARABIC-SINGLE        NN-ABBR  2[NN]                                           2*i*
+NN-CD-ARABIC-SINGLE        NN-ABBR  3[NN]                                           3*üÇ*
+NN-CD-ARABIC-SINGLE        NN-ABBR  4[NN]                                           4*ört~*
+NN-CD-ARABIC-SINGLE        NN-ABBR  5[NN]                                           5*eş*
+NN-CD-ARABIC-SINGLE        NN-ABBR  6[NN]                                           6*ı*
+NN-CD-ARABIC-SINGLE        NN-ABBR  7[NN]                                           7*i*
+NN-CD-ARABIC-SINGLE        NN-ABBR  8[NN]                                           8*iz*
+NN-CD-ARABIC-SINGLE        NN-ABBR  9[NN]                                           9*uz*
+NN-CD-ARABIC-SINGLE        NN-ABBR  10[NN]                                          10*un*
+NN-CD-ARABIC-SINGLE        NN-ABBR  20[NN]                                          20*i*
+NN-CD-ARABIC-SINGLE        NN-ABBR  30[NN]                                          30*uz*
+NN-CD-ARABIC-SINGLE        NN-ABBR  40[NN]                                          40*ırk*
+NN-CD-ARABIC-SINGLE        NN-ABBR  50[NN]                                          50*i*
+NN-CD-ARABIC-SINGLE        NN-ABBR  60[NN]                                          60*ış*
+NN-CD-ARABIC-SINGLE        NN-ABBR  70[NN]                                          70*iş*
+NN-CD-ARABIC-SINGLE        NN-ABBR  80[NN]                                          80*en*
+NN-CD-ARABIC-SINGLE        NN-ABBR  90[NN]                                          90*an*
+
+NN-CD-ARABIC-SINGLE-ZERO   NN-ABBR  0[NN]                                           0*ır*
+
+NN-ORD-ARABIC-SINGLE       NN-ABBR  1[NN]+.[NumberType=Ord]                         1.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  2[NN]+.[NumberType=Ord]                         2.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  3[NN]+.[NumberType=Ord]                         3.*ü*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  4[NN]+.[NumberType=Ord]                         4.*ü*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  5[NN]+.[NumberType=Ord]                         5.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  6[NN]+.[NumberType=Ord]                         6.*ı*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  7[NN]+.[NumberType=Ord]                         7.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  8[NN]+.[NumberType=Ord]                         8.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  9[NN]+.[NumberType=Ord]                         9.*u*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  10[NN]+.[NumberType=Ord]                        10.*u*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  20[NN]+.[NumberType=Ord]                        20.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  30[NN]+.[NumberType=Ord]                        30.*u*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  40[NN]+.[NumberType=Ord]                        40.*ı*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  50[NN]+.[NumberType=Ord]                        50.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  60[NN]+.[NumberType=Ord]                        60.*ı*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  70[NN]+.[NumberType=Ord]                        70.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  80[NN]+.[NumberType=Ord]                        80.*i*
+NN-ORD-ARABIC-SINGLE       NN-ABBR  90[NN]+.[NumberType=Ord]                        90.*ı*
+
+NN-ORD-ARABIC-SINGLE       NN-ABBR  1[NN]+HncH[NumberType=Ord]                      1inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  2[NN]+HncH[NumberType=Ord]                      2nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  3[NN]+HncH[NumberType=Ord]                      3üncü
+NN-ORD-ARABIC-SINGLE       NN-ABBR  4[NN]+HncH[NumberType=Ord]                      4üncü
+NN-ORD-ARABIC-SINGLE       NN-ABBR  5[NN]+HncH[NumberType=Ord]                      5inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  6[NN]+HncH[NumberType=Ord]                      6ncı
+NN-ORD-ARABIC-SINGLE       NN-ABBR  7[NN]+HncH[NumberType=Ord]                      7nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  8[NN]+HncH[NumberType=Ord]                      8inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  9[NN]+HncH[NumberType=Ord]                      9uncu
+NN-ORD-ARABIC-SINGLE       NN-ABBR  10[NN]+HncH[NumberType=Ord]                     10uncu
+NN-ORD-ARABIC-SINGLE       NN-ABBR  20[NN]+HncH[NumberType=Ord]                     20nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  30[NN]+HncH[NumberType=Ord]                     30uncu
+NN-ORD-ARABIC-SINGLE       NN-ABBR  40[NN]+HncH[NumberType=Ord]                     40ıncı
+NN-ORD-ARABIC-SINGLE       NN-ABBR  50[NN]+HncH[NumberType=Ord]                     50nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  60[NN]+HncH[NumberType=Ord]                     60ıncı
+NN-ORD-ARABIC-SINGLE       NN-ABBR  70[NN]+HncH[NumberType=Ord]                     70inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  80[NN]+HncH[NumberType=Ord]                     80inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  90[NN]+HncH[NumberType=Ord]                     90ıncı
+
+NN-ORD-ARABIC-SINGLE       NN-ABBR  1[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   1'inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  2[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   2'nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  3[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   3'üncü
+NN-ORD-ARABIC-SINGLE       NN-ABBR  4[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   4'üncü
+NN-ORD-ARABIC-SINGLE       NN-ABBR  5[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   5'inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  6[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   6'ncı
+NN-ORD-ARABIC-SINGLE       NN-ABBR  7[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   7'nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  8[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   8'inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  9[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   9'uncu
+NN-ORD-ARABIC-SINGLE       NN-ABBR  10[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  10'uncu
+NN-ORD-ARABIC-SINGLE       NN-ABBR  20[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  20'nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  30[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  30'uncu
+NN-ORD-ARABIC-SINGLE       NN-ABBR  40[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  40'ıncı
+NN-ORD-ARABIC-SINGLE       NN-ABBR  50[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  50'nci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  60[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  60'ıncı
+NN-ORD-ARABIC-SINGLE       NN-ABBR  70[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  70'inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  80[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  80'inci
+NN-ORD-ARABIC-SINGLE       NN-ABBR  90[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  90'ıncı
+
+NN-ORD-ARABIC-SINGLE-ZERO  NN-ABBR  0[NN]+.[NumberType=Ord]                         0.*i*
+NN-ORD-ARABIC-SINGLE-ZERO  NN-ABBR  0[NN]+HncH[NumberType=Ord]                      0ıncı
+NN-ORD-ARABIC-SINGLE-ZERO  NN-ABBR  0[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   0'ıncı
+
+# 2.2. Trailing Numbers
+
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       1      1
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       2      2
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       3      3
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       4      4
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       5      5
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       6      6
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       7      7
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       8      8
+NN-CD-ARABIC-MULTI-FIRST            NN-CD-ARABIC-MULTI-FIRST-EXIT       9      9
+
+NN-CD-ARABIC-MULTI-FIRST-EXIT       NN-CD-ARABIC-MULTI-MIDDLE           <eps>  <eps>
+NN-CD-ARABIC-MULTI-FIRST-EXIT       NN-CD-ARABIC-MULTI-ZERO             <eps>  <eps>
+NN-CD-ARABIC-MULTI-FIRST-EXIT       NN-CD-ARABIC-SINGLE                 <eps>  <eps>
+NN-CD-ARABIC-MULTI-FIRST-EXIT       NN-ORD-ARABIC-MULTI-ZERO            <eps>  <eps>
+NN-CD-ARABIC-MULTI-FIRST-EXIT       NN-ORD-ARABIC-SINGLE                <eps>  <eps>
+
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  1      1
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  2      2
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  3      3
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  4      4
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  5      5
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  6      6
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  7      7
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  8      8
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  9      9
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  ,      ,
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  .      .
+NN-CD-ARABIC-MULTI-MIDDLE           NN-CD-ARABIC-MULTI-MIDDLE-ZERO      0      0
+
+NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  NN-CD-ARABIC-MULTI-MIDDLE           <eps>  <eps>
+NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  NN-CD-ARABIC-MULTI-ZERO             <eps>  <eps>
+NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  NN-CD-ARABIC-SINGLE                 <eps>  <eps>
+NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  NN-ORD-ARABIC-MULTI-ZERO            <eps>  <eps>
+NN-CD-ARABIC-MULTI-MIDDLE-NON-ZERO  NN-ORD-ARABIC-SINGLE                <eps>  <eps>
+
+NN-CD-ARABIC-MULTI-MIDDLE-ZERO      NN-CD-ARABIC-MULTI-MIDDLE           <eps>  <eps>
+NN-CD-ARABIC-MULTI-MIDDLE-ZERO      NN-CD-ARABIC-SINGLE                 <eps>  <eps>
+NN-CD-ARABIC-MULTI-MIDDLE-ZERO      NN-ORD-ARABIC-SINGLE                <eps>  <eps>
+
+# 2.3. Zeros
+
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  00[NN]                                                      00*üz*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  000[NN]                                                     000*in*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  0000[NN]                                                    0000*in*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  00000[NN]                                                   00000*in*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  000000[NN]                                                  000000*on*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  0000000[NN]                                                 0000000*on*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  00000000[NN]                                                00000000*on*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  000000000[NN]                                               000000000*ar*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  0000000000[NN]                                              0000000000*ar*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  00000000000[NN]                                             00000000000*ar*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  000000000000[NN]                                            000000000000*on*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  0000000000000[NN]                                           0000000000000*on*
+NN-CD-ARABIC-MULTI-ZERO   NN-ABBR  00000000000000[NN]                                          00000000000000*on*
+
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00[NN]+.[NumberType=Ord]                                    00.*ü*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000[NN]+.[NumberType=Ord]                                   000.*i*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000[NN]+.[NumberType=Ord]                                  0000.*i*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000[NN]+.[NumberType=Ord]                                 00000.*i*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000[NN]+.[NumberType=Ord]                                000000.*u*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000[NN]+.[NumberType=Ord]                               0000000.*u*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000[NN]+.[NumberType=Ord]                              00000000.*u*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000000[NN]+.[NumberType=Ord]                             000000000.*ı*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000000[NN]+.[NumberType=Ord]                            0000000000.*ı*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000000[NN]+.[NumberType=Ord]                           00000000000.*ı*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000000000[NN]+.[NumberType=Ord]                          000000000000.*u*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000000000[NN]+.[NumberType=Ord]                         0000000000000.*u*
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000000000[NN]+.[NumberType=Ord]                        00000000000000.*u*
+
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00[NN]+HncH[NumberType=Ord]                                 00üncü
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000[NN]+HncH[NumberType=Ord]                                000inci
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000[NN]+HncH[NumberType=Ord]                               0000inci
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000[NN]+HncH[NumberType=Ord]                              00000inci
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000[NN]+HncH[NumberType=Ord]                             000000uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000[NN]+HncH[NumberType=Ord]                            0000000uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000[NN]+HncH[NumberType=Ord]                           00000000uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000000[NN]+HncH[NumberType=Ord]                          000000000ıncı
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000000[NN]+HncH[NumberType=Ord]                         0000000000ıncı
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000000[NN]+HncH[NumberType=Ord]                        00000000000ıncı
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000000000[NN]+HncH[NumberType=Ord]                       000000000000uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000000000[NN]+HncH[NumberType=Ord]                      0000000000000uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000000000[NN]+HncH[NumberType=Ord]                     00000000000000uncu
+
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]              00'üncü
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]             000'inci
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]            0000'inci
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]           00000'inci
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]          000000'uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]         0000000'uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]        00000000'uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]       000000000'ıncı
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]      0000000000'ıncı
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]     00000000000'ıncı
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  000000000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]    000000000000'uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  0000000000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]   0000000000000'uncu
+NN-ORD-ARABIC-MULTI-ZERO  NN-ABBR  00000000000000[NN]+'[Apostrophe=True]+HncH[NumberType=Ord]  00000000000000'uncu

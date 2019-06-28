@@ -1,0 +1,64 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file defines a grammar that resolves meta-phoneme E (which represents
+# the set of stem final vowels {e, i}), which is annotated at the word stem
+# final position for certain verbs.
+#
+# E meta-phoneme is realized as;
+#   - 'i' if the word stem is followed by a morpheme that starts with y,
+#   - 'e' otherwise.
+#
+# Note that when run standalone, this grammar resolves E meta-phoneme as 'e',
+# if the word stem is followed by the morpheme '+Hyor', which might look odd
+# (e.g. dE+HYor being resolved as de+Hyor, while the correct surface form being
+# 'diyor'). This case is handled in;
+#     //analyzer/src/morphophonemics/vowel_drop.grm
+
+import 'alphabet.grm' as alphabet;
+import 'common.grm' as common;
+import 'unicode.grm' as unicode;
+
+morpheme_starts_with_y =
+  common.kMorphemeBoundary (common.kDroppingYMetaPhoneme | "y".utf8)
+;
+
+realise_as_i =
+  common.kVowelClosingMetaPhoneme : "i".utf8
+;
+realise_as_e =
+  common.kVowelClosingMetaPhoneme : "e".utf8
+;
+
+# Only certain verb stems can be annotated for vowel change, thus expecting
+# word stem in left context.
+realise_vowel_closing_as_i = CDRewrite[
+  realise_as_i, common.kWordStem, morpheme_starts_with_y, alphabet.kSigmaStar
+];
+realise_vowel_closing_as_e = CDRewrite[
+  realise_as_e, common.kWordStem, common.kEndOfMorpheme, alphabet.kSigmaStar
+];
+
+export RESOLVE = Optimize[
+  realise_vowel_closing_as_i
+@ realise_vowel_closing_as_e
+];
+
+# Only used for testing.
+export RESOLVE_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to RESOLVE should be Unicode codepoints.
+@ RESOLVE
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];

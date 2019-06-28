@@ -1,0 +1,6 @@
+tag	root	morphophonemics	features	is_compound
+PUNCT-1	!	~	~	FALSE
+PUNCT-1	?	~	~	FALSE
+PUNCT-1	.	~	~	FALSE
+PUNCT-1	..	~	~	FALSE
+PUNCT-1	...	~	~	FALSE

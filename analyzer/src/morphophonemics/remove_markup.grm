@@ -1,0 +1,90 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file defines a grammar that;
+#   1. rewrites vowel harmony exception markup {{, [, %, }} that appear in word
+#      stems with their surface form counterparts {a, â, o, u}.
+#   2. removes the word stem final pronunciation annotation of foreign words,
+#      abbreviations or numeric words stems, which are eclosed in pronunciation
+#      annotation markup "*".
+#   3. removes all annotation markup that are trailing word stems, as a measure
+#      to not represent redundantly annotated morphophonemic phenomena on
+#      surface form.
+#   4. removes all morpheme boundary markup '+'.
+
+import 'alphabet.grm' as alphabet;
+import 'common.grm' as common;
+import 'unicode.grm' as unicode;
+
+vowel_markup_to_vowels =
+  ("{".utf8  : "a".utf8)
+| ("\[".utf8 : "â".utf8)
+| ("%".utf8  : "o".utf8)
+| ("}".utf8  : "u".utf8)
+;
+remove_pronunciation_markup =
+  common.kPronunciationMarkup
+  alphabet.kCharacter+
+  common.kPronunciationMarkup : ""
+;
+remove_stem_final_markup =
+  common.kStemFinalAnnotationMarkup+ : ""
+;
+
+remove_vowel_harmony_exception_markup = CDRewrite[
+  vowel_markup_to_vowels,
+  common.kWordStem,
+  common.kConsonantOrMarkup+ common.kEndOfMorpheme,
+  alphabet.kSigmaStar
+];
+
+remove_pronunciation_annotation_markup = CDRewrite[
+  remove_pronunciation_markup,
+  common.kWordStem,
+  common.kEndOfMorpheme,
+  alphabet.kSigmaStar
+];
+
+# We expect a character in left context, so we do not remove standalone '*',
+# '"', '~' and '^'.
+remove_stem_final_annotation_markup = CDRewrite[
+  remove_stem_final_markup,
+  common.kWordStem,
+  common.kEndOfMorpheme,
+  alphabet.kSigmaStar
+];
+
+# We only remove morpheme boundary markup if there is a character in both left
+# and right context, so we do not remove standalone '+'.
+remove_segmentation_markup = CDRewrite[
+  common.kMorphemeBoundary : "",
+  alphabet.kCharacter,
+  alphabet.kCharacter,
+  alphabet.kSigmaStar
+];
+
+export RESOLVE = Optimize[
+  remove_vowel_harmony_exception_markup
+@ remove_pronunciation_annotation_markup
+@ remove_stem_final_annotation_markup
+@ remove_segmentation_markup
+];
+
+# Only used for testing.
+export RESOLVE_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to RESOLVE should be Unicode codepoints.
+@ RESOLVE
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];

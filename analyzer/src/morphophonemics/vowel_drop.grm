@@ -1,0 +1,120 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file defines a grammar that;
+#   1. drops the morpheme final vowel, if it morpheme is followed by the
+#      progressive tense marker "+Hyor".
+#   2. drops the suffix initial meta-phoneme H (which represents the set of
+#      high vowels {u, ü, ı, i}), if the suffix is preceeded by a morpheme that
+#      ends with a vowel.
+#   3. drops the last vowel of word stems, which are annotated for vowel drop
+#      with "?" annotation markup, if they are followed by a morpheme that
+#      starts with a vowel.
+
+import 'alphabet.grm' as alphabet;
+import 'common.grm' as common;
+import 'unicode.grm' as unicode;
+
+progressive_tense_morpheme =
+  common.kMorphemeBoundary "H".utf8 "y".utf8 "o".utf8 "r".utf8
+;
+common_noun_ending =
+  (common.kConsonantOrMarkup - common.kApostrophe)+
+;
+proper_noun_ending =
+  common.kConsonantOrMarkup+
+;
+
+# We do not drop stem final vowel closing meta-morpheme E even if it is
+# followed by the progressive tense marker. This is an exception case, where
+# the stem final vowel is realised on surface and the first vowel of the
+# progressive tense marker is dropped.
+drop_last_vowel =
+  (common.kVowel - common.kVowelClosingMetaPhoneme) : ""
+;
+drop_first_vowel =
+  common.kHighVowelMetaPhoneme : ""
+;
+
+keep_stem_vowel =
+  ("a".utf8 common.kVowelDropMarkup : "a".utf8)
+| ("â".utf8 common.kVowelDropMarkup : "â".utf8)
+| ("e".utf8 common.kVowelDropMarkup : "e".utf8)
+| ("ı".utf8 common.kVowelDropMarkup : "ı".utf8)
+| ("i".utf8 common.kVowelDropMarkup : "i".utf8)
+| ("î".utf8 common.kVowelDropMarkup : "î".utf8)
+| ("o".utf8 common.kVowelDropMarkup : "o".utf8)
+| ("ö".utf8 common.kVowelDropMarkup : "ö".utf8)
+| ("u".utf8 common.kVowelDropMarkup : "u".utf8)
+| ("ü".utf8 common.kVowelDropMarkup : "ü".utf8)
+| ("û".utf8 common.kVowelDropMarkup : "û".utf8)
+;
+drop_stem_vowel =
+  ("a".utf8 common.kVowelDropMarkup : "")
+| ("â".utf8 common.kVowelDropMarkup : "")
+| ("e".utf8 common.kVowelDropMarkup : "")
+| ("ı".utf8 common.kVowelDropMarkup : "")
+| ("i".utf8 common.kVowelDropMarkup : "")
+| ("î".utf8 common.kVowelDropMarkup : "")
+| ("o".utf8 common.kVowelDropMarkup : "")
+| ("ö".utf8 common.kVowelDropMarkup : "")
+| ("u".utf8 common.kVowelDropMarkup : "")
+| ("ü".utf8 common.kVowelDropMarkup : "")
+| ("û".utf8 common.kVowelDropMarkup : "")
+;
+
+drop_last_vowel_of_morpheme = CDRewrite[
+  drop_last_vowel,
+  "",
+  progressive_tense_morpheme,
+  alphabet.kSigmaStar
+];
+drop_first_vowel_of_morpheme = CDRewrite[
+  drop_first_vowel,
+  common.kMorphemeEndsWithVowel,
+  "",
+  alphabet.kSigmaStar
+];
+
+drop_last_vowel_of_stem = CDRewrite[
+  drop_stem_vowel,
+  common.kWordStem,
+  common_noun_ending common.kMorphemeStartsWithVowel,
+  alphabet.kSigmaStar
+];
+# We do not drop the last vowel of the stem for proper nouns, thus not
+# expecting an optional apostrophe in right context (which only separates the
+# suffixes from proper noun word stems).
+keep_last_vowel_of_stem = CDRewrite[
+  keep_stem_vowel,
+  common.kWordStem,
+  proper_noun_ending common.kEndOfMorpheme,
+  alphabet.kSigmaStar
+];
+
+export RESOLVE = Optimize[
+  drop_last_vowel_of_morpheme
+@ drop_first_vowel_of_morpheme
+@ drop_last_vowel_of_stem
+@ keep_last_vowel_of_stem
+];
+
+# Only used for testing.
+export RESOLVE_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to RESOLVE should be Unicode codepoints.
+@ RESOLVE
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];
+

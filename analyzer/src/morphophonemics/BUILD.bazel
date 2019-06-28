@@ -1,0 +1,190 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+package(default_visibility = ["//analyzer:__pkg__"])
+
+licenses(["notice"])  # Apache 2.0
+
+load("//bazel:thrax.bzl", "grm_compile", "grm_test")
+
+# Grammars.
+grm_compile(
+    name = "common",
+    deps = [
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "consonant_change",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "consonant_drop",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "consonant_voicing",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "gemination",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "model",
+    deps = [
+        "common.far",
+        "common.grm",
+        "consonant_change.far",
+        "consonant_change.grm",
+        "consonant_drop.far",
+        "consonant_drop.grm",
+        "consonant_voicing.far",
+        "consonant_voicing.grm",
+        "gemination.far",
+        "gemination.grm",
+        "remove_markup.far",
+        "remove_markup.grm",
+        "vowel_change.far",
+        "vowel_change.grm",
+        "vowel_drop.far",
+        "vowel_drop.grm",
+        "vowel_harmony.far",
+        "vowel_harmony.grm",
+        "y_insertion.far",
+        "y_insertion.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "remove_markup",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "vowel_change",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "vowel_drop",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "vowel_harmony",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+grm_compile(
+    name = "y_insertion",
+    deps = [
+        "common.far",
+        "common.grm",
+        "//analyzer/src/symbols:alphabet.far",
+        "//analyzer/src/symbols:alphabet.grm",
+        "//analyzer/src/symbols:unicode.far",
+        "//analyzer/src/symbols:unicode.grm",
+    ],
+)
+
+# Tests.
+[
+    grm_test(
+        name = grm + "_test",
+        base_path = "analyzer/src/morphophonemics/",
+        far_file = grm + ".far",
+        test_file = grm + ".tsv",
+    )
+    for grm in [
+        "consonant_change",
+        "consonant_drop",
+        "consonant_voicing",
+        "gemination",
+        "model",
+        "remove_markup",
+        "vowel_change",
+        "vowel_drop",
+        "vowel_harmony",
+        "y_insertion",
+    ]
+]

@@ -1,0 +1,8 @@
+tag	root	morphophonemics	features	is_compound
+PRP	bendeniz	~	+[PersonNumber=A1sg]	FALSE
+PRP	biz	~	+[PersonNumber=A1pl]	FALSE
+PRP	bizler	~	+[PersonNumber=A1pl]	FALSE
+PRP	o	~	+[PersonNumber=A3sg]	FALSE
+PRP	onlar	~	+[PersonNumber=A3pl]	FALSE
+PRP	siz	~	+[PersonNumber=A2pl]	FALSE
+PRP	sizler	~	+[PersonNumber=A2pl]	FALSE

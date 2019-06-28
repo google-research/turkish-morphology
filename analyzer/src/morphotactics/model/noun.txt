@@ -1,0 +1,1391 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# 1. Start States
+
+# 1.1. Base Categories
+
+ADD       NN-DERIVATION-STEM       <eps>  <eps>
+ADD       ADD-APOS                 <eps>  <eps>
+NN        NN-DERIVATION-STEM       <eps>  <eps>
+NN-ABBR   NN-DERIVATION-STEM       <eps>  <eps>
+NN-ABBR   NN-ABBR-APOS             <eps>  <eps>
+NN-TEMP   NN-TEMP-DERIVATION-STEM  <eps>  <eps>
+NNP       NNP-DERIVATION-STEM      <eps>  <eps>
+NNP       NNP-APOS                 <eps>  <eps>
+NNP-ABBR  NNP-DERIVATION-STEM      <eps>  <eps>
+NNP-ABBR  NNP-ABBR-APOS            <eps>  <eps>
+
+# 1.2. Derived Categories
+
+NN-PNON     NN-PNON-DERIVATION-POSS-PNON  <eps>  <eps>
+NN-POSS     NN-POSS-DERIVATION-POSS-POSS  <eps>  <eps>
+NN-STEM     NN-STEM-DERIVATION-STEM       <eps>  <eps>
+VN-AORNOM   VN-AORNOM-DERIVATION-STEM     <eps>  <eps>
+VN-INF      VN-INF-DERIVATION-STEM        <eps>  <eps>
+VN-FUTNOM   VN-FUTNOM-DERIVATION-STEM     <eps>  <eps>
+VN-NONF     VN-NONF-DERIVATION-STEM       <eps>  <eps>
+VN-PASTNOM  VN-PASTNOM-DERIVATION-STEM    <eps>  <eps>
+VN-PERNOM   VN-PERNOM-DERIVATION-STEM     <eps>  <eps>
+VN-PRESNOM  VN-PRESNOM-DERIVATION-STEM    <eps>  <eps>
+VN-PRONOM   VN-PRONOM-DERIVATION-STEM     <eps>  <eps>
+
+# 2. Inflections
+
+# 2.1. Apostrophe
+
+ADD-APOS       NN-DERIVATION-STEM   +'[Apostrophe=True]  '
+NN-ABBR-APOS   NN-DERIVATION-STEM   +'[Apostrophe=True]  '
+NNP-ABBR-APOS  NNP-DERIVATION-STEM  +'[Apostrophe=True]  '
+NNP-APOS       NNP-DERIVATION-STEM  +'[Apostrophe=True]  '
+
+# 2.2. Derivation Slot: After Stem
+
+NN-DERIVATION-STEM          DER-NOUN-JJ-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJ-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJ-OF            +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJN-AFF          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJN-FOLL         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJN-FOR          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-JJN-FROM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-AFF           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-DIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-DOCT          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-FOLL          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-FOR           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-FROM          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-LANG          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-LY            +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-NESS          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-OF            +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-AFF         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-AGT         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-DIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-DOCT        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-FOLL        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-FOR         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-FROM        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-LANG        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-LIKE        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-NESS        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-OF          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-RB-COLL          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-VB-ACQ           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          DER-NOUN-VB-MAKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-STEM          NN-PERSON-NUMBER          <eps>                                               <eps>
+
+NN-PNON-DERIVATION-STEM     NN-PNON-PERSON-NUMBER     <eps>                                               <eps>
+NN-POSS-DERIVATION-STEM     NN-PNON-PERSON-NUMBER     <eps>                                               <eps>
+NN-STEM-DERIVATION-STEM     NN-STEM-PERSON-NUMBER     <eps>                                               <eps>
+
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJ-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJ-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJ-OF            +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJN-AFF          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJN-FOLL         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJN-FOR          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-JJN-FROM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-AFF           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-DIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-DOCT          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-FOLL          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-FOR           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-FROM          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-LANG          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-LY            +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-NESS          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NN-OF            +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-AFF         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-AGT         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-DIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-DOCT        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-FOLL        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-FOR         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-FROM        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-LANG        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-LIKE        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-NESS        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-OF          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-RB-COLL          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-VB-ACQ           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     DER-NOUN-VB-MAKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-STEM     NN-TEMP-PERSON-NUMBER     <eps>                                               <eps>
+
+NNP-DERIVATION-STEM         DER-NOUN-JJ-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-JJ-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-JJN-AFF          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-JJN-FOLL         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-JJN-FROM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-AFF           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-DOCT          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-FAM1          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-FAM2          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-FOLL          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-FROM          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-LANG          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-NESS          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NNP-DIM          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-FROM        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-AFF         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-FOLL        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-LIKE        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-AGT         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-DIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-NESS        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-LANG        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-DOCT        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-FAM1        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-NOMP-FAM2        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-VB-ACQ           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         DER-NOUN-VB-MAKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+NNP-DERIVATION-STEM         NNP-PERSON-NUMBER         <eps>                                               <eps>
+
+VN-AORNOM-DERIVATION-STEM   DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-STEM   DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-STEM   DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-STEM   DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-STEM   DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-STEM   DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-STEM   VN-AORNOM-PERSON-NUMBER   <eps>                                               <eps>
+
+VN-FUTNOM-DERIVATION-STEM   DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-STEM   DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-STEM   DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-STEM   DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-STEM   DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-STEM   DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-STEM   VN-FUTNOM-PERSON-NUMBER   <eps>                                               <eps>
+
+VN-INF-DERIVATION-STEM      DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-INF-DERIVATION-STEM      DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-INF-DERIVATION-STEM      DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-INF-DERIVATION-STEM      DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-INF-DERIVATION-STEM      DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-INF-DERIVATION-STEM      DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-INF-DERIVATION-STEM      VN-INF-PERSON-NUMBER      <eps>                                               <eps>
+
+VN-NONF-DERIVATION-STEM     DER-NOUN-JJ-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-JJ-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-JJN-FOR          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NN-AGT           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NN-DIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NN-FOR           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NN-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NOMP-AGT         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NOMP-DIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NOMP-FOR         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NOMP-LIKE        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-VB-ACQ           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     DER-NOUN-VB-MAKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-NONF-DERIVATION-STEM     VN-NONF-PERSON-NUMBER     <eps>                                               <eps>
+
+VN-PASTNOM-DERIVATION-STEM  DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-STEM  DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-STEM  DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-STEM  DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-STEM  DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-STEM  DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-STEM  VN-PASTNOM-PERSON-NUMBER  <eps>                                               <eps>
+
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-JJ-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NN-LIKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NN-NESS          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NOMP-LIKE        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NOMP-NESS        +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-VB-ACQ           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-RB-COLL          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   DER-NOUN-VB-MAKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-STEM   VN-PERNOM-PERSON-NUMBER   <eps>                                               <eps>
+
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-VB-ACQ           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-RB-COLL          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  DER-NOUN-VB-MAKE          +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-STEM  VN-PRESNOM-PERSON-NUMBER  <eps>                                               <eps>
+
+VN-PRONOM-DERIVATION-STEM   DER-NOUN-JJ-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-STEM   DER-NOUN-JJ-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-STEM   DER-NOUN-NN-RTD           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-STEM   DER-NOUN-NN-SIM           +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-STEM   DER-NOUN-NOMP-RTD         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-STEM   DER-NOUN-NOMP-SIM         +[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-STEM   VN-PRONOM-PERSON-NUMBER   <eps>                                               <eps>
+
+# 2.3. Person-Number
+
+NN-PERSON-NUMBER          NN-DERIVATION-PN          +[PersonNumber=A3sg]     <eps>
+NN-PERSON-NUMBER          NN-DERIVATION-PN          +lAr[PersonNumber=A3pl]  +lAr
+
+NN-PNON-PERSON-NUMBER     NN-PNON-DERIVATION-PN     +[PersonNumber=A3sg]     <eps>
+NN-PNON-PERSON-NUMBER     NN-PNON-DERIVATION-PN     +lAr[PersonNumber=A3pl]  +lAr
+
+NN-POSS-PERSON-NUMBER     NN-POSS-DERIVATION-PN     +[PersonNumber=A3sg]     <eps>
+NN-POSS-PERSON-NUMBER     NN-POSS-DERIVATION-PN     +lAr[PersonNumber=A3pl]  +lAr
+
+NN-STEM-PERSON-NUMBER     NN-STEM-DERIVATION-PN     +[PersonNumber=A3sg]     <eps>
+NN-STEM-PERSON-NUMBER     NN-STEM-DERIVATION-PN     +lAr[PersonNumber=A3pl]  +lAr
+
+NN-TEMP-PERSON-NUMBER     NN-TEMP-DERIVATION-PN     +[PersonNumber=A3sg]     <eps>
+NN-TEMP-PERSON-NUMBER     NN-TEMP-DERIVATION-PN     +lAr[PersonNumber=A3pl]  +lAr
+
+NNP-PERSON-NUMBER         NNP-DERIVATION-PN         +[PersonNumber=A3sg]     <eps>
+NNP-PERSON-NUMBER         NNP-DERIVATION-PN         +lAr[PersonNumber=A3pl]  +lAr
+
+VN-AORNOM-PERSON-NUMBER   VN-AORNOM-DERIVATION-PN   +[PersonNumber=A3sg]     <eps>
+VN-AORNOM-PERSON-NUMBER   VN-AORNOM-DERIVATION-PN   +lAr[PersonNumber=A3pl]  +lAr
+
+VN-FUTNOM-PERSON-NUMBER   VN-FUTNOM-DERIVATION-PN   +[PersonNumber=A3sg]     <eps>
+VN-FUTNOM-PERSON-NUMBER   VN-FUTNOM-DERIVATION-PN   +lAr[PersonNumber=A3pl]  +lAr
+
+VN-INF-PERSON-NUMBER      VN-INF-DERIVATION-PN      +[PersonNumber=A3sg]     <eps>
+VN-INF-PERSON-NUMBER      VN-INF-DERIVATION-PN      +lAr[PersonNumber=A3pl]  +lAr
+
+VN-NONF-PERSON-NUMBER     VN-NONF-DERIVATION-PN     +[PersonNumber=A3sg]     <eps>
+VN-NONF-PERSON-NUMBER     VN-NONF-DERIVATION-PN     +lAr[PersonNumber=A3pl]  +lAr
+
+VN-PASTNOM-PERSON-NUMBER  VN-PASTNOM-DERIVATION-PN  +[PersonNumber=A3sg]     <eps>
+VN-PASTNOM-PERSON-NUMBER  VN-PASTNOM-DERIVATION-PN  +lAr[PersonNumber=A3pl]  +lAr
+
+VN-PERNOM-PERSON-NUMBER   VN-PERNOM-DERIVATION-PN   +[PersonNumber=A3sg]     <eps>
+VN-PERNOM-PERSON-NUMBER   VN-PERNOM-DERIVATION-PN   +lAr[PersonNumber=A3pl]  +lAr
+
+VN-PRESNOM-PERSON-NUMBER  VN-PRESNOM-DERIVATION-PN  +[PersonNumber=A3sg]     <eps>
+VN-PRESNOM-PERSON-NUMBER  VN-PRESNOM-DERIVATION-PN  +lAr[PersonNumber=A3pl]  +lAr
+
+VN-PRONOM-PERSON-NUMBER   VN-PRONOM-DERIVATION-PN   +[PersonNumber=A3sg]     <eps>
+VN-PRONOM-PERSON-NUMBER   VN-PRONOM-DERIVATION-PN   +lAr[PersonNumber=A3pl]  +lAr
+
+# 2.4. Derivation Slot: After Person-Number
+
+NN-DERIVATION-PN          DER-NOUN-JJN-INTER     +[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-PN          DER-NOUN-NN-INTER      +[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-PN          DER-NOUN-NOMP-INTER    +[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-DERIVATION-PN          NN-POSSESSIVE          <eps>                           <eps>
+
+NN-PNON-DERIVATION-PN     NN-PNON-POSSESSIVE     <eps>                           <eps>
+NN-POSS-DERIVATION-PN     NN-POSS-POSSESSIVE     <eps>                           <eps>
+NN-STEM-DERIVATION-PN     NN-STEM-POSSESSIVE     <eps>                           <eps>
+
+NN-TEMP-DERIVATION-PN     DER-NOUN-RB-SINCE      +[Possessive=Pnon]+[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-PN     NN-TEMP-POSSESSIVE     <eps>                           <eps>
+
+NNP-DERIVATION-PN         NNP-POSSESSIVE         <eps>                           <eps>
+
+VN-AORNOM-DERIVATION-PN   VN-AORNOM-POSSESSIVE   <eps>                           <eps>
+VN-FUTNOM-DERIVATION-PN   VN-FUTNOM-POSSESSIVE   <eps>                           <eps>
+VN-INF-DERIVATION-PN      VN-INF-POSSESSIVE      <eps>                           <eps>
+VN-NONF-DERIVATION-PN     VN-NONF-POSSESSIVE     <eps>                           <eps>
+VN-PASTNOM-DERIVATION-PN  VN-PASTNOM-POSSESSIVE  <eps>                           <eps>
+VN-PERNOM-DERIVATION-PN   VN-PERNOM-POSSESSIVE   <eps>                           <eps>
+VN-PRESNOM-DERIVATION-PN  VN-PRESNOM-POSSESSIVE  <eps>                           <eps>
+VN-PRONOM-DERIVATION-PN   VN-PRONOM-POSSESSIVE   <eps>                           <eps>
+
+# 2.5. Possessive
+
+NN-POSSESSIVE          NN-DERIVATION-POSS-PNON          +[Possessive=Pnon]      <eps>
+NN-POSSESSIVE          NN-DERIVATION-POSS-POSS          +Hm[Possessive=P1sg]    +Hm
+NN-POSSESSIVE          NN-DERIVATION-POSS-POSS          +Hn[Possessive=P2sg]    +Hn
+NN-POSSESSIVE          NN-DERIVATION-POSS-POSS          +HnHz[Possessive=P2sg]  +HnHz
+NN-POSSESSIVE          NN-DERIVATION-POSS-POSS          +SH[Possessive=P3sg]    +SH
+NN-POSSESSIVE          NN-DERIVATION-POSS-POSS          +HmHz[Possessive=P1pl]  +HmHz
+NN-POSSESSIVE          NN-DERIVATION-POSS-POSS          +HnHz[Possessive=P2pl]  +HnHz
+NN-POSSESSIVE          NN-DERIVATION-POSS-POSS          +lArH[Possessive=P3pl]  +lArH
+
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-PNON     +[Possessive=Pnon]      <eps>
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-POSS     +Hm[Possessive=P1sg]    +Hm
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-POSS     +Hn[Possessive=P2sg]    +Hn
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-POSS     +HnHz[Possessive=P2sg]  +HnHz
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-POSS     +SH[Possessive=P3sg]    +SH
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-POSS     +HmHz[Possessive=P1pl]  +HmHz
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-POSS     +HnHz[Possessive=P2pl]  +HnHz
+NN-PNON-POSSESSIVE     NN-PNON-DERIVATION-POSS-POSS     +lArH[Possessive=P3pl]  +lArH
+
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-PNON     +[Possessive=Pnon]      <eps>
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-POSS     +Hm[Possessive=P1sg]    +Hm
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-POSS     +Hn[Possessive=P2sg]    +Hn
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-POSS     +HnHz[Possessive=P2sg]  +HnHz
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-POSS     +SH[Possessive=P3sg]    +SH
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-POSS     +HmHz[Possessive=P1pl]  +HmHz
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-POSS     +HnHz[Possessive=P2pl]  +HnHz
+NN-POSS-POSSESSIVE     NN-POSS-DERIVATION-POSS-POSS     +lArH[Possessive=P3pl]  +lArH
+
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-PNON     +[Possessive=Pnon]      <eps>
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-POSS     +Hm[Possessive=P1sg]    +Hm
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-POSS     +Hn[Possessive=P2sg]    +Hn
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-POSS     +HnHz[Possessive=P2sg]  +HnHz
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-POSS     +SH[Possessive=P3sg]    +SH
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-POSS     +HmHz[Possessive=P1pl]  +HmHz
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-POSS     +HnHz[Possessive=P2pl]  +HnHz
+NN-STEM-POSSESSIVE     NN-STEM-DERIVATION-POSS-POSS     +lArH[Possessive=P3pl]  +lArH
+
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-PNON     +[Possessive=Pnon]      <eps>
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-POSS     +Hm[Possessive=P1sg]    +Hm
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-POSS     +Hn[Possessive=P2sg]    +Hn
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-POSS     +HnHz[Possessive=P2sg]  +HnHz
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-POSS     +SH[Possessive=P3sg]    +SH
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-POSS     +HmHz[Possessive=P1pl]  +HmHz
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-POSS     +HnHz[Possessive=P2pl]  +HnHz
+NN-TEMP-POSSESSIVE     NN-TEMP-DERIVATION-POSS-POSS     +lArH[Possessive=P3pl]  +lArH
+
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-PNON         +[Possessive=Pnon]      <eps>
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-POSS         +Hm[Possessive=P1sg]    +Hm
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-POSS         +Hn[Possessive=P2sg]    +Hn
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-POSS         +HnHz[Possessive=P2sg]  +HnHz
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-POSS         +SH[Possessive=P3sg]    +SH
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-POSS         +HmHz[Possessive=P1pl]  +HmHz
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-POSS         +HnHz[Possessive=P2pl]  +HnHz
+NNP-POSSESSIVE         NNP-DERIVATION-POSS-POSS         +lArH[Possessive=P3pl]  +lArH
+
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-PNON   +[Possessive=Pnon]      <eps>
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-POSS   +Hm[Possessive=P1sg]    +Hm
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-POSS   +Hn[Possessive=P2sg]    +Hn
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2sg]  +HnHz
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-POSS   +SH[Possessive=P3sg]    +SH
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-POSS   +HmHz[Possessive=P1pl]  +HmHz
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2pl]  +HnHz
+VN-AORNOM-POSSESSIVE   VN-AORNOM-DERIVATION-POSS-POSS   +lArH[Possessive=P3pl]  +lArH
+
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-PNON   +[Possessive=Pnon]      <eps>
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-POSS   +Hm[Possessive=P1sg]    +Hm
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-POSS   +Hn[Possessive=P2sg]    +Hn
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2sg]  +HnHz
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-POSS   +SH[Possessive=P3sg]    +SH
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-POSS   +HmHz[Possessive=P1pl]  +HmHz
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2pl]  +HnHz
+VN-FUTNOM-POSSESSIVE   VN-FUTNOM-DERIVATION-POSS-POSS   +lArH[Possessive=P3pl]  +lArH
+
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-PNON      +[Possessive=Pnon]      <eps>
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-POSS      +Hm[Possessive=P1sg]    +Hm
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-POSS      +Hn[Possessive=P2sg]    +Hn
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-POSS      +HnHz[Possessive=P2sg]  +HnHz
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-POSS      +SH[Possessive=P3sg]    +SH
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-POSS      +HmHz[Possessive=P1pl]  +HmHz
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-POSS      +HnHz[Possessive=P2pl]  +HnHz
+VN-INF-POSSESSIVE      VN-INF-DERIVATION-POSS-POSS      +lArH[Possessive=P3pl]  +lArH
+
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-PNON     +[Possessive=Pnon]      <eps>
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-POSS     +Hm[Possessive=P1sg]    +Hm
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-POSS     +Hn[Possessive=P2sg]    +Hn
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-POSS     +HnHz[Possessive=P2sg]  +HnHz
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-POSS     +SH[Possessive=P3sg]    +SH
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-POSS     +HmHz[Possessive=P1pl]  +HmHz
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-POSS     +HnHz[Possessive=P2pl]  +HnHz
+VN-NONF-POSSESSIVE     VN-NONF-DERIVATION-POSS-POSS     +lArH[Possessive=P3pl]  +lArH
+
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-PNON  +[Possessive=Pnon]      <eps>
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-POSS  +Hm[Possessive=P1sg]    +Hm
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-POSS  +Hn[Possessive=P2sg]    +Hn
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-POSS  +HnHz[Possessive=P2sg]  +HnHz
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-POSS  +SH[Possessive=P3sg]    +SH
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-POSS  +HmHz[Possessive=P1pl]  +HmHz
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-POSS  +HnHz[Possessive=P2pl]  +HnHz
+VN-PASTNOM-POSSESSIVE  VN-PASTNOM-DERIVATION-POSS-POSS  +lArH[Possessive=P3pl]  +lArH
+
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-PNON   +[Possessive=Pnon]      <eps>
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-POSS   +Hm[Possessive=P1sg]    +Hm
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-POSS   +Hn[Possessive=P2sg]    +Hn
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2sg]  +HnHz
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-POSS   +SH[Possessive=P3sg]    +SH
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-POSS   +HmHz[Possessive=P1pl]  +HmHz
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2pl]  +HnHz
+VN-PERNOM-POSSESSIVE   VN-PERNOM-DERIVATION-POSS-POSS   +lArH[Possessive=P3pl]  +lArH
+
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-PNON  +[Possessive=Pnon]      <eps>
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-POSS  +Hm[Possessive=P1sg]    +Hm
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-POSS  +Hn[Possessive=P2sg]    +Hn
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-POSS  +HnHz[Possessive=P2sg]  +HnHz
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-POSS  +SH[Possessive=P3sg]    +SH
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-POSS  +HmHz[Possessive=P1pl]  +HmHz
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-POSS  +HnHz[Possessive=P2pl]  +HnHz
+VN-PRESNOM-POSSESSIVE  VN-PRESNOM-DERIVATION-POSS-POSS  +lArH[Possessive=P3pl]  +lArH
+
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-PNON   +[Possessive=Pnon]      <eps>
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-POSS   +Hm[Possessive=P1sg]    +Hm
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-POSS   +Hn[Possessive=P2sg]    +Hn
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2sg]  +HnHz
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-POSS   +SH[Possessive=P3sg]    +SH
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-POSS   +HmHz[Possessive=P1pl]  +HmHz
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-POSS   +HnHz[Possessive=P2pl]  +HnHz
+VN-PRONOM-POSSESSIVE   VN-PRONOM-DERIVATION-POSS-POSS   +lArH[Possessive=P3pl]  +lArH
+
+# 2.6. Derivation Slot: After Possessive
+
+NN-DERIVATION-POSS-PNON          DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-NN-FAM1      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-NOMP-FAM1    +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          FINAL-PNON            +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          FINAL-STEM            +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-PNON          NN-CASE-PNON          <eps>         <eps>
+
+NN-DERIVATION-POSS-POSS          DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NN-FAM1      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NN-FAM2      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NOMP-FAM1    +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NOMP-FAM2    +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          FINAL-POSS            +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          FINAL-STEM            +[Case=Bare]  <eps>
+NN-DERIVATION-POSS-POSS          NN-CASE-POSS          <eps>         <eps>
+
+NN-PNON-DERIVATION-POSS-PNON     NN-PNON-CASE-PNON     <eps>         <eps>
+NN-PNON-DERIVATION-POSS-POSS     NN-PNON-CASE-POSS     <eps>         <eps>
+
+NN-POSS-DERIVATION-POSS-PNON     NN-POSS-CASE-PNON     <eps>         <eps>
+NN-POSS-DERIVATION-POSS-POSS     NN-POSS-CASE-POSS     <eps>         <eps>
+
+NN-STEM-DERIVATION-POSS-PNON     NN-STEM-CASE-PNON     <eps>         <eps>
+NN-STEM-DERIVATION-POSS-POSS     NN-STEM-CASE-POSS     <eps>         <eps>
+
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NN-FAM1      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NN-FAM2      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NOMP-FAM1    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NOMP-FAM2    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     FINAL-PNON            +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     FINAL-STEM            +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-PNON     NN-TEMP-CASE-PNON     <eps>         <eps>
+
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NN-FAM1      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NN-FAM2      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NOMP-FAM1    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NOMP-FAM2    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     FINAL-POSS            +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     FINAL-STEM            +[Case=Bare]  <eps>
+NN-TEMP-DERIVATION-POSS-POSS     NN-TEMP-CASE-POSS     <eps>         <eps>
+
+NNP-DERIVATION-POSS-PNON         DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         FINAL-PNON            +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         FINAL-STEM            +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-PNON         NNP-CASE-PNON         <eps>         <eps>
+
+NNP-DERIVATION-POSS-POSS         DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         FINAL-POSS            +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         FINAL-STEM            +[Case=Bare]  <eps>
+NNP-DERIVATION-POSS-POSS         NNP-CASE-POSS         <eps>         <eps>
+
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   FINAL-PNON            +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   FINAL-STEM            +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-PNON   VN-AORNOM-CASE-PNON   <eps>         <eps>
+
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   FINAL-POSS            +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   FINAL-STEM            +[Case=Bare]  <eps>
+VN-AORNOM-DERIVATION-POSS-POSS   VN-AORNOM-CASE-POSS   <eps>         <eps>
+
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   FINAL-PNON            +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   FINAL-STEM            +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-PNON   VN-FUTNOM-CASE-PNON   <eps>         <eps>
+
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   FINAL-POSS            +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   FINAL-STEM            +[Case=Bare]  <eps>
+VN-FUTNOM-DERIVATION-POSS-POSS   VN-FUTNOM-CASE-POSS   <eps>         <eps>
+
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      FINAL-PNON            +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      FINAL-STEM            +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-PNON      VN-INF-CASE-PNON      <eps>         <eps>
+
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      FINAL-POSS            +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      FINAL-STEM            +[Case=Bare]  <eps>
+VN-INF-DERIVATION-POSS-POSS      VN-INF-CASE-POSS      <eps>         <eps>
+
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     FINAL-PNON            +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     FINAL-STEM            +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-PNON     VN-NONF-CASE-PNON     <eps>         <eps>
+
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     FINAL-POSS            +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     FINAL-STEM            +[Case=Bare]  <eps>
+VN-NONF-DERIVATION-POSS-POSS     VN-NONF-CASE-POSS     <eps>         <eps>
+
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  FINAL-PNON            +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  FINAL-STEM            +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-PNON  VN-PASTNOM-CASE-PNON  <eps>         <eps>
+
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  FINAL-POSS            +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  FINAL-STEM            +[Case=Bare]  <eps>
+VN-PASTNOM-DERIVATION-POSS-POSS  VN-PASTNOM-CASE-POSS  <eps>         <eps>
+
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   FINAL-PNON            +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   FINAL-STEM            +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-PNON   VN-PERNOM-CASE-PNON   <eps>         <eps>
+
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   FINAL-POSS            +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   FINAL-STEM            +[Case=Bare]  <eps>
+VN-PERNOM-DERIVATION-POSS-POSS   VN-PERNOM-CASE-POSS   <eps>         <eps>
+
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  FINAL-PNON            +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  FINAL-STEM            +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-PNON  VN-PRESNOM-CASE-PNON  <eps>         <eps>
+
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  DER-NOUN-VB-BCM       +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  FINAL-POSS            +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  FINAL-STEM            +[Case=Bare]  <eps>
+VN-PRESNOM-DERIVATION-POSS-POSS  VN-PRESNOM-CASE-POSS  <eps>         <eps>
+
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   FINAL-PNON            +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   FINAL-STEM            +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-PNON   VN-PRONOM-CASE-PNON   <eps>         <eps>
+
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WITH      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-JJ-WOUT      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WITH      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-NN-WOUT      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WITH    +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-NOMP-WOUT    +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-RB-BY        +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WITH      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   DER-NOUN-RB-WOUT      +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   FINAL-POSS            +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   FINAL-STEM            +[Case=Bare]  <eps>
+VN-PRONOM-DERIVATION-POSS-POSS   VN-PRONOM-CASE-POSS   <eps>         <eps>
+
+# 2.7. Case
+
+NN-CASE-PNON          NN-DERIVATION-CASE-BARE            +[Case=Bare]     <eps>
+NN-CASE-PNON          NN-DERIVATION-CASE-GEN             +NHn[Case=Gen]   +NHn
+NN-CASE-PNON          NN-DERIVATION-CASE-LOC             +DA[Case=Loc]    +DA
+NN-CASE-PNON          NN-DERIVATION-CASE-MARKED          +YH[Case=Acc]    +YH
+NN-CASE-PNON          NN-DERIVATION-CASE-MARKED          +YA[Case=Dat]    +YA
+NN-CASE-PNON          NN-DERIVATION-CASE-MARKED          +DAn[Case=Abl]   +DAn
+NN-CASE-PNON          NN-DERIVATION-CASE-MARKED          +YlA[Case=Ins]   +YlA
+NN-CASE-PNON          NN-DERIVATION-CASE-NOM             +[Case=Nom]      <eps>
+
+NN-CASE-POSS          NN-DERIVATION-CASE-BARE            +[Case=Bare]     <eps>
+NN-CASE-POSS          NN-DERIVATION-CASE-GEN             +NHn[Case=Gen]   +NHn
+NN-CASE-POSS          NN-DERIVATION-CASE-LOC             +NDA[Case=Loc]   +NDA
+NN-CASE-POSS          NN-DERIVATION-CASE-MARKED          +NH[Case=Acc]    +NH
+NN-CASE-POSS          NN-DERIVATION-CASE-MARKED          +NA[Case=Dat]    +NA
+NN-CASE-POSS          NN-DERIVATION-CASE-MARKED          +NDAn[Case=Abl]  +NDAn
+NN-CASE-POSS          NN-DERIVATION-CASE-MARKED          +YlA[Case=Ins]   +YlA
+NN-CASE-POSS          NN-DERIVATION-CASE-NOM             +[Case=Nom]      <eps>
+
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-LOC        +DA[Case=Loc]    +DA
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-MARKED     +YH[Case=Acc]    +YH
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-MARKED     +YA[Case=Dat]    +YA
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-MARKED     +DAn[Case=Abl]   +DAn
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-PNON-CASE-PNON     NN-PNON-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-LOC        +NDA[Case=Loc]   +NDA
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-MARKED     +NH[Case=Acc]    +NH
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-MARKED     +NA[Case=Dat]    +NA
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-MARKED     +NDAn[Case=Abl]  +NDAn
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-PNON-CASE-POSS     NN-PNON-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-LOC        +DA[Case=Loc]    +DA
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-MARKED     +YH[Case=Acc]    +YH
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-MARKED     +YA[Case=Dat]    +YA
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-MARKED     +DAn[Case=Abl]   +DAn
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-POSS-CASE-PNON     NN-POSS-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-LOC        +NDA[Case=Loc]   +NDA
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-MARKED     +NH[Case=Acc]    +NH
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-MARKED     +NA[Case=Dat]    +NA
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-MARKED     +NDAn[Case=Abl]  +NDAn
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-POSS-CASE-POSS     NN-POSS-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-LOC        +DA[Case=Loc]    +DA
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-MARKED     +YH[Case=Acc]    +YH
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-MARKED     +YA[Case=Dat]    +YA
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-MARKED     +DAn[Case=Abl]   +DAn
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-STEM-CASE-PNON     NN-STEM-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-LOC        +NDA[Case=Loc]   +NDA
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-MARKED     +NH[Case=Acc]    +NH
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-MARKED     +NA[Case=Dat]    +NA
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-MARKED     +NDAn[Case=Abl]  +NDAn
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-STEM-CASE-POSS     NN-STEM-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-LOC        +DA[Case=Loc]    +DA
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-MARKED     +YH[Case=Acc]    +YH
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-MARKED     +YA[Case=Dat]    +YA
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-MARKED     +DAn[Case=Abl]   +DAn
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-TEMP-CASE-PNON     NN-TEMP-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-LOC        +NDA[Case=Loc]   +NDA
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-MARKED     +NH[Case=Acc]    +NH
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-MARKED     +NA[Case=Dat]    +NA
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-MARKED     +NDAn[Case=Abl]  +NDAn
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+NN-TEMP-CASE-POSS     NN-TEMP-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+NNP-CASE-PNON         NNP-DERIVATION-CASE-BARE           +[Case=Bare]     <eps>
+NNP-CASE-PNON         NNP-DERIVATION-CASE-GEN            +NHn[Case=Gen]   +NHn
+NNP-CASE-PNON         NNP-DERIVATION-CASE-LOC            +DA[Case=Loc]    +DA
+NNP-CASE-PNON         NNP-DERIVATION-CASE-MARKED         +YH[Case=Acc]    +YH
+NNP-CASE-PNON         NNP-DERIVATION-CASE-MARKED         +YA[Case=Dat]    +YA
+NNP-CASE-PNON         NNP-DERIVATION-CASE-MARKED         +DAn[Case=Abl]   +DAn
+NNP-CASE-PNON         NNP-DERIVATION-CASE-MARKED         +YlA[Case=Ins]   +YlA
+NNP-CASE-PNON         NNP-DERIVATION-CASE-NOM            +[Case=Nom]      <eps>
+
+NNP-CASE-POSS         NNP-DERIVATION-CASE-BARE           +[Case=Bare]     <eps>
+NNP-CASE-POSS         NNP-DERIVATION-CASE-GEN            +NHn[Case=Gen]   +NHn
+NNP-CASE-POSS         NNP-DERIVATION-CASE-LOC            +NDA[Case=Loc]   +NDA
+NNP-CASE-POSS         NNP-DERIVATION-CASE-MARKED         +NH[Case=Acc]    +NH
+NNP-CASE-POSS         NNP-DERIVATION-CASE-MARKED         +NA[Case=Dat]    +NA
+NNP-CASE-POSS         NNP-DERIVATION-CASE-MARKED         +NDAn[Case=Abl]  +NDAn
+NNP-CASE-POSS         NNP-DERIVATION-CASE-MARKED         +YlA[Case=Ins]   +YlA
+NNP-CASE-POSS         NNP-DERIVATION-CASE-NOM            +[Case=Nom]      <eps>
+
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-AORNOM-CASE-PNON   VN-AORNOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-AORNOM-CASE-POSS   VN-AORNOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-FUTNOM-CASE-PNON   VN-FUTNOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-FUTNOM-CASE-POSS   VN-FUTNOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-BARE        +[Case=Bare]     <eps>
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-GEN         +NHn[Case=Gen]   +NHn
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-LOC         +DA[Case=Loc]    +DA
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-MARKED      +YH[Case=Acc]    +YH
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-MARKED      +YA[Case=Dat]    +YA
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-MARKED      +DAn[Case=Abl]   +DAn
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-MARKED      +YlA[Case=Ins]   +YlA
+VN-INF-CASE-PNON      VN-INF-DERIVATION-CASE-NOM         +[Case=Nom]      <eps>
+
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-BARE        +[Case=Bare]     <eps>
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-GEN         +NHn[Case=Gen]   +NHn
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-LOC         +NDA[Case=Loc]   +NDA
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-MARKED      +NH[Case=Acc]    +NH
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-MARKED      +NA[Case=Dat]    +NA
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-MARKED      +NDAn[Case=Abl]  +NDAn
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-MARKED      +YlA[Case=Ins]   +YlA
+VN-INF-CASE-POSS      VN-INF-DERIVATION-CASE-NOM         +[Case=Nom]      <eps>
+
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-LOC        +DA[Case=Loc]    +DA
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-MARKED     +YH[Case=Acc]    +YH
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-MARKED     +YA[Case=Dat]    +YA
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-MARKED     +DAn[Case=Abl]   +DAn
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+VN-NONF-CASE-PNON     VN-NONF-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-BARE       +[Case=Bare]     <eps>
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-GEN        +NHn[Case=Gen]   +NHn
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-LOC        +NDA[Case=Loc]   +NDA
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-MARKED     +NH[Case=Acc]    +NH
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-MARKED     +NA[Case=Dat]    +NA
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-MARKED     +NDAn[Case=Abl]  +NDAn
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-MARKED     +YlA[Case=Ins]   +YlA
+VN-NONF-CASE-POSS     VN-NONF-DERIVATION-CASE-NOM        +[Case=Nom]      <eps>
+
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-BARE    +[Case=Bare]     <eps>
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-GEN     +NHn[Case=Gen]   +NHn
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-LOC     +DA[Case=Loc]    +DA
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-MARKED  +YH[Case=Acc]    +YH
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-MARKED  +YA[Case=Dat]    +YA
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-MARKED  +DAn[Case=Abl]   +DAn
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-MARKED  +YlA[Case=Ins]   +YlA
+VN-PASTNOM-CASE-PNON  VN-PASTNOM-DERIVATION-CASE-NOM     +[Case=Nom]      <eps>
+
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-BARE    +[Case=Bare]     <eps>
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-GEN     +NHn[Case=Gen]   +NHn
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-LOC     +NDA[Case=Loc]   +NDA
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-MARKED  +NH[Case=Acc]    +NH
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-MARKED  +NA[Case=Dat]    +NA
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-MARKED  +NDAn[Case=Abl]  +NDAn
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-MARKED  +YlA[Case=Ins]   +YlA
+VN-PASTNOM-CASE-POSS  VN-PASTNOM-DERIVATION-CASE-NOM     +[Case=Nom]      <eps>
+
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-PERNOM-CASE-PNON   VN-PERNOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-PERNOM-CASE-POSS   VN-PERNOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-BARE    +[Case=Bare]     <eps>
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-GEN     +NHn[Case=Gen]   +NHn
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-LOC     +DA[Case=Loc]    +DA
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-MARKED  +YH[Case=Acc]    +YH
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-MARKED  +YA[Case=Dat]    +YA
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-MARKED  +DAn[Case=Abl]   +DAn
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-MARKED  +YlA[Case=Ins]   +YlA
+VN-PRESNOM-CASE-PNON  VN-PRESNOM-DERIVATION-CASE-NOM     +[Case=Nom]      <eps>
+
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-BARE    +[Case=Bare]     <eps>
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-GEN     +NHn[Case=Gen]   +NHn
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-LOC     +NDA[Case=Loc]   +NDA
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-MARKED  +NH[Case=Acc]    +NH
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-MARKED  +NA[Case=Dat]    +NA
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-MARKED  +NDAn[Case=Abl]  +NDAn
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-MARKED  +YlA[Case=Ins]   +YlA
+VN-PRESNOM-CASE-POSS  VN-PRESNOM-DERIVATION-CASE-NOM     +[Case=Nom]      <eps>
+
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-LOC      +DA[Case=Loc]    +DA
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-MARKED   +YH[Case=Acc]    +YH
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-MARKED   +YA[Case=Dat]    +YA
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-MARKED   +DAn[Case=Abl]   +DAn
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-PRONOM-CASE-PNON   VN-PRONOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-BARE     +[Case=Bare]     <eps>
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-GEN      +NHn[Case=Gen]   +NHn
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-LOC      +NDA[Case=Loc]   +NDA
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-MARKED   +NH[Case=Acc]    +NH
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-MARKED   +NA[Case=Dat]    +NA
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-MARKED   +NDAn[Case=Abl]  +NDAn
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-MARKED   +YlA[Case=Ins]   +YlA
+VN-PRONOM-CASE-POSS   VN-PRONOM-DERIVATION-CASE-NOM      +[Case=Nom]      <eps>
+
+# 2.8. Derivation Slot: After Case
+
+NN-DERIVATION-CASE-BARE            CONTRAST            <eps>  <eps>
+NN-DERIVATION-CASE-BARE            DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-DERIVATION-CASE-BARE            DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-DERIVATION-CASE-BARE            FINAL               <eps>  <eps>
+NN-DERIVATION-CASE-GEN             CONTRAST            <eps>  <eps>
+NN-DERIVATION-CASE-GEN             DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-DERIVATION-CASE-GEN             DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-DERIVATION-CASE-GEN             DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-DERIVATION-CASE-GEN             FINAL               <eps>  <eps>
+NN-DERIVATION-CASE-GEN             FINAL-STEM          <eps>  <eps>
+NN-DERIVATION-CASE-LOC             CONTRAST            <eps>  <eps>
+NN-DERIVATION-CASE-LOC             DER-NOUN-JJREL-REL  <eps>  <eps>
+NN-DERIVATION-CASE-LOC             DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-DERIVATION-CASE-LOC             DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-DERIVATION-CASE-LOC             DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-DERIVATION-CASE-LOC             FINAL               <eps>  <eps>
+NN-DERIVATION-CASE-LOC             FINAL-STEM          <eps>  <eps>
+NN-DERIVATION-CASE-MARKED          CONTRAST            <eps>  <eps>
+NN-DERIVATION-CASE-MARKED          DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-DERIVATION-CASE-MARKED          FINAL               <eps>  <eps>
+NN-DERIVATION-CASE-MARKED          FINAL-STEM          <eps>  <eps>
+NN-DERIVATION-CASE-NOM             CONTRAST            <eps>  <eps>
+NN-DERIVATION-CASE-NOM             DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-DERIVATION-CASE-NOM             DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-DERIVATION-CASE-NOM             FINAL               <eps>  <eps>
+
+NN-PNON-DERIVATION-CASE-BARE       FINAL-SUFFIX        <eps>  <eps>
+NN-PNON-DERIVATION-CASE-GEN        DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-PNON-DERIVATION-CASE-GEN        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-PNON-DERIVATION-CASE-GEN        FINAL-SUFFIX        <eps>  <eps>
+NN-PNON-DERIVATION-CASE-LOC        DER-NOUN-JJREL-REL  <eps>  <eps>
+NN-PNON-DERIVATION-CASE-LOC        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-PNON-DERIVATION-CASE-LOC        FINAL-SUFFIX        <eps>  <eps>
+NN-PNON-DERIVATION-CASE-MARKED     FINAL-SUFFIX        <eps>  <eps>
+NN-PNON-DERIVATION-CASE-NOM        FINAL-SUFFIX        <eps>  <eps>
+
+NN-POSS-DERIVATION-CASE-BARE       FINAL-SUFFIX        <eps>  <eps>
+NN-POSS-DERIVATION-CASE-GEN        DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-POSS-DERIVATION-CASE-GEN        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-POSS-DERIVATION-CASE-GEN        FINAL-SUFFIX        <eps>  <eps>
+NN-POSS-DERIVATION-CASE-LOC        DER-NOUN-JJREL-REL  <eps>  <eps>
+NN-POSS-DERIVATION-CASE-LOC        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-POSS-DERIVATION-CASE-LOC        FINAL-SUFFIX        <eps>  <eps>
+NN-POSS-DERIVATION-CASE-MARKED     FINAL-SUFFIX        <eps>  <eps>
+NN-POSS-DERIVATION-CASE-NOM        FINAL-SUFFIX        <eps>  <eps>
+
+NN-STEM-DERIVATION-CASE-BARE       FINAL-SUFFIX        <eps>  <eps>
+NN-STEM-DERIVATION-CASE-GEN        DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-STEM-DERIVATION-CASE-GEN        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-STEM-DERIVATION-CASE-GEN        FINAL-SUFFIX        <eps>  <eps>
+NN-STEM-DERIVATION-CASE-LOC        DER-NOUN-JJREL-REL  <eps>  <eps>
+NN-STEM-DERIVATION-CASE-LOC        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-STEM-DERIVATION-CASE-LOC        FINAL-SUFFIX        <eps>  <eps>
+NN-STEM-DERIVATION-CASE-MARKED     FINAL-SUFFIX        <eps>  <eps>
+NN-STEM-DERIVATION-CASE-NOM        FINAL-SUFFIX        <eps>  <eps>
+
+NN-TEMP-DERIVATION-CASE-BARE       CONTRAST            <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-BARE       DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-BARE       FINAL               <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-GEN        CONTRAST            <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-GEN        DER-NOUN-NOMP-REL   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-GEN        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-GEN        DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-GEN        FINAL               <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-GEN        FINAL-STEM          <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-LOC        CONTRAST            <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-LOC        DER-NOUN-JJREL-REL  <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-LOC        DER-NOUN-PRF-PRON   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-LOC        DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-LOC        FINAL               <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-LOC        FINAL-STEM          <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-MARKED     CONTRAST            <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-MARKED     DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-MARKED     FINAL               <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-MARKED     FINAL-STEM          <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-NOM        CONTRAST            <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-NOM        DER-NOUN-RB-WHILE   <eps>  <eps>
+NN-TEMP-DERIVATION-CASE-NOM        FINAL               <eps>  <eps>
+
+NNP-DERIVATION-CASE-BARE           CONTRAST            <eps>  <eps>
+NNP-DERIVATION-CASE-BARE           DER-NOUN-RB-WHILE   <eps>  <eps>
+NNP-DERIVATION-CASE-BARE           FINAL-NNP           <eps>  <eps>
+NNP-DERIVATION-CASE-GEN            CONTRAST            <eps>  <eps>
+NNP-DERIVATION-CASE-GEN            DER-NOUN-NOMP-REL   <eps>  <eps>
+NNP-DERIVATION-CASE-GEN            DER-NOUN-PRF-PRON   <eps>  <eps>
+NNP-DERIVATION-CASE-GEN            DER-NOUN-RB-WHILE   <eps>  <eps>
+NNP-DERIVATION-CASE-GEN            FINAL-NNP           <eps>  <eps>
+NNP-DERIVATION-CASE-GEN            FINAL-STEM          <eps>  <eps>
+NNP-DERIVATION-CASE-LOC            CONTRAST            <eps>  <eps>
+NNP-DERIVATION-CASE-LOC            DER-NOUN-JJREL-REL  <eps>  <eps>
+NNP-DERIVATION-CASE-LOC            DER-NOUN-PRF-PRON   <eps>  <eps>
+NNP-DERIVATION-CASE-LOC            DER-NOUN-RB-WHILE   <eps>  <eps>
+NNP-DERIVATION-CASE-LOC            FINAL-NNP           <eps>  <eps>
+NNP-DERIVATION-CASE-LOC            FINAL-STEM          <eps>  <eps>
+NNP-DERIVATION-CASE-MARKED         CONTRAST            <eps>  <eps>
+NNP-DERIVATION-CASE-MARKED         DER-NOUN-RB-WHILE   <eps>  <eps>
+NNP-DERIVATION-CASE-MARKED         FINAL-NNP           <eps>  <eps>
+NNP-DERIVATION-CASE-MARKED         FINAL-STEM          <eps>  <eps>
+NNP-DERIVATION-CASE-NOM            CONTRAST            <eps>  <eps>
+NNP-DERIVATION-CASE-NOM            DER-NOUN-RB-WHILE   <eps>  <eps>
+NNP-DERIVATION-CASE-NOM            FINAL-NNP           <eps>  <eps>
+
+VN-AORNOM-DERIVATION-CASE-BARE     CONTRAST            <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-BARE     FINAL               <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-GEN      CONTRAST            <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-GEN      DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-GEN      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-GEN      FINAL               <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-GEN      FINAL-STEM          <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-LOC      CONTRAST            <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-LOC      DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-LOC      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-LOC      FINAL               <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-LOC      FINAL-STEM          <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-MARKED   CONTRAST            <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-MARKED   FINAL               <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-MARKED   FINAL-STEM          <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-NOM      CONTRAST            <eps>  <eps>
+VN-AORNOM-DERIVATION-CASE-NOM      FINAL               <eps>  <eps>
+
+VN-FUTNOM-DERIVATION-CASE-BARE     CONTRAST            <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-BARE     FINAL               <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-GEN      CONTRAST            <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-GEN      DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-GEN      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-GEN      FINAL               <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-GEN      FINAL-STEM          <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-LOC      CONTRAST            <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-LOC      DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-LOC      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-LOC      FINAL               <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-LOC      FINAL-STEM          <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-MARKED   CONTRAST            <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-MARKED   FINAL               <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-MARKED   FINAL-STEM          <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-NOM      CONTRAST            <eps>  <eps>
+VN-FUTNOM-DERIVATION-CASE-NOM      FINAL               <eps>  <eps>
+
+VN-INF-DERIVATION-CASE-BARE        CONTRAST            <eps>  <eps>
+VN-INF-DERIVATION-CASE-BARE        FINAL               <eps>  <eps>
+VN-INF-DERIVATION-CASE-GEN         CONTRAST            <eps>  <eps>
+VN-INF-DERIVATION-CASE-GEN         DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-INF-DERIVATION-CASE-GEN         DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-INF-DERIVATION-CASE-GEN         FINAL               <eps>  <eps>
+VN-INF-DERIVATION-CASE-GEN         FINAL-STEM          <eps>  <eps>
+VN-INF-DERIVATION-CASE-LOC         CONTRAST            <eps>  <eps>
+VN-INF-DERIVATION-CASE-LOC         DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-INF-DERIVATION-CASE-LOC         DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-INF-DERIVATION-CASE-LOC         FINAL               <eps>  <eps>
+VN-INF-DERIVATION-CASE-LOC         FINAL-STEM          <eps>  <eps>
+VN-INF-DERIVATION-CASE-MARKED      CONTRAST            <eps>  <eps>
+VN-INF-DERIVATION-CASE-MARKED      FINAL               <eps>  <eps>
+VN-INF-DERIVATION-CASE-MARKED      FINAL-STEM          <eps>  <eps>
+VN-INF-DERIVATION-CASE-NOM         CONTRAST            <eps>  <eps>
+VN-INF-DERIVATION-CASE-NOM         FINAL               <eps>  <eps>
+
+VN-NONF-DERIVATION-CASE-BARE       CONTRAST            <eps>  <eps>
+VN-NONF-DERIVATION-CASE-BARE       FINAL               <eps>  <eps>
+VN-NONF-DERIVATION-CASE-GEN        CONTRAST            <eps>  <eps>
+VN-NONF-DERIVATION-CASE-GEN        DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-NONF-DERIVATION-CASE-GEN        DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-NONF-DERIVATION-CASE-GEN        FINAL               <eps>  <eps>
+VN-NONF-DERIVATION-CASE-GEN        FINAL-STEM          <eps>  <eps>
+VN-NONF-DERIVATION-CASE-LOC        CONTRAST            <eps>  <eps>
+VN-NONF-DERIVATION-CASE-LOC        DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-NONF-DERIVATION-CASE-LOC        DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-NONF-DERIVATION-CASE-LOC        FINAL               <eps>  <eps>
+VN-NONF-DERIVATION-CASE-LOC        FINAL-STEM          <eps>  <eps>
+VN-NONF-DERIVATION-CASE-MARKED     CONTRAST            <eps>  <eps>
+VN-NONF-DERIVATION-CASE-MARKED     FINAL               <eps>  <eps>
+VN-NONF-DERIVATION-CASE-MARKED     FINAL-STEM          <eps>  <eps>
+VN-NONF-DERIVATION-CASE-NOM        CONTRAST            <eps>  <eps>
+VN-NONF-DERIVATION-CASE-NOM        FINAL               <eps>  <eps>
+
+VN-PASTNOM-DERIVATION-CASE-BARE    CONTRAST            <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-BARE    FINAL               <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-GEN     CONTRAST            <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-GEN     DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-GEN     DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-GEN     FINAL               <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-GEN     FINAL-STEM          <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-LOC     CONTRAST            <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-LOC     DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-LOC     DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-LOC     FINAL               <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-LOC     FINAL-STEM          <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-MARKED  CONTRAST            <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-MARKED  FINAL               <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-MARKED  FINAL-STEM          <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-NOM     CONTRAST            <eps>  <eps>
+VN-PASTNOM-DERIVATION-CASE-NOM     FINAL               <eps>  <eps>
+
+VN-PERNOM-DERIVATION-CASE-BARE     CONTRAST            <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-BARE     FINAL               <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-GEN      CONTRAST            <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-GEN      DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-GEN      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-GEN      FINAL               <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-GEN      FINAL-STEM          <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-LOC      CONTRAST            <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-LOC      DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-LOC      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-LOC      FINAL               <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-LOC      FINAL-STEM          <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-MARKED   CONTRAST            <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-MARKED   FINAL               <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-MARKED   FINAL-STEM          <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-NOM      CONTRAST            <eps>  <eps>
+VN-PERNOM-DERIVATION-CASE-NOM      FINAL               <eps>  <eps>
+
+VN-PRESNOM-DERIVATION-CASE-BARE    CONTRAST            <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-BARE    FINAL               <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-GEN     CONTRAST            <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-GEN     DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-GEN     DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-GEN     FINAL               <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-GEN     FINAL-STEM          <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-LOC     CONTRAST            <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-LOC     DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-LOC     DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-LOC     FINAL               <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-LOC     FINAL-STEM          <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-MARKED  CONTRAST            <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-MARKED  FINAL               <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-MARKED  FINAL-STEM          <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-NOM     CONTRAST            <eps>  <eps>
+VN-PRESNOM-DERIVATION-CASE-NOM     FINAL               <eps>  <eps>
+
+VN-PRONOM-DERIVATION-CASE-BARE     CONTRAST            <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-BARE     FINAL               <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-GEN      CONTRAST            <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-GEN      DER-NOUN-NOMP-REL   <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-GEN      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-GEN      FINAL               <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-GEN      FINAL-STEM          <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-LOC      CONTRAST            <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-LOC      DER-NOUN-JJREL-REL  <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-LOC      DER-NOUN-PRF-PRON   <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-LOC      FINAL               <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-LOC      FINAL-STEM          <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-MARKED   CONTRAST            <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-MARKED   FINAL               <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-MARKED   FINAL-STEM          <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-NOM      CONTRAST            <eps>  <eps>
+VN-PRONOM-DERIVATION-CASE-NOM      FINAL               <eps>  <eps>
+
+# 3. Derivations
+
+# 3.1. Noun-to-Adjective
+
+DER-NOUN-JJ-AGT     JJ     )([JJ]-CH[Derivation=Agt]      +CH
+DER-NOUN-JJ-LIKE    JJ     )([JJ]-CA[Derivation=Like]     +CA
+DER-NOUN-JJ-OF      JJ     )([JJ]-lArcA[Derivation=Of]    +lArcA
+DER-NOUN-JJ-RTD     JJ     )([JJ]-sAl[Derivation=Rtd]     +sAl
+DER-NOUN-JJ-SIM     JJ     )([JJ]-HmsH[Derivation=Sim]    +HmsH
+DER-NOUN-JJ-SIM     JJ     )([JJ]-sH[Derivation=Sim]      +sH
+DER-NOUN-JJ-SIM     JJ     )([JJ]-sHl[Derivation=Sim]     +sHl
+DER-NOUN-JJ-SIM     JJ     )([JJ]-vari[Derivation=Sim]    +vari
+DER-NOUN-JJ-SIM     JJ     )([JJ]-Hmtrak[Derivation=Sim]  +Hmtrak
+DER-NOUN-JJ-WITH    JJ     )([JJ]-lH[Derivation=With]     +lH
+DER-NOUN-JJ-WOUT    JJ     )([JJ]-sHz[Derivation=Wout]    +sHz
+
+DER-NOUN-JJN-AFF    JJN    )([JJ]-CHl[Derivation=Aff]     +CHl
+DER-NOUN-JJN-INTER  JJN    )([JJ]-ara[Derivation=Inter]   +ara
+DER-NOUN-JJN-FOLL   JJN    )([JJ]-ist[Derivation=Foll]    +ist
+DER-NOUN-JJN-FOLL   JJN    )([JJ]-st[Derivation=Foll]     +st
+DER-NOUN-JJN-FOR    JJN    )([JJ]-lHk[Derivation=For]     +lHk
+DER-NOUN-JJN-FROM   JJN    )([JJ]-lH[Derivation=From]     +lH
+
+DER-NOUN-JJREL-REL  JJREL  )([JJ]-ki[Derivation=Rel]      +ki
+
+# 3.2. Noun-to-Adverb
+
+DER-NOUN-RB-BY     RB  )([RB]-NCA[Derivation=By]      +NCA
+DER-NOUN-RB-COLL   RB  )([RB]-CA[Derivation=Coll]     +CA
+DER-NOUN-RB-COLL   RB  )([RB]-CAk[Derivation=Coll]    +CAk
+DER-NOUN-RB-COLL   RB  )([RB]-CAnAk[Derivation=Coll]  +CAnAk
+DER-NOUN-RB-SINCE  RB  )([RB]-DHr[Derivation=Since]   +DHr
+DER-NOUN-RB-WHILE  RB  )([RB]-Yken[Derivation=While]  +Yken
+DER-NOUN-RB-WITH   RB  )([RB]-HlH[Derivation=With]    +HlH
+DER-NOUN-RB-WOUT   RB  )([RB]-sHz[Derivation=Wout]    +sHz
+
+# 3.3. Noun-to-Noun
+
+DER-NOUN-NN-AFF    NN   )([NN]-CHl[Derivation=Aff]     +CHl
+DER-NOUN-NN-AGT    NN   )([NN]-CH[Derivation=Agt]      +CH
+DER-NOUN-NN-DIM    NN   )([NN]-CHk[Derivation=Dim]     +CHk
+DER-NOUN-NN-DIM    NN   )([NN]-cAğHz[Derivation=Dim]   +cAğHz
+DER-NOUN-NN-DOCT   NN   )([NN]-izm[Derivation=Doct]    +izm
+DER-NOUN-NN-FAM1   NN   )([NN]-gil[Derivation=Fam]     +gil
+DER-NOUN-NN-FAM2   NN   )([NN]-lAr[Derivation=Fam]     +lAr
+DER-NOUN-NN-FOLL   NN   )([NN]-ist[Derivation=Foll]    +ist
+DER-NOUN-NN-FOLL   NN   )([NN]-st[Derivation=Foll]     +st
+DER-NOUN-NN-FOR    NN   )([NN]-lHk[Derivation=For]     +lHk
+DER-NOUN-NN-FROM   NN   )([NN]-lH[Derivation=From]     +lH
+DER-NOUN-NN-INTER  NN   )([NN]-ara[Derivation=Inter]   +ara
+DER-NOUN-NN-LANG   NN   )([NN]-CA[Derivation=Lang]     +CA
+DER-NOUN-NN-LIKE   NN   )([NN]-CA[Derivation=Like]     +CA
+DER-NOUN-NN-LY     NN   )([NN]-CA[Derivation=Ly]       +CA
+DER-NOUN-NN-LY     NN   )([NN]-CAsHnA[Derivation=Ly]   +CAsHnA
+DER-NOUN-NN-NESS   NN   )([NN]-lHk[Derivation=Ness]    +lHk
+DER-NOUN-NN-OF     NN   )([NN]-lArcA[Derivation=Of]    +lArcA
+DER-NOUN-NN-RTD    NN   )([NN]-sAl[Derivation=Rtd]     +sAl
+DER-NOUN-NN-SIM    NN   )([NN]-HmsH[Derivation=Sim]    +HmsH
+DER-NOUN-NN-SIM    NN   )([NN]-sH[Derivation=Sim]      +sH
+DER-NOUN-NN-SIM    NN   )([NN]-sHl[Derivation=Sim]     +sHl
+DER-NOUN-NN-SIM    NN   )([NN]-vari[Derivation=Sim]    +vari
+DER-NOUN-NN-SIM    NN   )([NN]-Hmtrak[Derivation=Sim]  +Hmtrak
+DER-NOUN-NN-WITH   NN   )([NN]-lH[Derivation=With]     +lH
+DER-NOUN-NN-WOUT   NN   )([NN]-sHz[Derivation=Wout]    +sHz
+
+DER-NOUN-NNP-DIM   NNP  )([NNP]-CHk[Derivation=Dim]    +CHk
+DER-NOUN-NNP-DIM   NNP  )([NNP]-cAğHz[Derivation=Dim]  +cAğHz
+
+# 3.4. Noun-to-Pronoun
+
+DER-NOUN-PRF-PRON PRF  )([PRF]-ki[Derivation=Pron]  +ki
+
+# 3.5. Noun-to-Verb
+
+DER-NOUN-NOMP-AFF    NOMP        )([NOMP]-CHl[Derivation=Aff]     +CHl
+DER-NOUN-NOMP-AGT    NOMP        )([NOMP]-CH[Derivation=Agt]      +CH
+DER-NOUN-NOMP-DIM    NOMP        )([NOMP]-CHk[Derivation=Dim]     +CHk
+DER-NOUN-NOMP-DIM    NOMP        )([NOMP]-cAğHz[Derivation=Dim]   +cAğHz
+DER-NOUN-NOMP-DOCT   NOMP        )([NOMP]-izm[Derivation=Doct]    +izm
+DER-NOUN-NOMP-FAM1   NOMP        )([NOMP]-gil[Derivation=Fam]     +gil
+DER-NOUN-NOMP-FAM2   NOMP        )([NOMP]-lAr[Derivation=Fam]     +lAr
+DER-NOUN-NOMP-FOLL   NOMP        )([NOMP]-ist[Derivation=Foll]    +ist
+DER-NOUN-NOMP-FOLL   NOMP        )([NOMP]-st[Derivation=Foll]     +st
+DER-NOUN-NOMP-FOR    NOMP        )([NOMP]-lHk[Derivation=For]     +lHk
+DER-NOUN-NOMP-FROM   NOMP        )([NOMP]-lH[Derivation=From]     +lH
+DER-NOUN-NOMP-INTER  NOMP        )([NOMP]-ara[Derivation=Inter]   +ara
+DER-NOUN-NOMP-LANG   NOMP        )([NOMP]-CA[Derivation=Lang]     +CA
+DER-NOUN-NOMP-LIKE   NOMP        )([NOMP]-CA[Derivation=Like]     +CA
+DER-NOUN-NOMP-NESS   NOMP        )([NOMP]-lHk[Derivation=Ness]    +lHk
+DER-NOUN-NOMP-OF     NOMP        )([NOMP]-lArcA[Derivation=Of]    +lArcA
+DER-NOUN-NOMP-RTD    NOMP        )([NOMP]-sAl[Derivation=Rtd]     +sAl
+DER-NOUN-NOMP-SIM    NOMP        )([NOMP]-HmsH[Derivation=Sim]    +HmsH
+DER-NOUN-NOMP-SIM    NOMP        )([NOMP]-sH[Derivation=Sim]      +sH
+DER-NOUN-NOMP-SIM    NOMP        )([NOMP]-sHl[Derivation=Sim]     +sHl
+DER-NOUN-NOMP-SIM    NOMP        )([NOMP]-vari[Derivation=Sim]    +vari
+DER-NOUN-NOMP-SIM    NOMP        )([NOMP]-Hmtrak[Derivation=Sim]  +Hmtrak
+DER-NOUN-NOMP-WITH   NOMP        )([NOMP]-lH[Derivation=With]     +lH
+DER-NOUN-NOMP-WOUT   NOMP        )([NOMP]-sHz[Derivation=Wout]    +sHz
+DER-NOUN-NOMP-REL    NOMP-REL    )([NOMP]-ki[Derivation=Rel]      +ki
+
+DER-NOUN-VB-ACQ      VB-CAU-DHR  )([VB]-lAn[Derivation=Acq]       +lAn
+DER-NOUN-VB-BCM      VB-CAU-DHR  )([VB]-lAş[Derivation=Bcm]       +lAş
+DER-NOUN-VB-MAKE     VB-CAU-T    )([VB]-lA[Derivation=Make]       +lA

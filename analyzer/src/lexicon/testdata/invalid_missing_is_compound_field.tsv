@@ -1,0 +1,8 @@
+tag	root	morphophonemics	features
+Nn	ABANOZ	~	~
+nN	âhît	âhî?t~	~
+nn	ördekbaşı	ördekbaş	~
+				
+Jj	KIZIL	~	~
+jJ	kopkoyu	~	+[Emphasis=True]
+in	ArT	~	+[ComplementType=CGen]

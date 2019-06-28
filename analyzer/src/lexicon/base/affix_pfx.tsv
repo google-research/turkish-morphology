@@ -1,0 +1,16 @@
+tag	root	morphophonemics	features	is_compound
+PFX	anti	~	~	FALSE
+PFX	eko	~	~	FALSE
+PFX	ekstra	~	~	FALSE
+PFX	ex	~	~	FALSE
+PFX	inter	~	~	FALSE
+PFX	intra	~	~	FALSE
+PFX	makro	~	~	FALSE
+PFX	mega	~	~	FALSE
+PFX	mikro	~	~	FALSE
+PFX	mini	~	~	FALSE
+PFX	multi	~	~	FALSE
+PFX	neo	~	~	FALSE
+PFX	para	~	~	FALSE
+PFX	post	~	~	FALSE
+PFX	ultra	~	~	FALSE

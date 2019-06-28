@@ -1,0 +1,15 @@
+tag	root	morphophonemics	features	is_compound
+VB-HL-AR-HR	andiç	andiÇ	~	FALSE
+VB-HL-AR-HR	aş	~	~	FALSE
+VB-HL-AR-HR	bit	~	~	FALSE
+VB-HL-AR-HR	düş	~	~	FALSE
+VB-HL-AR-HR	duy	~	~	FALSE
+VB-HL-AR-HR	geç	geÇ	~	FALSE
+VB-HL-AR-HR	iç	iÇ	~	FALSE
+VB-HL-AR-HR	piş	~	~	FALSE
+VB-HL-AR-HR	sanç	~	~	FALSE
+VB-HL-AR-HR	şiş	~	~	FALSE
+VB-HL-AR-HR	taş	~	~	FALSE
+VB-HL-AR-HR	uç	uÇ	~	FALSE
+VB-HL-AR-HR	yat	~	~	FALSE
+VB-HL-AR-HR	yenç	~	~	FALSE

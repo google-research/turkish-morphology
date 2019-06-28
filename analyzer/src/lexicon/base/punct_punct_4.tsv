@@ -1,0 +1,4 @@
+tag	root	morphophonemics	features	is_compound
+PUNCT-4	(	~	~	FALSE
+PUNCT-4	[	~	~	FALSE
+PUNCT-4	{	~	~	FALSE

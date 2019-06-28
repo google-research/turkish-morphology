@@ -1,0 +1,66 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# 1. Start States
+
+# 1.1. Base Categories
+
+RB       RB-DERIVATION-STEM       <eps>  <eps>
+RB-TEMP  RB-TEMP-DERIVATION-STEM  <eps>  <eps>
+WRB      WRB-DERIVATION-STEM      <eps>  <eps>
+
+# 1.2. Derived Categories
+
+CRB  CRB-DERIVATION-STEM  <eps>  <eps>
+
+# 2. Inflections
+
+# 2.1. Derivation Slot: After Stem
+
+CRB-DERIVATION-STEM      CONTRAST              <eps>  <eps>
+CRB-DERIVATION-STEM      FINAL                 <eps>  <eps>
+CRB-DERIVATION-STEM      FINAL-STEM            <eps>  <eps>
+
+RB-DERIVATION-STEM       CONTRAST              <eps>  <eps>
+RB-DERIVATION-STEM       FINAL                 <eps>  <eps>
+RB-DERIVATION-STEM       FINAL-STEM            <eps>  <eps>
+
+RB-TEMP-DERIVATION-STEM  CONTRAST              <eps>  <eps>
+RB-TEMP-DERIVATION-STEM  DER-ADVERB-JJREL-REL  <eps>  <eps>
+RB-TEMP-DERIVATION-STEM  DER-ADVERB-NOM-REL    <eps>  <eps>
+RB-TEMP-DERIVATION-STEM  DER-ADVERB-PRF-PRON   <eps>  <eps>
+RB-TEMP-DERIVATION-STEM  FINAL                 <eps>  <eps>
+RB-TEMP-DERIVATION-STEM  FINAL-STEM            <eps>  <eps>
+
+WRB-DERIVATION-STEM      CONTRAST              <eps>  <eps>
+WRB-DERIVATION-STEM      FINAL                 <eps>  <eps>
+WRB-DERIVATION-STEM      FINAL-STEM            <eps>  <eps>
+
+# 3. Derivations
+
+# 3.1. Adverb-to-Adjective
+
+DER-ADVERB-JJREL-REL  JJREL  )([JJ]-kH[Derivation=Rel]  +ki
+DER-ADVERB-JJREL-REL  JJREL  )([JJ]-kH[Derivation=Rel]  +kı
+DER-ADVERB-JJREL-REL  JJREL  )([JJ]-kH[Derivation=Rel]  +ku
+DER-ADVERB-JJREL-REL  JJREL  )([JJ]-kH[Derivation=Rel]  +kü
+
+# 3.2. Adverb-to-Pronoun
+
+DER-ADVERB-PRF-PRON  PRF  )([PRF]-ki[Derivation=Pron]  +ki
+
+# 3.3. Adverb-to-Verb
+
+DER-ADVERB-NOM-REL  NOMP-REL  )([NOMP]-ki[Derivation=Rel]  +ki

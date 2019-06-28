@@ -1,0 +1,107 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+package(default_visibility = ["//analyzer/src/morphotactics:__pkg__"])
+
+licenses(["notice"])  # Apache 2.0
+
+load("@turkish_morphology_deps//:requirements.bzl", "requirement")
+
+# Data.
+filegroup(
+    name = "base_lexicon",
+    srcs = glob([
+        "base/*.tsv",
+    ]),
+)
+
+filegroup(
+    name = "contrib_lexicon",
+    srcs = glob([
+        "contrib/*.tsv",
+    ]),
+)
+
+filegroup(
+    name = "test_lexicons",
+    srcs = glob([
+        "testdata/*.tsv",
+    ]),
+)
+
+# Libraries.
+py_library(
+    name = "parser",
+    srcs = ["parser.py"],
+    deps = [
+        ":tags",
+        "//analyzer/src/morphotactics:common",
+        "//analyzer/src/morphotactics:rule_py_pb2",
+    ],
+)
+
+py_library(
+    name = "reader",
+    srcs = ["reader.py"],
+)
+
+py_library(
+    name = "tags",
+    srcs = ["tags.py"],
+)
+
+py_library(
+    name = "validator",
+    srcs = ["validator.py"],
+    deps = [
+        ":tags",
+    ],
+)
+
+# Tests.
+py_test(
+    name = "parser_test",
+    size = "small",
+    srcs = ["parser_test.py"],
+    deps = [
+        ":parser",
+        ":tags",
+        "//analyzer/src/morphotactics:rule_py_pb2",
+        requirement("parameterized"),
+    ],
+)
+
+py_test(
+    name = "reader_test",
+    size = "small",
+    srcs = ["reader_test.py"],
+    data = [
+        ":test_lexicons",
+    ],
+    deps = [
+        ":reader",
+        requirement("parameterized"),
+    ],
+)
+
+py_test(
+    name = "validator_test",
+    size = "small",
+    srcs = ["validator_test.py"],
+    deps = [
+        ":tags",
+        ":validator",
+        requirement("parameterized"),
+    ],
+)

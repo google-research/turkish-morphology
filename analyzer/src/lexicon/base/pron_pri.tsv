@@ -1,0 +1,13 @@
+tag	root	morphophonemics	features	is_compound
+PRI	birbiri	~	~	FALSE
+PRI	gayr	~	~	FALSE
+PRI	herkes	~	~	FALSE
+PRI	herşey	~	~	FALSE
+PRI	heryer	~	~	FALSE
+PRI	hiçbirşey	~	~	FALSE
+PRI	hiçkimse	~	~	FALSE
+PRI	kimse	~	~	FALSE
+PRI	şey	~	~	FALSE
+PRI	vesaire	~	~	FALSE
+PRI	yekdiğeri	yekdiğer	~	TRUE
+PRI	zatıâli	~	~	FALSE

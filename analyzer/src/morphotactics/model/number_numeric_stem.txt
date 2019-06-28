@@ -1,0 +1,287 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
+# 1. Start States
+
+# 1.1. Base Categories
+
+START  CD-ARABIC-MULTI-FIRST    (  <eps>
+START  CD-ARABIC-SINGLE         (  <eps>
+START  CD-ARABIC-SINGLE-ZERO    (  <eps>
+START  DIST-ARABIC-SINGLE       (  <eps>
+START  DIST-ARABIC-SINGLE-ZERO  (  <eps>
+START  ORD-ARABIC-SINGLE        (  <eps>
+START  ORD-ARABIC-SINGLE-ZERO   (  <eps>
+
+# 2. Numeric Combinations
+
+# 2.1. Cardinal
+
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  00[CD]              00*üz*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  000[CD]             000*in*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  0000[CD]            0000*in*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  00000[CD]           00000*in*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  000000[CD]          000000*on*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  0000000[CD]         0000000*on*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  00000000[CD]        00000000*on*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  000000000[CD]       000000000*ar*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  0000000000[CD]      0000000000*ar*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  00000000000[CD]     00000000000*ar*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  000000000000[CD]    000000000000*on*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  0000000000000[CD]   0000000000000*on*
+CD-ARABIC-MULTI-ZERO   CD-DERIVATION-STEM  00000000000000[CD]  00000000000000*on*
+
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  1[CD]               1*ir*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  2[CD]               2*i*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  3[CD]               3*üç*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  4[CD]               4*ört~*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  5[CD]               5*eş*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  6[CD]               6*ı*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  7[CD]               7*i*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  8[CD]               8*iz*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  9[CD]               9*uz*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  10[CD]              10*un*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  20[CD]              20*i*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  30[CD]              30*uz*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  40[CD]              40*ırk*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  50[CD]              50*i*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  60[CD]              60*ış*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  70[CD]              70*iş*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  80[CD]              80*en*
+CD-ARABIC-SINGLE       CD-DERIVATION-STEM  90[CD]              90*an*
+
+CD-ARABIC-SINGLE-ZERO  CD-DERIVATION-STEM  0[CD]               0*ır*
+
+# 2.2. Ordinal
+
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00[CD]+.[NumberType=Ord]                                    00.*ü*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000[CD]+.[NumberType=Ord]                                   000.*i*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000[CD]+.[NumberType=Ord]                                  0000.*i*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000[CD]+.[NumberType=Ord]                                 00000.*i*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000[CD]+.[NumberType=Ord]                                000000.*u*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000[CD]+.[NumberType=Ord]                               0000000.*u*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000[CD]+.[NumberType=Ord]                              00000000.*u*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000000[CD]+.[NumberType=Ord]                             000000000.*ı*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000000[CD]+.[NumberType=Ord]                            0000000000.*ı*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000000[CD]+.[NumberType=Ord]                           00000000000.*ı*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000000000[CD]+.[NumberType=Ord]                          000000000000.*u*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000000000[CD]+.[NumberType=Ord]                         0000000000000.*u*
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000000000[CD]+.[NumberType=Ord]                        00000000000000.*u*
+
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00[CD]+HncH[NumberType=Ord]                                 00üncü
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000[CD]+HncH[NumberType=Ord]                                000inci
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000[CD]+HncH[NumberType=Ord]                               0000inci
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000[CD]+HncH[NumberType=Ord]                              00000inci
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000[CD]+HncH[NumberType=Ord]                             000000uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000[CD]+HncH[NumberType=Ord]                            0000000uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000[CD]+HncH[NumberType=Ord]                           00000000uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000000[CD]+HncH[NumberType=Ord]                          000000000ıncı
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000000[CD]+HncH[NumberType=Ord]                         0000000000ıncı
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000000[CD]+HncH[NumberType=Ord]                        00000000000ıncı
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000000000[CD]+HncH[NumberType=Ord]                       000000000000uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000000000[CD]+HncH[NumberType=Ord]                      0000000000000uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000000000[CD]+HncH[NumberType=Ord]                     00000000000000uncu
+
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              00'üncü
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]             000'inci
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]            0000'inci
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]           00000'inci
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]          000000'uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]         0000000'uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]        00000000'uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]       000000000'ıncı
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]      0000000000'ıncı
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]     00000000000'ıncı
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  000000000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]    000000000000'uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  0000000000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]   0000000000000'uncu
+ORD-ARABIC-MULTI-ZERO    CD-DERIVATION-ORDINAL  00000000000000[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]  00000000000000'uncu
+
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  1[CD]+.[NumberType=Ord]                                     1.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  2[CD]+.[NumberType=Ord]                                     2.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  3[CD]+.[NumberType=Ord]                                     3.*ü*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  4[CD]+.[NumberType=Ord]                                     4.*ü*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  5[CD]+.[NumberType=Ord]                                     5.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  6[CD]+.[NumberType=Ord]                                     6.*ı*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  7[CD]+.[NumberType=Ord]                                     7.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  8[CD]+.[NumberType=Ord]                                     8.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  9[CD]+.[NumberType=Ord]                                     9.*u*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  10[CD]+.[NumberType=Ord]                                    10.*u*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  20[CD]+.[NumberType=Ord]                                    20.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  30[CD]+.[NumberType=Ord]                                    30.*u*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  40[CD]+.[NumberType=Ord]                                    40.*ı*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  50[CD]+.[NumberType=Ord]                                    50.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  60[CD]+.[NumberType=Ord]                                    60.*ı*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  70[CD]+.[NumberType=Ord]                                    70.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  80[CD]+.[NumberType=Ord]                                    80.*i*
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  90[CD]+.[NumberType=Ord]                                    90.*ı*
+
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  1[CD]+HncH[NumberType=Ord]                                  1inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  2[CD]+HncH[NumberType=Ord]                                  2nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  3[CD]+HncH[NumberType=Ord]                                  3üncü
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  4[CD]+HncH[NumberType=Ord]                                  4üncü
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  5[CD]+HncH[NumberType=Ord]                                  5inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  6[CD]+HncH[NumberType=Ord]                                  6ncı
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  7[CD]+HncH[NumberType=Ord]                                  7nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  8[CD]+HncH[NumberType=Ord]                                  8inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  9[CD]+HncH[NumberType=Ord]                                  9uncu
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  10[CD]+HncH[NumberType=Ord]                                 10uncu
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  20[CD]+HncH[NumberType=Ord]                                 20nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  30[CD]+HncH[NumberType=Ord]                                 30uncu
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  40[CD]+HncH[NumberType=Ord]                                 40ıncı
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  50[CD]+HncH[NumberType=Ord]                                 50nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  60[CD]+HncH[NumberType=Ord]                                 60ıncı
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  70[CD]+HncH[NumberType=Ord]                                 70inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  80[CD]+HncH[NumberType=Ord]                                 80inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  90[CD]+HncH[NumberType=Ord]                                 90ıncı
+
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  1[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               1'inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  2[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               2'nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  3[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               3'üncü
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  4[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               4'üncü
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  5[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               5'inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  6[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               6'ncı
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  7[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               7'nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  8[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               8'inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  9[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               9'uncu
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  10[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              10'uncu
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  20[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              20'nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  30[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              30'uncu
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  40[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              40'ıncı
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  50[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              50'nci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  60[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              60'ıncı
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  70[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              70'inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  80[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              80'inci
+ORD-ARABIC-SINGLE        CD-DERIVATION-ORDINAL  90[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]              90'ıncı
+
+ORD-ARABIC-SINGLE-ZERO   CD-DERIVATION-ORDINAL  0[CD]+.[NumberType=Ord]                                     0.*i*
+ORD-ARABIC-SINGLE-ZERO   CD-DERIVATION-ORDINAL  0[CD]+HncH[NumberType=Ord]                                  0ıncı
+ORD-ARABIC-SINGLE-ZERO   CD-DERIVATION-ORDINAL  0[CD]+'[Apostrophe=True]+HncH[NumberType=Ord]               0'ıncı
+
+# 2.3. Distributive
+
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00[CD]+SAr[NumberType=Dist]                     00er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000[CD]+SAr[NumberType=Dist]                    000er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000[CD]+SAr[NumberType=Dist]                   0000er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000[CD]+SAr[NumberType=Dist]                  00000er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000000[CD]+SAr[NumberType=Dist]                 000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000000[CD]+SAr[NumberType=Dist]                0000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000000[CD]+SAr[NumberType=Dist]               00000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000000000[CD]+SAr[NumberType=Dist]              000000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000000000[CD]+SAr[NumberType=Dist]             0000000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000000000[CD]+SAr[NumberType=Dist]            00000000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000000000000[CD]+SAr[NumberType=Dist]           000000000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000000000000[CD]+SAr[NumberType=Dist]          0000000000000ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000000000000[CD]+SAr[NumberType=Dist]         00000000000000ar
+
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00[CD]+SAr[NumberType=Dist]                     00'er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000[CD]+SAr[NumberType=Dist]                    000'er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000[CD]+SAr[NumberType=Dist]                   0000'er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000[CD]+SAr[NumberType=Dist]                  00000'er
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000000[CD]+SAr[NumberType=Dist]                 000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000000[CD]+SAr[NumberType=Dist]                0000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000000[CD]+SAr[NumberType=Dist]               00000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000000000[CD]+SAr[NumberType=Dist]              000000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000000000[CD]+SAr[NumberType=Dist]             0000000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000000000[CD]+SAr[NumberType=Dist]            00000000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  000000000000[CD]+SAr[NumberType=Dist]           000000000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  0000000000000[CD]+SAr[NumberType=Dist]          0000000000000'ar
+DIST-ARABIC-MULTI-ZERO   CD-DERIVATION-DISTRIBUTIVE  00000000000000[CD]+SAr[NumberType=Dist]         00000000000000'ar
+
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  1[CD]+SAr[NumberType=Dist]                      1er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  2[CD]+SAr[NumberType=Dist]                      2şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  3[CD]+SAr[NumberType=Dist]                      3er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  4[CD]+SAr[NumberType=Dist]                      4er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  5[CD]+SAr[NumberType=Dist]                      5er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  6[CD]+SAr[NumberType=Dist]                      6şar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  7[CD]+SAr[NumberType=Dist]                      7şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  8[CD]+SAr[NumberType=Dist]                      8er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  9[CD]+SAr[NumberType=Dist]                      9ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  10[CD]+SAr[NumberType=Dist]                     10ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  20[CD]+SAr[NumberType=Dist]                     20şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  30[CD]+SAr[NumberType=Dist]                     30ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  40[CD]+SAr[NumberType=Dist]                     40ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  50[CD]+SAr[NumberType=Dist]                     50şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  60[CD]+SAr[NumberType=Dist]                     60ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  70[CD]+SAr[NumberType=Dist]                     70er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  80[CD]+SAr[NumberType=Dist]                     80er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  90[CD]+SAr[NumberType=Dist]                     90ar
+
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  1[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   1'er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  2[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   2'şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  3[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   3'er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  4[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   4'er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  5[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   5'er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  6[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   6'şar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  7[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   7'şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  8[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   8'er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  9[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   9'ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  10[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  10'ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  20[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  20'şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  30[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  30'ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  40[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  40'ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  50[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  50'şer
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  60[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  60'ar
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  70[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  70'er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  80[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  80'er
+DIST-ARABIC-SINGLE       CD-DERIVATION-DISTRIBUTIVE  90[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]  90'ar
+
+DIST-ARABIC-SINGLE-ZERO  CD-DERIVATION-DISTRIBUTIVE  0[CD]+SAr[NumberType=Dist]                      0ar
+DIST-ARABIC-SINGLE-ZERO  CD-DERIVATION-DISTRIBUTIVE  0[CD]+'[Apostrophe=True]+SAr[NumberType=Dist]   0'ar
+
+# 2.4. Trailing Numbers
+
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       1      1
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       2      2
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       3      3
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       4      4
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       5      5
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       6      6
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       7      7
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       8      8
+CD-ARABIC-MULTI-FIRST            CD-ARABIC-MULTI-FIRST-EXIT       9      9
+
+CD-ARABIC-MULTI-FIRST-EXIT       CD-ARABIC-MULTI-MIDDLE           <eps>  <eps>
+CD-ARABIC-MULTI-FIRST-EXIT       CD-ARABIC-MULTI-ZERO             <eps>  <eps>
+CD-ARABIC-MULTI-FIRST-EXIT       CD-ARABIC-SINGLE                 <eps>  <eps>
+CD-ARABIC-MULTI-FIRST-EXIT       DIST-ARABIC-MULTI-ZERO           <eps>  <eps>
+CD-ARABIC-MULTI-FIRST-EXIT       DIST-ARABIC-SINGLE               <eps>  <eps>
+CD-ARABIC-MULTI-FIRST-EXIT       ORD-ARABIC-MULTI-ZERO            <eps>  <eps>
+CD-ARABIC-MULTI-FIRST-EXIT       ORD-ARABIC-SINGLE                <eps>  <eps>
+
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-ZERO      0      0
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  1      1
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  2      2
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  3      3
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  4      4
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  5      5
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  6      6
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  7      7
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  8      8
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  9      9
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  ,      ,
+CD-ARABIC-MULTI-MIDDLE           CD-ARABIC-MULTI-MIDDLE-NON-ZERO  .      .
+
+CD-ARABIC-MULTI-MIDDLE-NON-ZERO  CD-ARABIC-MULTI-MIDDLE           <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-NON-ZERO  CD-ARABIC-MULTI-ZERO             <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-NON-ZERO  CD-ARABIC-SINGLE                 <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-NON-ZERO  DIST-ARABIC-MULTI-ZERO           <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-NON-ZERO  DIST-ARABIC-SINGLE               <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-NON-ZERO  ORD-ARABIC-MULTI-ZERO            <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-NON-ZERO  ORD-ARABIC-SINGLE                <eps>  <eps>
+
+CD-ARABIC-MULTI-MIDDLE-ZERO      CD-ARABIC-MULTI-MIDDLE           <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-ZERO      CD-ARABIC-SINGLE                 <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-ZERO      DIST-ARABIC-SINGLE               <eps>  <eps>
+CD-ARABIC-MULTI-MIDDLE-ZERO      ORD-ARABIC-SINGLE                <eps>  <eps>

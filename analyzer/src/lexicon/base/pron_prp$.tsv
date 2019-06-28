@@ -1,0 +1,10 @@
+tag	root	morphophonemics	features	is_compound
+PRP$	bendenizin	~	+[PersonNumber=A1sg]+[Possessive=Pnon]	FALSE
+PRP$	benim	~	+[PersonNumber=A1sg]+[Possessive=Pnon]	FALSE
+PRP$	bizim	~	+[PersonNumber=A1pl]+[Possessive=Pnon]	FALSE
+PRP$	bizlerin	~	+[PersonNumber=A1pl]+[Possessive=Pnon]	FALSE
+PRP$	onların	~	+[PersonNumber=A3pl]+[Possessive=Pnon]	FALSE
+PRP$	onun	~	+[PersonNumber=A3sg]+[Possessive=Pnon]	FALSE
+PRP$	senin	~	+[PersonNumber=A2sg]+[Possessive=Pnon]	FALSE
+PRP$	sizin	~	+[PersonNumber=A2pl]+[Possessive=Pnon]	FALSE
+PRP$	sizlerin	~	+[PersonNumber=A2pl]+[Possessive=Pnon]	FALSE

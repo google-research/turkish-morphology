@@ -1,0 +1,52 @@
+# -*- mode: Thrax; coding: utf-8; -*-
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+# This file defines a grammar that resolves the meta-phoneme D (which
+# represents the set of dental consonants {d, t}).
+#
+# D meta-phoneme is realized as;
+#   - 't' if D appears in suffix initial position and the last phoneme of the
+#     preceeding morpheme is one of {f, s, t, k, ç, ş, h, p},
+#   - 'd' otherwise.
+
+import 'alphabet.grm' as alphabet;
+import 'common.grm' as common;
+import 'unicode.grm' as unicode;
+
+realise_as_t =
+  common.kDentalConsonantMetaPhoneme : "t".utf8
+;
+realise_as_d =
+  common.kDentalConsonantMetaPhoneme : "d".utf8
+;
+
+realise_dental_consonant_as_t = CDRewrite[
+  realise_as_t, common.kMorphemeEndsWithFstkcshp, "", alphabet.kSigmaStar
+];
+realise_dental_consonant_as_d = CDRewrite[
+  realise_as_d, "", "", alphabet.kSigmaStar
+];
+
+export RESOLVE = Optimize[
+  realise_dental_consonant_as_t
+@ realise_dental_consonant_as_d
+];
+
+# Only used for testing.
+export RESOLVE_INTERNAL = Optimize[
+  unicode.UTF8_TO_UNICODE  # input to RESOLVE should be Unicode codepoints.
+@ RESOLVE
+@ unicode.UNICODE_TO_UTF8  # grm_tester_lib accepts input as UTF-8 bytes.
+];

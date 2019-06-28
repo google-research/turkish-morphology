@@ -1,0 +1,8 @@
+root	morphophonemics	features	is_compound
+ABANOZ	~	~	FALSE
+âhît	âhî?t~	~	FaLsE
+ördekbaşı	ördekbaş	~	true
+				
+KIZIL	~	~	FALSE
+kopkoyu	~	+[Emphasis=True]	false
+ArT	~	+[ComplementType=CGen]	FALSE

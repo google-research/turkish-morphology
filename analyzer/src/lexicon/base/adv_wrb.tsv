@@ -1,0 +1,6 @@
+tag	root	morphophonemics	features	is_compound
+WRB	nasıl	~	~	FALSE
+WRB	neden	~	~	FALSE
+WRB	niçin	~	~	FALSE
+WRB	nite	~	~	FALSE
+WRB	niye	~	~	FALSE

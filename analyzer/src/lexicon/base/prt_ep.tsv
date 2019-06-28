@@ -1,0 +1,7 @@
+tag	root	morphophonemics	features	is_compound
+EP	be	~	~	FALSE
+EP	evet	~	~	FALSE
+EP	hayır	~	~	FALSE
+EP	ya	~	~	FALSE
+EP	yaa	~	~	FALSE
+EP	yaaa	~	~	FALSE

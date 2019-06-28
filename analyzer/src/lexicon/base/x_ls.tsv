@@ -1,0 +1,13 @@
+tag	root	morphophonemics	features	is_compound
+LS	§	~	~	FALSE
+LS	•	~	~	FALSE
+LS	→	~	~	FALSE
+LS	▬	~	~	FALSE
+LS	►	~	~	FALSE
+LS	○	~	~	FALSE
+LS	◘	~	~	FALSE
+LS	◙	~	~	FALSE
+LS	♠	~	~	FALSE
+LS	♣	~	~	FALSE
+LS	♥	~	~	FALSE
+LS	♦	~	~	FALSE

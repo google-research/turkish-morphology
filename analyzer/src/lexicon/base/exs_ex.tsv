@@ -1,0 +1,6 @@
+tag	root	morphophonemics	features	is_compound
+EX	mecbur	~	~	FALSE
+EX	var	~	~	FALSE
+EX	yok	~	~	FALSE
+EX	yok	yoK	~	FALSE
+EX	zorunda	~	~	FALSE
