@@ -141,7 +141,7 @@ def _get_lexicon_rules(lexicon_dir):
 
     return lexicon_parser.parse(list(entries.values()))
 
-  paths = glob.iglob(f"{lexicon_dir}/*.tsv")
+  paths = sorted(glob.glob(f"{lexicon_dir}/*.tsv"))
   rule_sets = [_read_rule_set(p) for p in paths]
   lexicon = rule_pb2.RewriteRuleSet()
   lexicon.rule.extend(r for rs in rule_sets for r in rs.rule)
@@ -186,7 +186,7 @@ def _get_morphotactics_rules(morphotactics_dir):
 
     return morphotactics_parser.parse(list(lines.values()))
 
-  paths = glob.iglob(f"{morphotactics_dir}/*.txt")
+  paths = sorted(glob.glob(f"{morphotactics_dir}/*.txt"))
   rule_sets = [_read_rule_set(p) for p in paths]
   morphotactics = rule_pb2.RewriteRuleSet()
   morphotactics.rule.extend(r for rs in rule_sets for r in rs.rule)
