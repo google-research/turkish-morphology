@@ -25,7 +25,7 @@ load(
 git_repository(
     name = "com_google_protobuf",
     remote = "https://github.com/google/protobuf.git",
-    tag = "v3.8.0",
+    tag = "v3.9.0",
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
@@ -38,7 +38,7 @@ protobuf_deps()
 git_repository(
     name = "bazel_skylib",
     remote = "https://github.com/bazelbuild/bazel-skylib.git",
-    tag = "0.8.0",
+    tag = "0.9.0",
 )
 
 # Google Abseil libraries.
