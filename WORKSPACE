@@ -87,16 +87,16 @@ new_git_repository(
 
 # PyPi dependencies.
 git_repository(
-    name = "io_bazel_rules_python",
+    name = "rules_python",
     branch = "master",
     remote = "https://github.com/bazelbuild/rules_python.git",
 )
 
-load("@io_bazel_rules_python//python:pip.bzl", "pip_repositories")
+load("@rules_python//python:pip.bzl", "pip_repositories")
 
 pip_repositories()
 
-load("@io_bazel_rules_python//python:pip.bzl", "pip_import")
+load("@rules_python//python:pip.bzl", "pip_import")
 
 pip_import(
     name = "turkish_morphology_deps",
