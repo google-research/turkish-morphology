@@ -67,7 +67,7 @@ of such morphological analysis strings.
 ## Requirements
 
 To build and run the morphological analyzer install
-[Bazel version 0.27.0][9], [Python 3.6.5 (or a newer version)][10] and
+[Bazel version 0.28.1][9], [Python 3.6.5 (or a newer version)][10] and
 [G++][11]. All other intrinsic dependencies will be imported, built and taken
 care of by Bazel according to the [WORKSPACE][2] setup throughout the first
 invocation of the morphological analyzer runtime.
@@ -226,6 +226,6 @@ Unless otherwise noted, all original files are licensed under an
 [7]: ./analyzer/src/morphophonemics
 [8]: ./analyzer/src/morphophonemics/model.grm
 [9]: https://docs.bazel.build/versions/master/install.html
-[10]: https://www.python.org/download/releases/2.7/
+[10]: https://www.python.org/downloads/
 [11]: https://gcc.gnu.org/install/
 [12]: #interpreting-morphological-analysis-strings
