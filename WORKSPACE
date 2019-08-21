@@ -25,7 +25,7 @@ load(
 git_repository(
     name = "com_google_protobuf",
     remote = "https://github.com/google/protobuf.git",
-    tag = "v3.9.0",
+    tag = "v3.9.1",
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
