@@ -45,7 +45,7 @@ git_repository(
 git_repository(
     name = "com_google_absl",
     remote = "https://github.com/abseil/abseil-cpp.git",
-    tag = "20181200",
+    tag = "20190808",
 )
 
 # Python 2/3 backward compatibility libs.
