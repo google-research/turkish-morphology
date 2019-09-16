@@ -1,0 +1,153 @@
+# Copyright 2019 The Google Research Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+package(default_visibility = ["//src/analyzer:__pkg__"])
+
+licenses(["notice"])  # Apache 2.0
+
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+load("@turkish_morphology_deps//:requirements.bzl", "requirement")
+
+# Data.
+filegroup(
+    name = "model",
+    srcs = glob([
+        "model/*.txt",
+    ]),
+)
+
+filegroup(
+    name = "test_model",
+    srcs = glob([
+        "testdata/morphotactics*.txt",
+    ]),
+)
+
+filegroup(
+    name = "test_symbols",
+    srcs = ["testdata/complex_symbols_expected.txt"],
+)
+
+filegroup(
+    name = "test_text_fst",
+    srcs = ["testdata/text_fst_expected.txt"],
+)
+
+# Protos.
+py_proto_library(
+    name = "rule_py_pb2",
+    srcs = ["rule.proto"],
+    default_runtime = "@com_google_protobuf//:protobuf_python",
+    protoc = "@com_google_protobuf//:protoc",
+    visibility = ["//src/analyzer/lexicon:__pkg__"],
+)
+
+# Binaries.
+py_binary(
+    name = "model_compile",
+    srcs = ["model_compile.py"],
+    data = [
+        ":model",
+        "//src/analyzer/lexicon:base_lexicon",
+    ],
+    deps = [
+        ":common",
+        ":parser",
+        ":reader",
+        ":rule_py_pb2",
+        ":validator",
+        "//src/analyzer/lexicon:parser",
+        "//src/analyzer/lexicon:reader",
+        "//src/analyzer/lexicon:validator",
+    ],
+)
+
+# Libraries.
+py_library(
+    name = "common",
+    srcs = ["common.py"],
+    visibility = ["//src/analyzer/lexicon:__pkg__"],
+)
+
+py_library(
+    name = "parser",
+    srcs = ["parser.py"],
+    deps = [
+        ":rule_py_pb2",
+    ],
+)
+
+py_library(
+    name = "reader",
+    srcs = ["reader.py"],
+)
+
+py_library(
+    name = "validator",
+    srcs = ["validator.py"],
+    deps = [
+        ":common",
+    ],
+)
+
+# Tests.
+py_test(
+    name = "model_compile_test",
+    size = "small",
+    srcs = ["model_compile_test.py"],
+    data = [
+        ":test_model",
+        ":test_symbols",
+        ":test_text_fst",
+        "//src/analyzer/lexicon:test_lexicons",
+    ],
+    deps = [
+        ":model_compile",
+        requirement("parameterized"),
+    ],
+)
+
+py_test(
+    name = "parser_test",
+    size = "small",
+    srcs = ["parser_test.py"],
+    deps = [
+        ":parser",
+        ":rule_py_pb2",
+        requirement("parameterized"),
+    ],
+)
+
+py_test(
+    name = "reader_test",
+    size = "small",
+    srcs = ["reader_test.py"],
+    data = [
+        ":test_model",
+    ],
+    deps = [
+        ":reader",
+        requirement("parameterized"),
+    ],
+)
+
+py_test(
+    name = "validator_test",
+    size = "small",
+    srcs = ["validator_test.py"],
+    deps = [
+        ":validator",
+        requirement("parameterized"),
+    ],
+)

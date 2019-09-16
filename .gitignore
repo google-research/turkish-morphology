@@ -1,2 +1,2 @@
-analyzer/evaluator/treebank/*
 bazel-*
+scripts/treebank/*

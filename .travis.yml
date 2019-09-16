@@ -7,14 +7,14 @@ python:
 
 before_install:
   - sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python3
-  - wget 'https://github.com/bazelbuild/bazel/releases/download/0.28.1/bazel-0.28.1-installer-linux-x86_64.sh'
-  - chmod +x bazel-0.28.1-installer-linux-x86_64.sh
-  - ./bazel-0.28.1-installer-linux-x86_64.sh --user
-  - rm -f bazel-0.28.1-installer-linux-x86_64.sh
+  - wget 'https://github.com/bazelbuild/bazel/releases/download/0.29.1/bazel-0.29.1-installer-linux-x86_64.sh'
+  - chmod +x bazel-0.29.1-installer-linux-x86_64.sh
+  - ./bazel-0.29.1-installer-linux-x86_64.sh --user
+  - rm -f bazel-0.29.1-installer-linux-x86_64.sh
 
 addons:
   apt:
     update: true
 
 script:
-  - ~/bin/bazel test //analyzer/src/...
+  - ~/bin/bazel test //src/analyzer/...
