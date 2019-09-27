@@ -211,6 +211,32 @@ Morphological analysis strings can be decomposed into parts:
   inflectional groups that does not have one (e.g. first inflectional group of
   the above example inherits its proper noun feature analysis `Proper=False`
   from the second inflectional group).
+  
+## Citing
+
+If you have used the code, data or tools from this repository in your work,
+please cite: 
+
+Ozturel, A., Karadelen, T. & Demirsahin, I (2019, September). [A syntactically
+expressive morphological analyzer for Turkish][13]. In Proceedings of the 14th
+International Conference on Finite-State Methods and Natural Language 
+Processing (pp. 65-75). 
+
+```
+@inproceedings{
+    title = "A Syntactically Expressive Morphological Analyzer for Turkish",
+    author = "\"{O}zt\"{u}rel, Adnan and Kayadelen, Tolga and Demir\c{s}ahin, 
+        I\c{s}{\i}n",
+    booktitle = "Proceedings of the 14th International Conference on Finite-State 
+        Methods and Natural Language Processing",
+    month = "23--25" # sep,
+    year = "2019",
+    address = "Dresden, Germany",
+    publisher = "Association for Computational Linguistics",
+    url = "https://www.aclweb.org/anthology/W19-3110",
+    pages = "65--75",
+}
+```
 
 ## License
 
@@ -229,3 +255,4 @@ Unless otherwise noted, all original files are licensed under an
 [10]: https://www.python.org/downloads/
 [11]: https://gcc.gnu.org/install/
 [12]: #interpreting-morphological-analysis-strings
+[13]: https://www.aclweb.org/anthology/W19-3110
