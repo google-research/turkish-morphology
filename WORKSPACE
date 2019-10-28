@@ -25,41 +25,18 @@ load(
 git_repository(
     name = "com_google_protobuf",
     remote = "https://github.com/google/protobuf.git",
-    tag = "v3.9.1",
+    tag = "v3.10.0",
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
-# Explicitly import protocol buffer Skylib dependency. Below rule will become
-# obsolete once https://github.com/protocolbuffers/protobuf/issues/5178 is
-# fixed.
-git_repository(
-    name = "bazel_skylib",
-    remote = "https://github.com/bazelbuild/bazel-skylib.git",
-    tag = "0.9.0",
-)
-
 # Google Abseil libraries.
 git_repository(
     name = "com_google_absl",
     remote = "https://github.com/abseil/abseil-cpp.git",
     tag = "20190808",
-)
-
-# Python 2/3 backward compatibility libs.
-http_archive(
-    name = "six_archive",
-    build_file = "@//bazel:six.BUILD",
-    sha256 = "d16a0141ec1a18405cd4ce8b4613101da75da0e9a7aec5bdd4fa804d0e0eba73",
-    strip_prefix = "six-1.12.0",
-    url = "https://files.pythonhosted.org/packages/dd/bf/4138e7bfb757de47d1f4b6994648ec67a51efe58fa907c1e11e350cddfca/six-1.12.0.tar.gz",
-)
-
-bind(
-    name = "six",
-    actual = "@six_archive//:six",
 )
 
 # Google i18n language resources.
