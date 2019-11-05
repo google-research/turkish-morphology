@@ -67,7 +67,7 @@ of such morphological analysis strings.
 ## Requirements
 
 To build and run the morphological analyzer install
-[Bazel version 0.29.1][9], [Python 3.6.5 (or a newer version)][10] and
+[Bazel version 1.0.1][9], [Python 3.6.5 (or a newer version)][10] and
 [G++][11]. All other intrinsic dependencies will be imported, built and taken
 care of by Bazel according to the [WORKSPACE][2] setup throughout the first
 invocation of the morphological analyzer runtime.
@@ -211,23 +211,23 @@ Morphological analysis strings can be decomposed into parts:
   inflectional groups that does not have one (e.g. first inflectional group of
   the above example inherits its proper noun feature analysis `Proper=False`
   from the second inflectional group).
-  
+
 ## Citing
 
 If you have used the code, data or tools from this repository in your work,
-please cite: 
+please cite:
 
 Ozturel, A., Kayadelen, T. & Demirsahin, I (2019, September). [A syntactically
 expressive morphological analyzer for Turkish][13]. In Proceedings of the 14th
-International Conference on Finite-State Methods and Natural Language 
-Processing (pp. 65-75). 
+International Conference on Finite-State Methods and Natural Language
+Processing (pp. 65-75).
 
 ```
 @inproceedings{
     title = "A Syntactically Expressive Morphological Analyzer for Turkish",
-    author = "\"{O}zt\"{u}rel, Adnan and Kayadelen, Tolga and Demir\c{s}ahin, 
+    author = "\"{O}zt\"{u}rel, Adnan and Kayadelen, Tolga and Demir\c{s}ahin,
         I\c{s}{\i}n",
-    booktitle = "Proceedings of the 14th International Conference on Finite-State 
+    booktitle = "Proceedings of the 14th International Conference on Finite-State
         Methods and Natural Language Processing",
     month = "23--25" # sep,
     year = "2019",
