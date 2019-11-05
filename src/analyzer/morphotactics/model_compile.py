@@ -22,6 +22,7 @@ import io
 import logging
 import os
 import re
+from typing import Generator, List, Tuple
 
 from src.analyzer.lexicon import parser as lexicon_parser
 from src.analyzer.lexicon import reader as lexicon_reader
@@ -42,7 +43,7 @@ def _check_if_directory_exists(path):
 
 
 _ARG_PARSER = argparse.ArgumentParser(
-    description="""This tool takes a set of lexicon and morphotactics source
+    description="""This tool takes a set of lexicon and morphotactics model
     files and outputs AT&T FSM format symbols table and text FST files, which
     are used in building morphotactics FST (second layer of analysis) using
     OpenFst.
@@ -56,8 +57,8 @@ _ARG_PARSER = argparse.ArgumentParser(
     words) before building the morphotactics FST using OpenFST. For further
     details, see the comments in //src/analyzer/build.sh.
 
-    In case of an input illformed lexicon entry annotation, or morphotactics
-    rewrite rule definition, the tool raises MorphotacticsCompilerError.
+    In case of an input illformed lexicon entry, or morphotactics rule
+    definition, the tool raises MorphotacticsCompilerError.
 
     Note that all the files under the lexicon_dir that have the ".tsv" file
     extension, and those under the morphotactics_dir that have ".txt" file
@@ -73,14 +74,13 @@ _ARG_PARSER.add_argument(
     "--lexicon_dir",
     default="src/analyzer/lexicon/base",
     type=_check_if_directory_exists,
-    help="""path to the directory that contains the source lexicon annotation
-    TSV dumps.""")
+    help="""path to the directory that contains the lexicon TSV dumps.""")
 _ARG_PARSER.add_argument(
     "--morphotactics_dir",
     default="src/analyzer/morphotactics/model",
     type=_check_if_directory_exists,
-    help="""path to the directory that contains the source text files that
-    define rewrite rules of morphotactics model.""")
+    help="""path to the directory that contains the text files that define
+    rewrite rules of morphotactics model.""")
 _ARG_PARSER.add_argument(
     "--output_dir",
     default="bin",
@@ -91,6 +91,10 @@ _ARG_PARSER.add_argument(
 
 class MorphotacticsCompilerError(Exception):
   """Raised when one of the source files contains an illformed line or entry."""
+
+
+RewriteRule = rule_pb2.RewriteRule
+RewriteRuleSet = rule_pb2.RewriteRuleSet
 
 
 _SYMBOLS_REGEX = re.compile(
@@ -110,27 +114,25 @@ _SYMBOLS_REGEX = re.compile(
     r"[\(\.,]")
 
 
-def _get_lexicon_rules(lexicon_dir):
+def _get_lexicon_rules(lexicon_dir: str) -> RewriteRuleSet:
   """Parses lexicon into valid rewrite rules.
 
   Args:
-    lexicon_dir: str, path to the directory that contains the source lexicon
-        annotation TSV dumps. All files that have the ".tsv" file extension
-        under this directory will be picked up by this function and will
-        attempted to be parsed into a set of rewrite rule objects.
+    lexicon_dir: path to the directory that contains the lexicon TSV dumps.
+        All files that have the ".tsv" file extension under this directory will
+        be picked up by this function and will attempted to be parsed into a
+        set of rewrite rule objects.
 
   Raises:
-    MorphotacticsCompilerError: one of the lexicon entry annotations in the
-        lexicon source files is illformed, or no valid rewrite rules can be
-        generated from the annotation in lexicon source files.
+    MorphotacticsCompilerError: one of the lexicon entries in the is illformed,
+        or no valid rewrite rules can be generated from the lexicon entries.
 
   Returns:
-    rule_pb2.RewriteRuleSet, set of validated and parsed lexicon rewrite
-    rule objects.
+    Array of validated and parsed lexicon rewrite rule objects.
   """
-  def _read_rule_set(path):
+  def _read_rule_set(path: str) -> RewriteRule:
     logging.info("reading rewrite rules from %r", path)
-    entries = lexicon_reader.read_lexicon_source(path)  # might throw IOError.
+    entries = lexicon_reader.read_lexicon_entries(path)  # might throw IOError.
 
     for index, entry in entries.items():
       try:
@@ -143,7 +145,7 @@ def _get_lexicon_rules(lexicon_dir):
 
   paths = sorted(glob.glob(f"{lexicon_dir}/*.tsv"))
   rule_sets = [_read_rule_set(p) for p in paths]
-  lexicon = rule_pb2.RewriteRuleSet()
+  lexicon = RewriteRuleSet()
   lexicon.rule.extend(r for rs in rule_sets for r in rs.rule)
 
   if not lexicon.rule:
@@ -152,30 +154,27 @@ def _get_lexicon_rules(lexicon_dir):
   return lexicon
 
 
-def _get_morphotactics_rules(morphotactics_dir):
-  """Parses morphotactics into valid rewrite rules.
+def _get_morphotactics_rules(morphotactics_dir: str) -> RewriteRuleSet:
+  """Parses morphotactics model into valid rewrite rules.
 
   Args:
-    morphotactics_dir: str, path to the directory that contains the source text
-        files that define rewrite rules of morphotactics FST. All files that
-        have the ".txt" file extension under this directory will be picked up
-        by this function and will attempted to be parsed into a set of rewrite
-        rule objects.
+    morphotactics_dir: path to the directory that contains the text files that
+        define rules of morphotactics FST. All files that have the ".txt" file
+        extension under this directory will be picked up by this function and
+        will attempted to be parsed into a set of rewrite rule objects.
 
   Raises:
-    MorphotacticsCompilerError: one of the morphotactics rewrite rule
-        definitions in the morphotactics source files is illformed, or no valid
-        rewrite rules can be generated from the definitions in the
-        morphotactics source files.
+    MorphotacticsCompilerError: one of the morphotactics rule definitions
+        is illformed, or no valid rewrite rules can be generated from the rule
+        definitions.
 
   Returns:
-    rule_pb2.RewriteRuleSet, set of validated and parsed morphotactics rewrite
-    rule objects.
+    Array of validated and parsed morphotactics rewrite rule objects.
   """
-  def _read_rule_set(path):
+  def _read_rule_set(path: str) -> RewriteRule:
     logging.info("reading rewrite rules from %r", path)
     # Below read call might throw IOError.
-    lines = morphotactics_reader.read_morphotactics_source(path)
+    lines = morphotactics_reader.read_rule_definitions(path)
 
     for index, line in lines.items():
       try:
@@ -188,7 +187,7 @@ def _get_morphotactics_rules(morphotactics_dir):
 
   paths = sorted(glob.glob(f"{morphotactics_dir}/*.txt"))
   rule_sets = [_read_rule_set(p) for p in paths]
-  morphotactics = rule_pb2.RewriteRuleSet()
+  morphotactics = RewriteRuleSet()
   morphotactics.rule.extend(r for rs in rule_sets for r in rs.rule)
 
   if not morphotactics.rule:
@@ -198,7 +197,7 @@ def _get_morphotactics_rules(morphotactics_dir):
   return morphotactics
 
 
-def _remove_duplicate_rules(rule_set):
+def _remove_duplicate_rules(rule_set: RewriteRuleSet) -> None:
   """Removes duplicate rewrite rules objects that are in the rule set.
 
   This function preserves the order of the rewrite rules in the rule set and
@@ -206,10 +205,12 @@ def _remove_duplicate_rules(rule_set):
   duplicate rule.
 
   Args:
-    rule_set: rule_pb2.RewriteRuleSet, array of rewrite rule objects that
-        defines the state transition arcs of the morphocatics FST.
+    rule_set: array of rewrite rule objects that defines the state transition
+        arcs of the morphocatics FST.
   """
-  def _key_and_value(rule):
+  RuleKey = Tuple[str, str, str, str]
+
+  def _key_and_value(rule: RewriteRule) -> Tuple[RuleKey, RewriteRule]:
     return (rule.from_state, rule.to_state, rule.input, rule.output), rule
 
   inverted = collections.OrderedDict(map(_key_and_value, rule_set.rule))
@@ -221,7 +222,7 @@ def _remove_duplicate_rules(rule_set):
     rule_set.rule.extend([r for r in inverted.values()])
 
 
-def _symbols_of_input(label):
+def _symbols_of_input(label: str) -> List[str]:
   """Extracts FST symbols that compose complex input label of the rewrite rule.
 
   FST symbols of a complex input label is;
@@ -236,13 +237,13 @@ def _symbols_of_input(label):
       ')([VN]-YAn[Derivation=PresNom]').
 
   Args:
-    label: str, complex input label of a morphotactics FST rewrite rule.
+    label: complex input label of a morphotactics FST rewrite rule.
 
   Returns:
-    list of str, each item is a FST symbol that is used in the complex input
-    label of the rewrite rule. For labels that do not represent epsilon, FST
-    symbols are returned in the same order as they appear in the complex input
-    label, and duplicate symbols are preserved.
+    FST symbols that are used in the complex input label of the rewrite rule.
+    For labels that do not represent epsilon, FST symbols are returned in the
+    same order as they appear in the complex input label, and duplicate symbols
+    are preserved.
   """
   if label == common.EPSILON:
     return [label]
@@ -256,7 +257,7 @@ def _symbols_of_input(label):
   return _SYMBOLS_REGEX.findall(label)
 
 
-def _symbols_of_output(label):
+def _symbols_of_output(label: str) -> List[str]:
   """Extracts FST symbols that compose complex output label of the rewrite rule.
 
   FST symbols of a complex output label is;
@@ -266,13 +267,13 @@ def _symbols_of_output(label):
       (e.g. ['{', 'l', 'p'] for the label '{lp').
 
   Args:
-    label: str, complex output label of a morphotactics FST rewrite rule.
+    label: complex output label of a morphotactics FST rewrite rule.
 
   Returns:
-    list of str, each item is a FST symbol that is used in the complex output
-    label of the rewrite rule. For labels that do not represent epsilon, FST
-    symbols are returned in the same order as they appear in the complex output
-    label, and duplicate symbols are preserved.
+    FST symbols that are used in the complex output label of the rewrite rule.
+    For labels that do not represent epsilon, FST symbols are returned in the
+    same order as they appear in the complex output label, and duplicate symbols
+    are preserved.
   """
   if label == common.EPSILON:
     return [label]
@@ -281,7 +282,8 @@ def _symbols_of_output(label):
   return list(label)
 
 
-def _symbols_table_file_content(rule_set):
+def _symbols_table_file_content(
+    rule_set: RewriteRuleSet) -> Generator[str, None, None]:
   r"""Generates the content of the complex symbols table file.
 
   Generated file is in AT&T format. It defines the labels for state transition
@@ -294,14 +296,14 @@ def _symbols_table_file_content(rule_set):
   the union of the set of labels on both sides.
 
   Args:
-    rule_set: rule_pb2.RewriteRuleSet, array of rewrite rule objects that
-        defines the state transition arcs of the morphocatics FST.
+    rule_set: array of rewrite rule objects that defines the state transition
+        arcs of the morphocatics FST.
 
   Yields:
-    Str, lines of symbols table file, where each defines an FST symbol in
-    the form of 'SYMBOL INDEX\n' (e.g. '(abanoz[NN]	983041\n').
+    Lines of symbols table file, where each defines an FST symbol in the form
+    of 'SYMBOL INDEX\n' (e.g. '(abanoz[NN]	983041\n').
   """
-  def _line(symbol, index):
+  def _line(symbol: str, index: int) -> str:
     return f"{symbol}\t{index}\n".encode("utf-8")
 
   fst_symbols = []
@@ -322,30 +324,31 @@ def _symbols_table_file_content(rule_set):
   logging.info("generated complex symbols file content")
 
 
-def _text_fst_file_content(rule_set):
+def _text_fst_file_content(
+    rule_set: RewriteRuleSet) -> Generator[str, None, None]:
   r"""Generates the content of the text FST file.
 
   Generated file is in AT&T format. It defines the state transition arcs and
   input/output label pairs of the morphotactics model.
 
   Args:
-    rule_set: rule_pb2.RewriteRuleSet, array of rewrite rule objects that
-        defines the state transition arcs of the morphocatics FST.
+    rule_set: array of rewrite rule objects that defines the state transition
+        arcs of the morphocatics FST.
 
   Yields:
-    Str, lines of text FST file, where each defines a state transition arc
-    in the form of 'FROM_INDEX TO_INDEX INPUT OUTPUT\n'
-    (e.g. '0 5771 (dokun[VB] d\n').
+    Lines of text FST file, where each defines a state transition arc in the
+    form of 'FROM_INDEX TO_INDEX INPUT OUTPUT\n' (e.g. '0 5771 (dokun[VB] d\n').
   """
 
   class _Local(object):
     state_count = 0
 
-  def _new_state_index():
+  def _new_state_index() -> int:
     _Local.state_count += 1
     return _Local.state_count
 
-  def arc(from_, to, input_=common.EPSILON, output=common.EPSILON):
+  def arc(from_: str, to: str, input_: str = common.EPSILON,
+          output: str = common.EPSILON) -> str:
     return f"{from_}\t{to}\t{input_}\t{output}\n".encode("utf-8")
 
   start_state = common.START_STATE
@@ -380,22 +383,20 @@ def _text_fst_file_content(rule_set):
   logging.info("generated text FST file content")
 
 
-def _make_output_directory(output_dir):
+def _make_output_directory(output_dir: str) -> None:
   """Makes the output directory if it does not exist."""
   if output_dir and not os.path.exists(output_dir):
     os.makedirs(output_dir)
     logging.info("output directory does not exist, made %r", output_dir)
 
 
-def _write_file(output_path, file_content):
+def _write_file(output_path: str, file_content: List[str]) -> None:
   r"""Writes the file content to the output path as a text file.
 
   Args:
-    output_path: str, path to the file to which file content will be written as
-        text.
-    file_content: list of unicode, each item contains a line of the file
-        content which will be written to the 'output_path'. It is assumed that
-        each item ends with a '\n'.
+    output_path: path to the file to which file content will be written as text.
+    file_content: lines of the file content which will be written to the
+        'output_path'. This function assumes that each line ends with a '\n'.
 
   Raises:
     IOError: file content could not be written to the 'output_path'.

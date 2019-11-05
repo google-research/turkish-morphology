@@ -13,44 +13,47 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Functions to read TSV source lexicon files."""
+"""Functions to read TSV structured lexicon files."""
 
 import collections
 import io
 import itertools
+from typing import Dict, List, Tuple
 
 
-def _whitespace_trimmed(line):
+LexiconEntry = Dict[str, str]
+
+
+def _whitespace_trimmed(line: str) -> str:
   """Strips any leading and trailing whitespace off from the line."""
   return line.lstrip().rstrip()
 
 
-def _empty(line):
+def _empty(line: str) -> bool:
   """Returns True if line is empty (or only contains whitespace)."""
   return not line or line.isspace()
 
 
-def _split(line):
+def _split(line: str) -> List[str]:
   """Returns a list of whitespace trimmed columns that compose the line."""
   return [_whitespace_trimmed(c) for c in line.split("\t")]
 
 
-def read_lexicon_source(path):
-  """Reads the content of TSV lexicon source file from the file path.
+def read_lexicon_entries(path: str) -> Dict[int, LexiconEntry]:
+  """Reads lexicon entries of the TSV structured lexicon file from the path.
 
   Args:
-    path: string, path to a file which contains the TSV dump of lexicon
-        entries.
+    path: path to a file which contains TSV dump of lexicon entries.
 
   Raises:
-    IOError: source file cannot be read from the 'path'.
+    IOError: lexicon entries cannot be read from the 'path'.
 
   Returns:
-    OrderedDict(int->dict(str->str)). Keys are indices of the rows of the
-    source TSV, values are the dictionaries that contain field-value pairs for
-    the columns of each row. This dictionary does not contain the content for
-    empty rows. Items are sorted by increasing row index. Returns an empty
-    OrderedDict, if the TSV dump does not contain any lexicon entries.
+    Lexicon file content as a dictionary. Keys are indices of the rows of the
+    source TSV, values are the lexicon entries as dictionaries that contain
+    field-value pairs for the columns of each row. Content for empty rows are
+    pruned and lexicon entries are sorted by increasing row index. Returns an
+    empty dictionary, if the TSV dump does not contain any lexicon entries.
   """
   with io.open(path, "r", encoding="utf-8") as reader:
     lines = reader.readlines()
@@ -64,7 +67,7 @@ def read_lexicon_source(path):
 
   field_names = _split(header)
 
-  def _index_and_entry(index, line):
+  def _index_and_entry(index: int, line: str) -> Tuple[int, LexiconEntry]:
     return index + 2, dict(zip(field_names, _split(line)))
 
   non_empty = ((i, l) for i, l in enumerate(entries) if not _empty(l))

@@ -13,26 +13,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Functions to parse lexicon entry annotations into rewrite rule objects."""
+"""Functions to parse lexicon entries into rewrite rule objects."""
 
 import itertools
+from typing import Dict, Generator, List
 
 from src.analyzer.lexicon import tags
 from src.analyzer.morphotactics import common
 from src.analyzer.morphotactics import rule_pb2
 
 
-def _lower(string):
+LexiconEntry = Dict[str, str]
+RewriteRule = rule_pb2.RewriteRule
+RewriteRuleSet = rule_pb2.RewriteRuleSet
+
+
+def _lower(string: str) -> str:
   """Properly lowercase transforms Turkish string ("İ" -> "i", "I" -> "ı")."""
   return string.replace("İ", "i").replace("I", "ı").lower()
 
 
-def _upper(string):
+def _upper(string: str) -> str:
   """Properly uppercase transforms Turkish string ("i" -> "İ")."""
   return string.replace("i", "İ").upper()
 
 
-def _capitalize(string):
+def _capitalize(string: str) -> str:
   """Properly capitalizes Turkish string (string initial "i" -> "İ")."""
   if string.startswith("i"):
     string.replace("i", "İ", 1)
@@ -40,7 +46,7 @@ def _capitalize(string):
   return string.replace("I", "ı").capitalize()
 
 
-def _format_root(root, tag):
+def _format_root(root: str, tag: str) -> str:
   """Case formats the root annotation given the tag for lexicon entry."""
   formatting = tags.FORMATTING[tag]
 
@@ -54,8 +60,8 @@ def _format_root(root, tag):
   return root
 
 
-def _normalize(entries):
-  """Normalizes annotated values of each field of lexicon entry annotations.
+def _normalize(entries: List[LexiconEntry]) -> None:
+  """Normalizes annotated values of each field of the lexicon entry.
 
   This function;
       - converts the value of the 'tag' field into uppercase.
@@ -72,11 +78,7 @@ def _normalize(entries):
         the value of the 'root' and 'morphophonemics' fields.
 
   Args:
-    entries: list of dict(str->str), each item is a dictionary of field-value
-        pairs of a valid lexicon entry annotation. Keys are the names of the
-        annotated fields ('tag', 'root', 'morphophonemics', 'features',
-        'is_compound'), values are the annotated values for the respective
-        field.
+    entries: lexicon entries whose annotations will be normalized.
   """
   circumflex = {
       "â": "a",
@@ -84,7 +86,7 @@ def _normalize(entries):
       "û": "u",
   }
 
-  def _normalize_entry(entry):
+  def _normalize_entry(entry: LexiconEntry) -> LexiconEntry:
     entry["tag"] = entry["tag"].upper()
     entry["is_compound"] = entry["is_compound"].lower() == "true"
     entry["root"] = _format_root(entry["root"], entry["tag"])
@@ -94,10 +96,10 @@ def _normalize(entries):
 
     return entry
 
-  def _root_has_circumflex(entry):
+  def _root_has_circumflex(entry: LexiconEntry) -> bool:
     return any(c in entry["root"] for c in circumflex.keys())
 
-  def _make_entry(entry):
+  def _make_entry(entry: LexiconEntry) -> LexiconEntry:
     fields_to_check = ("root", "morphophonemics")
     field_and_chars = itertools.product(fields_to_check, circumflex.items())
     normalized = entry.copy()
@@ -112,27 +114,24 @@ def _normalize(entries):
   entries.extend(new_entries)
 
 
-def _cross_classify(entries):
-  """Cross-classifies lexicon entry annotations across parts of speech.
+def _cross_classify(entries: List[LexiconEntry]) -> None:
+  """Cross-classifies lexicon entries across parts of speech.
 
-  This function adds a new lexicon entry annotation by just rewriting its tag
-  for each part-of-speech that is defined in the CROSS_CLASSIFY_AS dictionary
-  of //morphotactics_compiler/lexicon/tags.py.
+  This function adds a new lexicon entry by just rewriting its tag for each
+  part-of-speech that is defined in the CROSS_CLASSIFY_AS dictionary of
+  //morphotactics_compiler/lexicon/tags.py.
 
-  While cross-classifying lexicon entry annotations required (or optional)
-  features are removed, if required (or optional) features defined for the
+  While making new cross-classified lexicon entries removes the required
+  (or optional) features, if required (or optional) features defined for the
   target part-of-speech in REQUIRED_FEATURES and OPTIONAL_FEATURES dictionaries
   of //morphotactics_compiler/lexicon/tags.py does not match the ones that are
   defined for the source part-of-speech.
 
   Args:
-    entries: list of dict(str->str), each item is a dictionary of field-value
-        pairs of a valid lexicon entry annotation. Keys are the names of the
-        annotated fields ('tag', 'root', 'morphophonemics', 'features',
-        'is_compound'), values are the annotated values for the respective
-        field.
+    entries: lexicon entries which will be cross-classified across parts of
+        speech.
   """
-  def _new_features(old_features, old_tag, new_tag):
+  def _new_features(old_features: str, old_tag: str, new_tag: str) -> str:
     if new_tag == "NOMP-CASE-BARE":
       return "+[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]"
 
@@ -150,14 +149,15 @@ def _cross_classify(entries):
 
     return ""
 
-  def _make_entry(entry, old_tag, new_tag):
+  def _make_entry(entry: LexiconEntry, old_tag: str,
+                  new_tag: str) -> LexiconEntry:
     new_entry = entry.copy()
     new_entry["tag"] = new_tag
     new_entry["root"] = _format_root(new_entry["root"], new_tag)
     new_entry["features"] = _new_features(entry["features"], old_tag, new_tag)
     return new_entry
 
-  def _new_entries(entry):
+  def _new_entries(entry: LexiconEntry) -> Generator[LexiconEntry, None, None]:
     old_tag = entry["tag"]
     new_tags = tags.CROSS_CLASSIFY_AS[old_tag]
     args = itertools.product([entry], [old_tag], new_tags)
@@ -167,17 +167,17 @@ def _cross_classify(entries):
   entries.extend(new_entries)
 
 
-def _rule_input(entry):
+def _rule_input(entry: LexiconEntry) -> str:
   """Returns the input label of a rewrite rule.
 
-  Generated input label has the form '(Root[Tag]+[Cat1=Val_x]...+[Catn=Val_y]'
-  (e.g. '(dümdüz[JJ]+[Emphasis=True]').
-
   Args:
-    entry: dict(str->str), field-value pairs of a valid lexicon entry
-        annotation. Keys are the names of the annotated fields ('tag', 'root',
-        'morphophonemics', 'features', 'is_compound'), values are the annotated
-        values for the respective field.
+    entry: lexicon entry whose root form, tag and features annotations are
+        used to create a rewrite rule input label.
+
+  Returns:
+    Input label of a state transition arc of the morphotactics FST. Returns an
+    input label which has the form '(Root[Tag]+[Cat1=Val_x]...+[Catn=Val_y]'
+    (e.g. '(dümdüz[JJ]+[Emphasis=True]').
   """
   root = entry["root"]
   tag = tags.OUTPUT_AS[entry["tag"]]
@@ -185,18 +185,17 @@ def _rule_input(entry):
   return f"({root}[{tag}]{features}"
 
 
-def _rule_output(entry):
+def _rule_output(entry: LexiconEntry) -> str:
   """Returns the output label of a rewrite rule.
 
-  If lexicon annotation entry has morphophonemics annotated, then it is used
-  as the output label. Otherwise, lowercase normalized root form is used as the
-  output label.
-
   Args:
-    entry: dict(str->str), field-value pairs of a valid lexicon entry
-        annotation. Keys are the names of the annotated fields ('tag', 'root',
-        'morphophonemics', 'features', 'is_compound'), values are the annotated
-        values for the respective field.
+    entry: lexicon entry whose morphophonemics or root form annotation is used
+        to create a rewrite rule output label.
+
+  Returns:
+    Output label of a state transition arc of the morphotactics FST. If lexicon
+    entry has morphophonemics annotation, returns it as the output label.
+    Otherwise, returns lowercase normalized root form as the output label.
   """
   if entry["morphophonemics"]:
     return entry["morphophonemics"]
@@ -204,20 +203,17 @@ def _rule_output(entry):
   return _lower(entry["root"])
 
 
-def _create_rewrite_rule(entry):
-  """Creates a rewrite rule object from the lexicon entry annotation.
+def _create_rewrite_rule(entry: LexiconEntry) -> RewriteRule:
+  """Creates a rewrite rule from the lexicon entry.
 
   Args:
-    entry: dict(str->str), field-value pairs of a valid lexicon entry
-        annotation. Keys are the names of the annotated fields ('tag', 'root',
-        'morphophonemics', 'features', 'is_compound'), values are the annotated
-        values for the respective field.
+    entry: lexicon entry which will be used to generate a rewrite rule.
 
   Returns:
-    rule_pb2.RewriteRule, rewrite rule object that defines a state transition
-    arc of the compiled morphocatics FST.
+    Rewrite rule object that defines a state transition arc of the
+    morphotactics FST.
   """
-  rule = rule_pb2.RewriteRule()
+  rule = RewriteRule()
   rule.from_state = common.START_STATE
   rule.to_state = entry["tag"]
   rule.input = _rule_input(entry)
@@ -225,26 +221,22 @@ def _create_rewrite_rule(entry):
   return rule
 
 
-def parse(entries):
-  """Generates rewrite rules from the lexicon entry annotations source file.
+def parse(entries: List[LexiconEntry]) -> RewriteRuleSet:
+  """Generates a rewrite rule set from lexicon entries.
 
-  Note that this function assumes all input entries are valid, meaning that
-  they should be first validated with //src/analyzer/lexicon/validator.py.
+  Note that this function assumes all input lexicon entries are valid, meaning
+  that they should be first validated with //src/analyzer/lexicon/validator.py.
 
   Args:
-    entries: list of dict(str->str), each item is a dictionary of field-value
-        pairs of a valid lexicon entry annotation. Keys are the names of the
-        annotated fields ('tag', 'root', 'morphophonemics', 'features',
-        'is_compound'), values are the annotated values for the respective
-        field.
+    entries: lexicon entries which will be used to generate rewrite rules.
 
   Returns:
-    rule_pb2.RewriteRuleSet, array of rewrite rule objects that defines a
-    subset of the state transition arcs of the compiled morphocatics FST.
+    Array of rewrite rule objects that defines a subset of the state transition
+    arcs of the morphotactics FST.
   """
   _normalize(entries)
   _cross_classify(entries)
   state_entries = [e for e in entries if e["tag"] in tags.FST_STATES]
-  rule_set = rule_pb2.RewriteRuleSet()
+  rule_set = RewriteRuleSet()
   rule_set.rule.extend(map(_create_rewrite_rule, state_entries))
   return rule_set

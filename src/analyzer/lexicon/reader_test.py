@@ -33,7 +33,7 @@ def _read_file(path):
   return read
 
 
-class ReadLexiconSourceTest(unittest.TestCase):
+class ReadLexiconEntriesTest(unittest.TestCase):
 
   @parameterized.expand([
       param(
@@ -92,7 +92,7 @@ class ReadLexiconSourceTest(unittest.TestCase):
   ])
   def test_success(self, _, basename, expected):
     path = os.path.join(_TESTDATA_DIR, f"{basename}.tsv")
-    actual = reader.read_lexicon_source(path)
+    actual = reader.read_lexicon_entries(path)
     self.assertDictEqual(expected, actual)
 
   @parameterized.expand([
@@ -109,7 +109,7 @@ class ReadLexiconSourceTest(unittest.TestCase):
   ])
   def test_raises_exception(self, _, path, exception):
     with self.assertRaises(exception):
-      reader.read_lexicon_source(path)
+      reader.read_lexicon_entries(path)
 
 
 if __name__ == "__main__":

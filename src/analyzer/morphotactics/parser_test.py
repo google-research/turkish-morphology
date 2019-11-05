@@ -28,13 +28,15 @@ class ParseTest(unittest.TestCase):
 
   @parameterized.expand([
       param(
-          "EmptyLines",
-          lines=[],
+          "EmptyRuleDefinitions",
+          rule_definitions=[],
           expected_pbtxt=""
       ),
       param(
-          "SingleLine",
-          lines=[["STATE-1", "STATE-2", "+Morpheme[Cat=Val]", "+Morpheme"]],
+          "SingleRuleDefinition",
+          rule_definitions=[
+              ["STATE-1", "STATE-2", "+Morpheme[Cat=Val]", "+Morpheme"],
+          ],
           expected_pbtxt="""
           rule {
             from_state: 'STATE-1'
@@ -45,8 +47,8 @@ class ParseTest(unittest.TestCase):
           """
       ),
       param(
-          "MultipleLines",
-          lines=[
+          "MultipleRuleDefinitions",
+          rule_definitions=[
               ["STATE-1", "STATE-2", "+Morpheme1[Cat1=Val1]", "+Morpheme1"],
               ["STATE-3", "STATE-4", "+Morpheme2[Cat2=Val2]", "+Morpheme2"],
           ],
@@ -67,7 +69,9 @@ class ParseTest(unittest.TestCase):
       ),
       param(
           "NormalizesFromStateName",
-          lines=[["sTaTe-1", "STATE-2", "+Morpheme[Cat=Val]", "+Morpheme"]],
+          rule_definitions=[
+              ["sTaTe-1", "STATE-2", "+Morpheme[Cat=Val]", "+Morpheme"],
+          ],
           expected_pbtxt="""
           rule {
             from_state: 'STATE-1'
@@ -79,7 +83,9 @@ class ParseTest(unittest.TestCase):
       ),
       param(
           "NormalizesToStateName",
-          lines=[["STATE-1", "StAtE-2", "+Morpheme[Cat=Val]", "+Morpheme"]],
+          rule_definitions=[
+              ["STATE-1", "StAtE-2", "+Morpheme[Cat=Val]", "+Morpheme"],
+          ],
           expected_pbtxt="""
           rule {
             from_state: 'STATE-1'
@@ -91,7 +97,9 @@ class ParseTest(unittest.TestCase):
       ),
       param(
           "NormalizesBracketedOutputToken",
-          lines=[["STATE-1", "StAtE-2", "<BrAcKeTeD>", "+Morpheme"]],
+          rule_definitions=[
+              ["STATE-1", "StAtE-2", "<BrAcKeTeD>", "+Morpheme"],
+          ],
           expected_pbtxt="""
           rule {
             from_state: 'STATE-1'
@@ -103,7 +111,9 @@ class ParseTest(unittest.TestCase):
       ),
       param(
           "NormalizesBracketedInputToken",
-          lines=[["STATE-1", "StAtE-2", "+Morpheme[Cat=Val]", "<BrAcKeTeD>"]],
+          rule_definitions=[
+              ["STATE-1", "StAtE-2", "+Morpheme[Cat=Val]", "<BrAcKeTeD>"],
+          ],
           expected_pbtxt="""
           rule {
             from_state: 'STATE-1'
@@ -114,8 +124,8 @@ class ParseTest(unittest.TestCase):
           """
       ),
   ])
-  def test_success(self, _, lines, expected_pbtxt):
-    actual = parser.parse(lines)
+  def test_success(self, _, rule_definitions, expected_pbtxt):
+    actual = parser.parse(rule_definitions)
     expected = rule_pb2.RewriteRuleSet()
     text_format.Parse(expected_pbtxt, expected)
     self.assertEqual(expected, actual)

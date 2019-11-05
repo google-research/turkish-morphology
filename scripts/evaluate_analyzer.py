@@ -26,6 +26,7 @@ import multiprocessing
 import os
 import re
 import subprocess
+from typing import Generator, List, Tuple, Set
 
 
 _BASE_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -77,15 +78,15 @@ class Statistics():
   unparsed = set()
 
 
-def _lower(string):
+def _lower(string: str) -> str:
   """Properly lower transforms Turkish string ("İ" -> "i", "I" -> "ı")."""
   return string.replace("İ", "i").replace("I", "ı").lower()
 
 
-def _read_tokens(treebank_dir):
+def _read_tokens(treebank_dir: str) -> List[str]:
   """Reads tokens from CoNLL data and returns them in a list."""
 
-  def _extract_tokens_from(line):
+  def _extract_tokens_from(line: str) -> Generator[str, None, None]:
     """Extracts token from a CoNLL data file line."""
     if line.isspace():  # Empty lines are sentence seperators.
       return
@@ -103,7 +104,7 @@ def _read_tokens(treebank_dir):
     if token != "_":  # It's an inflectional group, not a word form.
       yield from token.split("_")
 
-  def _read_from(path):
+  def _read_from(path: str) -> Generator[str, None, None]:
     """Reads tokens from CoNLL data file that lives in the path."""
     logging.info("Reading tokens from '%s'", path)
 
@@ -122,10 +123,11 @@ def _read_tokens(treebank_dir):
   return tokens
 
 
-def _gather_analyses(word_form, far_path):
+def _gather_analyses(word_form: str,
+                     far_path: str) -> Tuple[str, Set[str], Set[str]]:
   """Gathers generated morphological analysis strings for a word form."""
 
-  def _remove_proper(analysis):
+  def _remove_proper(analysis: str) -> str:
     """Removes proper feature from the analysis string."""
     return analysis.replace("+[Proper=False]", "").replace("+[Proper=True]", "")
 
@@ -151,16 +153,16 @@ def _gather_analyses(word_form, far_path):
       f" '{word_form}'. The output is:\n{output}")
 
 
-def _evaluate(word_forms, far_path):
+def _evaluate(word_forms: Set[str], far_path: str) -> Statistics:
   """Collects statistics on coverage, and generated analysis and IG counts."""
   statistics = Statistics()
   pool = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
 
-  def _ig_count(analysis):
+  def _ig_count(analysis: str) -> int:
     """Finds the number of inflectional groups in the analysis string."""
     return len(_IG_BOUNDARY_REGEX.findall(analysis)) + 1
 
-  def _aggregate_stats(result):
+  def _aggregate_stats(result: Tuple[str, Set[str], Set[str]]) -> None:
     """Aggregates statistics for a word form."""
     word_form, with_proper, without_proper = result
 
@@ -190,7 +192,8 @@ def _evaluate(word_forms, far_path):
   return statistics
 
 
-def _prepare_summary(tokens, word_forms, statistics):
+def _prepare_summary(tokens: List[str], word_forms: Set[str],
+                     statistics: Statistics) -> str:
   """Generates a human-readable evaluation summary."""
   if not tokens:
     raise EvaluationError(

@@ -33,11 +33,11 @@ def _read_file(path):
   return read
 
 
-class ReadMorphotacticsSourceTest(unittest.TestCase):
+class ReadRuleDefinitionsTest(unittest.TestCase):
 
   def test_success(self):
     path = os.path.join(_TESTDATA_DIR, "morphotactics_valid_rules_1.txt")
-    actual = reader.read_morphotactics_source(path)
+    actual = reader.read_rule_definitions(path)
     expected = collections.OrderedDict((
         (7, [
             "JJ",
@@ -110,7 +110,7 @@ class ReadMorphotacticsSourceTest(unittest.TestCase):
   ])
   def test_raises_exception(self, _, path, exception):
     with self.assertRaises(exception):
-      reader.read_morphotactics_source(path)
+      reader.read_rule_definitions(path)
 
 
 if __name__ == "__main__":

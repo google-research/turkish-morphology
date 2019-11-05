@@ -13,24 +13,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Functions to read text source morphotactic files."""
+"""Functions to read text morphotactic model files."""
 
 import collections
 import io
 import itertools
+from typing import Dict, List, Tuple
 
 
-def _whitespace_trimmed(line):
+RuleDefinition = List[str]
+
+
+def _whitespace_trimmed(line: str) -> str:
   """Strips any leading and trailing whitespace off from the line."""
   return line.lstrip().rstrip()
 
 
-def _empty(line):
+def _empty(line: str) -> bool:
   """Returns True if line is empty (or only contains whitespace)."""
   return not line or line.isspace()
 
 
-def _comment(line):
+def _comment(line: str) -> bool:
   """Returns True if line is a comment line (starts with '#')."""
   return line.startswith("#")
 
@@ -40,27 +44,28 @@ def _rule(line):
   return not (_empty(line) or _comment(line))
 
 
-def read_morphotactics_source(path):
-  """Reads the content of text morphotactics source file from the file path.
+def read_rule_definitions(path: str) -> Dict[int, RuleDefinition]:
+  """Reads morphotactics FST rule definitions from the path.
 
   Args:
-    path: string, path to a text file which contains the rewrite rules of
-        morphotactics transducer.
+    path: path to a text file which contains the definition of rewrite rules of
+        morphotactics FST.
 
   Raises:
-    IOError: source file cannot be read from the 'path'.
+    IOError: morphotactics FST rule definitions cannot be read from the 'path'.
 
   Returns:
-    OrderedDict(int->list of str). Keys are indices of the lines of the source
-    file, values are the list of whitespace tokenized tokens of each line. This
-    dictionary does not contain the content for the lines that are empty, that
-    only include comments, or only composed of whitespace characters. Items are
-    sorted by increasing line index.
+    Morphotactics FST rule definitions as a dictionary. Keys are indices of the
+    lines of the source file, values are the list of whitespace tokenized tokens
+    of each line. Content for lines those that are empty, only include comments,
+    or only composed of whitespace characters are pruned and rule definitions
+    are sorted by increasing line index. Returns an empty dictionary, if
+    the text file does not contain any rule definitions.
   """
   with io.open(path, "r", encoding="utf-8") as reader:
     lines = reader.readlines()
 
-  def _index_and_entry(index, line):
+  def _index_and_entry(index: int, line: str) -> Tuple[int, RuleDefinition]:
     return index + 1, _whitespace_trimmed(line).split()
 
   rules = ((i, l) for i, l in enumerate(lines) if _rule(l))

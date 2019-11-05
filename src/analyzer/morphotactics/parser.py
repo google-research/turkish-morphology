@@ -13,73 +13,80 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Functions to parse a tokenized morphotactics rewrite rule definition."""
+"""Functions to parse rule definitions into rewrite rule objects."""
+
+from typing import List
 
 from src.analyzer.morphotactics import rule_pb2
 
 
-def _normalize(lines):
-  """Normalizes the tokens of each morphotactics rewrite rule definition.
+RewriteRule = rule_pb2.RewriteRule
+RewriteRuleSet = rule_pb2.RewriteRuleSet
+RuleDefinition = List[str]
 
-  This function converts the 'from' and 'to' state values to uppercase, and
-  all bracketed 'output' and 'input' labels to lowercase (e.g. the rewrite rule
-  'state-1 StAtE-2 +MetaMorpheme[Cat=Val] <EPS>' is normalized to
+
+def _normalize(rule_definitions: List[RuleDefinition]) -> None:
+  """Normalizes the tokens of morphotactics rewrite rule definition.
+
+  This function converts the 'from_state' and 'to_state' values to uppercase,
+  and all bracketed 'output' and 'input' labels to lowercase (e.g. the rewrite
+  rule 'state-1 StAtE-2 +MetaMorpheme[Cat=Val] <EPS>' is normalized to
   'STATE-1 STATE-2 +MetaMorpheme[Cat=Val] <eps>'). Normalization is done
-  in-place for each whitespace tokenized source line.
+  in-place.
 
   Args:
-    lines: list of list of str, each item of the list is a list of whitespace
-        tokenized tokens of a line which defines a valid morphotactics rewrite
-        rule.
+    rule_definitions: morphotactics rule definitions whose tokens will be
+        normalized.
   """
-  def _bracketed(token):
+  def _bracketed(token: str) -> bool:
     return token.startswith("<") and token.endswith(">")
 
-  def _get_normalized(tokens):
-    tokens[0] = tokens[0].upper()
-    tokens[1] = tokens[1].upper()
-    tokens[2] = tokens[2].lower() if _bracketed(tokens[2]) else tokens[2]
-    tokens[3] = tokens[3].lower() if _bracketed(tokens[3]) else tokens[3]
-    return tokens
+  def _get_normalized(rule_definition):
+    from_state, to_state,  input_, output = rule_definition
+    rule_definition[0] = from_state.upper()
+    rule_definition[1] = to_state.upper()
+    rule_definition[2] = input_.lower() if _bracketed(input_) else input_
+    rule_definition[3] = output.lower() if _bracketed(output) else output
+    return rule_definition
 
-  lines[:] = list(map(_get_normalized, lines))
+  rule_definitions[:] = list(map(_get_normalized, rule_definitions))
 
 
-def _create_rewrite_rule(tokens):
-  """Creates a rewrite rule object from the rewrite rule definition tokens.
+def _create_rewrite_rule(rule_definition: RuleDefinition) -> RewriteRule:
+  """Creates a rewrite rule from the morphotactics rule definition.
 
   Args:
-    tokens: list of str, each item is a whitespace tokenized token of a line
-        which defines a valid morphotactics rewrite rule.
+    rule_definition: morphotactics rule definition which will be used to
+        generate a rewrite rule.
 
   Returns:
-    rule_pb2.RewriteRule, rewrite rule object that defines a state transition
-    arc of the compiled morphocatics FST.
+    Rewrite rule object that defines a state transition arc of the
+    morphotactics FST.
   """
-  rule = rule_pb2.RewriteRule()
-  rule.from_state = tokens[0]
-  rule.to_state = tokens[1]
-  rule.input = tokens[2]
-  rule.output = tokens[3]
+  rule = RewriteRule()
+  rule.from_state = rule_definition[0]
+  rule.to_state = rule_definition[1]
+  rule.input = rule_definition[2]
+  rule.output = rule_definition[3]
   return rule
 
 
-def parse(lines):
-  """Generates rewrite rules from the content of morphotactics source file.
+def parse(rule_definitions: List[RuleDefinition]) -> RewriteRuleSet:
+  """Generates a rewrite rule set from morphotactics rule definitions.
 
-  Note that this function assumes all input lines are valid, meaning that
-  they should be first validated with //src/analyzer/morphotactics/validator.py.
+  Note that this function assumes all input rule definitions are valid, meaning
+  that they should be first validated with
+  //src/analyzer/morphotactics/validator.py.
 
   Args:
-    lines: list of list of str, each item of the list is a list of whitespace
-        tokenized tokens of a line which defines a valid morphotactics rewrite
-        rule.
+    rule_definitions: morphotactics rule definitions which will be used in
+        generating rewrite rules.
 
   Returns:
-    rule_pb2.RewriteRuleSet, array of rewrite rule objects that defines a
-    subset of the state transition arcs of the compiled morphocatics FST.
+    Array of rewrite rule objects that defines a subset of the state transition
+    arcs of the morphotactics FST.
   """
-  _normalize(lines)
-  rule_set = rule_pb2.RewriteRuleSet()
-  rule_set.rule.extend(_create_rewrite_rule(l) for l in lines)
+  _normalize(rule_definitions)
+  rule_set = RewriteRuleSet()
+  rule_set.rule.extend(_create_rewrite_rule(d) for d in rule_definitions)
   return rule_set
