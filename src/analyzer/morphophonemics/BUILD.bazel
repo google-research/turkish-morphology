@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("//bazel:thrax.bzl", "grm_compile", "grm_test")
+
 package(default_visibility = ["//src/analyzer:__pkg__"])
 
 licenses(["notice"])  # Apache 2.0
-
-load("//bazel:thrax.bzl", "grm_compile", "grm_test")
 
 # Grammars.
 grm_compile(

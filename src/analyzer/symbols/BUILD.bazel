@@ -12,14 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("//bazel:thrax.bzl", "grm_compile", "grm_test")
+
 package(default_visibility = [
     "//src/analyzer:__pkg__",
     "//src/analyzer/morphophonemics:__pkg__",
 ])
 
 licenses(["notice"])  # Apache 2.0
-
-load("//bazel:thrax.bzl", "grm_compile", "grm_test")
 
 # Data.
 # Base symbols table should only include the exact set of characters that can

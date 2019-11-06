@@ -12,12 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+load("@turkish_morphology_deps//:requirements.bzl", "requirement")
+
 package(default_visibility = ["//src/analyzer:__pkg__"])
 
 licenses(["notice"])  # Apache 2.0
-
-load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
-load("@turkish_morphology_deps//:requirements.bzl", "requirement")
 
 # Data.
 filegroup(

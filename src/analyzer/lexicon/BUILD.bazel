@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+load("@turkish_morphology_deps//:requirements.bzl", "requirement")
+
 package(default_visibility = ["//src/analyzer/morphotactics:__pkg__"])
 
 licenses(["notice"])  # Apache 2.0
-
-load("@turkish_morphology_deps//:requirements.bzl", "requirement")
 
 # Data.
 filegroup(

@@ -17,7 +17,7 @@
 # This macro is very brittle and makes undesirable assumptions. Among other
 # shortcomings, it will only work with grammars that use local (or relative)
 # imports, and it requires all transitive dependencies to be listed in deps.
-def grm_compile(name, src=None, deps=[]):
+def grm_compile(name, src = None, deps = []):
     thraxcompiler = "@thrax//:thraxcompiler"
 
     if not src:
@@ -55,13 +55,13 @@ def grm_test(name, far_file, test_file, base_path):
         size = "small",
         args = [
             "--far=" + base_path + far_file,
-            "--test_file=" + base_path + testdata_dir + test_file
+            "--test_file=" + base_path + testdata_dir + test_file,
         ],
         data = [
-              far_file,
-              testdata_dir + test_file,
+            far_file,
+            testdata_dir + test_file,
         ],
         deps = [
-            "@language_resources//utils:grm_tester_lib"
+            "@language_resources//utils:grm_tester_lib",
         ],
     )

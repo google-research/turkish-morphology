@@ -14,7 +14,6 @@
 
 workspace(name = "turkish_morphology")
 
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load(
     "@bazel_tools//tools/build_defs/repo:git.bzl",
     "git_repository",
@@ -69,11 +68,9 @@ git_repository(
     remote = "https://github.com/bazelbuild/rules_python.git",
 )
 
-load("@rules_python//python:pip.bzl", "pip_repositories")
+load("@rules_python//python:pip.bzl", "pip_import", "pip_repositories")
 
 pip_repositories()
-
-load("@rules_python//python:pip.bzl", "pip_import")
 
 pip_import(
     name = "turkish_morphology_deps",
