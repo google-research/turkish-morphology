@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for src.analyzer.morphotactics.model_compile."""
 
 import os
@@ -263,7 +262,9 @@ class MainTest(unittest.TestCase):
           morphotactics_dir="invalid_dir_path",
       ),
   ])
-  def test_raises_exception_on_argument(self, _, lexicon_dir=_TMP_LEX_DIR,
+  def test_raises_exception_on_argument(self,
+                                        _,
+                                        lexicon_dir=_TMP_LEX_DIR,
                                         morphotactics_dir=_TMP_MORPH_DIR,
                                         output_dir=_TMP_OUT_DIR):
     self._test_call_failure(lexicon_dir, morphotactics_dir, output_dir)

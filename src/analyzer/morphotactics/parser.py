@@ -12,13 +12,11 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Functions to parse rule definitions into rewrite rule objects."""
 
 from typing import List
 
 from src.analyzer.morphotactics import rule_pb2
-
 
 RewriteRule = rule_pb2.RewriteRule
 RewriteRuleSet = rule_pb2.RewriteRuleSet
@@ -38,11 +36,12 @@ def _normalize(rule_definitions: List[RuleDefinition]) -> None:
     rule_definitions: morphotactics rule definitions whose tokens will be
         normalized.
   """
+
   def _bracketed(token: str) -> bool:
     return token.startswith("<") and token.endswith(">")
 
   def _get_normalized(rule_definition):
-    from_state, to_state,  input_, output = rule_definition
+    from_state, to_state, input_, output = rule_definition
     rule_definition[0] = from_state.upper()
     rule_definition[1] = to_state.upper()
     rule_definition[2] = input_.lower() if _bracketed(input_) else input_

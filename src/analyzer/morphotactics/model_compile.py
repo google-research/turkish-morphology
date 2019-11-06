@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tool to compile morphotactics FST into OpenFST format."""
 
 import argparse
@@ -96,7 +95,6 @@ class MorphotacticsCompilerError(Exception):
 RewriteRule = rule_pb2.RewriteRule
 RewriteRuleSet = rule_pb2.RewriteRuleSet
 
-
 _SYMBOLS_REGEX = re.compile(
     # First inflectional group.
     r"\(.+?\[[A-Z\.,:\(\)\'\-\"`\$]+?\]|"
@@ -130,6 +128,7 @@ def _get_lexicon_rules(lexicon_dir: str) -> RewriteRuleSet:
   Returns:
     Array of validated and parsed lexicon rewrite rule objects.
   """
+
   def _read_rule_set(path: str) -> RewriteRule:
     logging.info("reading rewrite rules from %r", path)
     entries = lexicon_reader.read_lexicon_entries(path)  # might throw IOError.
@@ -171,6 +170,7 @@ def _get_morphotactics_rules(morphotactics_dir: str) -> RewriteRuleSet:
   Returns:
     Array of validated and parsed morphotactics rewrite rule objects.
   """
+
   def _read_rule_set(path: str) -> RewriteRule:
     logging.info("reading rewrite rules from %r", path)
     # Below read call might throw IOError.
@@ -282,8 +282,8 @@ def _symbols_of_output(label: str) -> List[str]:
   return list(label)
 
 
-def _symbols_table_file_content(
-    rule_set: RewriteRuleSet) -> Generator[str, None, None]:
+def _symbols_table_file_content(rule_set: RewriteRuleSet
+                               ) -> Generator[str, None, None]:
   r"""Generates the content of the complex symbols table file.
 
   Generated file is in AT&T format. It defines the labels for state transition
@@ -303,6 +303,7 @@ def _symbols_table_file_content(
     Lines of symbols table file, where each defines an FST symbol in the form
     of 'SYMBOL INDEX\n' (e.g. '(abanoz[NN]	983041\n').
   """
+
   def _line(symbol: str, index: int) -> str:
     return f"{symbol}\t{index}\n".encode("utf-8")
 
@@ -324,8 +325,8 @@ def _symbols_table_file_content(
   logging.info("generated complex symbols file content")
 
 
-def _text_fst_file_content(
-    rule_set: RewriteRuleSet) -> Generator[str, None, None]:
+def _text_fst_file_content(rule_set: RewriteRuleSet
+                          ) -> Generator[str, None, None]:
   r"""Generates the content of the text FST file.
 
   Generated file is in AT&T format. It defines the state transition arcs and
@@ -347,7 +348,9 @@ def _text_fst_file_content(
     _Local.state_count += 1
     return _Local.state_count
 
-  def arc(from_: str, to: str, input_: str = common.EPSILON,
+  def arc(from_: str,
+          to: str,
+          input_: str = common.EPSILON,
           output: str = common.EPSILON) -> str:
     return f"{from_}\t{to}\t{input_}\t{output}\n".encode("utf-8")
 
@@ -430,8 +433,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-  logging.basicConfig(
-      level=logging.INFO,
-      format="%(asctime)s %(levelname)s: %(message)s",
-      datefmt="%H:%M:%S")
+  logging.basicConfig(level=logging.INFO,
+                      format="%(asctime)s %(levelname)s: %(message)s",
+                      datefmt="%H:%M:%S")
   main(_ARG_PARSER.parse_args())

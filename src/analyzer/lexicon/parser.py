@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Functions to parse lexicon entries into rewrite rule objects."""
 
 import itertools
@@ -21,7 +20,6 @@ from typing import Dict, Generator, List
 from src.analyzer.lexicon import tags
 from src.analyzer.morphotactics import common
 from src.analyzer.morphotactics import rule_pb2
-
 
 LexiconEntry = Dict[str, str]
 RewriteRule = rule_pb2.RewriteRule
@@ -131,6 +129,7 @@ def _cross_classify(entries: List[LexiconEntry]) -> None:
     entries: lexicon entries which will be cross-classified across parts of
         speech.
   """
+
   def _new_features(old_features: str, old_tag: str, new_tag: str) -> str:
     if new_tag == "NOMP-CASE-BARE":
       return "+[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]"

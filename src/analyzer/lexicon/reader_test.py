@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for src.analyzer.lexicon.reader."""
 
 import collections
@@ -22,7 +21,6 @@ import unittest
 from src.analyzer.lexicon import reader
 from parameterized import param
 from parameterized import parameterized
-
 
 _TESTDATA_DIR = "src/analyzer/lexicon/testdata"
 
@@ -40,54 +38,54 @@ class ReadLexiconEntriesTest(unittest.TestCase):
           "ValidLexiconWithHeaderAndEntries",
           basename="valid_entries_1",
           expected=collections.OrderedDict((
-            (2, {
-                "tag": "Nn",
-                "root": "ABANOZ",
-                "morphophonemics": "~",
-                "features": "~",
-                "is_compound": "FALSE"
-            }),
-            (3, {
-                "tag": "nN",
-                "root": "âhît",
-                "morphophonemics": "âhî?t~",
-                "features": "~",
-                "is_compound": "FaLsE"
-            }),
-            (4, {
-                "tag": "nn",
-                "root": "ördekbaşı",
-                "morphophonemics": "ördekbaş",
-                "features": "~",
-                "is_compound": "true"
-            }),
-            (6, {
-                "tag": "Jj",
-                "root": "KIZIL",
-                "morphophonemics": "~",
-                "features": "~",
-                "is_compound": "FALSE"
-            }),
-            (7, {
-                "tag": "jJ",
-                "root": "kopkoyu",
-                "morphophonemics": "~",
-                "features": "+[Emphasis=True]",
-                "is_compound": "false"
-            }),
-            (8, {
-                "tag": "in",
-                "root": "ArT",
-                "morphophonemics": "~",
-                "features": "+[ComplementType=CGen]",
-                "is_compound": "FALSE"
-            }),
-        ))
+              (2, {
+                  "tag": "Nn",
+                  "root": "ABANOZ",
+                  "morphophonemics": "~",
+                  "features": "~",
+                  "is_compound": "FALSE",
+              }),
+              (3, {
+                  "tag": "nN",
+                  "root": "âhît",
+                  "morphophonemics": "âhî?t~",
+                  "features": "~",
+                  "is_compound": "FaLsE",
+              }),
+              (4, {
+                  "tag": "nn",
+                  "root": "ördekbaşı",
+                  "morphophonemics": "ördekbaş",
+                  "features": "~",
+                  "is_compound": "true",
+              }),
+              (6, {
+                  "tag": "Jj",
+                  "root": "KIZIL",
+                  "morphophonemics": "~",
+                  "features": "~",
+                  "is_compound": "FALSE",
+              }),
+              (7, {
+                  "tag": "jJ",
+                  "root": "kopkoyu",
+                  "morphophonemics": "~",
+                  "features": "+[Emphasis=True]",
+                  "is_compound": "false",
+              }),
+              (8, {
+                  "tag": "in",
+                  "root": "ArT",
+                  "morphophonemics": "~",
+                  "features": "+[ComplementType=CGen]",
+                  "is_compound": "FALSE",
+              }),
+          )),
       ),
       param(
           "InvalidLexiconWithOnlyHeader",
           basename="invalid_only_header",
-          expected=collections.OrderedDict()
+          expected=collections.OrderedDict(),
       ),
   ])
   def test_success(self, _, basename, expected):
@@ -99,12 +97,12 @@ class ReadLexiconEntriesTest(unittest.TestCase):
       param(
           "InvalidPath",
           path=os.path.join(_TESTDATA_DIR, "invalid_path.tsv"),
-          exception=IOError
+          exception=IOError,
       ),
       param(
           "EmptyPath",
           path="",
-          exception=IOError
+          exception=IOError,
       ),
   ])
   def test_raises_exception(self, _, path, exception):

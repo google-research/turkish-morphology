@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Functions to validate lexicon entries."""
 
 import re
@@ -28,11 +27,8 @@ class InvalidLexiconEntryError(Exception):
 FeatureCategoryValuePair = Tuple[str, str]
 LexiconEntry = Dict[str, str]
 
-
-_FEATURE_CATEGORY_VALUE_REGEX = re.compile(
-    r"\+\[([A-z0-9]+?)=([A-z0-9]+?)\]")
-_FEATURES_REGEX = re.compile(
-    r"(?:\+\[[A-z0-9]+?=[A-z0-9]+?\])+")
+_FEATURE_CATEGORY_VALUE_REGEX = re.compile(r"\+\[([A-z0-9]+?)=([A-z0-9]+?)\]")
+_FEATURES_REGEX = re.compile(r"(?:\+\[[A-z0-9]+?=[A-z0-9]+?\])+")
 _REQUIRED_FIELDS = set([
     "tag",
     "root",
@@ -73,8 +69,7 @@ def _entry_has_required_fields(entry: LexiconEntry) -> None:
 
   if missing_fields:
     field_str = ", ".join(sorted(missing_fields))
-    raise InvalidLexiconEntryError(
-        f"Entry is missing fields: '{field_str}'")
+    raise InvalidLexiconEntryError(f"Entry is missing fields: '{field_str}'")
 
 
 def _entry_field_values_are_not_empty(entry: LexiconEntry) -> None:
@@ -87,9 +82,10 @@ def _entry_field_values_are_not_empty(entry: LexiconEntry) -> None:
         f"Entry fields have empty values: '{field_str}'")
 
 
-def _entry_field_values_does_not_contain_infix_whitespace(
-    entry: LexiconEntry) -> None:
+def _entry_field_values_does_not_contain_infix_whitespace(entry: LexiconEntry
+                                                         ) -> None:
   """Checks if entry has single token tag, morphophonemics and feature value."""
+
   def _has_multi_token_value(field: str) -> bool:
     return len(entry[field].split()) != 1
 
@@ -171,8 +167,7 @@ def _entry_required_features_are_valid(entry: LexiconEntry) -> None:
         "Entry has invalid required feature category.")
 
   if any(v not in r for v, r in zip(values, required.values())):
-    raise InvalidLexiconEntryError(
-        "Entry has invalid required feature value.")
+    raise InvalidLexiconEntryError("Entry has invalid required feature value.")
 
 
 def _entry_optional_features_are_valid(entry: LexiconEntry) -> None:

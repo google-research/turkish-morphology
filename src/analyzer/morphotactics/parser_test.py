@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for src.analyzer.morphotactics.parser."""
 
 import unittest
@@ -30,7 +29,7 @@ class ParseTest(unittest.TestCase):
       param(
           "EmptyRuleDefinitions",
           rule_definitions=[],
-          expected_pbtxt=""
+          expected_pbtxt="",
       ),
       param(
           "SingleRuleDefinition",
@@ -44,7 +43,7 @@ class ParseTest(unittest.TestCase):
             input: '+Morpheme[Cat=Val]'
             output: '+Morpheme'
           }
-          """
+          """,
       ),
       param(
           "MultipleRuleDefinitions",
@@ -65,7 +64,7 @@ class ParseTest(unittest.TestCase):
             input: '+Morpheme2[Cat2=Val2]'
             output: '+Morpheme2'
           }
-          """
+          """,
       ),
       param(
           "NormalizesFromStateName",
@@ -79,7 +78,7 @@ class ParseTest(unittest.TestCase):
             input: '+Morpheme[Cat=Val]'
             output: '+Morpheme'
           }
-          """
+          """,
       ),
       param(
           "NormalizesToStateName",
@@ -93,7 +92,7 @@ class ParseTest(unittest.TestCase):
             input: '+Morpheme[Cat=Val]'
             output: '+Morpheme'
           }
-          """
+          """,
       ),
       param(
           "NormalizesBracketedOutputToken",
@@ -107,7 +106,7 @@ class ParseTest(unittest.TestCase):
             input: '<bracketed>'
             output: '+Morpheme'
           }
-          """
+          """,
       ),
       param(
           "NormalizesBracketedInputToken",
@@ -121,7 +120,7 @@ class ParseTest(unittest.TestCase):
             input: '+Morpheme[Cat=Val]'
             output: '<bracketed>'
           }
-          """
+          """,
       ),
   ])
   def test_success(self, _, rule_definitions, expected_pbtxt):

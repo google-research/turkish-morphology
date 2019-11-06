@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Common symbols and state labels that are used in morphotactics FST."""
 
 # Special (initial and final) FST state labels.

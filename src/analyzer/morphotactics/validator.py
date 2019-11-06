@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Functions to validate morphotactics rewrite rule definitions."""
 
 import re
@@ -26,7 +25,6 @@ class InvalidMorphotacticsRuleError(Exception):
 
 
 RuleDefinition = List[str]
-
 
 _RULE_INPUT_REGEX = re.compile(
     # Inflectional group boundaries.
@@ -48,8 +46,8 @@ _RULE_OUTPUT_REGEX = re.compile(
     r"[',\.]")
 
 
-def _rule_has_expected_number_of_tokens(
-    rule_definition: RuleDefinition) -> None:
+def _rule_has_expected_number_of_tokens(rule_definition: RuleDefinition
+                                       ) -> None:
   """Checks if rule definition has 4 tokens (from, to, output, input)."""
   if len(rule_definition) != 4:
     raise InvalidMorphotacticsRuleError(

@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tests for src.analyzer.morphotactics.validator."""
 
 import unittest
@@ -31,8 +30,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
-              "<eps>"
-          ]
+              "<eps>",
+          ],
       ),
       param(
           "EpsilonRuleOutputIgBoundryRuleInput",
@@ -40,8 +39,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               ")([JJ]-HmsH[Derivation=Sim]",
-              "<eps>"
-          ]
+              "<eps>",
+          ],
       ),
       param(
           "EpsilonRuleOutputInflectionMorphemeRuleInput",
@@ -49,8 +48,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "+NDAn[Case=Abl]",
-              "<eps>"
-          ]
+              "<eps>",
+          ],
       ),
       param(
           "EpsilonRuleOutputProperNounAnalysisRuleInput",
@@ -58,8 +57,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               ")+[Proper=False]",
-              "<eps>"
-          ]
+              "<eps>",
+          ],
       ),
       param(
           "EpsilonRuleOutputNumberRuleInput",
@@ -67,8 +66,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "1[NN]+'[Apostrophe=True]+HncH[NumberInf=Ord]",
-              "<eps>"
-          ]
+              "<eps>",
+          ],
       ),
       param(
           "EpsilonRuleOutputDecimalPointSeparatorRuleInput",
@@ -76,8 +75,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               ".",
-              "<eps>"
-          ]
+              "<eps>",
+          ],
       ),
       param(
           "EpsilonRuleInputMetaMorphemeRuleOutput",
@@ -85,8 +84,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
-              "+cAğHz"
-          ]
+              "+cAğHz",
+          ],
       ),
       param(
           "EpsilonRuleInputNumberMorphophonemicsRuleOutput",
@@ -94,8 +93,8 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
-              "00.*ü*"
-          ]
+              "00.*ü*",
+          ],
       ),
   ])
   def test_success(self, _, rule_definition):
@@ -109,17 +108,17 @@ class ValidateTest(unittest.TestCase):
               "TO-STATE",
               "<eps>",
               "<eps>",
-              "EXTRA-TOKEN"
+              "EXTRA-TOKEN",
           ],
-          error="Expecting 4 tokens got 5."
+          error="Expecting 4 tokens got 5.",
       ),
       param(
           "MissingTokens",
           rule_definition=[
               "FROM-STATE",
-              "TO-STATE"
+              "TO-STATE",
           ],
-          error="Expecting 4 tokens got 2."
+          error="Expecting 4 tokens got 2.",
       ),
       param(
           "EmptyFromStateToken",
@@ -127,9 +126,9 @@ class ValidateTest(unittest.TestCase):
               "",
               "TO-STATE",
               "<eps>",
-              "<eps>"
+              "<eps>",
           ],
-          error="Rule definition contains empty tokens."
+          error="Rule definition contains empty tokens.",
       ),
       param(
           "EmptyToStateToken",
@@ -137,9 +136,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "",
               "<eps>",
-              "<eps>"
+              "<eps>",
           ],
-          error="Rule definition contains empty tokens."
+          error="Rule definition contains empty tokens.",
       ),
       param(
           "EmptyRuleInputToken",
@@ -147,9 +146,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "",
-              "<eps>"
+              "<eps>",
           ],
-          error="Rule definition contains empty tokens."
+          error="Rule definition contains empty tokens.",
       ),
       param(
           "EmptyRuleOutputToken",
@@ -157,9 +156,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
-              ""
+              "",
           ],
-          error="Rule definition contains empty tokens."
+          error="Rule definition contains empty tokens.",
       ),
       param(
           "InvalidPrefixCharactersInInputToken",
@@ -167,9 +166,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "foo)([TAG]-ki[Cat=Val]]",
-              "<eps>"
+              "<eps>",
           ],
-          error="Invalid rule input label."
+          error="Invalid rule input label.",
       ),
       param(
           "InvalidInfixCharactersInInputToken",
@@ -177,9 +176,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               ")foo+[Proper=True]",
-              "<eps>"
+              "<eps>",
           ],
-          error="Invalid rule input label."
+          error="Invalid rule input label.",
       ),
       param(
           "InvalidSuffixCharactersInInputToken",
@@ -187,9 +186,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "5[TAG]foo",
-              "<eps>"
+              "<eps>",
           ],
-          error="Invalid rule input label."
+          error="Invalid rule input label.",
       ),
       param(
           "InvalidRuleInputToken",
@@ -197,9 +196,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "Invalid-Input",
-              "<eps>"
+              "<eps>",
           ],
-          error="Invalid rule input label."
+          error="Invalid rule input label.",
       ),
       param(
           "InvalidRuleOutputToken",
@@ -207,9 +206,9 @@ class ValidateTest(unittest.TestCase):
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
-              "Invalid-Output"
+              "Invalid-Output",
           ],
-          error="Invalid rule output label."
+          error="Invalid rule output label.",
       ),
   ])
   def test_raises_exception(self, _, rule_definition, error):

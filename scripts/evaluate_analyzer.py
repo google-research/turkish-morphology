@@ -12,7 +12,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
 """Tool to evaluate coverage and hypothesis space of the morphological analyzer.
 """
 
@@ -28,9 +27,7 @@ import re
 import subprocess
 from typing import Generator, List, Tuple, Set
 
-
 _BASE_PATH = os.path.dirname(os.path.abspath(__file__))
-
 
 _ARG_PARSER = argparse.ArgumentParser(description="""
     This tools collects aggregated statistics on coverage, and average number
@@ -58,13 +55,10 @@ class EvaluationError(Exception):
 
 
 _SUCCESS_OUTPUT_REGEX = re.compile(
-    r"Morphological analyses for the word '.+':(.+)",
-    re.DOTALL)
-_FAILURE_OUTPUT_REGEX = re.compile(
-    r".+is not accepted as a Turkish word.+",
-    re.DOTALL)
-_IG_BOUNDARY_REGEX = re.compile(
-    r"\(\[.+?\]-.+?")
+    r"Morphological analyses for the word '.+':(.+)", re.DOTALL)
+_FAILURE_OUTPUT_REGEX = re.compile(r".+is not accepted as a Turkish word.+",
+                                   re.DOTALL)
+_IG_BOUNDARY_REGEX = re.compile(r"\(\[.+?\]-.+?")
 
 
 # Ad-hoc container to store aggregated statistics.
@@ -196,8 +190,7 @@ def _prepare_summary(tokens: List[str], word_forms: Set[str],
                      statistics: Statistics) -> str:
   """Generates a human-readable evaluation summary."""
   if not tokens:
-    raise EvaluationError(
-        "Cannot generate evaluation summary without tokens.")
+    raise EvaluationError("Cannot generate evaluation summary without tokens.")
 
   if not word_forms:
     raise EvaluationError(
@@ -269,8 +262,7 @@ def main(args):
 
 
 if __name__ == "__main__":
-  logging.basicConfig(
-      level=logging.INFO,
-      format="%(asctime)s %(levelname)s: %(message)s",
-      datefmt="%H:%M:%S")
+  logging.basicConfig(level=logging.INFO,
+                      format="%(asctime)s %(levelname)s: %(message)s",
+                      datefmt="%H:%M:%S")
   main(_ARG_PARSER.parse_args())
