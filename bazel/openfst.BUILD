@@ -1447,3 +1447,25 @@ cc_library(
         ":fst",
     ],
 )
+
+# Extension: Python wrapper.
+cc_binary(
+    name = "pywrapfst.so",
+    srcs = [prefix_dir + "extensions/python/pywrapfst.cc"],
+    deps = [
+	":farscript",
+	":fst",
+	":fstscript",
+        "@local_config_python//:python_headers"
+    ],
+    linkshared = 1,
+)
+
+py_library(
+    name = "pywrapfst",
+    srcs = [],
+    srcs_version = "PY2AND3",
+    data = [
+	"pywrapfst.so",
+    ],
+)

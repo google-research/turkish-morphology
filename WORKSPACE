@@ -38,6 +38,17 @@ git_repository(
     tag = "20190808",
 )
 
+# gRpc (only used for detecting and configuring local Python).
+git_repository(
+    name = "com_github_grpc_grpc",
+    remote = "https://github.com/grpc/grpc.git",
+    tag = "v1.25.0",
+)
+
+load("@com_github_grpc_grpc//third_party/py:python_configure.bzl", "python_configure")
+
+python_configure(name = "local_config_python")
+
 # Google i18n language resources.
 git_repository(
     name = "language_resources",
