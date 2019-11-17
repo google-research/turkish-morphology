@@ -67,6 +67,7 @@ self-explanatory Thrax grammars that are under
 | Case             | Gen           | +NHn                         | Genitive case                                   | ADD, IN, NN, NNP, NOMP, PRD, PRF, PRI, PRP, PRP$, PRR, VN, WP    |
 | Case             | Ins           | +YlA                         | Instrumental / Comitative case                  | ADD, IN, NN, NNP, NOMP, PRD, PRF, PRI, PRP, PRP$, PRR, VN, WP    |
 | Case             | Loc           | +DA, +NDA                    | Locative case                                   | ADD, IN, NN, NNP, NOMP, PRD, PRF, PRI, PRP, PRP$, PRR, VN, WP    |
+| Case             | Nom           | `<eps>`                      | Nominative case                                 | ADD, IN, NN, NNP, NOMP, PRD, PRF, PRI, PRP, PRP$, PRR, VN, WP    |
 |                  |               |                              |                                                 |                                                                  |
 | Contrast         | True          | +YsA                         | Contrastive                                     | ADD, IN, NN, NNP, PRD, PRF, PRI, PRP, PRP$, PRR, RB, VN, WRB, WP |
 |                  |               |                              |                                                 |                                                                  |
