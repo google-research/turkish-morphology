@@ -19,12 +19,7 @@ from typing import List
 
 from src.analyzer.morphotactics import common
 
-
-class InvalidMorphotacticsRuleError(Exception):
-  """Raised when a morphotactics rewrite rule definition is illformed."""
-
-
-RuleDefinition = List[str]
+_RuleDefinition = List[str]
 
 _RULE_INPUT_REGEX = re.compile(
     # Inflectional group boundaries.
@@ -46,7 +41,11 @@ _RULE_OUTPUT_REGEX = re.compile(
     r"[',\.]")
 
 
-def _rule_has_expected_number_of_tokens(rule_definition: RuleDefinition
+class InvalidMorphotacticsRuleError(Exception):
+  """Raised when a morphotactics rewrite rule definition is illformed."""
+
+
+def _rule_has_expected_number_of_tokens(rule_definition: _RuleDefinition
                                        ) -> None:
   """Checks if rule definition has 4 tokens (from, to, output, input)."""
   if len(rule_definition) != 4:
@@ -54,7 +53,7 @@ def _rule_has_expected_number_of_tokens(rule_definition: RuleDefinition
         f"Expecting 4 tokens got {len(rule_definition)}.")
 
 
-def _rule_has_non_empty_tokens(rule_definition: RuleDefinition) -> None:
+def _rule_has_non_empty_tokens(rule_definition: _RuleDefinition) -> None:
   """Checks if rule definition has no empty tokens."""
   if any(not t for t in rule_definition):
     raise InvalidMorphotacticsRuleError(
@@ -109,7 +108,7 @@ def _rule_output_is_valid(output_label: str) -> None:
     raise InvalidMorphotacticsRuleError("Invalid rule output label.")
 
 
-def validate(rule_definition: RuleDefinition) -> None:
+def validate(rule_definition: _RuleDefinition) -> None:
   """Raises an exception if tokenized morphotactics rewrite rule is illformed.
 
   Args:

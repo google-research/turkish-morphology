@@ -79,13 +79,8 @@ flags.DEFINE_string(
 flags.register_validator("lexicon_dir", lambda v: os.path.isdir(v))
 flags.register_validator("morphotactics_dir", lambda v: os.path.isdir(v))
 
-
-class MorphotacticsCompilerError(Exception):
-  """Raised when one of the source files contains an illformed line or entry."""
-
-
-RewriteRule = rule_pb2.RewriteRule
-RewriteRuleSet = rule_pb2.RewriteRuleSet
+_RewriteRule = rule_pb2.RewriteRule
+_RewriteRuleSet = rule_pb2.RewriteRuleSet
 
 _SYMBOLS_REGEX = re.compile(
     # First inflectional group.
@@ -104,7 +99,11 @@ _SYMBOLS_REGEX = re.compile(
     r"[\(\.,]")
 
 
-def _get_lexicon_rules(lexicon_dir: str) -> RewriteRuleSet:
+class MorphotacticsCompilerError(Exception):
+  """Raised when one of the source files contains an illformed line or entry."""
+
+
+def _get_lexicon_rules(lexicon_dir: str) -> _RewriteRuleSet:
   """Parses lexicon into valid rewrite rules.
 
   Args:
@@ -121,7 +120,7 @@ def _get_lexicon_rules(lexicon_dir: str) -> RewriteRuleSet:
     Array of validated and parsed lexicon rewrite rule objects.
   """
 
-  def _read_rule_set(path: str) -> RewriteRule:
+  def _read_rule_set(path: str) -> _RewriteRule:
     logging.info("reading rewrite rules from %r", path)
     entries = lexicon_reader.read_lexicon_entries(path)  # might throw IOError.
 
@@ -136,7 +135,7 @@ def _get_lexicon_rules(lexicon_dir: str) -> RewriteRuleSet:
 
   paths = sorted(glob.glob(f"{lexicon_dir}/*.tsv"))
   rule_sets = [_read_rule_set(p) for p in paths]
-  lexicon = RewriteRuleSet()
+  lexicon = _RewriteRuleSet()
   lexicon.rule.extend(r for rs in rule_sets for r in rs.rule)
 
   if not lexicon.rule:
@@ -145,7 +144,7 @@ def _get_lexicon_rules(lexicon_dir: str) -> RewriteRuleSet:
   return lexicon
 
 
-def _get_morphotactics_rules(morphotactics_dir: str) -> RewriteRuleSet:
+def _get_morphotactics_rules(morphotactics_dir: str) -> _RewriteRuleSet:
   """Parses morphotactics model into valid rewrite rules.
 
   Args:
@@ -163,7 +162,7 @@ def _get_morphotactics_rules(morphotactics_dir: str) -> RewriteRuleSet:
     Array of validated and parsed morphotactics rewrite rule objects.
   """
 
-  def _read_rule_set(path: str) -> RewriteRule:
+  def _read_rule_set(path: str) -> _RewriteRule:
     logging.info("reading rewrite rules from %r", path)
     # Below read call might throw IOError.
     lines = morphotactics_reader.read_rule_definitions(path)
@@ -179,7 +178,7 @@ def _get_morphotactics_rules(morphotactics_dir: str) -> RewriteRuleSet:
 
   paths = sorted(glob.glob(f"{morphotactics_dir}/*.txt"))
   rule_sets = [_read_rule_set(p) for p in paths]
-  morphotactics = RewriteRuleSet()
+  morphotactics = _RewriteRuleSet()
   morphotactics.rule.extend(r for rs in rule_sets for r in rs.rule)
 
   if not morphotactics.rule:
@@ -189,7 +188,7 @@ def _get_morphotactics_rules(morphotactics_dir: str) -> RewriteRuleSet:
   return morphotactics
 
 
-def _remove_duplicate_rules(rule_set: RewriteRuleSet) -> None:
+def _remove_duplicate_rules(rule_set: _RewriteRuleSet) -> None:
   """Removes duplicate rewrite rules objects that are in the rule set.
 
   This function preserves the order of the rewrite rules in the rule set and
@@ -202,7 +201,7 @@ def _remove_duplicate_rules(rule_set: RewriteRuleSet) -> None:
   """
   RuleKey = Tuple[str, str, str, str]
 
-  def _key_and_value(rule: RewriteRule) -> Tuple[RuleKey, RewriteRule]:
+  def _key_and_value(rule: _RewriteRule) -> Tuple[RuleKey, _RewriteRule]:
     return (rule.from_state, rule.to_state, rule.input, rule.output), rule
 
   inverted = collections.OrderedDict(map(_key_and_value, rule_set.rule))
@@ -274,7 +273,7 @@ def _symbols_of_output(label: str) -> List[str]:
   return list(label)
 
 
-def _symbols_table_file_content(rule_set: RewriteRuleSet
+def _symbols_table_file_content(rule_set: _RewriteRuleSet
                                ) -> Generator[str, None, None]:
   r"""Generates the content of the complex symbols table file.
 
@@ -317,7 +316,7 @@ def _symbols_table_file_content(rule_set: RewriteRuleSet
   logging.info("generated complex symbols file content")
 
 
-def _text_fst_file_content(rule_set: RewriteRuleSet
+def _text_fst_file_content(rule_set: _RewriteRuleSet
                           ) -> Generator[str, None, None]:
   r"""Generates the content of the text FST file.
 
@@ -409,7 +408,7 @@ def main(unused_argv):
   lexicon = _get_lexicon_rules(FLAGS.lexicon_dir)
   morphotactics = _get_morphotactics_rules(FLAGS.morphotactics_dir)
 
-  merged = rule_pb2.RewriteRuleSet()
+  merged = _RewriteRuleSet()
   merged.rule.extend(lexicon.rule)
   merged.rule.extend(morphotactics.rule)
   _remove_duplicate_rules(merged)

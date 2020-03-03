@@ -19,7 +19,7 @@ import io
 import itertools
 from typing import Dict, List, Tuple
 
-LexiconEntry = Dict[str, str]
+_LexiconEntry = Dict[str, str]
 
 
 def _whitespace_trimmed(line: str) -> str:
@@ -37,7 +37,7 @@ def _split(line: str) -> List[str]:
   return [_whitespace_trimmed(c) for c in line.split("\t")]
 
 
-def read_lexicon_entries(path: str) -> Dict[int, LexiconEntry]:
+def read_lexicon_entries(path: str) -> Dict[int, _LexiconEntry]:
   """Reads lexicon entries of the TSV structured lexicon file from the path.
 
   Args:
@@ -65,7 +65,7 @@ def read_lexicon_entries(path: str) -> Dict[int, LexiconEntry]:
 
   field_names = _split(header)
 
-  def _index_and_entry(index: int, line: str) -> Tuple[int, LexiconEntry]:
+  def _index_and_entry(index: int, line: str) -> Tuple[int, _LexiconEntry]:
     return index + 2, dict(zip(field_names, _split(line)))
 
   non_empty = ((i, l) for i, l in enumerate(entries) if not _empty(l))

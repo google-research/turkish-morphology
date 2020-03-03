@@ -19,7 +19,7 @@ import io
 import itertools
 from typing import Dict, List, Tuple
 
-RuleDefinition = List[str]
+_RuleDefinition = List[str]
 
 
 def _whitespace_trimmed(line: str) -> str:
@@ -42,7 +42,7 @@ def _rule(line):
   return not (_empty(line) or _comment(line))
 
 
-def read_rule_definitions(path: str) -> Dict[int, RuleDefinition]:
+def read_rule_definitions(path: str) -> Dict[int, _RuleDefinition]:
   """Reads morphotactics FST rule definitions from the path.
 
   Args:
@@ -63,7 +63,7 @@ def read_rule_definitions(path: str) -> Dict[int, RuleDefinition]:
   with io.open(path, "r", encoding="utf-8") as reader:
     lines = reader.readlines()
 
-  def _index_and_entry(index: int, line: str) -> Tuple[int, RuleDefinition]:
+  def _index_and_entry(index: int, line: str) -> Tuple[int, _RuleDefinition]:
     return index + 1, _whitespace_trimmed(line).split()
 
   rules = ((i, l) for i, l in enumerate(lines) if _rule(l))

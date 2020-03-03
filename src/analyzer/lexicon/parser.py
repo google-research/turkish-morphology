@@ -21,9 +21,9 @@ from src.analyzer.lexicon import tags
 from src.analyzer.morphotactics import common
 from src.analyzer.morphotactics import rule_pb2
 
-LexiconEntry = Dict[str, str]
-RewriteRule = rule_pb2.RewriteRule
-RewriteRuleSet = rule_pb2.RewriteRuleSet
+_LexiconEntry = Dict[str, str]
+_RewriteRule = rule_pb2.RewriteRule
+_RewriteRuleSet = rule_pb2.RewriteRuleSet
 
 
 def _lower(string: str) -> str:
@@ -58,7 +58,7 @@ def _format_root(root: str, tag: str) -> str:
   return root
 
 
-def _normalize(entries: List[LexiconEntry]) -> None:
+def _normalize(entries: List[_LexiconEntry]) -> None:
   """Normalizes annotated values of each field of the lexicon entry.
 
   This function;
@@ -84,7 +84,7 @@ def _normalize(entries: List[LexiconEntry]) -> None:
       "û": "u",
   }
 
-  def _normalize_entry(entry: LexiconEntry) -> LexiconEntry:
+  def _normalize_entry(entry: _LexiconEntry) -> _LexiconEntry:
     entry["tag"] = entry["tag"].upper()
     entry["is_compound"] = entry["is_compound"].lower() == "true"
     entry["root"] = _format_root(entry["root"], entry["tag"])
@@ -94,10 +94,10 @@ def _normalize(entries: List[LexiconEntry]) -> None:
 
     return entry
 
-  def _root_has_circumflex(entry: LexiconEntry) -> bool:
+  def _root_has_circumflex(entry: _LexiconEntry) -> bool:
     return any(c in entry["root"] for c in circumflex.keys())
 
-  def _make_entry(entry: LexiconEntry) -> LexiconEntry:
+  def _make_entry(entry: _LexiconEntry) -> _LexiconEntry:
     fields_to_check = ("root", "morphophonemics")
     field_and_chars = itertools.product(fields_to_check, circumflex.items())
     normalized = entry.copy()
@@ -112,7 +112,7 @@ def _normalize(entries: List[LexiconEntry]) -> None:
   entries.extend(new_entries)
 
 
-def _cross_classify(entries: List[LexiconEntry]) -> None:
+def _cross_classify(entries: List[_LexiconEntry]) -> None:
   """Cross-classifies lexicon entries across parts of speech.
 
   This function adds a new lexicon entry by just rewriting its tag for each
@@ -148,15 +148,16 @@ def _cross_classify(entries: List[LexiconEntry]) -> None:
 
     return ""
 
-  def _make_entry(entry: LexiconEntry, old_tag: str,
-                  new_tag: str) -> LexiconEntry:
+  def _make_entry(entry: _LexiconEntry, old_tag: str,
+                  new_tag: str) -> _LexiconEntry:
     new_entry = entry.copy()
     new_entry["tag"] = new_tag
     new_entry["root"] = _format_root(new_entry["root"], new_tag)
     new_entry["features"] = _new_features(entry["features"], old_tag, new_tag)
     return new_entry
 
-  def _new_entries(entry: LexiconEntry) -> Generator[LexiconEntry, None, None]:
+  def _new_entries(entry: _LexiconEntry
+                  ) -> Generator[_LexiconEntry, None, None]:
     old_tag = entry["tag"]
     new_tags = tags.CROSS_CLASSIFY_AS[old_tag]
     args = itertools.product([entry], [old_tag], new_tags)
@@ -166,7 +167,7 @@ def _cross_classify(entries: List[LexiconEntry]) -> None:
   entries.extend(new_entries)
 
 
-def _rule_input(entry: LexiconEntry) -> str:
+def _rule_input(entry: _LexiconEntry) -> str:
   """Returns the input label of a rewrite rule.
 
   Args:
@@ -184,7 +185,7 @@ def _rule_input(entry: LexiconEntry) -> str:
   return f"({root}[{tag}]{features}"
 
 
-def _rule_output(entry: LexiconEntry) -> str:
+def _rule_output(entry: _LexiconEntry) -> str:
   """Returns the output label of a rewrite rule.
 
   Args:
@@ -202,7 +203,7 @@ def _rule_output(entry: LexiconEntry) -> str:
   return _lower(entry["root"])
 
 
-def _create_rewrite_rule(entry: LexiconEntry) -> RewriteRule:
+def _create_rewrite_rule(entry: _LexiconEntry) -> _RewriteRule:
   """Creates a rewrite rule from the lexicon entry.
 
   Args:
@@ -212,7 +213,7 @@ def _create_rewrite_rule(entry: LexiconEntry) -> RewriteRule:
     Rewrite rule object that defines a state transition arc of the
     morphotactics FST.
   """
-  rule = RewriteRule()
+  rule = _RewriteRule()
   rule.from_state = common.START_STATE
   rule.to_state = entry["tag"]
   rule.input = _rule_input(entry)
@@ -220,7 +221,7 @@ def _create_rewrite_rule(entry: LexiconEntry) -> RewriteRule:
   return rule
 
 
-def parse(entries: List[LexiconEntry]) -> RewriteRuleSet:
+def parse(entries: List[_LexiconEntry]) -> _RewriteRuleSet:
   """Generates a rewrite rule set from lexicon entries.
 
   Note that this function assumes all input lexicon entries are valid, meaning
@@ -236,6 +237,6 @@ def parse(entries: List[LexiconEntry]) -> RewriteRuleSet:
   _normalize(entries)
   _cross_classify(entries)
   state_entries = [e for e in entries if e["tag"] in tags.FST_STATES]
-  rule_set = RewriteRuleSet()
+  rule_set = _RewriteRuleSet()
   rule_set.rule.extend(map(_create_rewrite_rule, state_entries))
   return rule_set

@@ -18,12 +18,12 @@ from typing import List
 
 from src.analyzer.morphotactics import rule_pb2
 
-RewriteRule = rule_pb2.RewriteRule
-RewriteRuleSet = rule_pb2.RewriteRuleSet
-RuleDefinition = List[str]
+_RewriteRule = rule_pb2.RewriteRule
+_RewriteRuleSet = rule_pb2.RewriteRuleSet
+_RuleDefinition = List[str]
 
 
-def _normalize(rule_definitions: List[RuleDefinition]) -> None:
+def _normalize(rule_definitions: List[_RuleDefinition]) -> None:
   """Normalizes the tokens of morphotactics rewrite rule definition.
 
   This function converts the 'from_state' and 'to_state' values to uppercase,
@@ -51,7 +51,7 @@ def _normalize(rule_definitions: List[RuleDefinition]) -> None:
   rule_definitions[:] = list(map(_get_normalized, rule_definitions))
 
 
-def _create_rewrite_rule(rule_definition: RuleDefinition) -> RewriteRule:
+def _create_rewrite_rule(rule_definition: _RuleDefinition) -> _RewriteRule:
   """Creates a rewrite rule from the morphotactics rule definition.
 
   Args:
@@ -62,7 +62,7 @@ def _create_rewrite_rule(rule_definition: RuleDefinition) -> RewriteRule:
     Rewrite rule object that defines a state transition arc of the
     morphotactics FST.
   """
-  rule = RewriteRule()
+  rule = _RewriteRule()
   rule.from_state = rule_definition[0]
   rule.to_state = rule_definition[1]
   rule.input = rule_definition[2]
@@ -70,7 +70,7 @@ def _create_rewrite_rule(rule_definition: RuleDefinition) -> RewriteRule:
   return rule
 
 
-def parse(rule_definitions: List[RuleDefinition]) -> RewriteRuleSet:
+def parse(rule_definitions: List[_RuleDefinition]) -> _RewriteRuleSet:
   """Generates a rewrite rule set from morphotactics rule definitions.
 
   Note that this function assumes all input rule definitions are valid, meaning
@@ -86,6 +86,6 @@ def parse(rule_definitions: List[RuleDefinition]) -> RewriteRuleSet:
     arcs of the morphotactics FST.
   """
   _normalize(rule_definitions)
-  rule_set = RewriteRuleSet()
+  rule_set = _RewriteRuleSet()
   rule_set.rule.extend(_create_rewrite_rule(d) for d in rule_definitions)
   return rule_set
