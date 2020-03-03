@@ -14,14 +14,14 @@
 # limitations under the License.
 """Tests for src.analyzer.morphotactics.validator."""
 
-import unittest
-
 from src.analyzer.morphotactics import validator
 from parameterized import param
 from parameterized import parameterized
 
+from absl.testing import absltest
 
-class ValidateTest(unittest.TestCase):
+
+class ValidateTest(absltest.TestCase):
 
   @parameterized.expand([
       param(
@@ -218,4 +218,4 @@ class ValidateTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
+  absltest.main()

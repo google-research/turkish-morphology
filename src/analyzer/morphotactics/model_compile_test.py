@@ -17,10 +17,11 @@
 import os
 import shutil
 import subprocess
-import unittest
 
 from parameterized import param
 from parameterized import parameterized
+
+from absl.testing import absltest
 
 _LEX_DIR = os.path.join("src", "analyzer", "lexicon", "testdata")
 _MORPH_DIR = os.path.join("src", "analyzer", "morphotactics", "testdata")
@@ -47,7 +48,7 @@ def _copy_files(filenames, source_directory, destination_directory):
     shutil.copyfile(from_, to)
 
 
-class MainTest(unittest.TestCase):
+class MainTest(absltest.TestCase):
 
   def setUp(self):
     super(MainTest, self).setUp()
@@ -271,4 +272,4 @@ class MainTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
+  absltest.main()

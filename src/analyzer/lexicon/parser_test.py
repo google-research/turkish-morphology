@@ -15,7 +15,6 @@
 """Tests for src.analyzer.lexicon.parser."""
 
 import collections
-import unittest
 
 from src.analyzer.lexicon import parser
 from src.analyzer.lexicon import tags
@@ -23,6 +22,8 @@ from src.analyzer.morphotactics import rule_pb2
 from parameterized import param
 from parameterized import parameterized
 from google.protobuf import text_format
+
+from absl.testing import absltest
 
 
 def setUpModule():
@@ -83,7 +84,7 @@ def setUpModule():
   tags.OPTIONAL_FEATURES.update({t.tag: t.optional_features for t in tag_set})
 
 
-class ParseTest(unittest.TestCase):
+class ParseTest(absltest.TestCase):
 
   @parameterized.expand([
       param(
@@ -495,4 +496,4 @@ class ParseTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
+  absltest.main()

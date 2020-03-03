@@ -15,12 +15,13 @@
 """Tests for src.analyzer.lexicon.validator."""
 
 import collections
-import unittest
 
 from src.analyzer.lexicon import tags
 from src.analyzer.lexicon import validator
 from parameterized import param
 from parameterized import parameterized
+
+from absl.testing import absltest
 
 
 def setUpModule():
@@ -46,7 +47,7 @@ def setUpModule():
   tags.OPTIONAL_FEATURES.update({t.tag: t.optional_features for t in tag_set})
 
 
-class ValidateTest(unittest.TestCase):
+class ValidateTest(absltest.TestCase):
 
   @parameterized.expand([
       param(
@@ -498,4 +499,4 @@ class ValidateTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
+  absltest.main()

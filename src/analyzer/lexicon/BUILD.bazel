@@ -84,6 +84,7 @@ py_test(
         ":parser",
         ":tags",
         "//src/analyzer/morphotactics:rule_py_pb2",
+        "@io_abseil_py//absl/testing:absltest",
         requirement("parameterized"),
     ],
 )
@@ -99,6 +100,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":reader",
+        "@io_abseil_py//absl/testing:absltest",
         requirement("parameterized"),
     ],
 )
@@ -112,6 +114,7 @@ py_test(
     deps = [
         ":tags",
         ":validator",
+        "@io_abseil_py//absl/testing:absltest",
         requirement("parameterized"),
     ],
 )

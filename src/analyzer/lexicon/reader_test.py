@@ -16,11 +16,12 @@
 
 import collections
 import os
-import unittest
 
 from src.analyzer.lexicon import reader
 from parameterized import param
 from parameterized import parameterized
+
+from absl.testing import absltest
 
 _TESTDATA_DIR = "src/analyzer/lexicon/testdata"
 
@@ -31,7 +32,7 @@ def _read_file(path):
   return read
 
 
-class ReadLexiconEntriesTest(unittest.TestCase):
+class ReadLexiconEntriesTest(absltest.TestCase):
 
   @parameterized.expand([
       param(
@@ -111,4 +112,4 @@ class ReadLexiconEntriesTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
+  absltest.main()

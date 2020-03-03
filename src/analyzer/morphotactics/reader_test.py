@@ -16,11 +16,12 @@
 
 import collections
 import os
-import unittest
 
 from src.analyzer.morphotactics import reader
 from parameterized import param
 from parameterized import parameterized
+
+from absl.testing import absltest
 
 _TESTDATA_DIR = "src/analyzer/morphotactics/testdata"
 
@@ -31,7 +32,7 @@ def _read_file(path):
   return read
 
 
-class ReadRuleDefinitionsTest(unittest.TestCase):
+class ReadRuleDefinitionsTest(absltest.TestCase):
 
   def test_success(self):
     path = os.path.join(_TESTDATA_DIR, "morphotactics_valid_rules_1.txt")
@@ -68,4 +69,4 @@ class ReadRuleDefinitionsTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
+  absltest.main()

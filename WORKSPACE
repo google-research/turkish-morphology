@@ -20,6 +20,17 @@ load(
     "new_git_repository",
 )
 
+# Python 2/3 compatibility.
+http_archive(
+    name = "six_archive",
+    build_file = "@//third_party:six.BUILD",
+    sha256 = "236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a",
+    strip_prefix = "six-1.14.0",
+    urls = [
+        "https://pypi.python.org/packages/source/s/six/six-1.14.0.tar.gz",
+    ],
+)
+
 # Google protocol buffers.
 git_repository(
     name = "com_google_protobuf",
@@ -31,11 +42,18 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
-# Google Abseil libraries.
+# Abseil C++ common libraries.
 git_repository(
     name = "com_google_absl",
     remote = "https://github.com/abseil/abseil-cpp.git",
     tag = "20190808",
+)
+
+# Abseil Python common libraries.
+git_repository(
+    name = "io_abseil_py",
+    remote = "https://github.com/abseil/abseil-py.git",
+    tag = "pypi-v0.9.0",
 )
 
 # gRpc (only used for detecting and configuring local Python).

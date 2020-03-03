@@ -14,16 +14,16 @@
 # limitations under the License.
 """Tests for src.analyzer.morphotactics.parser."""
 
-import unittest
-
 from src.analyzer.morphotactics import parser
 from src.analyzer.morphotactics import rule_pb2
 from parameterized import param
 from parameterized import parameterized
 from google.protobuf import text_format
 
+from absl.testing import absltest
 
-class ParseTest(unittest.TestCase):
+
+class ParseTest(absltest.TestCase):
 
   @parameterized.expand([
       param(
@@ -131,4 +131,4 @@ class ParseTest(unittest.TestCase):
 
 
 if __name__ == "__main__":
-  unittest.main()
+  absltest.main()

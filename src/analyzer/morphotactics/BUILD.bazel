@@ -125,6 +125,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":model_compile",
+        "@io_abseil_py//absl/testing:absltest",
         requirement("parameterized"),
     ],
 )
@@ -138,6 +139,7 @@ py_test(
     deps = [
         ":parser",
         ":rule_py_pb2",
+        "@io_abseil_py//absl/testing:absltest",
         requirement("parameterized"),
     ],
 )
@@ -153,6 +155,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":reader",
+        "@io_abseil_py//absl/testing:absltest",
         requirement("parameterized"),
     ],
 )
@@ -165,6 +168,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":validator",
+        "@io_abseil_py//absl/testing:absltest",
         requirement("parameterized"),
     ],
 )
