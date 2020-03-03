@@ -12,13 +12,39 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Tool to compile morphotactics FST into OpenFST format."""
+"""Tool to compile morphotactics FST into OpenFST format.
 
-import argparse
+This tool takes a set of lexicon and morphotactics model files and outputs AT&T
+FSM format symbols table and text FST files, which are used in building
+morphotactics FST (second layer of analysis) using OpenFst.
+
+Output symbols table will not suffice to build the morphotactics FST. It will
+only contain labels for the complex symbols (such as meta-morphemes that are
+used on the output side of rewrite rules, or morphological anlysis tags that are
+used on the input side of the rewrite rules of the morphotactics model). Thus,
+it should first be concatenated with the base symbols table (which contains the
+labels for the characters of the input words) before building the morphotactics
+FST using OpenFST. For further details, see the comments in
+//src/analyzer/build.sh.
+
+In case of an input illformed lexicon entry, or morphotactics rule definition,
+the tool raises MorphotacticsCompilerError.
+
+Note that all the files under the lexicon_dir that have the ".tsv" file
+extension, and those under the morphotactics_dir that have ".txt" file extension
+will be picked up by this tool throughout compilation (so abstain from having
+redundant files with those file extensions in respective directories, or
+probably the tool will raise MorphotacticsCompilerError to signal illformed
+source data).
+
+Generated symbols table and text FST files will respectively have the names
+'complex_symbols.syms' and 'morphotactics.txt'. They will be written under
+output_dir.
+"""
+
 import collections
 import glob
 import io
-import logging
 import os
 import re
 from typing import Generator, List, Tuple
@@ -32,60 +58,28 @@ from src.analyzer.morphotactics import reader as morphotactics_reader
 from src.analyzer.morphotactics import rule_pb2
 from src.analyzer.morphotactics import validator as morphotactics_validator
 
+from absl import app
+from absl import flags
+from absl import logging
 
-def _check_if_directory_exists(path):
-  """Raises an exception if 'path' is not a path to an existing directory."""
-  if not os.path.isdir(path):
-    raise argparse.ArgumentTypeError(
-        f"Not a valid path to an existing directory: '{path}'")
-  return path
+FLAGS = flags.FLAGS
 
+flags.DEFINE_string(
+    "lexicon_dir",
+    "src/analyzer/lexicon/base",
+    "Path to the directory that contains the lexicon TSV dumps.")
+flags.DEFINE_string(
+    "morphotactics_dir",
+    "src/analyzer/morphotactics/model",
+    "Path to the directory that contains the text files that define"
+    " rewrite rules of morphotactics model.")
+flags.DEFINE_string(
+    "output_dir", "bin",
+    "Path to the directory to which compiled OpenFST format transducer"
+    " specification and symbols table file will be written to as text file")
 
-_ARG_PARSER = argparse.ArgumentParser(
-    description="""This tool takes a set of lexicon and morphotactics model
-    files and outputs AT&T FSM format symbols table and text FST files, which
-    are used in building morphotactics FST (second layer of analysis) using
-    OpenFst.
-
-    Output symbols table will not suffice to build the morphotactics FST. It
-    will only contain labels for the complex symbols (such as meta-morphemes
-    that are used on the output side of rewrite rules, or morphological anlysis
-    tags that are used on the input side of the rewrite rules of the
-    morphotactics model). Thus, it should first be concatenated with the base
-    symbols table (which contains the labels for the characters of the input
-    words) before building the morphotactics FST using OpenFST. For further
-    details, see the comments in //src/analyzer/build.sh.
-
-    In case of an input illformed lexicon entry, or morphotactics rule
-    definition, the tool raises MorphotacticsCompilerError.
-
-    Note that all the files under the lexicon_dir that have the ".tsv" file
-    extension, and those under the morphotactics_dir that have ".txt" file
-    extension will be picked up by this tool throughout compilation (so abstain
-    from having redundant files with those file extensions in respective
-    directories, or probably the tool will raise MorphotacticsCompilerError
-    to signal illformed source data).
-
-    Generated symbols table and text FST files will respectively have the names
-    'complex_symbols.syms' and 'morphotactics.txt'. They will be written under
-    output_dir.""")
-_ARG_PARSER.add_argument(
-    "--lexicon_dir",
-    default="src/analyzer/lexicon/base",
-    type=_check_if_directory_exists,
-    help="""path to the directory that contains the lexicon TSV dumps.""")
-_ARG_PARSER.add_argument(
-    "--morphotactics_dir",
-    default="src/analyzer/morphotactics/model",
-    type=_check_if_directory_exists,
-    help="""path to the directory that contains the text files that define
-    rewrite rules of morphotactics model.""")
-_ARG_PARSER.add_argument(
-    "--output_dir",
-    default="bin",
-    type=str,
-    help="""path to the directory to which compiled OpenFST format transducer
-    specification and symbols table file will be written to as text file""")
+flags.register_validator("lexicon_dir", lambda v: os.path.isdir(v))
+flags.register_validator("morphotactics_dir", lambda v: os.path.isdir(v))
 
 
 class MorphotacticsCompilerError(Exception):
@@ -411,11 +405,11 @@ def _write_file(output_path: str, file_content: List[str]) -> None:
   logging.info("wrote to %r", output_path)
 
 
-def main(args):
+def main(unused_argv):
   # Below rewrite rule retrieval calls might throw IOError or
   # MorphotacticsCompilerError.
-  lexicon = _get_lexicon_rules(args.lexicon_dir)
-  morphotactics = _get_morphotactics_rules(args.morphotactics_dir)
+  lexicon = _get_lexicon_rules(FLAGS.lexicon_dir)
+  morphotactics = _get_morphotactics_rules(FLAGS.morphotactics_dir)
 
   merged = rule_pb2.RewriteRuleSet()
   merged.rule.extend(lexicon.rule)
@@ -425,15 +419,12 @@ def main(args):
   symbols_content = _symbols_table_file_content(merged)
   fst_content = _text_fst_file_content(merged)
 
-  _make_output_directory(args.output_dir)
-  symbols_path = os.path.join(args.output_dir, "complex_symbols.syms")
+  _make_output_directory(FLAGS.output_dir)
+  symbols_path = os.path.join(FLAGS.output_dir, "complex_symbols.syms")
   _write_file(symbols_path, symbols_content)
-  fst_path = os.path.join(args.output_dir, "morphotactics.txt")
+  fst_path = os.path.join(FLAGS.output_dir, "morphotactics.txt")
   _write_file(fst_path, fst_content)
 
 
 if __name__ == "__main__":
-  logging.basicConfig(level=logging.INFO,
-                      format="%(asctime)s %(levelname)s: %(message)s",
-                      datefmt="%H:%M:%S")
-  main(_ARG_PARSER.parse_args())
+  app.run(main)

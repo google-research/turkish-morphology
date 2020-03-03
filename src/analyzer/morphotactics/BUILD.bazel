@@ -71,6 +71,9 @@ py_binary(
         "//src/analyzer/lexicon:parser",
         "//src/analyzer/lexicon:reader",
         "//src/analyzer/lexicon:validator",
+        "@io_abseil_py//absl:app",
+        "@io_abseil_py//absl/flags",
+        "@io_abseil_py//absl/logging",
     ],
 )
 

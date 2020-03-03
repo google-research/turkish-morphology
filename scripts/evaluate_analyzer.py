@@ -13,41 +13,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 """Tool to evaluate coverage and hypothesis space of the morphological analyzer.
+
+This tools collects aggregated statistics on coverage, and average number of
+analysis and inflectional groups generated for word forms that are observed in
+a data set. It consumes data sets that are in CoNLL format.
+
+In order to run this tool you need to place your copy of Turkish treebank under
+//scripts/treebank (make this directory if it does not exists). All treebank
+files that are under this directory that has ".conll" file extension should be
+in CoNLL 2007 format. They will be picked up by this tool and used in
+calculating the statistics.
 """
 
-import argparse
 import collections
 import glob
 import io
 import itertools
-import logging
 import multiprocessing
 import os
 import re
 import subprocess
 from typing import Generator, List, Tuple, Set
 
+from absl import app
+from absl import flags
+from absl import logging
+
 _BASE_PATH = os.path.dirname(os.path.abspath(__file__))
 
-_ARG_PARSER = argparse.ArgumentParser(description="""
-    This tools collects aggregated statistics on coverage, and average number
-    of analysis and inflectional groups generated for word forms that are
-    observed in a data set. It consumes data sets that are in CoNLL format.
+FLAGS = flags.FLAGS
 
-    In order to run this tool you need to place your copy of Turkish treebank
-    under //scripts/treebank (make this directory if it does not
-    exists). All treebank files that are under this directory that has ".conll"
-    file extension should be in CoNLL 2007 format. They will be picked up by
-    this tool and used in calculating the statistics.""")
-_ARG_PARSER.add_argument(
-    "--far_path",
-    default=os.path.join(_BASE_PATH, "../src/analyzer/bin/turkish.far"),
-    help="""path to the FST archive which contains Turkish morphological
-    analyzer.""")
-_ARG_PARSER.add_argument(
-    "--treebank_dir",
-    default="scripts/treebank",
-    help="""path to the directory which contains treebank files.""")
+flags.DEFINE_string(
+    "far_path", os.path.join(_BASE_PATH, "../src/analyzer/bin/turkish.far"),
+    "Path to the FST archive which contains Turkish morphological"
+    " analyzer.")
+flags.DEFINE_string("treebank_dir", "scripts/treebank",
+                    "Path to the directory which contains treebank files.")
 
 
 class EvaluationError(Exception):
@@ -253,16 +254,13 @@ def _prepare_summary(tokens: List[str], word_forms: Set[str],
   """
 
 
-def main(args):
-  tokens = _read_tokens(args.treebank_dir)
+def main(unused_argv):
+  tokens = _read_tokens(FLAGS.treebank_dir)
   word_forms = set([_lower(t) for t in tokens])
-  statistics = _evaluate(word_forms, args.far_path)
+  statistics = _evaluate(word_forms, FLAGS.far_path)
   summary = _prepare_summary(tokens, word_forms, statistics)
   print(summary)
 
 
 if __name__ == "__main__":
-  logging.basicConfig(level=logging.INFO,
-                      format="%(asctime)s %(levelname)s: %(message)s",
-                      datefmt="%H:%M:%S")
-  main(_ARG_PARSER.parse_args())
+  app.run(main)
