@@ -25,7 +25,6 @@ in CoNLL 2007 format. They will be picked up by this tool and used in
 calculating the statistics.
 """
 
-import collections
 import glob
 import io
 import itertools
@@ -221,7 +220,7 @@ def _prepare_summary(tokens: List[str], word_forms: Set[str],
   if statistics.unparsed:
     failures = "\n      ".join(u for u in statistics.unparsed)
   else:
-    failures = "N\A"
+    failures = "N\\A"
 
   return f"""
   +++++ OVERALL +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
