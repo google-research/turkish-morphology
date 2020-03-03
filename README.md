@@ -78,7 +78,7 @@ To morphologically parse a word, simply run below from the project root
 directory.
 
 ```
-bazel run scripts:print_analyses -- --word=[WORD_TO_PARSE]
+bazel run -c opt scripts:print_analyses -- --word=[WORD_TO_PARSE]
 ```
 
 This will morphologically parse the input word against the two-level
@@ -86,7 +86,7 @@ morphological analyzer and output a set of morphological analysis strings, as
 such:
 
 ```
-bazel run scripts:print_analyses -- --word=geldiğinde
+bazel run -c opt scripts:print_analyses -- --word=geldiğinde
 > Morphological analyses for the word 'geldiğinde':
 > (gel[VB]+[Polarity=Pos])([NOMP]-DHk[Derivation=PastNom]+[PersonNumber=A3sg]+Hn[Possessive=P2sg]+NDA[Case=Loc]+[Copula=PresCop]+[PersonNumber=V3pl])+[Proper=False]
 > (gel[VB]+[Polarity=Pos])([NOMP]-DHk[Derivation=PastNom]+[PersonNumber=A3sg]+Hn[Possessive=P2sg]+NDA[Case=Loc]+[Copula=PresCop]+[PersonNumber=V3pl])+[Proper=True]
@@ -106,7 +106,7 @@ If the input string is not accepted as a Turkish word, morphological analyzer
 outputs an empty result.
 
 ```
-bazel run scripts:print_analyses -- --word=foo
+bazel run -c opt scripts:print_analyses -- --word=foo
 > 'foo' is not accepted as a Turkish word
 ```
 
@@ -118,7 +118,7 @@ An example output morphological analysis string is as follows;
 homes):
 
 ```
-bazel run scripts:print_analyses -- --word=evlerindekilerin
+bazel run -c opt scripts:print_analyses -- --word=evlerindekilerin
 ```
 
 **Sample Output Morphological Analysis String**:
