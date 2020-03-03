@@ -67,7 +67,7 @@ of such morphological analysis strings.
 ## Requirements
 
 To build and run the morphological analyzer install
-[Bazel version 1.0.1][9], [Python 3.6.5 (or a newer version)][10] and
+[Bazel version 2.2.0][9], [Python 3.6.5 (or a newer version)][10] and
 [G++][11]. All other intrinsic dependencies will be imported, built and taken
 care of by Bazel according to the [WORKSPACE][2] setup throughout the first
 invocation of the morphological analyzer runtime.

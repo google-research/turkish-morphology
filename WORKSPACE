@@ -36,7 +36,7 @@ http_archive(
 git_repository(
     name = "com_google_protobuf",
     remote = "https://github.com/google/protobuf.git",
-    tag = "v3.10.0",
+    tag = "v3.11.4",
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
@@ -47,7 +47,7 @@ protobuf_deps()
 git_repository(
     name = "com_google_absl",
     remote = "https://github.com/abseil/abseil-cpp.git",
-    tag = "20190808",
+    tag = "20200225",
 )
 
 # Abseil Python common libraries.
@@ -68,7 +68,7 @@ git_repository(
 git_repository(
     name = "com_github_grpc_grpc",
     remote = "https://github.com/grpc/grpc.git",
-    tag = "v1.25.0",
+    tag = "v1.27.3",
 )
 
 load(
