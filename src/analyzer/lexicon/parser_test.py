@@ -19,10 +19,10 @@ import collections
 from src.analyzer.lexicon import parser
 from src.analyzer.lexicon import tags
 from src.analyzer.morphotactics import rule_pb2
-from google.protobuf import text_format
 
 from absl.testing import absltest
 from absl.testing import parameterized
+from google.protobuf import text_format
 
 
 def setUpModule():

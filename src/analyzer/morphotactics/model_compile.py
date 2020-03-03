@@ -65,12 +65,10 @@ from absl import logging
 FLAGS = flags.FLAGS
 
 flags.DEFINE_string(
-    "lexicon_dir",
-    "src/analyzer/lexicon/base",
+    "lexicon_dir", "src/analyzer/lexicon/base",
     "Path to the directory that contains the lexicon TSV dumps.")
 flags.DEFINE_string(
-    "morphotactics_dir",
-    "src/analyzer/morphotactics/model",
+    "morphotactics_dir", "src/analyzer/morphotactics/model",
     "Path to the directory that contains the text files that define"
     " rewrite rules of morphotactics model.")
 flags.DEFINE_string(

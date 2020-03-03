@@ -16,10 +16,10 @@
 
 from src.analyzer.morphotactics import parser
 from src.analyzer.morphotactics import rule_pb2
-from google.protobuf import text_format
 
 from absl.testing import absltest
 from absl.testing import parameterized
+from google.protobuf import text_format
 
 
 class ParseTest(parameterized.TestCase):
