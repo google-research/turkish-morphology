@@ -1448,7 +1448,7 @@ cc_library(
     ],
 )
 
-# Extension: Python wrapper.
+# Extension: Python wrapper (extensions/python/)
 cc_binary(
     name = "pywrapfst.so",
     srcs = [prefix_dir + "extensions/python/pywrapfst.cc"],

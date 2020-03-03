@@ -71,7 +71,10 @@ git_repository(
     tag = "v1.25.0",
 )
 
-load("@com_github_grpc_grpc//third_party/py:python_configure.bzl", "python_configure")
+load(
+    "@com_github_grpc_grpc//third_party/py:python_configure.bzl",
+    "python_configure",
+)
 
 python_configure(name = "local_config_python")
 
@@ -85,7 +88,7 @@ git_repository(
 # OpenFst.
 new_git_repository(
     name = "openfst",
-    build_file = "@//bazel:openfst.BUILD",
+    build_file = "@//third_party:openfst.BUILD",
     remote = "https://github.com/mjansche/openfst.git",
     tag = "1.7.2",
 )
@@ -93,7 +96,7 @@ new_git_repository(
 # Thrax.
 new_git_repository(
     name = "thrax",
-    build_file = "@//bazel:thrax.BUILD",
+    build_file = "@//third_party:thrax.BUILD",
     commit = "c65fb3d51f9bd0299503f3289a124f52c3431eeb",
     remote = "https://github.com/mjansche/thrax.git",
 )
