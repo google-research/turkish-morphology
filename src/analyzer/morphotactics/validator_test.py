@@ -15,203 +15,206 @@
 """Tests for src.analyzer.morphotactics.validator."""
 
 from src.analyzer.morphotactics import validator
-from parameterized import param
-from parameterized import parameterized
 
 from absl.testing import absltest
+from absl.testing import parameterized
 
 
-class ValidateTest(absltest.TestCase):
+class ValidateTest(parameterized.TestCase):
 
-  @parameterized.expand([
-      param(
-          "EpsilonRuleInputAndOutput",
-          rule_definition=[
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "EpsilonRuleInputAndOutput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
               "<eps>",
           ],
-      ),
-      param(
-          "EpsilonRuleOutputIgBoundryRuleInput",
-          rule_definition=[
+      },
+      {
+          "testcase_name":
+              "EpsilonRuleOutputIgBoundryRuleInput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               ")([JJ]-HmsH[Derivation=Sim]",
               "<eps>",
           ],
-      ),
-      param(
-          "EpsilonRuleOutputInflectionMorphemeRuleInput",
-          rule_definition=[
+      },
+      {
+          "testcase_name":
+              "EpsilonRuleOutputInflectionMorphemeRuleInput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "+NDAn[Case=Abl]",
               "<eps>",
           ],
-      ),
-      param(
-          "EpsilonRuleOutputProperNounAnalysisRuleInput",
-          rule_definition=[
+      },
+      {
+          "testcase_name":
+              "EpsilonRuleOutputProperNounAnalysisRuleInput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               ")+[Proper=False]",
               "<eps>",
           ],
-      ),
-      param(
-          "EpsilonRuleOutputNumberRuleInput",
-          rule_definition=[
+      },
+      {
+          "testcase_name":
+              "EpsilonRuleOutputNumberRuleInput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "1[NN]+'[Apostrophe=True]+HncH[NumberInf=Ord]",
               "<eps>",
           ],
-      ),
-      param(
-          "EpsilonRuleOutputDecimalPointSeparatorRuleInput",
-          rule_definition=[
+      },
+      {
+          "testcase_name": "EpsilonRuleOutputDecimalPointSeparatorRuleInput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               ".",
               "<eps>",
           ],
-      ),
-      param(
-          "EpsilonRuleInputMetaMorphemeRuleOutput",
-          rule_definition=[
+      },
+      {
+          "testcase_name": "EpsilonRuleInputMetaMorphemeRuleOutput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
               "+cAğHz",
           ],
-      ),
-      param(
-          "EpsilonRuleInputNumberMorphophonemicsRuleOutput",
-          rule_definition=[
+      },
+      {
+          "testcase_name": "EpsilonRuleInputNumberMorphophonemicsRuleOutput",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
               "00.*ü*",
           ],
-      ),
+      },
   ])
-  def test_success(self, _, rule_definition):
+  def test_success(self, rule_definition):
     self.assertIsNone(validator.validate(rule_definition))
 
-  @parameterized.expand([
-      param(
-          "ExtraTokens",
-          rule_definition=[
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "ExtraTokens",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
               "<eps>",
               "EXTRA-TOKEN",
           ],
-          error="Expecting 4 tokens got 5.",
-      ),
-      param(
-          "MissingTokens",
-          rule_definition=[
+          "error": "Expecting 4 tokens got 5.",
+      },
+      {
+          "testcase_name": "MissingTokens",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
           ],
-          error="Expecting 4 tokens got 2.",
-      ),
-      param(
-          "EmptyFromStateToken",
-          rule_definition=[
+          "error": "Expecting 4 tokens got 2.",
+      },
+      {
+          "testcase_name": "EmptyFromStateToken",
+          "rule_definition": [
               "",
               "TO-STATE",
               "<eps>",
               "<eps>",
           ],
-          error="Rule definition contains empty tokens.",
-      ),
-      param(
-          "EmptyToStateToken",
-          rule_definition=[
+          "error": "Rule definition contains empty tokens.",
+      },
+      {
+          "testcase_name": "EmptyToStateToken",
+          "rule_definition": [
               "FROM-STATE",
               "",
               "<eps>",
               "<eps>",
           ],
-          error="Rule definition contains empty tokens.",
-      ),
-      param(
-          "EmptyRuleInputToken",
-          rule_definition=[
-              "FROM-STATE",
-              "TO-STATE",
-              "",
-              "<eps>",
-          ],
-          error="Rule definition contains empty tokens.",
-      ),
-      param(
-          "EmptyRuleOutputToken",
-          rule_definition=[
+          "error": "Rule definition contains empty tokens.",
+      },
+      {
+          "testcase_name": "EmptyRuleInputToken",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
+              "",
+              "<eps>",
+          ],
+          "error": "Rule definition contains empty tokens.",
+      },
+      {
+          "testcase_name": "EmptyRuleOutputToken",
+          "rule_definition": [
+              "FROM-STATE",
+              "TO-STATE",
               "<eps>",
               "",
           ],
-          error="Rule definition contains empty tokens.",
-      ),
-      param(
-          "InvalidPrefixCharactersInInputToken",
-          rule_definition=[
+          "error": "Rule definition contains empty tokens.",
+      },
+      {
+          "testcase_name": "InvalidPrefixCharactersInInputToken",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "foo)([TAG]-ki[Cat=Val]]",
               "<eps>",
           ],
-          error="Invalid rule input label.",
-      ),
-      param(
-          "InvalidInfixCharactersInInputToken",
-          rule_definition=[
+          "error": "Invalid rule input label.",
+      },
+      {
+          "testcase_name": "InvalidInfixCharactersInInputToken",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               ")foo+[Proper=True]",
               "<eps>",
           ],
-          error="Invalid rule input label.",
-      ),
-      param(
-          "InvalidSuffixCharactersInInputToken",
-          rule_definition=[
+          "error": "Invalid rule input label.",
+      },
+      {
+          "testcase_name": "InvalidSuffixCharactersInInputToken",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "5[TAG]foo",
               "<eps>",
           ],
-          error="Invalid rule input label.",
-      ),
-      param(
-          "InvalidRuleInputToken",
-          rule_definition=[
+          "error": "Invalid rule input label.",
+      },
+      {
+          "testcase_name": "InvalidRuleInputToken",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "Invalid-Input",
               "<eps>",
           ],
-          error="Invalid rule input label.",
-      ),
-      param(
-          "InvalidRuleOutputToken",
-          rule_definition=[
+          "error": "Invalid rule input label.",
+      },
+      {
+          "testcase_name": "InvalidRuleOutputToken",
+          "rule_definition": [
               "FROM-STATE",
               "TO-STATE",
               "<eps>",
               "Invalid-Output",
           ],
-          error="Invalid rule output label.",
-      ),
+          "error": "Invalid rule output label.",
+      },
   ])
-  def test_raises_exception(self, _, rule_definition, error):
+  def test_raises_exception(self, rule_definition, error):
     with self.assertRaisesRegexp(validator.InvalidMorphotacticsRuleError,
                                  error):
       validator.validate(rule_definition)

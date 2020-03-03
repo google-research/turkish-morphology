@@ -18,10 +18,8 @@ import os
 import shutil
 import subprocess
 
-from parameterized import param
-from parameterized import parameterized
-
 from absl.testing import absltest
+from absl.testing import parameterized
 
 _LEX_DIR = os.path.join("src", "analyzer", "lexicon", "testdata")
 _MORPH_DIR = os.path.join("src", "analyzer", "morphotactics", "testdata")
@@ -48,7 +46,7 @@ def _copy_files(filenames, source_directory, destination_directory):
     shutil.copyfile(from_, to)
 
 
-class MainTest(absltest.TestCase):
+class MainTest(parameterized.TestCase):
 
   def setUp(self):
     super(MainTest, self).setUp()
@@ -103,105 +101,105 @@ class MainTest(absltest.TestCase):
     _copy_files(morphotactics, _MORPH_DIR, _TMP_MORPH_DIR)
     self._test_call_success(_TMP_LEX_DIR, _TMP_MORPH_DIR, _TMP_OUT_DIR)
 
-  @parameterized.expand([
-      param(
-          "EmptyLexicon",
-          lexicon="invalid_empty_lexicon.tsv",
-      ),
-      param(
-          "OnlyHeader",
-          lexicon="invalid_only_header.tsv",
-      ),
-      param(
-          "OnlyEmptyRowsWithHeader",
-          lexicon="invalid_only_empty_rows.tsv",
-      ),
-      param(
-          "MissingTagField",
-          lexicon="invalid_missing_tag_field.tsv",
-      ),
-      param(
-          "MissingRootField",
-          lexicon="invalid_missing_root_field.tsv",
-      ),
-      param(
-          "MissingMorphophonemicsField",
-          lexicon="invalid_missing_morphophonemics_field.tsv",
-      ),
-      param(
-          "MissingFeaturesField",
-          lexicon="invalid_missing_features_field.tsv",
-      ),
-      param(
-          "MissingIsCompoundField",
-          lexicon="invalid_missing_is_compound_field.tsv",
-      ),
-      param(
-          "EmptyTagValue",
-          lexicon="invalid_empty_tag_value.tsv",
-      ),
-      param(
-          "EmptyRootValue",
-          lexicon="invalid_empty_root_value.tsv",
-      ),
-      param(
-          "EmptyMorphophonemicsValue",
-          lexicon="invalid_empty_morphophonemics_value.tsv",
-      ),
-      param(
-          "EmptyFeaturesValue",
-          lexicon="invalid_empty_features_value.tsv",
-      ),
-      param(
-          "EmptyIsCompoundValue",
-          lexicon="invalid_empty_is_compound_value.tsv",
-      ),
-      param(
-          "WhitespaceInTagValue",
-          lexicon="invalid_whitespace_in_tag_value.tsv",
-      ),
-      param(
-          "WhitespaceInMorphophonemicsValue",
-          lexicon="invalid_whitespace_in_morphophonemics_value.tsv",
-      ),
-      param(
-          "WhitespaceInFeaturesValue",
-          lexicon="invalid_whitespace_in_features_value.tsv",
-      ),
-      param(
-          "InvalidTagValue",
-          lexicon="invalid_tag_value.tsv",
-      ),
-      param(
-          "InvalidIsCompoundValue",
-          lexicon="invalid_is_compound_value.tsv",
-      ),
-      param(
-          "InvalidMorphophonemicsValue",
-          lexicon="invalid_morphophonemics_value.tsv",
-      ),
-      param(
-          "InvalidFeaturesValue",
-          lexicon="invalid_features_value.tsv",
-      ),
-      param(
-          "MissingRequiredFeatures",
-          lexicon="invalid_missing_required_features.tsv",
-      ),
-      param(
-          "InvalidRequiredFeatures",
-          lexicon="invalid_required_features.tsv",
-      ),
-      param(
-          "InvalidOptionalFeatures",
-          lexicon="invalid_optional_features.tsv",
-      ),
-      param(
-          "InvalidRedundantFeatures",
-          lexicon="invalid_redundant_features.tsv",
-      ),
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "EmptyLexicon",
+          "lexicon": "invalid_empty_lexicon.tsv",
+      },
+      {
+          "testcase_name": "OnlyHeader",
+          "lexicon": "invalid_only_header.tsv",
+      },
+      {
+          "testcase_name": "OnlyEmptyRowsWithHeader",
+          "lexicon": "invalid_only_empty_rows.tsv",
+      },
+      {
+          "testcase_name": "MissingTagField",
+          "lexicon": "invalid_missing_tag_field.tsv",
+      },
+      {
+          "testcase_name": "MissingRootField",
+          "lexicon": "invalid_missing_root_field.tsv",
+      },
+      {
+          "testcase_name": "MissingMorphophonemicsField",
+          "lexicon": "invalid_missing_morphophonemics_field.tsv",
+      },
+      {
+          "testcase_name": "MissingFeaturesField",
+          "lexicon": "invalid_missing_features_field.tsv",
+      },
+      {
+          "testcase_name": "MissingIsCompoundField",
+          "lexicon": "invalid_missing_is_compound_field.tsv",
+      },
+      {
+          "testcase_name": "EmptyTagValue",
+          "lexicon": "invalid_empty_tag_value.tsv",
+      },
+      {
+          "testcase_name": "EmptyRootValue",
+          "lexicon": "invalid_empty_root_value.tsv",
+      },
+      {
+          "testcase_name": "EmptyMorphophonemicsValue",
+          "lexicon": "invalid_empty_morphophonemics_value.tsv",
+      },
+      {
+          "testcase_name": "EmptyFeaturesValue",
+          "lexicon": "invalid_empty_features_value.tsv",
+      },
+      {
+          "testcase_name": "EmptyIsCompoundValue",
+          "lexicon": "invalid_empty_is_compound_value.tsv",
+      },
+      {
+          "testcase_name": "WhitespaceInTagValue",
+          "lexicon": "invalid_whitespace_in_tag_value.tsv",
+      },
+      {
+          "testcase_name": "WhitespaceInMorphophonemicsValue",
+          "lexicon": "invalid_whitespace_in_morphophonemics_value.tsv",
+      },
+      {
+          "testcase_name": "WhitespaceInFeaturesValue",
+          "lexicon": "invalid_whitespace_in_features_value.tsv",
+      },
+      {
+          "testcase_name": "InvalidTagValue",
+          "lexicon": "invalid_tag_value.tsv",
+      },
+      {
+          "testcase_name": "InvalidIsCompoundValue",
+          "lexicon": "invalid_is_compound_value.tsv",
+      },
+      {
+          "testcase_name": "InvalidMorphophonemicsValue",
+          "lexicon": "invalid_morphophonemics_value.tsv",
+      },
+      {
+          "testcase_name": "InvalidFeaturesValue",
+          "lexicon": "invalid_features_value.tsv",
+      },
+      {
+          "testcase_name": "MissingRequiredFeatures",
+          "lexicon": "invalid_missing_required_features.tsv",
+      },
+      {
+          "testcase_name": "InvalidRequiredFeatures",
+          "lexicon": "invalid_required_features.tsv",
+      },
+      {
+          "testcase_name": "InvalidOptionalFeatures",
+          "lexicon": "invalid_optional_features.tsv",
+      },
+      {
+          "testcase_name": "InvalidRedundantFeatures",
+          "lexicon": "invalid_redundant_features.tsv",
+      },
   ])
-  def test_raises_exception_on_source_lexicon(self, _, lexicon):
+  def test_raises_exception_on_source_lexicon(self, lexicon):
     morphotactics = [
         "morphotactics_valid_rules_1.txt",
         "morphotactics_valid_rules_2.txt",
@@ -210,33 +208,33 @@ class MainTest(absltest.TestCase):
     _copy_files([lexicon], _LEX_DIR, _TMP_LEX_DIR)
     self._test_call_failure(_TMP_LEX_DIR, _TMP_MORPH_DIR, _TMP_OUT_DIR)
 
-  @parameterized.expand([
-      param(
-          "EmptyMorphotactics",
-          morphotactics="morphotactics_invalid_empty.txt",
-      ),
-      param(
-          "OnlyComments",
-          morphotactics="morphotactics_invalid_only_comments.txt",
-      ),
-      param(
-          "OnlyEmptyLines",
-          morphotactics="morphotactics_invalid_only_empty_lines.txt",
-      ),
-      param(
-          "InvalidNumberOfRuleTokens",
-          morphotactics="morphotactics_invalid_number_of_tokens.txt",
-      ),
-      param(
-          "InvalidRuleInputToken",
-          morphotactics="morphotactics_invalid_rule_input.txt",
-      ),
-      param(
-          "InvalidRuleOutputToken",
-          morphotactics="morphotactics_invalid_rule_output.txt",
-      ),
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "EmptyMorphotactics",
+          "morphotactics": "morphotactics_invalid_empty.txt",
+      },
+      {
+          "testcase_name": "OnlyComments",
+          "morphotactics": "morphotactics_invalid_only_comments.txt",
+      },
+      {
+          "testcase_name": "OnlyEmptyLines",
+          "morphotactics": "morphotactics_invalid_only_empty_lines.txt",
+      },
+      {
+          "testcase_name": "InvalidNumberOfRuleTokens",
+          "morphotactics": "morphotactics_invalid_number_of_tokens.txt",
+      },
+      {
+          "testcase_name": "InvalidRuleInputToken",
+          "morphotactics": "morphotactics_invalid_rule_input.txt",
+      },
+      {
+          "testcase_name": "InvalidRuleOutputToken",
+          "morphotactics": "morphotactics_invalid_rule_output.txt",
+      },
   ])
-  def test_raises_exception_on_source_morphotactics(self, _, morphotactics):
+  def test_raises_exception_on_source_morphotactics(self, morphotactics):
     lexicons = [
         "valid_entries_1.tsv",
         "valid_entries_2.tsv",
@@ -245,26 +243,25 @@ class MainTest(absltest.TestCase):
     _copy_files([morphotactics], _MORPH_DIR, _TMP_MORPH_DIR)
     self._test_call_failure(_TMP_LEX_DIR, _TMP_MORPH_DIR, _TMP_OUT_DIR)
 
-  @parameterized.expand([
-      param(
-          "EmptyLexiconDirectoryPath",
-          lexicon_dir="",
-      ),
-      param(
-          "InvalidLexiconDirectoryPath",
-          lexicon_dir="invalid_dir_path",
-      ),
-      param(
-          "EmptyMorphotacticsDirectoryPath",
-          morphotactics_dir="",
-      ),
-      param(
-          "InvalidMorphotacticsDirectoryPath",
-          morphotactics_dir="invalid_dir_path",
-      ),
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "EmptyLexiconDirectoryPath",
+          "lexicon_dir": "",
+      },
+      {
+          "testcase_name": "InvalidLexiconDirectoryPath",
+          "lexicon_dir": "invalid_dir_path",
+      },
+      {
+          "testcase_name": "EmptyMorphotacticsDirectoryPath",
+          "morphotactics_dir": "",
+      },
+      {
+          "testcase_name": "InvalidMorphotacticsDirectoryPath",
+          "morphotactics_dir": "invalid_dir_path",
+      },
   ])
   def test_raises_exception_on_argument(self,
-                                        _,
                                         lexicon_dir=_TMP_LEX_DIR,
                                         morphotactics_dir=_TMP_MORPH_DIR,
                                         output_dir=_TMP_OUT_DIR):

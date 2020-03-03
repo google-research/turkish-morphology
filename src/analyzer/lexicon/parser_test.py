@@ -19,11 +19,10 @@ import collections
 from src.analyzer.lexicon import parser
 from src.analyzer.lexicon import tags
 from src.analyzer.morphotactics import rule_pb2
-from parameterized import param
-from parameterized import parameterized
 from google.protobuf import text_format
 
 from absl.testing import absltest
+from absl.testing import parameterized
 
 
 def setUpModule():
@@ -84,26 +83,26 @@ def setUpModule():
   tags.OPTIONAL_FEATURES.update({t.tag: t.optional_features for t in tag_set})
 
 
-class ParseTest(absltest.TestCase):
+class ParseTest(parameterized.TestCase):
 
-  @parameterized.expand([
-      param(
-          "EmptyEntries",
-          entries=[],
-          expected_pbtxt="",
-      ),
-      param(
-          "SingleEntry",
-          entries=[
-              {
-                  "tag": "TAG-1",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "EmptyEntries",
+          "entries": [],
+          "expected_pbtxt": "",
+      },
+      {
+          "testcase_name":
+              "SingleEntry",
+          "entries": [{
+              "tag": "TAG-1",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-1'
@@ -111,10 +110,11 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "MultipleEntry",
-          entries=[
+      },
+      {
+          "testcase_name":
+              "MultipleEntry",
+          "entries": [
               {
                   "tag": "TAG-2",
                   "root": "valid-root-1",
@@ -130,7 +130,8 @@ class ParseTest(absltest.TestCase):
                   "is_compound": "True"
               },
           ],
-          expected_pbtxt="""
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-2'
@@ -144,19 +145,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-morphophonemics'
           }
           """,
-      ),
-      param(
-          "NormalizesTag",
-          entries=[
-              {
-                  "tag": "tAg-1",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesTag",
+          "entries": [{
+              "tag": "tAg-1",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-1'
@@ -164,19 +165,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "NormalizesIsCompoundTrueAndPicksMorphophonemicsAsRuleOutput",
-          entries=[
-              {
-                  "tag": "TAG-1",
-                  "root": "valid-root",
-                  "morphophonemics": "valid-morphophonemics",
-                  "features": "~",
-                  "is_compound": "TrUe"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesIsCompoundTrueAndPicksMorphophonemicsAsRuleOutput",
+          "entries": [{
+              "tag": "TAG-1",
+              "root": "valid-root",
+              "morphophonemics": "valid-morphophonemics",
+              "features": "~",
+              "is_compound": "TrUe"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-1'
@@ -184,19 +185,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-morphophonemics'
           }
           """,
-      ),
-      param(
-          "NormalizesIsCompoundFalseAndPicksRootAsRuleOutput",
-          entries=[
-              {
-                  "tag": "TAG-1",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "fAlSe"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesIsCompoundFalseAndPicksRootAsRuleOutput",
+          "entries": [{
+              "tag": "TAG-1",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "fAlSe"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-1'
@@ -204,19 +205,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "NormalizesRootToLowercase",
-          entries=[
-              {
-                  "tag": "tAg-4",
-                  "root": "VaLID-RoOt",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesRootToLowercase",
+          "entries": [{
+              "tag": "tAg-4",
+              "root": "VaLID-RoOt",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-4'
@@ -224,19 +225,19 @@ class ParseTest(absltest.TestCase):
             output: 'valıd-root'
           }
           """,
-      ),
-      param(
-          "NormalizesRootToUppercase",
-          entries=[
-              {
-                  "tag": "tAg-5",
-                  "root": "VaLiD-RoOt",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesRootToUppercase",
+          "entries": [{
+              "tag": "tAg-5",
+              "root": "VaLiD-RoOt",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-5'
@@ -244,19 +245,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "NormalizesRootToCapitalized",
-          entries=[
-              {
-                  "tag": "tAg-6",
-                  "root": "İ-VaLID-RoOt",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesRootToCapitalized",
+          "entries": [{
+              "tag": "tAg-6",
+              "root": "İ-VaLID-RoOt",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-6'
@@ -264,19 +265,19 @@ class ParseTest(absltest.TestCase):
             output: 'i-valıd-root'
           }
           """,
-      ),
-      param(
-          "NormalizesCharactersWithCircumflexWithEmptyMorphotactics",
-          entries=[
-              {
-                  "tag": "TAG-1",
-                  "root": "vâlîd-root",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesCharactersWithCircumflexWithEmptyMorphotactics",
+          "entries": [{
+              "tag": "TAG-1",
+              "root": "vâlîd-root",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-1'
@@ -290,19 +291,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "NormalizesCharactersWithCircumflexWithNonEmptyMorphotactics",
-          entries=[
-              {
-                  "tag": "TAG-1",
-                  "root": "vâlîd-root",
-                  "morphophonemics": "vâlîd-morphophonemics",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "NormalizesCharactersWithCircumflexWithNonEmptyMorphotactics",
+          "entries": [{
+              "tag": "TAG-1",
+              "root": "vâlîd-root",
+              "morphophonemics": "vâlîd-morphophonemics",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-1'
@@ -316,19 +317,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-morphophonemics'
           }
           """,
-      ),
-      param(
-          "RewritesOutputTag",
-          entries=[
-              {
-                  "tag": "TAG-7",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "RewritesOutputTag",
+          "entries": [{
+              "tag": "TAG-7",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-7'
@@ -336,19 +337,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "CrossClassifiesAndRemovesRequiredFeatures",
-          entries=[
-              {
-                  "tag": "TAG-8",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "+[Cat1=Val12]+[Cat2=Val21]",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "CrossClassifiesAndRemovesRequiredFeatures",
+          "entries": [{
+              "tag": "TAG-8",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "+[Cat1=Val12]+[Cat2=Val21]",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-8'
@@ -362,19 +363,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "CrossClassifiesAndRemovesOptionalFeatures",
-          entries=[
-              {
-                  "tag": "TAG-9",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "+[Cat2=Val22]",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "CrossClassifiesAndRemovesOptionalFeatures",
+          "entries": [{
+              "tag": "TAG-9",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "+[Cat2=Val22]",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-9'
@@ -388,19 +389,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "CrossClassifiesWithMatchingRequiredFeatures",
-          entries=[
-              {
-                  "tag": "TAG-10",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "+[Cat1=Val12]+[Cat2=Val21]",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "CrossClassifiesWithMatchingRequiredFeatures",
+          "entries": [{
+              "tag": "TAG-10",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "+[Cat1=Val12]+[Cat2=Val21]",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-10'
@@ -414,19 +415,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "CrossClassifiesWithMatchingOptionalFeatures",
-          entries=[
-              {
-                  "tag": "TAG-11",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "+[Cat3=Val31]",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "CrossClassifiesWithMatchingOptionalFeatures",
+          "entries": [{
+              "tag": "TAG-11",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "+[Cat3=Val31]",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-11'
@@ -440,19 +441,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "CrossClassifiesAndAddsBareCaseMarkedNominalPredicateFeatures",
-          entries=[
-              {
-                  "tag": "TAG-12",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "CrossClassifiesAndAddsBareCaseMarkedNominalPredicateFeatures",
+          "entries": [{
+              "tag": "TAG-12",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-12'
@@ -466,19 +467,19 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
-      param(
-          "DoesNotCreateRewriteRuleForEntryWithNonFstStateTag",
-          entries=[
-              {
-                  "tag": "TAG-13",
-                  "root": "valid-root",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "False"
-              },
-          ],
-          expected_pbtxt="""
+      },
+      {
+          "testcase_name":
+              "DoesNotCreateRewriteRuleForEntryWithNonFstStateTag",
+          "entries": [{
+              "tag": "TAG-13",
+              "root": "valid-root",
+              "morphophonemics": "~",
+              "features": "~",
+              "is_compound": "False"
+          },],
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'START'
             to_state: 'TAG-1'
@@ -486,9 +487,9 @@ class ParseTest(absltest.TestCase):
             output: 'valid-root'
           }
           """,
-      ),
+      },
   ])
-  def test_success(self, _, entries, expected_pbtxt):
+  def test_success(self, entries, expected_pbtxt):
     actual = parser.parse(entries)
     expected = rule_pb2.RewriteRuleSet()
     text_format.Parse(expected_pbtxt, expected)

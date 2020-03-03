@@ -18,10 +18,9 @@ import collections
 
 from src.analyzer.lexicon import tags
 from src.analyzer.lexicon import validator
-from parameterized import param
-from parameterized import parameterized
 
 from absl.testing import absltest
+from absl.testing import parameterized
 
 
 def setUpModule():
@@ -47,453 +46,460 @@ def setUpModule():
   tags.OPTIONAL_FEATURES.update({t.tag: t.optional_features for t in tag_set})
 
 
-class ValidateTest(absltest.TestCase):
+class ValidateTest(parameterized.TestCase):
 
-  @parameterized.expand([
-      param(
-          "NoFeaturesExpectedNonCompound",
-          entry={
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "NoFeaturesExpectedNonCompound",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "NoFeaturesExpectedNonCompoundWithMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name": "NoFeaturesExpectedNonCompoundWithMorphophonemics",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "NoFeaturesExpectedCompoundWithMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name": "NoFeaturesExpectedCompoundWithMorphophonemics",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "RequiredFeaturesExpectedNonCompoundWithFeatures",
-          entry={
+      },
+      {
+          "testcase_name": "RequiredFeaturesExpectedNonCompoundWithFeatures",
+          "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "+[Cat1=Val12]+[Cat2=Val21]",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "RequiredFeaturesExpectedNonCompoundWithFeaturesAndMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name":
+              "RequiredFeaturesExpectedNonCompoundWithFeaturesAndMorphophonemics",
+          "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]+[Cat2=Val21]",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "RequiredFeaturesExpectedCompoundWithFeaturesAndMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name":
+              "RequiredFeaturesExpectedCompoundWithFeaturesAndMorphophonemics",
+          "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]+[Cat2=Val21]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "OptionalFeaturesExpectedNonCompound",
-          entry={
+      },
+      {
+          "testcase_name": "OptionalFeaturesExpectedNonCompound",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "OptionalFeaturesExpectedNonCompoundWithMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name":
+              "OptionalFeaturesExpectedNonCompoundWithMorphophonemics",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "OptionalFeaturesExpectedNonCompoundWithFeatures",
-          entry={
+      },
+      {
+          "testcase_name": "OptionalFeaturesExpectedNonCompoundWithFeatures",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "+[Cat1=Val12]",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "OptionalFeaturesExpectedNonCompoundWithFeaturesAndMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name":
+              "OptionalFeaturesExpectedNonCompoundWithFeaturesAndMorphophonemics",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]",
               "is_compound": "FaLsE",
           },
-      ),
-      param(
-          "OptionalFeaturesExpectedCompoundWithMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name":
+              "OptionalFeaturesExpectedCompoundWithMorphophonemics",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "OptionalFeaturesExpectedCompoundWithFeaturesAndMorphophonemics",
-          entry={
+      },
+      {
+          "testcase_name":
+              "OptionalFeaturesExpectedCompoundWithFeaturesAndMorphophonemics",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]",
               "is_compound": "TrUe",
           },
-      ),
+      },
   ])
-  def test_success(self, _, entry):
+  def test_success(self, entry):
     self.assertIsNone(validator.validate(entry))
 
-  @parameterized.expand([
-      param(
-          "MissingTag",
-          error="Entry is missing fields: 'tag'",
-          entry={
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "MissingTag",
+          "error": "Entry is missing fields: 'tag'",
+          "entry": {
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "MissingRoot",
-          error="Entry is missing fields: 'root'",
-          entry={
+      },
+      {
+          "testcase_name": "MissingRoot",
+          "error": "Entry is missing fields: 'root'",
+          "entry": {
               "tag": "TaG-1",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "MissingMorphophonemics",
-          error="Entry is missing fields: 'morphophonemics'",
-          entry={
+      },
+      {
+          "testcase_name": "MissingMorphophonemics",
+          "error": "Entry is missing fields: 'morphophonemics'",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "MissingFeatures",
-          error="Entry is missing fields: 'features'",
-          entry={
+      },
+      {
+          "testcase_name": "MissingFeatures",
+          "error": "Entry is missing fields: 'features'",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "MissingIsCompound",
-          error="Entry is missing fields: 'is_compound'",
-          entry={
+      },
+      {
+          "testcase_name": "MissingIsCompound",
+          "error": "Entry is missing fields: 'is_compound'",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
           },
-      ),
-      param(
-          "MissingMultipleRequiredField",
-          error=("Entry is missing fields: 'is_compound,"
-                 " morphophonemics, root"),
-          entry={
+      },
+      {
+          "testcase_name": "MissingMultipleRequiredField",
+          "error": ("Entry is missing fields: 'is_compound,"
+                    " morphophonemics, root"),
+          "entry": {
               "tag": "TaG-1",
               "features": "~",
           },
-      ),
-      param(
-          "EmptyTag",
-          error="Entry fields have empty values: 'tag'",
-          entry={
+      },
+      {
+          "testcase_name": "EmptyTag",
+          "error": "Entry fields have empty values: 'tag'",
+          "entry": {
               "tag": "",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "EmptyRoot",
-          error="Entry fields have empty values: 'root'",
-          entry={
+      },
+      {
+          "testcase_name": "EmptyRoot",
+          "error": "Entry fields have empty values: 'root'",
+          "entry": {
               "tag": "TaG-1",
               "root": "",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "EmptyMorphophonemics",
-          error="Entry fields have empty values: 'morphophonemics'",
-          entry={
+      },
+      {
+          "testcase_name": "EmptyMorphophonemics",
+          "error": "Entry fields have empty values: 'morphophonemics'",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "EmptyFeatures",
-          error="Entry fields have empty values: 'features'",
-          entry={
+      },
+      {
+          "testcase_name": "EmptyFeatures",
+          "error": "Entry fields have empty values: 'features'",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "EmptyIsCompound",
-          error="Entry fields have empty values: 'is_compound'",
-          entry={
+      },
+      {
+          "testcase_name": "EmptyIsCompound",
+          "error": "Entry fields have empty values: 'is_compound'",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "",
           },
-      ),
-      param(
-          "MultipleEmptyRequiredField",
-          error=("Entry fields have empty values: 'is_compound,"
-                 " morphophonemics, root'"),
-          entry={
+      },
+      {
+          "testcase_name": "MultipleEmptyRequiredField",
+          "error": ("Entry fields have empty values: 'is_compound,"
+                    " morphophonemics, root'"),
+          "entry": {
               "tag": "TaG-1",
               "root": "",
               "morphophonemics": "",
               "features": "~",
               "is_compound": "",
           },
-      ),
-      param(
-          "TagContainsInfixWhitespace",
-          error="Entry field values contain whitespace: 'tag'",
-          entry={
+      },
+      {
+          "testcase_name": "TagContainsInfixWhitespace",
+          "error": "Entry field values contain whitespace: 'tag'",
+          "entry": {
               "tag": "TaG 1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "MorphophonemicsContainsInfixWhitespace",
-          error="Entry field values contain whitespace: 'morphophonemics'",
-          entry={
+      },
+      {
+          "testcase_name": "MorphophonemicsContainsInfixWhitespace",
+          "error": "Entry field values contain whitespace: 'morphophonemics'",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "FeaturesContainsInfixWhitespace",
-          error="Entry field values contain whitespace: 'features'",
-          entry={
+      },
+      {
+          "testcase_name": "FeaturesContainsInfixWhitespace",
+          "error": "Entry field values contain whitespace: 'features'",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1 = Val12]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "MultipleFieldsContainsInfixWhitespace",
-          error="Entry field values contain whitespace: 'features, tag'",
-          entry={
+      },
+      {
+          "testcase_name": "MultipleFieldsContainsInfixWhitespace",
+          "error": "Entry field values contain whitespace: 'features, tag'",
+          "entry": {
               "tag": "TaG 3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1 = Val12]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidTag",
-          error=("Entry 'tag' field has invalid value. It can only be one of"
-                 " the valid tags that are defined in"
-                 " 'morphotactics_compiler/tags.py'."),
-          entry={
+      },
+      {
+          "testcase_name": "InvalidTag",
+          "error": ("Entry 'tag' field has invalid value. It can only be one of"
+                    " the valid tags that are defined in"
+                    " 'morphotactics_compiler/tags.py'."),
+          "entry": {
               "tag": "Invalid-Tag",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidIsCompound",
-          error=("Entry 'is_compound' field has invalid value. It can only"
-                 " have the values 'true' or 'false'."),
-          entry={
+      },
+      {
+          "testcase_name": "InvalidIsCompound",
+          "error": ("Entry 'is_compound' field has invalid value. It can only"
+                    " have the values 'true' or 'false'."),
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "invalid-is-compound",
           },
-      ),
-      param(
-          "InvalidMorphophonemics",
-          error=("Entry is marked as ending with compounding marker but it is"
-                 " missing morphophonemics annotation."),
-          entry={
+      },
+      {
+          "testcase_name": "InvalidMorphophonemics",
+          "error":
+              ("Entry is marked as ending with compounding marker but it is"
+               " missing morphophonemics annotation."),
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidFeaturesInvalidPrefixCharacters",
-          error="Entry features annotation is invalid.",
-          entry={
+      },
+      {
+          "testcase_name": "InvalidFeaturesInvalidPrefixCharacters",
+          "error": "Entry features annotation is invalid.",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "foo+[Cat1=Val12]+[Cat3=Val31]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidFeaturesInvalidInfixCharacters",
-          error="Entry features annotation is invalid.",
-          entry={
+      },
+      {
+          "testcase_name": "InvalidFeaturesInvalidInfixCharacters",
+          "error": "Entry features annotation is invalid.",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]foo+[Cat3=Val31]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidFeaturesInvalidSuffixCharacters",
-          error="Entry features annotation is invalid.",
-          entry={
+      },
+      {
+          "testcase_name": "InvalidFeaturesInvalidSuffixCharacters",
+          "error": "Entry features annotation is invalid.",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]+[Cat3=Val31]foo",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "NoRequiredFeatures",
-          error="Entry is missing required features.",
-          entry={
+      },
+      {
+          "testcase_name": "NoRequiredFeatures",
+          "error": "Entry is missing required features.",
+          "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "MissingRequiredFeatures",
-          error="Entry has invalid required feature category.",
-          entry={
+      },
+      {
+          "testcase_name": "MissingRequiredFeatures",
+          "error": "Entry has invalid required feature category.",
+          "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidRequiredFeatureCategory",
-          error="Entry has invalid required feature category.",
-          entry={
+      },
+      {
+          "testcase_name": "InvalidRequiredFeatureCategory",
+          "error": "Entry has invalid required feature category.",
+          "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]+[Cat3=Val21]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidRequiredFeatureValue",
-          error="Entry has invalid required feature value.",
-          entry={
+      },
+      {
+          "testcase_name": "InvalidRequiredFeatureValue",
+          "error": "Entry has invalid required feature value.",
+          "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]+[Cat2=Val23]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidOptionalFeatureCategory",
-          error="Entry has invalid optional features.",
-          entry={
+      },
+      {
+          "testcase_name": "InvalidOptionalFeatureCategory",
+          "error": "Entry has invalid optional features.",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat2=Val12]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "InvalidOptionalFeatureValue",
-          error="Entry has invalid optional features.",
-          entry={
+      },
+      {
+          "testcase_name": "InvalidOptionalFeatureValue",
+          "error": "Entry has invalid optional features.",
+          "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val11]",
               "is_compound": "TrUe",
           },
-      ),
-      param(
-          "RedundantFeatures",
-          error="Entry has features while it is not expected to have any.",
-          entry={
+      },
+      {
+          "testcase_name": "RedundantFeatures",
+          "error": "Entry has features while it is not expected to have any.",
+          "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "+[Cat1=Val12]",
               "is_compound": "TrUe",
           },
-      ),
+      },
   ])
-  def test_raises_exception(self, _, error, entry):
+  def test_raises_exception(self, error, entry):
     with self.assertRaisesRegexp(validator.InvalidLexiconEntryError, error):
       validator.validate(entry)
 

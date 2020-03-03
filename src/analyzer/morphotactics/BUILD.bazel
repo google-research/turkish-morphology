@@ -13,7 +13,6 @@
 # limitations under the License.
 
 load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
-load("@turkish_morphology_deps//:requirements.bzl", "requirement")
 
 package(default_visibility = ["//src/analyzer:__pkg__"])
 
@@ -126,7 +125,7 @@ py_test(
     deps = [
         ":model_compile",
         "@io_abseil_py//absl/testing:absltest",
-        requirement("parameterized"),
+        "@io_abseil_py//absl/testing:parameterized",
     ],
 )
 
@@ -140,7 +139,7 @@ py_test(
         ":parser",
         ":rule_py_pb2",
         "@io_abseil_py//absl/testing:absltest",
-        requirement("parameterized"),
+        "@io_abseil_py//absl/testing:parameterized",
     ],
 )
 
@@ -156,7 +155,7 @@ py_test(
     deps = [
         ":reader",
         "@io_abseil_py//absl/testing:absltest",
-        requirement("parameterized"),
+        "@io_abseil_py//absl/testing:parameterized",
     ],
 )
 
@@ -169,6 +168,6 @@ py_test(
     deps = [
         ":validator",
         "@io_abseil_py//absl/testing:absltest",
-        requirement("parameterized"),
+        "@io_abseil_py//absl/testing:parameterized",
     ],
 )

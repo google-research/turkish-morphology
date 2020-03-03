@@ -18,10 +18,9 @@ import collections
 import os
 
 from src.analyzer.lexicon import reader
-from parameterized import param
-from parameterized import parameterized
 
 from absl.testing import absltest
+from absl.testing import parameterized
 
 _TESTDATA_DIR = "src/analyzer/lexicon/testdata"
 
@@ -32,81 +31,84 @@ def _read_file(path):
   return read
 
 
-class ReadLexiconEntriesTest(absltest.TestCase):
+class ReadLexiconEntriesTest(parameterized.TestCase):
 
-  @parameterized.expand([
-      param(
-          "ValidLexiconWithHeaderAndEntries",
-          basename="valid_entries_1",
-          expected=collections.OrderedDict((
-              (2, {
-                  "tag": "Nn",
-                  "root": "ABANOZ",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "FALSE",
-              }),
-              (3, {
-                  "tag": "nN",
-                  "root": "âhît",
-                  "morphophonemics": "âhî?t~",
-                  "features": "~",
-                  "is_compound": "FaLsE",
-              }),
-              (4, {
-                  "tag": "nn",
-                  "root": "ördekbaşı",
-                  "morphophonemics": "ördekbaş",
-                  "features": "~",
-                  "is_compound": "true",
-              }),
-              (6, {
-                  "tag": "Jj",
-                  "root": "KIZIL",
-                  "morphophonemics": "~",
-                  "features": "~",
-                  "is_compound": "FALSE",
-              }),
-              (7, {
-                  "tag": "jJ",
-                  "root": "kopkoyu",
-                  "morphophonemics": "~",
-                  "features": "+[Emphasis=True]",
-                  "is_compound": "false",
-              }),
-              (8, {
-                  "tag": "in",
-                  "root": "ArT",
-                  "morphophonemics": "~",
-                  "features": "+[ComplementType=CGen]",
-                  "is_compound": "FALSE",
-              }),
-          )),
-      ),
-      param(
-          "InvalidLexiconWithOnlyHeader",
-          basename="invalid_only_header",
-          expected=collections.OrderedDict(),
-      ),
+  @parameterized.named_parameters([
+      {
+          "testcase_name":
+              "ValidLexiconWithHeaderAndEntries",
+          "basename":
+              "valid_entries_1",
+          "expected":
+              collections.OrderedDict((
+                  (2, {
+                      "tag": "Nn",
+                      "root": "ABANOZ",
+                      "morphophonemics": "~",
+                      "features": "~",
+                      "is_compound": "FALSE",
+                  }),
+                  (3, {
+                      "tag": "nN",
+                      "root": "âhît",
+                      "morphophonemics": "âhî?t~",
+                      "features": "~",
+                      "is_compound": "FaLsE",
+                  }),
+                  (4, {
+                      "tag": "nn",
+                      "root": "ördekbaşı",
+                      "morphophonemics": "ördekbaş",
+                      "features": "~",
+                      "is_compound": "true",
+                  }),
+                  (6, {
+                      "tag": "Jj",
+                      "root": "KIZIL",
+                      "morphophonemics": "~",
+                      "features": "~",
+                      "is_compound": "FALSE",
+                  }),
+                  (7, {
+                      "tag": "jJ",
+                      "root": "kopkoyu",
+                      "morphophonemics": "~",
+                      "features": "+[Emphasis=True]",
+                      "is_compound": "false",
+                  }),
+                  (8, {
+                      "tag": "in",
+                      "root": "ArT",
+                      "morphophonemics": "~",
+                      "features": "+[ComplementType=CGen]",
+                      "is_compound": "FALSE",
+                  }),
+              )),
+      },
+      {
+          "testcase_name": "InvalidLexiconWithOnlyHeader",
+          "basename": "invalid_only_header",
+          "expected": collections.OrderedDict(),
+      },
   ])
-  def test_success(self, _, basename, expected):
+  def test_success(self, basename, expected):
     path = os.path.join(_TESTDATA_DIR, f"{basename}.tsv")
     actual = reader.read_lexicon_entries(path)
     self.assertDictEqual(expected, actual)
 
-  @parameterized.expand([
-      param(
-          "InvalidPath",
-          path=os.path.join(_TESTDATA_DIR, "invalid_path.tsv"),
-          exception=IOError,
-      ),
-      param(
-          "EmptyPath",
-          path="",
-          exception=IOError,
-      ),
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "InvalidPath",
+          "path": os.path.join(_TESTDATA_DIR, "invalid_path.tsv"),
+          "exception": IOError,
+      },
+      {
+          "testcase_name": "EmptyPath",
+          "path": "",
+          "exception": IOError,
+      },
   ])
-  def test_raises_exception(self, _, path, exception):
+  def test_raises_exception(self, path, exception):
     with self.assertRaises(exception):
       reader.read_lexicon_entries(path)
 

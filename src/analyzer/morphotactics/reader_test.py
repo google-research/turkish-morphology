@@ -18,10 +18,9 @@ import collections
 import os
 
 from src.analyzer.morphotactics import reader
-from parameterized import param
-from parameterized import parameterized
 
 from absl.testing import absltest
+from absl.testing import parameterized
 
 _TESTDATA_DIR = "src/analyzer/morphotactics/testdata"
 
@@ -32,7 +31,7 @@ def _read_file(path):
   return read
 
 
-class ReadRuleDefinitionsTest(absltest.TestCase):
+class ReadRuleDefinitionsTest(parameterized.TestCase):
 
   def test_success(self):
     path = os.path.join(_TESTDATA_DIR, "morphotactics_valid_rules_1.txt")
@@ -51,19 +50,19 @@ class ReadRuleDefinitionsTest(absltest.TestCase):
     ))
     self.assertDictEqual(expected, actual)
 
-  @parameterized.expand([
-      param(
-          "InvalidPath",
-          path=os.path.join(_TESTDATA_DIR, "invalid_path.tsv"),
-          exception=IOError,
-      ),
-      param(
-          "EmptyPath",
-          path="",
-          exception=IOError,
-      ),
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "InvalidPath",
+          "path": os.path.join(_TESTDATA_DIR, "invalid_path.tsv"),
+          "exception": IOError,
+      },
+      {
+          "testcase_name": "EmptyPath",
+          "path": "",
+          "exception": IOError,
+      },
   ])
-  def test_raises_exception(self, _, path, exception):
+  def test_raises_exception(self, path, exception):
     with self.assertRaises(exception):
       reader.read_rule_definitions(path)
 

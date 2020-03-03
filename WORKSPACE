@@ -14,6 +14,7 @@
 
 workspace(name = "turkish_morphology")
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load(
     "@bazel_tools//tools/build_defs/repo:git.bzl",
     "git_repository",
@@ -56,6 +57,13 @@ git_repository(
     tag = "pypi-v0.9.0",
 )
 
+# Bazel Python rules.
+git_repository(
+    name = "rules_python",
+    remote = "https://github.com/bazelbuild/rules_python.git",
+    tag = "0.0.1",
+)
+
 # gRpc (only used for detecting and configuring local Python).
 git_repository(
     name = "com_github_grpc_grpc",
@@ -89,26 +97,3 @@ new_git_repository(
     commit = "c65fb3d51f9bd0299503f3289a124f52c3431eeb",
     remote = "https://github.com/mjansche/thrax.git",
 )
-
-# PyPi dependencies.
-git_repository(
-    name = "rules_python",
-    branch = "master",
-    remote = "https://github.com/bazelbuild/rules_python.git",
-)
-
-load("@rules_python//python:pip.bzl", "pip_import", "pip_repositories")
-
-pip_repositories()
-
-pip_import(
-    name = "turkish_morphology_deps",
-    requirements = "@turkish_morphology//:requirements.txt",
-)
-
-load(
-    "@turkish_morphology_deps//:requirements.bzl",
-    _install_turkish_morphology_deps = "pip_install",
-)
-
-_install_turkish_morphology_deps()

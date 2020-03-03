@@ -16,27 +16,28 @@
 
 from src.analyzer.morphotactics import parser
 from src.analyzer.morphotactics import rule_pb2
-from parameterized import param
-from parameterized import parameterized
 from google.protobuf import text_format
 
 from absl.testing import absltest
+from absl.testing import parameterized
 
 
-class ParseTest(absltest.TestCase):
+class ParseTest(parameterized.TestCase):
 
-  @parameterized.expand([
-      param(
-          "EmptyRuleDefinitions",
-          rule_definitions=[],
-          expected_pbtxt="",
-      ),
-      param(
-          "SingleRuleDefinition",
-          rule_definitions=[
+  @parameterized.named_parameters([
+      {
+          "testcase_name": "EmptyRuleDefinitions",
+          "rule_definitions": [],
+          "expected_pbtxt": "",
+      },
+      {
+          "testcase_name":
+              "SingleRuleDefinition",
+          "rule_definitions": [
               ["STATE-1", "STATE-2", "+Morpheme[Cat=Val]", "+Morpheme"],
           ],
-          expected_pbtxt="""
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'STATE-1'
             to_state: 'STATE-2'
@@ -44,14 +45,16 @@ class ParseTest(absltest.TestCase):
             output: '+Morpheme'
           }
           """,
-      ),
-      param(
-          "MultipleRuleDefinitions",
-          rule_definitions=[
+      },
+      {
+          "testcase_name":
+              "MultipleRuleDefinitions",
+          "rule_definitions": [
               ["STATE-1", "STATE-2", "+Morpheme1[Cat1=Val1]", "+Morpheme1"],
               ["STATE-3", "STATE-4", "+Morpheme2[Cat2=Val2]", "+Morpheme2"],
           ],
-          expected_pbtxt="""
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'STATE-1'
             to_state: 'STATE-2'
@@ -65,13 +68,15 @@ class ParseTest(absltest.TestCase):
             output: '+Morpheme2'
           }
           """,
-      ),
-      param(
-          "NormalizesFromStateName",
-          rule_definitions=[
+      },
+      {
+          "testcase_name":
+              "NormalizesFromStateName",
+          "rule_definitions": [
               ["sTaTe-1", "STATE-2", "+Morpheme[Cat=Val]", "+Morpheme"],
           ],
-          expected_pbtxt="""
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'STATE-1'
             to_state: 'STATE-2'
@@ -79,13 +84,15 @@ class ParseTest(absltest.TestCase):
             output: '+Morpheme'
           }
           """,
-      ),
-      param(
-          "NormalizesToStateName",
-          rule_definitions=[
+      },
+      {
+          "testcase_name":
+              "NormalizesToStateName",
+          "rule_definitions": [
               ["STATE-1", "StAtE-2", "+Morpheme[Cat=Val]", "+Morpheme"],
           ],
-          expected_pbtxt="""
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'STATE-1'
             to_state: 'STATE-2'
@@ -93,13 +100,15 @@ class ParseTest(absltest.TestCase):
             output: '+Morpheme'
           }
           """,
-      ),
-      param(
-          "NormalizesBracketedOutputToken",
-          rule_definitions=[
+      },
+      {
+          "testcase_name":
+              "NormalizesBracketedOutputToken",
+          "rule_definitions": [
               ["STATE-1", "StAtE-2", "<BrAcKeTeD>", "+Morpheme"],
           ],
-          expected_pbtxt="""
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'STATE-1'
             to_state: 'STATE-2'
@@ -107,13 +116,15 @@ class ParseTest(absltest.TestCase):
             output: '+Morpheme'
           }
           """,
-      ),
-      param(
-          "NormalizesBracketedInputToken",
-          rule_definitions=[
+      },
+      {
+          "testcase_name":
+              "NormalizesBracketedInputToken",
+          "rule_definitions": [
               ["STATE-1", "StAtE-2", "+Morpheme[Cat=Val]", "<BrAcKeTeD>"],
           ],
-          expected_pbtxt="""
+          "expected_pbtxt":
+              """
           rule {
             from_state: 'STATE-1'
             to_state: 'STATE-2'
@@ -121,9 +132,9 @@ class ParseTest(absltest.TestCase):
             output: '<bracketed>'
           }
           """,
-      ),
+      },
   ])
-  def test_success(self, _, rule_definitions, expected_pbtxt):
+  def test_success(self, rule_definitions, expected_pbtxt):
     actual = parser.parse(rule_definitions)
     expected = rule_pb2.RewriteRuleSet()
     text_format.Parse(expected_pbtxt, expected)

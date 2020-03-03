@@ -12,8 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@turkish_morphology_deps//:requirements.bzl", "requirement")
-
 package(default_visibility = ["//src/analyzer/morphotactics:__pkg__"])
 
 licenses(["notice"])  # Apache 2.0
@@ -85,7 +83,7 @@ py_test(
         ":tags",
         "//src/analyzer/morphotactics:rule_py_pb2",
         "@io_abseil_py//absl/testing:absltest",
-        requirement("parameterized"),
+        "@io_abseil_py//absl/testing:parameterized",
     ],
 )
 
@@ -101,7 +99,7 @@ py_test(
     deps = [
         ":reader",
         "@io_abseil_py//absl/testing:absltest",
-        requirement("parameterized"),
+        "@io_abseil_py//absl/testing:parameterized",
     ],
 )
 
@@ -115,6 +113,6 @@ py_test(
         ":tags",
         ":validator",
         "@io_abseil_py//absl/testing:absltest",
-        requirement("parameterized"),
+        "@io_abseil_py//absl/testing:parameterized",
     ],
 )
