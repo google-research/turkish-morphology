@@ -1,0 +1,35 @@
+name: Build Status
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.7
+    - name: Update pip
+      run: |
+        python -m pip install --upgrade pip
+    - name: Lint with flake8
+      run: |
+        pip install flake8
+        # Stop the build if there are Python syntax errors or undefined names.
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings.
+        flake8 . --count --exit-zero --statistics
+    - name: Install bazel
+      run: |
+        sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python3
+        wget 'https://github.com/bazelbuild/bazel/releases/download/2.2.0/bazel-2.2.0-installer-linux-x86_64.sh'
+        chmod +x bazel-2.2.0-installer-linux-x86_64.sh
+        ./bazel-2.2.0-installer-linux-x86_64.sh --user
+        rm -f bazel-2.2.0-installer-linux-x86_64.sh
+    - name: Test with bazel
+      run: |
+        ~/bin/bazel test //... --test_output=all

@@ -1,6 +1,6 @@
 # Turkish Morphology
 
-[![Build Status](https://travis-ci.org/google-research/turkish-morphology.svg?branch=master)](https://travis-ci.org/google-research/turkish-morphology)
+![](https://github.com/google-research/turkish-morphology/workflows/Build%20Status/badge.svg)
 
 A two-level morphological analyzer for Turkish.
 
