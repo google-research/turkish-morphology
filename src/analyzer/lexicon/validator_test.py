@@ -90,8 +90,8 @@ class ValidateTest(parameterized.TestCase):
           },
       },
       {
-          "testcase_name":
-              "RequiredFeaturesExpectedNonCompoundWithFeaturesAndMorphophonemics",
+          "testcase_name": ("RequiredFeaturesExpectedNonCompoundWithFeaturesAnd"
+                            "Morphophonemics"),
           "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
@@ -143,8 +143,8 @@ class ValidateTest(parameterized.TestCase):
           },
       },
       {
-          "testcase_name":
-              "OptionalFeaturesExpectedNonCompoundWithFeaturesAndMorphophonemics",
+          "testcase_name": ("OptionalFeaturesExpectedNonCompoundWithFeaturesAnd"
+                            "Morphophonemics"),
           "entry": {
               "tag": "TaG-3",
               "root": "valid-root",

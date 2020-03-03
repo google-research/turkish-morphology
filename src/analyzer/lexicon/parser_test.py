@@ -100,7 +100,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -155,7 +155,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -175,7 +175,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -195,7 +195,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "fAlSe"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -215,7 +215,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -235,7 +235,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -255,7 +255,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -275,7 +275,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -301,7 +301,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "vâlîd-morphophonemics",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -327,7 +327,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -347,7 +347,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "+[Cat1=Val12]+[Cat2=Val21]",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -373,7 +373,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "+[Cat2=Val22]",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -399,7 +399,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "+[Cat1=Val12]+[Cat2=Val21]",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -425,7 +425,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "+[Cat3=Val31]",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -451,7 +451,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
@@ -477,7 +477,7 @@ class ParseTest(parameterized.TestCase):
               "morphophonemics": "~",
               "features": "~",
               "is_compound": "False"
-          },],
+          }],
           "expected_pbtxt":
               """
           rule {
