@@ -18,7 +18,6 @@ package(default_visibility = ["//src/analyzer:__pkg__"])
 
 licenses(["notice"])  # Apache 2.0
 
-# Grammars.
 grm_compile(
     name = "common",
     deps = [
@@ -167,7 +166,6 @@ grm_compile(
     ],
 )
 
-# Tests.
 [
     grm_test(
         name = grm + "_test",

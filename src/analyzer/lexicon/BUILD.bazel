@@ -16,7 +16,6 @@ package(default_visibility = ["//src/analyzer/morphotactics:__pkg__"])
 
 licenses(["notice"])  # Apache 2.0
 
-# Data.
 filegroup(
     name = "base_lexicon",
     srcs = glob([
@@ -31,14 +30,6 @@ filegroup(
     ]),
 )
 
-filegroup(
-    name = "test_lexicons",
-    srcs = glob([
-        "testdata/*.tsv",
-    ]),
-)
-
-# Libraries.
 py_library(
     name = "parser",
     srcs = ["parser.py"],
@@ -50,28 +41,6 @@ py_library(
     ],
 )
 
-py_library(
-    name = "reader",
-    srcs = ["reader.py"],
-    srcs_version = "PY3",
-)
-
-py_library(
-    name = "tags",
-    srcs = ["tags.py"],
-    srcs_version = "PY3",
-)
-
-py_library(
-    name = "validator",
-    srcs = ["validator.py"],
-    srcs_version = "PY3",
-    deps = [
-        ":tags",
-    ],
-)
-
-# Tests.
 py_test(
     name = "parser_test",
     size = "small",
@@ -87,6 +56,12 @@ py_test(
     ],
 )
 
+py_library(
+    name = "reader",
+    srcs = ["reader.py"],
+    srcs_version = "PY3",
+)
+
 py_test(
     name = "reader_test",
     size = "small",
@@ -100,6 +75,28 @@ py_test(
         ":reader",
         "@io_abseil_py//absl/testing:absltest",
         "@io_abseil_py//absl/testing:parameterized",
+    ],
+)
+
+py_library(
+    name = "tags",
+    srcs = ["tags.py"],
+    srcs_version = "PY3",
+)
+
+filegroup(
+    name = "test_lexicons",
+    srcs = glob([
+        "testdata/*.tsv",
+    ]),
+)
+
+py_library(
+    name = "validator",
+    srcs = ["validator.py"],
+    srcs_version = "PY3",
+    deps = [
+        ":tags",
     ],
 )
 

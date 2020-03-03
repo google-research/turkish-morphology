@@ -21,21 +21,19 @@ package(default_visibility = [
 
 licenses(["notice"])  # Apache 2.0
 
-# Data.
-# Base symbols table should only include the exact set of characters that can
-# be observed in all possible input words to the morphological analyzer.
-filegroup(
-    name = "base_symbols",
-    srcs = ["base_symbols.syms"],
-)
-
-# Grammars.
 grm_compile(
     name = "alphabet",
     deps = [
         "unicode.far",
         "unicode.grm",
     ],
+)
+
+# Base symbols table should only include the exact set of characters that can
+# be observed in all possible input words to the morphological analyzer.
+filegroup(
+    name = "base_symbols",
+    srcs = ["base_symbols.syms"],
 )
 
 grm_compile(
@@ -48,14 +46,13 @@ grm_compile(
     ],
 )
 
-grm_compile(
-    name = "unicode",
-)
-
-# Tests.
 grm_test(
     name = "case_conversion_test",
     base_path = "src/analyzer/symbols/",
     far_file = "case_conversion.far",
     test_file = "case_conversion.tsv",
+)
+
+grm_compile(
+    name = "unicode",
 )

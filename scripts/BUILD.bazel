@@ -16,13 +16,6 @@ package(default_visibility = ["//visibility:private"])
 
 licenses(["notice"])  # Apache 2.0
 
-# Data.
-filegroup(
-    name = "treebank",
-    srcs = glob(["treebank/*.conll"]),
-)
-
-# Binaries.
 py_binary(
     name = "evaluate_analyzer",
     srcs = ["evaluate_analyzer.py"],
@@ -48,4 +41,9 @@ cc_binary(
         "@openfst//:fst",
         "@thrax//:grm-manager",
     ],
+)
+
+filegroup(
+    name = "treebank",
+    srcs = glob(["treebank/*.conll"]),
 )
