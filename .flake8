@@ -1,0 +1,14 @@
+[flake8]
+ignore =
+  # E111: we use 2 spaces for code indentation.
+  E111,
+  # E114: we use 2 spaces for comment indentation.
+  E114,
+  # E125: this check gives false positives for 2 space indentation.
+  E125,
+  # E129: this check counteracts with E127.
+  E129,
+  # W503: this is a deprecated check and counteracts with W504.
+  W503
+max-complexity = 10
+max-line-length = 80
