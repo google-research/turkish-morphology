@@ -31,47 +31,47 @@ def setUpModule():
   # dictionaries that are used in parsing. This allows us to use lexicon
   # entries that are constructed with these tags in below test cases.
   tag_set = (
-      tags._TagSetItem(tag="TAG-1"),
-      tags._TagSetItem(tag="TAG-2",
-                       required_features=collections.OrderedDict([
-                           ("Cat1", {"Val11", "Val12"}),
-                           ("Cat2", {"Val21", "Val22"}),
-                       ])),
-      tags._TagSetItem(tag="TAG-3",
-                       optional_features={
-                           "Cat3": {"Val31", "Val32"},
-                       }),
-      tags._TagSetItem(tag="TAG-4", formatting="lower"),
-      tags._TagSetItem(tag="TAG-5", formatting="upper"),
-      tags._TagSetItem(tag="TAG-6", formatting="capitals"),
-      tags._TagSetItem(tag="TAG-7", output_as="TAG-7-OUTPUT"),
-      tags._TagSetItem(tag="TAG-8",
-                       cross_classify_as=("TAG-1",),
-                       required_features=collections.OrderedDict([
-                           ("Cat1", {"Val11", "Val12"}),
-                           ("Cat2", {"Val21", "Val22"}),
-                       ])),
-      tags._TagSetItem(tag="TAG-9",
-                       cross_classify_as=("TAG-1",),
-                       optional_features={
-                           "Cat1": {"Val11"},
-                           "Cat2": {"Val22"},
-                       }),
-      tags._TagSetItem(tag="TAG-10",
-                       cross_classify_as=("TAG-2",),
-                       required_features=collections.OrderedDict([
-                           ("Cat1", {"Val11", "Val12"}),
-                           ("Cat2", {"Val21", "Val22"}),
-                       ])),
-      tags._TagSetItem(tag="TAG-11",
-                       cross_classify_as=("TAG-3",),
-                       optional_features={
-                           "Cat3": {"Val31", "Val32"},
-                       }),
-      tags._TagSetItem(tag="TAG-12", cross_classify_as=("NOMP-CASE-BARE",)),
-      tags._TagSetItem(tag="TAG-13",
-                       is_fst_state=False,
-                       cross_classify_as=("TAG-1",)),
+      tags.TagSetItem(tag="TAG-1"),
+      tags.TagSetItem(tag="TAG-2",
+                      required_features=collections.OrderedDict([
+                          ("Cat1", {"Val11", "Val12"}),
+                          ("Cat2", {"Val21", "Val22"}),
+                      ])),
+      tags.TagSetItem(tag="TAG-3",
+                      optional_features={
+                          "Cat3": {"Val31", "Val32"},
+                      }),
+      tags.TagSetItem(tag="TAG-4", formatting="lower"),
+      tags.TagSetItem(tag="TAG-5", formatting="upper"),
+      tags.TagSetItem(tag="TAG-6", formatting="capitals"),
+      tags.TagSetItem(tag="TAG-7", output_as="TAG-7-OUTPUT"),
+      tags.TagSetItem(tag="TAG-8",
+                      cross_classify_as=("TAG-1",),
+                      required_features=collections.OrderedDict([
+                          ("Cat1", {"Val11", "Val12"}),
+                          ("Cat2", {"Val21", "Val22"}),
+                      ])),
+      tags.TagSetItem(tag="TAG-9",
+                      cross_classify_as=("TAG-1",),
+                      optional_features={
+                          "Cat1": {"Val11"},
+                          "Cat2": {"Val22"},
+                      }),
+      tags.TagSetItem(tag="TAG-10",
+                      cross_classify_as=("TAG-2",),
+                      required_features=collections.OrderedDict([
+                          ("Cat1", {"Val11", "Val12"}),
+                          ("Cat2", {"Val21", "Val22"}),
+                      ])),
+      tags.TagSetItem(tag="TAG-11",
+                      cross_classify_as=("TAG-3",),
+                      optional_features={
+                          "Cat3": {"Val31", "Val32"},
+                      }),
+      tags.TagSetItem(tag="TAG-12", cross_classify_as=("NOMP-CASE-BARE",)),
+      tags.TagSetItem(tag="TAG-13",
+                      is_fst_state=False,
+                      cross_classify_as=("TAG-1",)),
   )
   tags.VALID_TAGS.update({t.tag for t in tag_set})
   tags.OUTPUT_AS.update(

@@ -137,13 +137,13 @@ def _cross_classify(entries: List[_LexiconEntry]) -> None:
     old_required = tags.REQUIRED_FEATURES[old_tag]
     new_required = tags.REQUIRED_FEATURES[new_tag]
 
-    if (old_required is not None and old_required == new_required):
+    if (old_required and old_required == new_required):
       return old_features
 
     old_optional = tags.OPTIONAL_FEATURES[old_tag]
     new_optional = tags.OPTIONAL_FEATURES[new_tag]
 
-    if (old_optional is not None and old_optional == new_optional):
+    if (old_optional and old_optional == new_optional):
       return old_features
 
     return ""
