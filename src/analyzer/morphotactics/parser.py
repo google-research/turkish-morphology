@@ -14,7 +14,7 @@
 # limitations under the License.
 """Functions to parse rule definitions into rewrite rule objects."""
 
-from typing import List
+from typing import Generator, Iterable, List
 
 from src.analyzer.morphotactics import rule_pb2
 
@@ -23,7 +23,8 @@ _RewriteRuleSet = rule_pb2.RewriteRuleSet
 _RuleDefinition = List[str]
 
 
-def _normalize(rule_definitions: List[_RuleDefinition]) -> None:
+def _normalize(rule_definitions: Iterable[_RuleDefinition]
+              ) -> Generator[_RuleDefinition, None, None]:
   """Normalizes the tokens of morphotactics rewrite rule definition.
 
   This function converts the 'from_state' and 'to_state' values to uppercase,
@@ -35,12 +36,15 @@ def _normalize(rule_definitions: List[_RuleDefinition]) -> None:
   Args:
     rule_definitions: morphotactics rule definitions whose tokens will be
         normalized.
+
+  Yields:
+    Morphotactics rewrite rule definitions whose tokens are normalized.
   """
 
   def _bracketed(token: str) -> bool:
     return token.startswith("<") and token.endswith(">")
 
-  def _get_normalized(rule_definition):
+  def _get_normalized(rule_definition: _RuleDefinition) -> _RuleDefinition:
     from_state, to_state, input_, output = rule_definition
     rule_definition[0] = from_state.upper()
     rule_definition[1] = to_state.upper()
@@ -48,7 +52,7 @@ def _normalize(rule_definitions: List[_RuleDefinition]) -> None:
     rule_definition[3] = output.lower() if _bracketed(output) else output
     return rule_definition
 
-  rule_definitions[:] = list(map(_get_normalized, rule_definitions))
+  yield from (_get_normalized(rd) for rd in rule_definitions)
 
 
 def _create_rewrite_rule(rule_definition: _RuleDefinition) -> _RewriteRule:
@@ -70,7 +74,7 @@ def _create_rewrite_rule(rule_definition: _RuleDefinition) -> _RewriteRule:
   return rule
 
 
-def parse(rule_definitions: List[_RuleDefinition]) -> _RewriteRuleSet:
+def parse(rule_definitions: Iterable[_RuleDefinition]) -> _RewriteRuleSet:
   """Generates a rewrite rule set from morphotactics rule definitions.
 
   Note that this function assumes all input rule definitions are valid, meaning
@@ -85,7 +89,7 @@ def parse(rule_definitions: List[_RuleDefinition]) -> _RewriteRuleSet:
     Array of rewrite rule objects that defines a subset of the state transition
     arcs of the morphotactics FST.
   """
-  _normalize(rule_definitions)
+  normalized = _normalize(rule_definitions)
   rule_set = _RewriteRuleSet()
-  rule_set.rule.extend(_create_rewrite_rule(d) for d in rule_definitions)
+  rule_set.rule.extend(_create_rewrite_rule(d) for d in normalized)
   return rule_set

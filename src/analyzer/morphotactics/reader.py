@@ -36,7 +36,7 @@ def _comment(line: str) -> bool:
   return line.startswith("#")
 
 
-def _rule(line):
+def _rule(line: str) -> bool:
   """Returns True if the line defines an FST rule."""
   return not (_empty(line) or _comment(line))
 

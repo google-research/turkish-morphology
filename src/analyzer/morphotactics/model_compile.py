@@ -46,7 +46,7 @@ import collections
 import glob
 import os
 import re
-from typing import Generator, List, Tuple
+from typing import Generator, Iterable, List, Tuple
 
 from src.analyzer.lexicon import parser as lexicon_parser
 from src.analyzer.lexicon import reader as lexicon_reader
@@ -384,7 +384,7 @@ def _make_output_directory(output_dir: str) -> None:
     logging.info(f"output directory does not exist, made '{output_dir}'")
 
 
-def _write_file(output_path: str, file_content: List[str]) -> None:
+def _write_file(output_path: str, file_content: Iterable[str]) -> None:
   r"""Writes the file content to the output path as a text file.
 
   Args:

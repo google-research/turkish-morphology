@@ -15,7 +15,7 @@
 """Functions to parse lexicon entries into rewrite rule objects."""
 
 import itertools
-from typing import Dict, Generator, List
+from typing import Dict, Generator, Iterable, List
 
 from src.analyzer.lexicon import tags
 from src.analyzer.morphotactics import common
@@ -58,7 +58,7 @@ def _format_root(root: str, tag: str) -> str:
   return root
 
 
-def _normalize(entries: List[_LexiconEntry]) -> None:
+def _normalize(entries: Iterable[_LexiconEntry]) -> List[_LexiconEntry]:
   """Normalizes annotated values of each field of the lexicon entry.
 
   This function;
@@ -77,6 +77,9 @@ def _normalize(entries: List[_LexiconEntry]) -> None:
 
   Args:
     entries: lexicon entries whose annotations will be normalized.
+
+  Returns:
+    Lexicon entries whose annotations are normalized.
   """
   circumflex = {
       "â": "a",
@@ -107,12 +110,13 @@ def _normalize(entries: List[_LexiconEntry]) -> None:
 
     return normalized
 
-  entries[:] = list(map(_normalize_entry, entries))
-  new_entries = [_make_entry(e) for e in entries if _root_has_circumflex(e)]
-  entries.extend(new_entries)
+  normalized = [_normalize_entry(e) for e in entries]
+  new_entries = (_make_entry(e) for e in normalized if _root_has_circumflex(e))
+  normalized.extend(new_entries)
+  return normalized
 
 
-def _cross_classify(entries: List[_LexiconEntry]) -> None:
+def _cross_classify(entries: Iterable[_LexiconEntry]) -> List[_LexiconEntry]:
   """Cross-classifies lexicon entries across parts of speech.
 
   This function adds a new lexicon entry by just rewriting its tag for each
@@ -128,6 +132,9 @@ def _cross_classify(entries: List[_LexiconEntry]) -> None:
   Args:
     entries: lexicon entries which will be cross-classified across parts of
         speech.
+
+  Returns:
+    Lexicon entries that are yielded after part-of-speech cross-classification.
   """
 
   def _new_features(old_features: str, old_tag: str, new_tag: str) -> str:
@@ -163,8 +170,10 @@ def _cross_classify(entries: List[_LexiconEntry]) -> None:
     args = itertools.product([entry], [old_tag], new_tags)
     yield from (_make_entry(*a) for a in args)
 
-  new_entries = list(itertools.chain.from_iterable(map(_new_entries, entries)))
-  entries.extend(new_entries)
+  cross_classified = list(entries)
+  new_entries = itertools.chain.from_iterable(map(_new_entries, entries))
+  cross_classified.extend(new_entries)
+  return cross_classified
 
 
 def _rule_input(entry: _LexiconEntry) -> str:
@@ -221,7 +230,7 @@ def _create_rewrite_rule(entry: _LexiconEntry) -> _RewriteRule:
   return rule
 
 
-def parse(entries: List[_LexiconEntry]) -> _RewriteRuleSet:
+def parse(entries: Iterable[_LexiconEntry]) -> _RewriteRuleSet:
   """Generates a rewrite rule set from lexicon entries.
 
   Note that this function assumes all input lexicon entries are valid, meaning
@@ -234,9 +243,9 @@ def parse(entries: List[_LexiconEntry]) -> _RewriteRuleSet:
     Array of rewrite rule objects that defines a subset of the state transition
     arcs of the morphotactics FST.
   """
-  _normalize(entries)
-  _cross_classify(entries)
-  state_entries = [e for e in entries if e["tag"] in tags.FST_STATES]
+  normalized = _normalize(entries)
+  cross_classified = _cross_classify(normalized)
+  state_entries = (e for e in cross_classified if e["tag"] in tags.FST_STATES)
   rule_set = _RewriteRuleSet()
   rule_set.rule.extend(map(_create_rewrite_rule, state_entries))
   return rule_set
