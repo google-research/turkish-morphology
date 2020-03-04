@@ -15,7 +15,6 @@
 """Functions to read TSV structured lexicon files."""
 
 import collections
-import io
 import itertools
 from typing import Dict, List, Tuple
 
@@ -53,7 +52,7 @@ def read_lexicon_entries(path: str) -> Dict[int, _LexiconEntry]:
     pruned and lexicon entries are sorted by increasing row index. Returns an
     empty dictionary, if the TSV dump does not contain any lexicon entries.
   """
-  with io.open(path, "r", encoding="utf-8") as reader:
+  with open(path, "r", encoding="utf-8") as reader:
     lines = reader.readlines()
 
   # Line 1 is assumed to be the TSV header. Any line below the header is

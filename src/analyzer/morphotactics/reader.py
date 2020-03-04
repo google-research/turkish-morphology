@@ -15,7 +15,6 @@
 """Functions to read text morphotactic model files."""
 
 import collections
-import io
 import itertools
 from typing import Dict, List, Tuple
 
@@ -60,7 +59,7 @@ def read_rule_definitions(path: str) -> Dict[int, _RuleDefinition]:
     are sorted by increasing line index. Returns an empty dictionary, if
     the text file does not contain any rule definitions.
   """
-  with io.open(path, "r", encoding="utf-8") as reader:
+  with open(path, "r", encoding="utf-8") as reader:
     lines = reader.readlines()
 
   def _index_and_entry(index: int, line: str) -> Tuple[int, _RuleDefinition]:

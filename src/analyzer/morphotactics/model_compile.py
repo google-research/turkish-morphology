@@ -44,7 +44,6 @@ output_dir.
 
 import collections
 import glob
-import io
 import os
 import re
 from typing import Generator, List, Tuple
@@ -396,7 +395,7 @@ def _write_file(output_path: str, file_content: List[str]) -> None:
   Raises:
     IOError: file content could not be written to the 'output_path'.
   """
-  with io.open(output_path, "w+", encoding="utf-8") as f:
+  with open(output_path, "w+", encoding="utf-8") as f:
     for line in file_content:
       f.write(line.decode("utf-8"))
 

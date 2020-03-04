@@ -27,7 +27,6 @@ calculating the statistics.
 
 import dataclasses
 import glob
-import io
 import itertools
 import multiprocessing
 import os
@@ -106,7 +105,7 @@ def _read_tokens(treebank_dir: str) -> List[str]:
     """Reads tokens from CoNLL data file that lives in the path."""
     logging.info(f"Reading tokens from '{path}'")
 
-    with io.open(path, "r", encoding="utf-8") as reader:
+    with open(path, "r", encoding="utf-8") as reader:
       line_tokens = (_extract_tokens_from(l) for l in reader)
       yield from itertools.chain.from_iterable(line_tokens)
 
