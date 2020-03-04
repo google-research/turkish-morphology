@@ -164,7 +164,7 @@ def _cross_classify(entries: Iterable[_LexiconEntry]) -> List[_LexiconEntry]:
     return new_entry
 
   def _new_entries(entry: _LexiconEntry
-                  ) -> Generator[_LexiconEntry, None, None]:
+                   ) -> Generator[_LexiconEntry, None, None]:
     old_tag = entry["tag"]
     new_tags = tags.CROSS_CLASSIFY_AS[old_tag]
     args = itertools.product([entry], [old_tag], new_tags)

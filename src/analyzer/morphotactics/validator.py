@@ -46,7 +46,7 @@ class InvalidMorphotacticsRuleError(Exception):
 
 
 def _rule_has_expected_number_of_tokens(rule_definition: _RuleDefinition
-                                       ) -> None:
+                                        ) -> None:
   """Checks if rule definition has 4 tokens (from, to, output, input)."""
   if len(rule_definition) != 4:
     raise InvalidMorphotacticsRuleError(

@@ -38,13 +38,13 @@ class ParseTest(parameterized.TestCase):
           ],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'STATE-1'
-            to_state: 'STATE-2'
-            input: '+Morpheme[Cat=Val]'
-            output: '+Morpheme'
-          }
-          """,
+              rule {
+                from_state: 'STATE-1'
+                to_state: 'STATE-2'
+                input: '+Morpheme[Cat=Val]'
+                output: '+Morpheme'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -55,19 +55,19 @@ class ParseTest(parameterized.TestCase):
           ],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'STATE-1'
-            to_state: 'STATE-2'
-            input: '+Morpheme1[Cat1=Val1]'
-            output: '+Morpheme1'
-          }
-          rule {
-            from_state: 'STATE-3'
-            to_state: 'STATE-4'
-            input: '+Morpheme2[Cat2=Val2]'
-            output: '+Morpheme2'
-          }
-          """,
+              rule {
+                from_state: 'STATE-1'
+                to_state: 'STATE-2'
+                input: '+Morpheme1[Cat1=Val1]'
+                output: '+Morpheme1'
+              }
+              rule {
+                from_state: 'STATE-3'
+                to_state: 'STATE-4'
+                input: '+Morpheme2[Cat2=Val2]'
+                output: '+Morpheme2'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -77,13 +77,13 @@ class ParseTest(parameterized.TestCase):
           ],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'STATE-1'
-            to_state: 'STATE-2'
-            input: '+Morpheme[Cat=Val]'
-            output: '+Morpheme'
-          }
-          """,
+              rule {
+                from_state: 'STATE-1'
+                to_state: 'STATE-2'
+                input: '+Morpheme[Cat=Val]'
+                output: '+Morpheme'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -93,13 +93,13 @@ class ParseTest(parameterized.TestCase):
           ],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'STATE-1'
-            to_state: 'STATE-2'
-            input: '+Morpheme[Cat=Val]'
-            output: '+Morpheme'
-          }
-          """,
+              rule {
+                from_state: 'STATE-1'
+                to_state: 'STATE-2'
+                input: '+Morpheme[Cat=Val]'
+                output: '+Morpheme'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -109,13 +109,13 @@ class ParseTest(parameterized.TestCase):
           ],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'STATE-1'
-            to_state: 'STATE-2'
-            input: '<bracketed>'
-            output: '+Morpheme'
-          }
-          """,
+              rule {
+                from_state: 'STATE-1'
+                to_state: 'STATE-2'
+                input: '<bracketed>'
+                output: '+Morpheme'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -125,13 +125,13 @@ class ParseTest(parameterized.TestCase):
           ],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'STATE-1'
-            to_state: 'STATE-2'
-            input: '+Morpheme[Cat=Val]'
-            output: '<bracketed>'
-          }
-          """,
+              rule {
+                from_state: 'STATE-1'
+                to_state: 'STATE-2'
+                input: '+Morpheme[Cat=Val]'
+                output: '<bracketed>'
+              }
+              """,
       },
   ])
   def test_success(self, rule_definitions, expected_pbtxt):

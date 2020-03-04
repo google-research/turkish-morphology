@@ -32,46 +32,75 @@ def setUpModule():
   # entries that are constructed with these tags in below test cases.
   tag_set = (
       tags.TagSetItem(tag="TAG-1"),
-      tags.TagSetItem(tag="TAG-2",
-                      required_features=collections.OrderedDict([
-                          ("Cat1", {"Val11", "Val12"}),
-                          ("Cat2", {"Val21", "Val22"}),
-                      ])),
-      tags.TagSetItem(tag="TAG-3",
-                      optional_features={
-                          "Cat3": {"Val31", "Val32"},
-                      }),
-      tags.TagSetItem(tag="TAG-4", formatting="lower"),
-      tags.TagSetItem(tag="TAG-5", formatting="upper"),
-      tags.TagSetItem(tag="TAG-6", formatting="capitals"),
-      tags.TagSetItem(tag="TAG-7", output_as="TAG-7-OUTPUT"),
-      tags.TagSetItem(tag="TAG-8",
-                      cross_classify_as=("TAG-1",),
-                      required_features=collections.OrderedDict([
-                          ("Cat1", {"Val11", "Val12"}),
-                          ("Cat2", {"Val21", "Val22"}),
-                      ])),
-      tags.TagSetItem(tag="TAG-9",
-                      cross_classify_as=("TAG-1",),
-                      optional_features={
-                          "Cat1": {"Val11"},
-                          "Cat2": {"Val22"},
-                      }),
-      tags.TagSetItem(tag="TAG-10",
-                      cross_classify_as=("TAG-2",),
-                      required_features=collections.OrderedDict([
-                          ("Cat1", {"Val11", "Val12"}),
-                          ("Cat2", {"Val21", "Val22"}),
-                      ])),
-      tags.TagSetItem(tag="TAG-11",
-                      cross_classify_as=("TAG-3",),
-                      optional_features={
-                          "Cat3": {"Val31", "Val32"},
-                      }),
-      tags.TagSetItem(tag="TAG-12", cross_classify_as=("NOMP-CASE-BARE",)),
-      tags.TagSetItem(tag="TAG-13",
-                      is_fst_state=False,
-                      cross_classify_as=("TAG-1",)),
+      tags.TagSetItem(
+          tag="TAG-2",
+          required_features=collections.OrderedDict([
+              ("Cat1", {"Val11", "Val12"}),
+              ("Cat2", {"Val21", "Val22"}),
+          ]),
+      ),
+      tags.TagSetItem(
+          tag="TAG-3",
+          optional_features={
+              "Cat3": {"Val31", "Val32"},
+          },
+      ),
+      tags.TagSetItem(
+          tag="TAG-4",
+          formatting="lower",
+      ),
+      tags.TagSetItem(
+          tag="TAG-5",
+          formatting="upper",
+      ),
+      tags.TagSetItem(
+          tag="TAG-6",
+          formatting="capitals",
+      ),
+      tags.TagSetItem(
+          tag="TAG-7",
+          output_as="TAG-7-OUTPUT",
+      ),
+      tags.TagSetItem(
+          tag="TAG-8",
+          cross_classify_as=("TAG-1",),
+          required_features=collections.OrderedDict([
+              ("Cat1", {"Val11", "Val12"}),
+              ("Cat2", {"Val21", "Val22"}),
+          ]),
+      ),
+      tags.TagSetItem(
+          tag="TAG-9",
+          cross_classify_as=("TAG-1",),
+          optional_features={
+              "Cat1": {"Val11"},
+              "Cat2": {"Val22"},
+          },
+      ),
+      tags.TagSetItem(
+          tag="TAG-10",
+          cross_classify_as=("TAG-2",),
+          required_features=collections.OrderedDict([
+              ("Cat1", {"Val11", "Val12"}),
+              ("Cat2", {"Val21", "Val22"}),
+          ]),
+      ),
+      tags.TagSetItem(
+          tag="TAG-11",
+          cross_classify_as=("TAG-3",),
+          optional_features={
+              "Cat3": {"Val31", "Val32"},
+          },
+      ),
+      tags.TagSetItem(
+          tag="TAG-12",
+          cross_classify_as=("NOMP-CASE-BARE",),
+      ),
+      tags.TagSetItem(
+          tag="TAG-13",
+          is_fst_state=False,
+          cross_classify_as=("TAG-1",),
+      ),
   )
   tags.VALID_TAGS.update({t.tag for t in tag_set})
   tags.OUTPUT_AS.update(
@@ -99,17 +128,17 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -120,31 +149,31 @@ class ParseTest(parameterized.TestCase):
                   "root": "valid-root-1",
                   "morphophonemics": "~",
                   "features": "+[Cat1=Val12]+[Cat2=Val21]",
-                  "is_compound": "False"
+                  "is_compound": "False",
               },
               {
                   "tag": "TAG-3",
                   "root": "valid-root-2",
                   "morphophonemics": "valid-morphophonemics",
                   "features": "+[Cat3=Val32]",
-                  "is_compound": "True"
+                  "is_compound": "True",
               },
           ],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-2'
-            input: '(valid-root-1[TAG-2]+[Cat1=Val12]+[Cat2=Val21]'
-            output: 'valid-root-1'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-3'
-            input: '(valid-root-2[TAG-3]+[Cat3=Val32]'
-            output: 'valid-morphophonemics'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-2'
+                input: '(valid-root-1[TAG-2]+[Cat1=Val12]+[Cat2=Val21]'
+                output: 'valid-root-1'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-3'
+                input: '(valid-root-2[TAG-3]+[Cat3=Val32]'
+                output: 'valid-morphophonemics'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -154,17 +183,17 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -174,17 +203,17 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
-              "is_compound": "TrUe"
+              "is_compound": "TrUe",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-morphophonemics'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-morphophonemics'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -194,17 +223,17 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "fAlSe"
+              "is_compound": "fAlSe",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -214,17 +243,17 @@ class ParseTest(parameterized.TestCase):
               "root": "VaLID-RoOt",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-4'
-            input: '(valıd-root[TAG-4]'
-            output: 'valıd-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-4'
+                input: '(valıd-root[TAG-4]'
+                output: 'valıd-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -234,17 +263,17 @@ class ParseTest(parameterized.TestCase):
               "root": "VaLiD-RoOt",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-5'
-            input: '(VALİD-ROOT[TAG-5]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-5'
+                input: '(VALİD-ROOT[TAG-5]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -254,17 +283,17 @@ class ParseTest(parameterized.TestCase):
               "root": "İ-VaLID-RoOt",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-6'
-            input: '(İ-valıd-root[TAG-6]'
-            output: 'i-valıd-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-6'
+                input: '(İ-valıd-root[TAG-6]'
+                output: 'i-valıd-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -274,23 +303,23 @@ class ParseTest(parameterized.TestCase):
               "root": "vâlîd-root",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(vâlîd-root[TAG-1]'
-            output: 'vâlîd-root'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(vâlîd-root[TAG-1]'
+                output: 'vâlîd-root'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -300,23 +329,23 @@ class ParseTest(parameterized.TestCase):
               "root": "vâlîd-root",
               "morphophonemics": "vâlîd-morphophonemics",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(vâlîd-root[TAG-1]'
-            output: 'vâlîd-morphophonemics'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-morphophonemics'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(vâlîd-root[TAG-1]'
+                output: 'vâlîd-morphophonemics'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-morphophonemics'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -326,17 +355,17 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-7'
-            input: '(valid-root[TAG-7-OUTPUT]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-7'
+                input: '(valid-root[TAG-7-OUTPUT]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -346,23 +375,23 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "+[Cat1=Val12]+[Cat2=Val21]",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-8'
-            input: '(valid-root[TAG-8]+[Cat1=Val12]+[Cat2=Val21]'
-            output: 'valid-root'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-8'
+                input: '(valid-root[TAG-8]+[Cat1=Val12]+[Cat2=Val21]'
+                output: 'valid-root'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -372,23 +401,23 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "+[Cat2=Val22]",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-9'
-            input: '(valid-root[TAG-9]+[Cat2=Val22]'
-            output: 'valid-root'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-9'
+                input: '(valid-root[TAG-9]+[Cat2=Val22]'
+                output: 'valid-root'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -398,23 +427,23 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "+[Cat1=Val12]+[Cat2=Val21]",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-10'
-            input: '(valid-root[TAG-10]+[Cat1=Val12]+[Cat2=Val21]'
-            output: 'valid-root'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-2'
-            input: '(valid-root[TAG-2]+[Cat1=Val12]+[Cat2=Val21]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-10'
+                input: '(valid-root[TAG-10]+[Cat1=Val12]+[Cat2=Val21]'
+                output: 'valid-root'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-2'
+                input: '(valid-root[TAG-2]+[Cat1=Val12]+[Cat2=Val21]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -424,23 +453,23 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "+[Cat3=Val31]",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-11'
-            input: '(valid-root[TAG-11]+[Cat3=Val31]'
-            output: 'valid-root'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-3'
-            input: '(valid-root[TAG-3]+[Cat3=Val31]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-11'
+                input: '(valid-root[TAG-11]+[Cat3=Val31]'
+                output: 'valid-root'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-3'
+                input: '(valid-root[TAG-3]+[Cat3=Val31]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -450,23 +479,24 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-12'
-            input: '(valid-root[TAG-12]'
-            output: 'valid-root'
-          }
-          rule {
-            from_state: 'START'
-            to_state: 'NOMP-CASE-BARE'
-            input: '(valid-root[NOMP]+[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Bare]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-12'
+                input: '(valid-root[TAG-12]'
+                output: 'valid-root'
+              }
+              rule {
+                from_state: 'START'
+                to_state: 'NOMP-CASE-BARE'
+                input: '(valid-root[NOMP]+[PersonNumber=A3sg]"""
+              """+[Possessive=Pnon]+[Case=Bare]'
+                output: 'valid-root'
+              }
+              """,
       },
       {
           "testcase_name":
@@ -476,17 +506,17 @@ class ParseTest(parameterized.TestCase):
               "root": "valid-root",
               "morphophonemics": "~",
               "features": "~",
-              "is_compound": "False"
+              "is_compound": "False",
           }],
           "expected_pbtxt":
               """
-          rule {
-            from_state: 'START'
-            to_state: 'TAG-1'
-            input: '(valid-root[TAG-1]'
-            output: 'valid-root'
-          }
-          """,
+              rule {
+                from_state: 'START'
+                to_state: 'TAG-1'
+                input: '(valid-root[TAG-1]'
+                output: 'valid-root'
+              }
+              """,
       },
   ])
   def test_success(self, entries, expected_pbtxt):

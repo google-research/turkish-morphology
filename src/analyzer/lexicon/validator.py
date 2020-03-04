@@ -15,7 +15,7 @@
 """Functions to validate lexicon entries."""
 
 import re
-from typing import Dict, Generator, List, Tuple
+from typing import Dict, Generator, Tuple
 
 from src.analyzer.lexicon import tags
 
@@ -58,7 +58,7 @@ def _is_compound_of(entry: _LexiconEntry) -> str:
 
 
 def _category_value_pairs(features: str
-                         ) -> Generator[_FeatureCategoryValuePair, None, None]:
+                          ) -> Generator[_FeatureCategoryValuePair, None, None]:
   """Extracts feature category-value pairs from features annotation string."""
   yield from (f for f in _FEATURE_CATEGORY_VALUE_REGEX.findall(features) if f)
 
@@ -83,7 +83,7 @@ def _entry_field_values_are_not_empty(entry: _LexiconEntry) -> None:
 
 
 def _entry_field_values_does_not_contain_infix_whitespace(entry: _LexiconEntry
-                                                         ) -> None:
+                                                          ) -> None:
   """Checks if entry has single token tag, morphophonemics and feature value."""
 
   def _has_multi_token_value(field: str) -> bool:

@@ -33,206 +33,355 @@ class TagSetItem:
 
 _TAG_SET = (
     # ADJ: Adjective.
-    TagSetItem(tag="JJ",
-               cross_classify_as=("NN", "NOMP", "PRI", "RB"),
-               optional_features={
-                   "Emphasis": {"True"},
-               }),
-    TagSetItem(tag="JJN",
-               is_fst_state=False,
-               cross_classify_as=("JJ", "NN", "NOMP"),
-               optional_features={
-                   "Emphasis": {"True"},
-               }),
+    TagSetItem(
+        tag="JJ",
+        cross_classify_as=("NN", "NOMP", "PRI", "RB"),
+        optional_features={
+            "Emphasis": {"True"},
+        },
+    ),
+    TagSetItem(
+        tag="JJN",
+        is_fst_state=False,
+        cross_classify_as=("JJ", "NN", "NOMP"),
+        optional_features={
+            "Emphasis": {"True"},
+        },
+    ),
     # ADP: Adposition.
-    TagSetItem(tag="IN",
-               cross_classify_as=("NN", "NOMP"),
-               required_features=collections.OrderedDict([
-                   ("ComplementType", {
-                       "CAbl", "CAcc", "CBare", "CDat", "CFin", "CGen", "CIns",
-                       "CNum"
-                   }),
-               ])),
+    TagSetItem(
+        tag="IN",
+        cross_classify_as=("NN", "NOMP"),
+        required_features=collections.OrderedDict([
+            ("ComplementType",
+             {"CAbl", "CAcc", "CBare", "CDat", "CFin", "CGen", "CIns", "CNum"}),
+        ]),
+    ),
     # ADV: Adverb.
-    TagSetItem(tag="RB",
-               optional_features={
-                   "Emphasis": {"True"},
-                   "Temporal": {"True"},
-               }),
-    TagSetItem(tag="RB-TEMP",
-               output_as="RB",
-               cross_classify_as=("NN-TEMP", "NOMP"),
-               required_features=collections.OrderedDict([
-                   ("Temporal", {"True"}),
-               ])),
-    TagSetItem(tag="WRB", cross_classify_as=("NOMP",)),
+    TagSetItem(
+        tag="RB",
+        optional_features={
+            "Emphasis": {"True"},
+            "Temporal": {"True"},
+        },
+    ),
+    TagSetItem(
+        tag="RB-TEMP",
+        output_as="RB",
+        cross_classify_as=("NN-TEMP", "NOMP"),
+        required_features=collections.OrderedDict([
+            ("Temporal", {"True"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="WRB",
+        cross_classify_as=("NOMP",),
+    ),
     # AFFIX: Affix.
     TagSetItem(tag="PFX"),
     # CONJ: Conjunction.
-    TagSetItem(tag="CC",
-               required_features=collections.OrderedDict([
-                   ("ConjunctionType", {"Adv", "Coor", "Par", "Sub"}),
-               ])),
+    TagSetItem(
+        tag="CC",
+        required_features=collections.OrderedDict([
+            ("ConjunctionType", {"Adv", "Coor", "Par", "Sub"}),
+        ]),
+    ),
     # DET: Determiner.
-    TagSetItem(tag="DT",
-               cross_classify_as=("NOMP", "PRI"),
-               required_features=collections.OrderedDict([
-                   ("DeterminerType", {"Def", "Dem", "Dir", "Ind"}),
-               ])),
-    TagSetItem(tag="PDT", cross_classify_as=("NOMP",)),
-    TagSetItem(tag="WDT", cross_classify_as=("PRI", "NOMP")),
+    TagSetItem(
+        tag="DT",
+        cross_classify_as=("NOMP", "PRI"),
+        required_features=collections.OrderedDict([
+            ("DeterminerType", {"Def", "Dem", "Dir", "Ind"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="PDT",
+        cross_classify_as=("NOMP",),
+    ),
+    TagSetItem(
+        tag="WDT",
+        cross_classify_as=("PRI", "NOMP"),
+    ),
     # EXS: Existential.
-    TagSetItem(tag="EX", cross_classify_as=("NOMP-CASE-BARE",)),
+    TagSetItem(
+        tag="EX",
+        cross_classify_as=("NOMP-CASE-BARE",),
+    ),
     # NOUN: Noun.
-    TagSetItem(tag="ADD", cross_classify_as=("NOMP-WITH-APOS",)),
-    TagSetItem(tag="NN", cross_classify_as=("NOMP",)),
-    TagSetItem(tag="NN-ABBR",
-               output_as="NN",
-               formatting="upper",
-               cross_classify_as=("NOMP-WITH-APOS",)),
-    TagSetItem(tag="NN-ABBR-APOS",
-               output_as="NN",
-               formatting="upper",
-               cross_classify_as=("NOMP-APOS",)),
-    TagSetItem(tag="NN-TEMP",
-               output_as="NN",
-               required_features=collections.OrderedDict([
-                   ("Temporal", {"True"}),
-               ])),
-    TagSetItem(tag="NNP",
-               formatting="capitals",
-               cross_classify_as=("NOMP-WITH-APOS",)),
-    TagSetItem(tag="NNP-ABBR",
-               output_as="NNP",
-               formatting="upper",
-               cross_classify_as=("NOMP-WITH-APOS",)),
+    TagSetItem(
+        tag="ADD",
+        cross_classify_as=("NOMP-WITH-APOS",),
+    ),
+    TagSetItem(
+        tag="NN",
+        cross_classify_as=("NOMP",),
+    ),
+    TagSetItem(
+        tag="NN-ABBR",
+        output_as="NN",
+        formatting="upper",
+        cross_classify_as=("NOMP-WITH-APOS",),
+    ),
+    TagSetItem(
+        tag="NN-ABBR-APOS",
+        output_as="NN",
+        formatting="upper",
+        cross_classify_as=("NOMP-APOS",),
+    ),
+    TagSetItem(
+        tag="NN-TEMP",
+        output_as="NN",
+        required_features=collections.OrderedDict([
+            ("Temporal", {"True"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="NNP",
+        formatting="capitals",
+        cross_classify_as=("NOMP-WITH-APOS",),
+    ),
+    TagSetItem(
+        tag="NNP-ABBR",
+        output_as="NNP",
+        formatting="upper",
+        cross_classify_as=("NOMP-WITH-APOS",),
+    ),
     # NUM: Number.
-    TagSetItem(tag="CD", cross_classify_as=("NN", "NOMP-WITH-APOS")),
-    TagSetItem(tag="CD-DIST",
-               is_fst_state=False,
-               cross_classify_as=("NN", "NOMP-WITH-APOS")),
-    TagSetItem(tag="CD-ORD",
-               is_fst_state=False,
-               cross_classify_as=("NN", "NOMP-WITH-APOS")),
+    TagSetItem(
+        tag="CD",
+        cross_classify_as=("NN", "NOMP-WITH-APOS"),
+    ),
+    TagSetItem(
+        tag="CD-DIST",
+        is_fst_state=False,
+        cross_classify_as=("NN", "NOMP-WITH-APOS"),
+    ),
+    TagSetItem(
+        tag="CD-ORD",
+        is_fst_state=False,
+        cross_classify_as=("NN", "NOMP-WITH-APOS"),
+    ),
     # ONOM: Onomatopoeic.
     TagSetItem(tag="DUP"),
     # PRON: Pronoun.
-    TagSetItem(tag="PRD", cross_classify_as=("NOMP",)),
-    TagSetItem(tag="PRD-PNON",
-               output_as="PRD",
-               cross_classify_as=("NOMP-PNON",),
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-                   ("Possessive", {"Pnon"}),
-               ])),
-    TagSetItem(tag="PRD-PNPOSS",
-               output_as="PRD",
-               cross_classify_as=("NOMP-PNPOSS",),
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-               ])),
-    TagSetItem(tag="PRI", cross_classify_as=("NOMP",)),
-    TagSetItem(tag="PRP",
-               cross_classify_as=("NOMP-PN",),
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-               ])),
-    TagSetItem(tag="PRP-CASE",
-               output_as="PRP",
-               cross_classify_as=("NOMP-CASE-MARKED",),
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-                   ("Possessive", {"Pnon"}),
-                   ("Case", {"Acc", "Abl", "Dat", "Gen", "Ins", "Loc"}),
-               ])),
-    TagSetItem(tag="PRP-IRR",
-               output_as="PRP",
-               cross_classify_as=("NOMP-PNON",),
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-                   ("Possessive", {"Pnon"}),
-               ])),
-    TagSetItem(tag="PRP$",
-               cross_classify_as=("NOMP-PNON",),
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-                   ("Possessive", {"Pnon"}),
-               ])),
-    TagSetItem(tag="PRR", cross_classify_as=("NOMP",)),
-    TagSetItem(tag="WP", cross_classify_as=("NOMP",)),
+    TagSetItem(
+        tag="PRD",
+        cross_classify_as=("NOMP",),
+    ),
+    TagSetItem(
+        tag="PRD-PNON",
+        output_as="PRD",
+        cross_classify_as=("NOMP-PNON",),
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+            ("Possessive", {"Pnon"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="PRD-PNPOSS",
+        output_as="PRD",
+        cross_classify_as=("NOMP-PNPOSS",),
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="PRI",
+        cross_classify_as=("NOMP",),
+    ),
+    TagSetItem(
+        tag="PRP",
+        cross_classify_as=("NOMP-PN",),
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="PRP-CASE",
+        output_as="PRP",
+        cross_classify_as=("NOMP-CASE-MARKED",),
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+            ("Possessive", {"Pnon"}),
+            ("Case", {"Acc", "Abl", "Dat", "Gen", "Ins", "Loc"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="PRP-IRR",
+        output_as="PRP",
+        cross_classify_as=("NOMP-PNON",),
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+            ("Possessive", {"Pnon"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="PRP$",
+        cross_classify_as=("NOMP-PNON",),
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+            ("Possessive", {"Pnon"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="PRR",
+        cross_classify_as=("NOMP",),
+    ),
+    TagSetItem(
+        tag="WP",
+        cross_classify_as=("NOMP",),
+    ),
     # PRT: Particle.
     TagSetItem(tag="EP"),
     TagSetItem(tag="OP"),
     TagSetItem(tag="RPC"),
-    TagSetItem(tag="RPNEG", cross_classify_as=("NOMP-CASE-BARE",)),
-    TagSetItem(tag="RPQ", cross_classify_as=("NOMP-CASE-BARE",)),
+    TagSetItem(
+        tag="RPNEG",
+        cross_classify_as=("NOMP-CASE-BARE",),
+    ),
+    TagSetItem(
+        tag="RPQ",
+        cross_classify_as=("NOMP-CASE-BARE",),
+    ),
     # PUNCT: Punctuation.
-    TagSetItem(tag="PUNCT-1", output_as="."),
-    TagSetItem(tag="PUNCT-2", output_as=","),
-    TagSetItem(tag="PUNCT-3", output_as=":"),
-    TagSetItem(tag="PUNCT-4", output_as="("),
-    TagSetItem(tag="PUNCT-5", output_as=")"),
-    TagSetItem(tag="PUNCT-6", output_as="``"),
-    TagSetItem(tag="PUNCT-7", output_as="'"),
-    TagSetItem(tag="PUNCT-8", output_as="-"),
+    TagSetItem(
+        tag="PUNCT-1",
+        output_as=".",
+    ),
+    TagSetItem(
+        tag="PUNCT-2",
+        output_as=",",
+    ),
+    TagSetItem(
+        tag="PUNCT-3",
+        output_as=":",
+    ),
+    TagSetItem(
+        tag="PUNCT-4",
+        output_as="(",
+    ),
+    TagSetItem(
+        tag="PUNCT-5",
+        output_as=")",
+    ),
+    TagSetItem(
+        tag="PUNCT-6",
+        output_as="``",
+    ),
+    TagSetItem(
+        tag="PUNCT-7",
+        output_as="'",
+    ),
+    TagSetItem(
+        tag="PUNCT-8",
+        output_as="-",
+    ),
     # VERB: Verb.
     TagSetItem(tag="NOMP"),
-    TagSetItem(tag="NOMP-APOS", output_as="NOMP"),
-    TagSetItem(tag="NOMP-CASE-BARE",
-               output_as="NOMP",
-               required_features=collections.OrderedDict([
-                   ("PersonNumber", {"A3sg"}),
-                   ("Possessive", {"Pnon"}),
-                   ("Case", {"Bare"}),
-               ])),
-    TagSetItem(tag="NOMP-CASE-MARKED",
-               output_as="NOMP",
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-                   ("Possessive", {"Pnon"}),
-                   ("Case", {"Acc", "Abl", "Dat", "Gen", "Ins", "Loc"}),
-               ])),
-    TagSetItem(tag="NOMP-PN",
-               output_as="NOMP",
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-               ])),
-    TagSetItem(tag="NOMP-PNON",
-               output_as="NOMP",
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-                   ("Possessive", {"Pnon"}),
-               ])),
-    TagSetItem(tag="NOMP-PNPOSS",
-               output_as="NOMP",
-               required_features=collections.OrderedDict([
-                   ("PersonNumber",
-                    {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
-               ])),
-    TagSetItem(tag="NOMP-WITH-APOS", output_as="NOMP"),
-    TagSetItem(tag="VB-HL-AR-DHR", output_as="VB"),
-    TagSetItem(tag="VB-HL-AR-HR", output_as="VB"),
-    TagSetItem(tag="VB-HL-AR-HT", output_as="VB"),
-    TagSetItem(tag="VB-HL-AR-NO", output_as="VB"),
-    TagSetItem(tag="VB-HL-AR-T", output_as="VB"),
-    TagSetItem(tag="VB-HL-HR-DHR", output_as="VB"),
-    TagSetItem(tag="VB-HL-HR-NO", output_as="VB"),
-    TagSetItem(tag="VB-HL-HR-T", output_as="VB"),
-    TagSetItem(tag="VB-HN-AR-DHR", output_as="VB"),
-    TagSetItem(tag="VB-HN-HR-DHR", output_as="VB"),
-    TagSetItem(tag="VB-HN-HR-NO", output_as="VB"),
-    TagSetItem(tag="VB-HN-HR-T", output_as="VB"),
-    TagSetItem(tag="VB-ON-OR-DHR", output_as="VB"),
-    TagSetItem(tag="VB-ON-OR-T", output_as="VB"),
+    TagSetItem(
+        tag="NOMP-APOS",
+        output_as="NOMP",
+    ),
+    TagSetItem(
+        tag="NOMP-CASE-BARE",
+        output_as="NOMP",
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A3sg"}),
+            ("Possessive", {"Pnon"}),
+            ("Case", {"Bare"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="NOMP-CASE-MARKED",
+        output_as="NOMP",
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+            ("Possessive", {"Pnon"}),
+            ("Case", {"Acc", "Abl", "Dat", "Gen", "Ins", "Loc"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="NOMP-PN",
+        output_as="NOMP",
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="NOMP-PNON",
+        output_as="NOMP",
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+            ("Possessive", {"Pnon"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="NOMP-PNPOSS",
+        output_as="NOMP",
+        required_features=collections.OrderedDict([
+            ("PersonNumber", {"A1sg", "A2sg", "A3sg", "A1pl", "A2pl", "A3pl"}),
+        ]),
+    ),
+    TagSetItem(
+        tag="NOMP-WITH-APOS",
+        output_as="NOMP",
+    ),
+    TagSetItem(
+        tag="VB-HL-AR-DHR",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HL-AR-HR",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HL-AR-HT",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HL-AR-NO",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HL-AR-T",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HL-HR-DHR",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HL-HR-NO",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HL-HR-T",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HN-AR-DHR",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HN-HR-DHR",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HN-HR-NO",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-HN-HR-T",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-ON-OR-DHR",
+        output_as="VB",
+    ),
+    TagSetItem(
+        tag="VB-ON-OR-T",
+        output_as="VB",
+    ),
     # X: Other.
     TagSetItem(tag="FW"),
     TagSetItem(tag="GW"),

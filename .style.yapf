@@ -1,3 +1,4 @@
 [style]
 based_on_style = google
+align_closing_bracket_with_visual_indent = true
 indent_width = 2

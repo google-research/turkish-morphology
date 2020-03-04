@@ -23,10 +23,8 @@ from absl.testing import parameterized
 
 _LEX_DIR = os.path.join("src", "analyzer", "lexicon", "testdata")
 _MORPH_DIR = os.path.join("src", "analyzer", "morphotactics", "testdata")
-
 _EXPECTED_SYMBOLS = os.path.join(_MORPH_DIR, "complex_symbols_expected.txt")
 _EXPECTED_FST = os.path.join(_MORPH_DIR, "text_fst_expected.txt")
-
 _TMP_DIR = "tmp"
 _TMP_LEX_DIR = os.path.join(_TMP_DIR, "lexicon")
 _TMP_MORPH_DIR = os.path.join(_TMP_DIR, "morphotactics")

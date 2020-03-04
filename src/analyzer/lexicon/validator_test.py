@@ -30,16 +30,20 @@ def setUpModule():
   # test cases.
   tag_set = (
       tags.TagSetItem(tag="TAG-1"),
-      tags.TagSetItem(tag="TAG-2",
-                      required_features=collections.OrderedDict([
-                          ("Cat1", {"Val11", "Val12"}),
-                          ("Cat2", {"Val21", "Val22"}),
-                      ])),
-      tags.TagSetItem(tag="TAG-3",
-                      optional_features={
-                          "Cat1": {"Val12"},
-                          "Cat3": {"Val31"},
-                      }),
+      tags.TagSetItem(
+          tag="TAG-2",
+          required_features=collections.OrderedDict([
+              ("Cat1", {"Val11", "Val12"}),
+              ("Cat2", {"Val21", "Val22"}),
+          ]),
+      ),
+      tags.TagSetItem(
+          tag="TAG-3",
+          optional_features={
+              "Cat1": {"Val12"},
+              "Cat3": {"Val31"},
+          },
+      ),
   )
   tags.VALID_TAGS.update({t.tag for t in tag_set})
   tags.REQUIRED_FEATURES.update({t.tag: t.required_features for t in tag_set})
@@ -377,9 +381,8 @@ class ValidateTest(parameterized.TestCase):
       },
       {
           "testcase_name": "InvalidMorphophonemics",
-          "error":
-              ("Entry is marked as ending with compounding marker but it is"
-               " missing morphophonemics annotation."),
+          "error": ("Entry is marked as ending with compounding marker but it"
+                    " is missing morphophonemics annotation."),
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
