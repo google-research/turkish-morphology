@@ -121,7 +121,7 @@ def _get_lexicon_rules(lexicon_dir: str) -> _RewriteRuleSet:
   """
 
   def _read_rule_set(path: str) -> _RewriteRule:
-    logging.info("reading rewrite rules from %r", path)
+    logging.info(f"reading rewrite rules from '{path}'")
     entries = lexicon_reader.read_lexicon_entries(path)  # might throw IOError.
 
     for index, entry in entries.items():
@@ -163,7 +163,7 @@ def _get_morphotactics_rules(morphotactics_dir: str) -> _RewriteRuleSet:
   """
 
   def _read_rule_set(path: str) -> _RewriteRule:
-    logging.info("reading rewrite rules from %r", path)
+    logging.info(f"reading rewrite rules from '{path}'")
     # Below read call might throw IOError.
     lines = morphotactics_reader.read_rule_definitions(path)
 
@@ -205,10 +205,11 @@ def _remove_duplicate_rules(rule_set: _RewriteRuleSet) -> None:
     return (rule.from_state, rule.to_state, rule.input, rule.output), rule
 
   inverted = collections.OrderedDict(map(_key_and_value, rule_set.rule))
-  duplicates = len(rule_set.rule) - len(inverted)
+  duplicate_count = len(rule_set.rule) - len(inverted)
 
-  if duplicates:
-    logging.info("found %i duplicate rewrite rules, removing them", duplicates)
+  if duplicate_count:
+    logging.info(
+        f"found {duplicate_count} duplicate rewrite rules, removing them")
     rule_set.ClearField("rule")
     rule_set.rule.extend([r for r in inverted.values()])
 
@@ -381,7 +382,7 @@ def _make_output_directory(output_dir: str) -> None:
   """Makes the output directory if it does not exist."""
   if output_dir and not os.path.exists(output_dir):
     os.makedirs(output_dir)
-    logging.info("output directory does not exist, made %r", output_dir)
+    logging.info(f"output directory does not exist, made '{output_dir}'")
 
 
 def _write_file(output_path: str, file_content: List[str]) -> None:
@@ -399,7 +400,7 @@ def _write_file(output_path: str, file_content: List[str]) -> None:
     for line in file_content:
       f.write(line.decode("utf-8"))
 
-  logging.info("wrote to %r", output_path)
+  logging.info(f"wrote to '{output_path}'")
 
 
 def main(unused_argv):

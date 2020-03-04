@@ -50,15 +50,16 @@ flags.DEFINE_string("treebank_dir", "scripts/treebank",
                     "Path to the directory which contains treebank files.")
 
 
-class EvaluationError(Exception):
-  """Raised when failure/success of the analyzer cannot be determined."""
-
-
 _SUCCESS_OUTPUT_REGEX = re.compile(
     r"Morphological analyses for the word '.+':(.+)", re.DOTALL)
 _FAILURE_OUTPUT_REGEX = re.compile(r".+is not accepted as a Turkish word.+",
                                    re.DOTALL)
 _IG_BOUNDARY_REGEX = re.compile(r"\(\[.+?\]-.+?")
+
+
+class EvaluationError(Exception):
+  """Raised when failure/success of the analyzer cannot be determined."""
+
 
 
 # Ad-hoc container to store aggregated statistics.
@@ -100,7 +101,7 @@ def _read_tokens(treebank_dir: str) -> List[str]:
 
   def _read_from(path: str) -> Generator[str, None, None]:
     """Reads tokens from CoNLL data file that lives in the path."""
-    logging.info("Reading tokens from '%s'", path)
+    logging.info(f"Reading tokens from '{path}'")
 
     with io.open(path, "r", encoding="utf-8") as reader:
       line_tokens = (_extract_tokens_from(l) for l in reader)
