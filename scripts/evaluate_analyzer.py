@@ -25,6 +25,7 @@ in CoNLL 2007 format. They will be picked up by this tool and used in
 calculating the statistics.
 """
 
+import dataclasses
 import glob
 import io
 import itertools
@@ -32,7 +33,7 @@ import multiprocessing
 import os
 import re
 import subprocess
-from typing import Generator, List, Tuple, Set
+from typing import Generator, Iterable, List, Tuple, Sequence, Set
 
 from absl import app
 from absl import flags
@@ -49,7 +50,6 @@ flags.DEFINE_string(
 flags.DEFINE_string("treebank_dir", "scripts/treebank",
                     "Path to the directory which contains treebank files.")
 
-
 _SUCCESS_OUTPUT_REGEX = re.compile(
     r"Morphological analyses for the word '.+':(.+)", re.DOTALL)
 _FAILURE_OUTPUT_REGEX = re.compile(r".+is not accepted as a Turkish word.+",
@@ -61,16 +61,19 @@ class EvaluationError(Exception):
   """Raised when failure/success of the analyzer cannot be determined."""
 
 
+@dataclasses.dataclass
+class _AnalysisIg:
+  analysis_count: int = dataclasses.field(default=0)
+  ig_count: int = dataclasses.field(default=0)
 
-# Ad-hoc container to store aggregated statistics.
-class Statistics():
-  success_count = 0
-  failure_count = 0
-  analysis_count_with_proper = 0
-  ig_count_with_proper = 0
-  analysis_count_without_proper = 0
-  ig_count_without_proper = 0
-  unparsed = set()
+
+@dataclasses.dataclass
+class _Statistics:
+  success_count: int = dataclasses.field(default=0)
+  failure_count: int = dataclasses.field(default=0)
+  unparsed: Set = dataclasses.field(default_factory=set)
+  with_proper: _AnalysisIg = dataclasses.field(default_factory=_AnalysisIg)
+  without_proper: _AnalysisIg = dataclasses.field(default_factory=_AnalysisIg)
 
 
 def _lower(string: str) -> str:
@@ -108,7 +111,7 @@ def _read_tokens(treebank_dir: str) -> List[str]:
       yield from itertools.chain.from_iterable(line_tokens)
 
   paths = glob.iglob(f"{treebank_dir}/*.conll")
-  file_tokens = [_read_from(p) for p in paths]
+  file_tokens = (_read_from(p) for p in paths)
   tokens = list(itertools.chain.from_iterable(file_tokens))
 
   if not tokens:
@@ -133,8 +136,8 @@ def _gather_analyses(word_form: str,
   success = _SUCCESS_OUTPUT_REGEX.match(output.decode("utf-8"))
 
   if success:
-    with_proper = set([a for a in success.group(1).split("\n") if a])
-    without_proper = set([_remove_proper(a) for a in with_proper])
+    with_proper = set(a for a in success.group(1).split("\n") if a)
+    without_proper = set(_remove_proper(a) for a in with_proper)
     return word_form, with_proper, without_proper
 
   failure = _FAILURE_OUTPUT_REGEX.match(output.decode("utf-8"))
@@ -148,9 +151,9 @@ def _gather_analyses(word_form: str,
       f" '{word_form}'. The output is:\n{output}")
 
 
-def _evaluate(word_forms: Set[str], far_path: str) -> Statistics:
+def _evaluate(word_forms: Iterable[str], far_path: str) -> _Statistics:
   """Collects statistics on coverage, and generated analysis and IG counts."""
-  statistics = Statistics()
+  statistics = _Statistics()
   pool = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
 
   def _ig_count(analysis: str) -> int:
@@ -168,15 +171,13 @@ def _evaluate(word_forms: Set[str], far_path: str) -> Statistics:
 
     statistics.success_count += 1
 
-    if with_proper:
-      statistics.analysis_count_with_proper += len(with_proper)
-      ig_count = sum([_ig_count(a) for a in with_proper])
-      statistics.ig_count_with_proper += ig_count
+    statistics.with_proper.analysis_count += len(with_proper)
+    ig_count = sum(_ig_count(a) for a in with_proper)
+    statistics.with_proper.ig_count += ig_count
 
-    if without_proper:
-      statistics.analysis_count_without_proper += len(without_proper)
-      ig_count = sum([_ig_count(a) for a in without_proper])
-      statistics.ig_count_without_proper += ig_count
+    statistics.without_proper.analysis_count += len(without_proper)
+    ig_count = sum(_ig_count(a) for a in without_proper)
+    statistics.without_proper.ig_count += ig_count
 
   for word_form in word_forms:
     process_args = (word_form, far_path)
@@ -187,8 +188,8 @@ def _evaluate(word_forms: Set[str], far_path: str) -> Statistics:
   return statistics
 
 
-def _prepare_summary(tokens: List[str], word_forms: Set[str],
-                     statistics: Statistics) -> str:
+def _prepare_summary(tokens: Sequence[str], word_forms: Sequence[str],
+                     statistics: _Statistics) -> str:
   """Generates a human-readable evaluation summary."""
   if not tokens:
     raise EvaluationError("Cannot generate evaluation summary without tokens.")
@@ -202,10 +203,10 @@ def _prepare_summary(tokens: List[str], word_forms: Set[str],
   coverage = statistics.success_count / form_count * 100
   success = statistics.success_count
   failure = statistics.failure_count
-  analysis_with_proper = statistics.analysis_count_with_proper
-  analysis_without_proper = statistics.analysis_count_without_proper
-  ig_with_proper = statistics.ig_count_with_proper
-  ig_without_proper = statistics.ig_count_without_proper
+  analysis_with_proper = statistics.with_proper.analysis_count
+  analysis_without_proper = statistics.without_proper.analysis_count
+  ig_with_proper = statistics.with_proper.ig_count
+  ig_without_proper = statistics.without_proper.ig_count
 
   if success:
     avg_analysis_with_proper = analysis_with_proper / success
@@ -256,7 +257,7 @@ def _prepare_summary(tokens: List[str], word_forms: Set[str],
 
 def main(unused_argv):
   tokens = _read_tokens(FLAGS.treebank_dir)
-  word_forms = set([_lower(t) for t in tokens])
+  word_forms = set(_lower(t) for t in tokens)
   statistics = _evaluate(word_forms, FLAGS.far_path)
   summary = _prepare_summary(tokens, word_forms, statistics)
   print(summary)

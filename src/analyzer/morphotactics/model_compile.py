@@ -333,7 +333,7 @@ def _text_fst_file_content(rule_set: _RewriteRuleSet
     form of 'FROM_INDEX TO_INDEX INPUT OUTPUT\n' (e.g. '0 5771 (dokun[VB] d\n').
   """
 
-  class _Local(object):
+  class _Local:
     state_count = 0
 
   def _new_state_index() -> int:
