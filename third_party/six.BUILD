@@ -1,7 +1,5 @@
 load("@rules_python//python:defs.bzl", "py_library")
 
-licenses(["notice"])  # MIT
-
 exports_files(["LICENSE"])
 
 py_library(

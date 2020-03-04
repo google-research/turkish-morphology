@@ -17,8 +17,6 @@ load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
 
 package(default_visibility = ["//src/analyzer:__pkg__"])
 
-licenses(["notice"])  # Apache 2.0
-
 py_library(
     name = "common",
     srcs = ["common.py"],

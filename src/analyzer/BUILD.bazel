@@ -14,8 +14,6 @@
 
 package(default_visibility = ["//scripts:__pkg__"])
 
-licenses(["notice"])  # Apache 2.0
-
 sh_binary(
     name = "build",
     srcs = ["build.sh"],

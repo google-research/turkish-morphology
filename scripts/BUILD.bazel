@@ -16,8 +16,6 @@ load("@rules_python//python:defs.bzl", "py_binary")
 
 package(default_visibility = ["//visibility:private"])
 
-licenses(["notice"])  # Apache 2.0
-
 py_binary(
     name = "evaluate_analyzer",
     srcs = ["evaluate_analyzer.py"],

@@ -19,8 +19,6 @@ package(default_visibility = [
     "//src/analyzer/morphophonemics:__pkg__",
 ])
 
-licenses(["notice"])  # Apache 2.0
-
 grm_compile(
     name = "alphabet",
     deps = [

@@ -16,8 +16,6 @@ load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
 package(default_visibility = ["//src/analyzer/morphotactics:__pkg__"])
 
-licenses(["notice"])  # Apache 2.0
-
 filegroup(
     name = "base_lexicon",
     srcs = glob([
