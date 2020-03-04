@@ -296,7 +296,7 @@ def _symbols_table_file_content(rule_set: _RewriteRuleSet
   """
 
   def _line(symbol: str, index: int) -> str:
-    return f"{symbol}\t{index}\n".encode("utf-8")
+    return f"{symbol}\t{index}\n"
 
   fst_symbols = []
 
@@ -343,7 +343,7 @@ def _text_fst_file_content(rule_set: _RewriteRuleSet
           to: str,
           input_: str = common.EPSILON,
           output: str = common.EPSILON) -> str:
-    return f"{from_}\t{to}\t{input_}\t{output}\n".encode("utf-8")
+    return f"{from_}\t{to}\t{input_}\t{output}\n"
 
   start_state = common.START_STATE
   epsilon = common.EPSILON
@@ -373,7 +373,7 @@ def _text_fst_file_content(rule_set: _RewriteRuleSet
     yield arc(from_, index_of[rule.to_state])
 
   # Last line should be the index of the accept state.
-  yield f"{index_of[common.ACCEPT_STATE]}\n".encode("utf-8")
+  yield f"{index_of[common.ACCEPT_STATE]}\n"
   logging.info("generated text FST file content")
 
 
@@ -396,8 +396,7 @@ def _write_file(output_path: str, file_content: List[str]) -> None:
     IOError: file content could not be written to the 'output_path'.
   """
   with open(output_path, "w+", encoding="utf-8") as f:
-    for line in file_content:
-      f.write(line.decode("utf-8"))
+    f.writelines(file_content)
 
   logging.info(f"wrote to '{output_path}'")
 
