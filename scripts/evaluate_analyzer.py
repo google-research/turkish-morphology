@@ -12,6 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
 """Tool to evaluate coverage and hypothesis space of the morphological analyzer.
 
 This tools collects aggregated statistics on coverage, and average number of
@@ -31,28 +32,21 @@ import itertools
 import multiprocessing
 import os
 import re
-import subprocess
 from typing import Generator, Iterable, List, Tuple, Sequence, Set
+
+from lib import analyze
 
 from absl import app
 from absl import flags
 from absl import logging
 
-_BASE_PATH = os.path.dirname(os.path.abspath(__file__))
-
 FLAGS = flags.FLAGS
 
-flags.DEFINE_string(
-    "far_path", os.path.join(_BASE_PATH, "../src/analyzer/bin/turkish.far"),
-    "Path to the FST archive which contains Turkish morphological"
-    " analyzer.")
 flags.DEFINE_string("treebank_dir", "scripts/treebank",
                     "Path to the directory which contains treebank files.")
 
-_SUCCESS_OUTPUT_REGEX = re.compile(
-    r"Morphological analyses for the word '.+':(.+)", re.DOTALL)
-_FAILURE_OUTPUT_REGEX = re.compile(r".+is not accepted as a Turkish word.+",
-                                   re.DOTALL)
+_AnalysisResult = Tuple[str, List[str], List[str]]
+
 _IG_BOUNDARY_REGEX = re.compile(r"\(\[.+?\]-.+?")
 
 
@@ -101,7 +95,7 @@ def _read_tokens(treebank_dir: str) -> List[str]:
     if token != "_":  # It's an inflectional group, not a word form.
       yield from token.split("_")
 
-  def _read_from(path: str) -> Generator[str, None, None]:
+  def _read_tokens_from(path: str) -> Generator[str, None, None]:
     """Reads tokens from CoNLL data file that lives in the path."""
     logging.info(f"Reading tokens from '{path}'")
 
@@ -110,7 +104,7 @@ def _read_tokens(treebank_dir: str) -> List[str]:
       yield from itertools.chain.from_iterable(line_tokens)
 
   paths = glob.iglob(f"{treebank_dir}/*.conll")
-  file_tokens = (_read_from(p) for p in paths)
+  file_tokens = (_read_tokens_from(p) for p in paths)
   tokens = list(itertools.chain.from_iterable(file_tokens))
 
   if not tokens:
@@ -120,71 +114,45 @@ def _read_tokens(treebank_dir: str) -> List[str]:
   return tokens
 
 
-def _gather_analyses(word_form: str,
-                     far_path: str) -> Tuple[str, Set[str], Set[str]]:
+def _gather_analyses(word_form: str) -> _AnalysisResult:
   """Gathers generated morphological analysis strings for a word form."""
-
-  def _remove_proper(analysis: str) -> str:
-    """Removes proper feature from the analysis string."""
-    return analysis.replace("+[Proper=False]", "").replace("+[Proper=True]", "")
-
-  output = subprocess.check_output(
-      ["./print_analyses", f"--far_path={far_path}", f"--word={word_form}"],
-      cwd=_BASE_PATH)
-
-  success = _SUCCESS_OUTPUT_REGEX.match(output.decode("utf-8"))
-
-  if success:
-    with_proper = set(a for a in success.group(1).split("\n") if a)
-    without_proper = set(_remove_proper(a) for a in with_proper)
-    return word_form, with_proper, without_proper
-
-  failure = _FAILURE_OUTPUT_REGEX.match(output.decode("utf-8"))
-
-  if failure:
-    return word_form, set(), set()
-
-  raise EvaluationError(
-      f"Cannot determine whether analyzer can parse the word or not given"
-      f" the output it generates for the word form"
-      f" '{word_form}'. The output is:\n{output}")
+  with_proper = analyze.surface_form(word_form)
+  without_proper = analyze.surface_form(word_form, use_proper_feature=False)
+  return word_form, with_proper, without_proper
 
 
-def _evaluate(word_forms: Iterable[str], far_path: str) -> _Statistics:
+def _evaluate(word_forms: Iterable[str]) -> _Statistics:
   """Collects statistics on coverage, and generated analysis and IG counts."""
-  statistics = _Statistics()
+  stats = _Statistics()
   pool = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
 
   def _ig_count(analysis: str) -> int:
     """Finds the number of inflectional groups in the analysis string."""
     return len(_IG_BOUNDARY_REGEX.findall(analysis)) + 1
 
-  def _aggregate_stats(result: Tuple[str, Set[str], Set[str]]) -> None:
+  def _aggregate_stats(result: _AnalysisResult) -> None:
     """Aggregates statistics for a word form."""
     word_form, with_proper, without_proper = result
 
     if not (with_proper and without_proper):
-      statistics.failure_count += 1
-      statistics.unparsed.add(word_form)
+      stats.failure_count += 1
+      stats.unparsed.add(word_form)
       return
 
-    statistics.success_count += 1
+    stats.success_count += 1
 
-    statistics.with_proper.analysis_count += len(with_proper)
-    ig_count = sum(_ig_count(a) for a in with_proper)
-    statistics.with_proper.ig_count += ig_count
+    stats.with_proper.analysis_count += len(with_proper)
+    stats.with_proper.ig_count += sum(_ig_count(a) for a in with_proper)
 
-    statistics.without_proper.analysis_count += len(without_proper)
-    ig_count = sum(_ig_count(a) for a in without_proper)
-    statistics.without_proper.ig_count += ig_count
+    stats.without_proper.analysis_count += len(without_proper)
+    stats.without_proper.ig_count += sum(_ig_count(a) for a in without_proper)
 
   for word_form in word_forms:
-    process_args = (word_form, far_path)
-    pool.apply_async(_gather_analyses, process_args, callback=_aggregate_stats)
+    pool.apply_async(_gather_analyses, (word_form,), callback=_aggregate_stats)
 
   pool.close()
   pool.join()
-  return statistics
+  return stats
 
 
 def _prepare_summary(tokens: Sequence[str], word_forms: Sequence[str],
@@ -219,7 +187,7 @@ def _prepare_summary(tokens: Sequence[str], word_forms: Sequence[str],
     avg_ig_without_proper = 0
 
   if statistics.unparsed:
-    failures = "\n      ".join(u for u in statistics.unparsed)
+    failures = "\n      ".join(u for u in sorted(statistics.unparsed))
   else:
     failures = "N\\A"
 
@@ -257,7 +225,7 @@ def _prepare_summary(tokens: Sequence[str], word_forms: Sequence[str],
 def main(unused_argv):
   tokens = _read_tokens(FLAGS.treebank_dir)
   word_forms = set(_lower(t) for t in tokens)
-  statistics = _evaluate(word_forms, FLAGS.far_path)
+  statistics = _evaluate(word_forms)
   summary = _prepare_summary(tokens, word_forms, statistics)
   print(summary)
 

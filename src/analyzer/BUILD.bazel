@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//scripts:__pkg__"])
+package(default_visibility = ["//lib:__pkg__"])
 
 sh_binary(
     name = "build",

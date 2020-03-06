@@ -12,39 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("@rules_python//python:defs.bzl", "py_binary")
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
-package(default_visibility = ["//visibility:private"])
+package(default_visibility = ["//visibility:public"])
 
-py_binary(
-    name = "evaluate_analyzer",
-    srcs = ["evaluate_analyzer.py"],
+py_library(
+    name = "analyze",
+    srcs = ["analyze.py"],
     data = [
-        ":treebank",
+        "//src/analyzer:build_fst",
+    ],
+    srcs_version = "PY3",
+    deps = [
+        "//src/analyzer/morphotactics:common",
+        "@openfst//:pywrapfst",
+    ],
+)
+
+py_test(
+    name = "analyze_test",
+    size = "small",
+    srcs = ["analyze_test.py"],
+    data = [
+        ":testdata",
     ],
     python_version = "PY3",
     srcs_version = "PY3",
     deps = [
-        "//lib:analyze",
-        "@io_abseil_py//absl:app",
-        "@io_abseil_py//absl/flags",
-        "@io_abseil_py//absl/logging",
+        ":analyze",
+        "@io_abseil_py//absl/testing:absltest",
+        "@io_abseil_py//absl/testing:parameterized",
     ],
-)
-
-py_binary(
-    name = "print_analyses",
-    srcs = ["print_analyses.py"],
-    python_version = "PY3",
-    srcs_version = "PY3",
-    deps = [
-        "//lib:analyze",
-        "@io_abseil_py//absl:app",
-        "@io_abseil_py//absl/flags",
-    ],
-)
-
-filegroup(
-    name = "treebank",
-    srcs = glob(["treebank/*.conll"]),
 )
