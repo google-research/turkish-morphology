@@ -33,9 +33,6 @@ py_test(
     name = "analyze_test",
     size = "small",
     srcs = ["analyze_test.py"],
-    data = [
-        ":testdata",
-    ],
     python_version = "PY3",
     srcs_version = "PY3",
     deps = [
