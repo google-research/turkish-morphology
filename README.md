@@ -217,7 +217,7 @@ Morphological analysis strings can be decomposed into parts:
 If you have used the code, data or tools from this repository in your work,
 please cite:
 
-Ozturel, A., Kayadelen, T. & Demirsahin, I (2019, September). [A syntactically
+Öztürel, A., Kayadelen, T. & Demirşahin, I (2019, September). [A syntactically
 expressive morphological analyzer for Turkish][13]. In Proceedings of the 14th
 International Conference on Finite-State Methods and Natural Language
 Processing (pp. 65-75).
