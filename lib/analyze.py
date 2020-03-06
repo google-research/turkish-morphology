@@ -15,7 +15,6 @@
 
 """Functions to morphologically analyze surface forms of Turkish words."""
 
-import copy
 import os
 import pathlib
 from typing import Generator, List, Optional
