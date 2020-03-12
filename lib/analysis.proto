@@ -1,0 +1,70 @@
+// Copyright 2020 The Google Research Authors.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+// Protocol buffer specification for rewrite rules of the morphotactics FST.
+
+syntax = "proto2";
+
+package public;
+
+
+message Root {
+  // Morheme which is the root form of the word.
+  optional string morpheme = 1;
+}
+
+message Feature {
+  // Feature category. For the feature category tagset, see:
+  //    //src/analyzer/morphotactics/README.md
+  optional string category = 1;
+
+  // Feature value. For the valid set of feature values per feature category,
+  // see:
+  //    //src/analuzer/morphotactics/README.md
+  optional string value = 2;
+}
+
+message Affix {
+  // Morphological feature of the affix.
+  optional Feature feature = 1;
+
+  // Meta-morpheme of the affix.
+  optional string meta_morpheme = 2;
+}
+
+message InflectionalGroup {
+  // Fine part-of-speech tag of the inflectional group. For the tagset, see:
+  //    //src/analyzer/lexicon/README.md
+  optional string pos = 1;
+
+  // Root (or stem) of the word. This field is set for only the the first
+  // inflectional group of the morphological analysis.
+  optional Root root = 2;
+
+  // Derivational affix. This field is set for all inflectional groups of the
+  // morphological analysis except the first.
+  optional Affix derivation = 3;
+
+  // Inflectional affixes. This field is optionally set if there inflections
+  // within the scope of the inflectional group.
+  repeated Affix inflection = 4;
+
+  // Proper feature.
+  optional bool proper = 5;
+}
+
+message Analysis {
+  // Inflectional groups of the morphological analysis.
+  repeated InflectionalGroup ig = 1;
+}

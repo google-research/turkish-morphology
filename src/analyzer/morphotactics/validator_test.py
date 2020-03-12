@@ -114,7 +114,7 @@ class ValidateTest(parameterized.TestCase):
               "<eps>",
               "EXTRA-TOKEN",
           ],
-          "error": "Expecting 4 tokens got 5.",
+          "message": "Expecting 4 tokens got 5.",
       },
       {
           "testcase_name": "MissingTokens",
@@ -122,7 +122,7 @@ class ValidateTest(parameterized.TestCase):
               "FROM-STATE",
               "TO-STATE",
           ],
-          "error": "Expecting 4 tokens got 2.",
+          "message": "Expecting 4 tokens got 2.",
       },
       {
           "testcase_name": "EmptyFromStateToken",
@@ -132,7 +132,7 @@ class ValidateTest(parameterized.TestCase):
               "<eps>",
               "<eps>",
           ],
-          "error": "Rule definition contains empty tokens.",
+          "message": "Rule definition contains empty tokens.",
       },
       {
           "testcase_name": "EmptyToStateToken",
@@ -142,7 +142,7 @@ class ValidateTest(parameterized.TestCase):
               "<eps>",
               "<eps>",
           ],
-          "error": "Rule definition contains empty tokens.",
+          "message": "Rule definition contains empty tokens.",
       },
       {
           "testcase_name": "EmptyRuleInputToken",
@@ -152,7 +152,7 @@ class ValidateTest(parameterized.TestCase):
               "",
               "<eps>",
           ],
-          "error": "Rule definition contains empty tokens.",
+          "message": "Rule definition contains empty tokens.",
       },
       {
           "testcase_name": "EmptyRuleOutputToken",
@@ -162,7 +162,7 @@ class ValidateTest(parameterized.TestCase):
               "<eps>",
               "",
           ],
-          "error": "Rule definition contains empty tokens.",
+          "message": "Rule definition contains empty tokens.",
       },
       {
           "testcase_name": "InvalidPrefixCharactersInInputToken",
@@ -172,7 +172,7 @@ class ValidateTest(parameterized.TestCase):
               "foo)([TAG]-ki[Cat=Val]]",
               "<eps>",
           ],
-          "error": "Invalid rule input label.",
+          "message": "Invalid rule input label.",
       },
       {
           "testcase_name": "InvalidInfixCharactersInInputToken",
@@ -182,7 +182,7 @@ class ValidateTest(parameterized.TestCase):
               ")foo+[Proper=True]",
               "<eps>",
           ],
-          "error": "Invalid rule input label.",
+          "message": "Invalid rule input label.",
       },
       {
           "testcase_name": "InvalidSuffixCharactersInInputToken",
@@ -192,7 +192,7 @@ class ValidateTest(parameterized.TestCase):
               "5[TAG]foo",
               "<eps>",
           ],
-          "error": "Invalid rule input label.",
+          "message": "Invalid rule input label.",
       },
       {
           "testcase_name": "InvalidRuleInputToken",
@@ -202,7 +202,7 @@ class ValidateTest(parameterized.TestCase):
               "Invalid-Input",
               "<eps>",
           ],
-          "error": "Invalid rule input label.",
+          "message": "Invalid rule input label.",
       },
       {
           "testcase_name": "InvalidRuleOutputToken",
@@ -212,12 +212,12 @@ class ValidateTest(parameterized.TestCase):
               "<eps>",
               "Invalid-Output",
           ],
-          "error": "Invalid rule output label.",
+          "message": "Invalid rule output label.",
       },
   ])
-  def test_raises_exception(self, rule_definition, error):
+  def test_raises_exception(self, rule_definition, message):
     with self.assertRaisesRegexp(validator.InvalidMorphotacticsRuleError,
-                                 error):
+                                 message):
       validator.validate(rule_definition)
 
 

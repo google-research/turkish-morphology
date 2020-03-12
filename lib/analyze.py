@@ -1,5 +1,5 @@
 # coding=utf-8
-# Copyright 2019 The Google Research Authors.
+# Copyright 2020 The Google Research Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -126,8 +126,12 @@ def _extract_analyses(output_fst: _Fst,
     if symbol != common.EPSILON:
       new_symbols.append(symbol)
 
-    yield from _extract_analyses(output_fst, arc.nextstate, symbol_table,
-                                 new_symbols)
+    yield from _extract_analyses(
+        output_fst,
+        arc.nextstate,
+        symbol_table,
+        new_symbols,
+    )
 
 
 def _remove_proper_feature(human_readable: str) -> str:
@@ -143,7 +147,7 @@ def surface_form(surface_form: str,
 
   Args:
     surface_form: surface form of a Turkish word that is to be morphologically
-      analzed.
+      analyzed.
     use_proper_feature: if true includes 'Proper' feature in the morphological
       analyses.
 

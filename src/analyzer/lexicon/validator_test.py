@@ -187,66 +187,66 @@ class ValidateTest(parameterized.TestCase):
   @parameterized.named_parameters([
       {
           "testcase_name": "MissingTag",
-          "error": "Entry is missing fields: 'tag'",
           "entry": {
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry is missing fields: 'tag'",
       },
       {
           "testcase_name": "MissingRoot",
-          "error": "Entry is missing fields: 'root'",
           "entry": {
               "tag": "TaG-1",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry is missing fields: 'root'",
       },
       {
           "testcase_name": "MissingMorphophonemics",
-          "error": "Entry is missing fields: 'morphophonemics'",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry is missing fields: 'morphophonemics'",
       },
       {
           "testcase_name": "MissingFeatures",
-          "error": "Entry is missing fields: 'features'",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "is_compound": "TrUe",
           },
+          "message": "Entry is missing fields: 'features'",
       },
       {
           "testcase_name": "MissingIsCompound",
-          "error": "Entry is missing fields: 'is_compound'",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
               "morphophonemics": "valid-morphophonemics",
               "features": "~",
           },
+          "message": "Entry is missing fields: 'is_compound'",
       },
       {
-          "testcase_name": "MissingMultipleRequiredField",
-          "error": ("Entry is missing fields: 'is_compound,"
-                    " morphophonemics, root"),
+          "testcase_name":
+              "MissingMultipleRequiredField",
           "entry": {
               "tag": "TaG-1",
               "features": "~",
           },
+          "message": ("Entry is missing fields: 'is_compound,"
+                      " morphophonemics, root"),
       },
       {
           "testcase_name": "EmptyTag",
-          "error": "Entry fields have empty values: 'tag'",
           "entry": {
               "tag": "",
               "root": "valid-root",
@@ -254,10 +254,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry fields have empty values: 'tag'",
       },
       {
           "testcase_name": "EmptyRoot",
-          "error": "Entry fields have empty values: 'root'",
           "entry": {
               "tag": "TaG-1",
               "root": "",
@@ -265,10 +265,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry fields have empty values: 'root'",
       },
       {
           "testcase_name": "EmptyMorphophonemics",
-          "error": "Entry fields have empty values: 'morphophonemics'",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
@@ -276,10 +276,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry fields have empty values: 'morphophonemics'",
       },
       {
           "testcase_name": "EmptyFeatures",
-          "error": "Entry fields have empty values: 'features'",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
@@ -287,10 +287,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "",
               "is_compound": "TrUe",
           },
+          "message": "Entry fields have empty values: 'features'",
       },
       {
           "testcase_name": "EmptyIsCompound",
-          "error": "Entry fields have empty values: 'is_compound'",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
@@ -298,11 +298,11 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "",
           },
+          "message": "Entry fields have empty values: 'is_compound'",
       },
       {
-          "testcase_name": "MultipleEmptyRequiredField",
-          "error": ("Entry fields have empty values: 'is_compound,"
-                    " morphophonemics, root'"),
+          "testcase_name":
+              "MultipleEmptyRequiredField",
           "entry": {
               "tag": "TaG-1",
               "root": "",
@@ -310,10 +310,11 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "",
           },
+          "message": ("Entry fields have empty values: 'is_compound,"
+                      " morphophonemics, root'"),
       },
       {
           "testcase_name": "TagContainsInfixWhitespace",
-          "error": "Entry field values contain whitespace: 'tag'",
           "entry": {
               "tag": "TaG 1",
               "root": "valid-root",
@@ -321,10 +322,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry field values contain whitespace: 'tag'",
       },
       {
           "testcase_name": "MorphophonemicsContainsInfixWhitespace",
-          "error": "Entry field values contain whitespace: 'morphophonemics'",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
@@ -332,10 +333,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry field values contain whitespace: 'morphophonemics'",
       },
       {
           "testcase_name": "FeaturesContainsInfixWhitespace",
-          "error": "Entry field values contain whitespace: 'features'",
           "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
@@ -343,10 +344,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1 = Val12]",
               "is_compound": "TrUe",
           },
+          "message": "Entry field values contain whitespace: 'features'",
       },
       {
           "testcase_name": "MultipleFieldsContainsInfixWhitespace",
-          "error": "Entry field values contain whitespace: 'features, tag'",
           "entry": {
               "tag": "TaG 3",
               "root": "valid-root",
@@ -354,12 +355,11 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1 = Val12]",
               "is_compound": "TrUe",
           },
+          "message": "Entry field values contain whitespace: 'features, tag'",
       },
       {
-          "testcase_name": "InvalidTag",
-          "error": ("Entry 'tag' field has invalid value. It can only be one of"
-                    " the valid tags that are defined in"
-                    " 'morphotactics_compiler/tags.py'."),
+          "testcase_name":
+              "InvalidTag",
           "entry": {
               "tag": "Invalid-Tag",
               "root": "valid-root",
@@ -367,11 +367,13 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": ("Entry 'tag' field has invalid value. It can only be one"
+                      " of the valid tags that are defined in"
+                      " 'morphotactics_compiler/tags.py'."),
       },
       {
-          "testcase_name": "InvalidIsCompound",
-          "error": ("Entry 'is_compound' field has invalid value. It can only"
-                    " have the values 'true' or 'false'."),
+          "testcase_name":
+              "InvalidIsCompound",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
@@ -379,11 +381,12 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "invalid-is-compound",
           },
+          "message": ("Entry 'is_compound' field has invalid value. It can only"
+                      " have the values 'true' or 'false'."),
       },
       {
-          "testcase_name": "InvalidMorphophonemics",
-          "error": ("Entry is marked as ending with compounding marker but it"
-                    " is missing morphophonemics annotation."),
+          "testcase_name":
+              "InvalidMorphophonemics",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
@@ -391,10 +394,11 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": ("Entry is marked as ending with compounding marker but it"
+                      " is missing morphophonemics annotation."),
       },
       {
           "testcase_name": "InvalidFeaturesInvalidPrefixCharacters",
-          "error": "Entry features annotation is invalid.",
           "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
@@ -402,10 +406,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "foo+[Cat1=Val12]+[Cat3=Val31]",
               "is_compound": "TrUe",
           },
+          "message": "Entry features annotation is invalid.",
       },
       {
           "testcase_name": "InvalidFeaturesInvalidInfixCharacters",
-          "error": "Entry features annotation is invalid.",
           "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
@@ -413,10 +417,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1=Val12]foo+[Cat3=Val31]",
               "is_compound": "TrUe",
           },
+          "message": "Entry features annotation is invalid.",
       },
       {
           "testcase_name": "InvalidFeaturesInvalidSuffixCharacters",
-          "error": "Entry features annotation is invalid.",
           "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
@@ -424,10 +428,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1=Val12]+[Cat3=Val31]foo",
               "is_compound": "TrUe",
           },
+          "message": "Entry features annotation is invalid.",
       },
       {
           "testcase_name": "NoRequiredFeatures",
-          "error": "Entry is missing required features.",
           "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
@@ -435,10 +439,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "~",
               "is_compound": "TrUe",
           },
+          "message": "Entry is missing required features.",
       },
       {
           "testcase_name": "MissingRequiredFeatures",
-          "error": "Entry has invalid required feature category.",
           "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
@@ -446,10 +450,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1=Val12]",
               "is_compound": "TrUe",
           },
+          "message": "Entry has invalid required feature category.",
       },
       {
           "testcase_name": "InvalidRequiredFeatureCategory",
-          "error": "Entry has invalid required feature category.",
           "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
@@ -457,10 +461,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1=Val12]+[Cat3=Val21]",
               "is_compound": "TrUe",
           },
+          "message": "Entry has invalid required feature category.",
       },
       {
           "testcase_name": "InvalidRequiredFeatureValue",
-          "error": "Entry has invalid required feature value.",
           "entry": {
               "tag": "TaG-2",
               "root": "valid-root",
@@ -468,10 +472,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1=Val12]+[Cat2=Val23]",
               "is_compound": "TrUe",
           },
+          "message": "Entry has invalid required feature value.",
       },
       {
           "testcase_name": "InvalidOptionalFeatureCategory",
-          "error": "Entry has invalid optional features.",
           "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
@@ -479,10 +483,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat2=Val12]",
               "is_compound": "TrUe",
           },
+          "message": "Entry has invalid optional features.",
       },
       {
           "testcase_name": "InvalidOptionalFeatureValue",
-          "error": "Entry has invalid optional features.",
           "entry": {
               "tag": "TaG-3",
               "root": "valid-root",
@@ -490,10 +494,10 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1=Val11]",
               "is_compound": "TrUe",
           },
+          "message": "Entry has invalid optional features.",
       },
       {
           "testcase_name": "RedundantFeatures",
-          "error": "Entry has features while it is not expected to have any.",
           "entry": {
               "tag": "TaG-1",
               "root": "valid-root",
@@ -501,10 +505,11 @@ class ValidateTest(parameterized.TestCase):
               "features": "+[Cat1=Val12]",
               "is_compound": "TrUe",
           },
+          "message": "Entry has features while it is not expected to have any.",
       },
   ])
-  def test_raises_exception(self, error, entry):
-    with self.assertRaisesRegexp(validator.InvalidLexiconEntryError, error):
+  def test_raises_exception(self, entry, message):
+    with self.assertRaisesRegexp(validator.InvalidLexiconEntryError, message):
       validator.validate(entry)
 
 

@@ -3,3 +3,4 @@ based_on_style = google
 align_closing_bracket_with_visual_indent = true
 blank_line_before_module_docstring = true
 indent_width = 2
+split_before_logical_operator = true

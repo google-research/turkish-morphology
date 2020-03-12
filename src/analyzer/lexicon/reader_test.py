@@ -101,16 +101,16 @@ class ReadLexiconEntriesTest(parameterized.TestCase):
       {
           "testcase_name": "InvalidPath",
           "path": os.path.join(_TESTDATA_DIR, "invalid_path.tsv"),
-          "exception": IOError,
+          "error": IOError,
       },
       {
           "testcase_name": "EmptyPath",
           "path": "",
-          "exception": IOError,
+          "error": IOError,
       },
   ])
-  def test_raises_exception(self, path, exception):
-    with self.assertRaises(exception):
+  def test_raises_exception(self, path, error):
+    with self.assertRaises(error):
       reader.read_lexicon_entries(path)
 
 

@@ -30,10 +30,10 @@ import dataclasses
 import glob
 import itertools
 import multiprocessing
-import re
 from typing import Generator, Iterable, List, Tuple, Sequence, Set
 
 from lib import analyze
+from lib import decompose
 
 from absl import app
 from absl import flags
@@ -45,8 +45,6 @@ flags.DEFINE_string("treebank_dir", "scripts/treebank",
                     "Path to the directory which contains treebank files.")
 
 _AnalysisResult = Tuple[str, List[str], List[str]]
-
-_IG_BOUNDARY_REGEX = re.compile(r"\(\[.+?\]-.+?")
 
 
 class EvaluationError(Exception):
@@ -125,9 +123,10 @@ def _evaluate(word_forms: Iterable[str]) -> _Statistics:
   stats = _Statistics()
   pool = multiprocessing.Pool(multiprocessing.cpu_count() - 1)
 
-  def _ig_count(analysis: str) -> int:
+  def _ig_count(human_readable: str) -> int:
     """Finds the number of inflectional groups in the analysis string."""
-    return len(_IG_BOUNDARY_REGEX.findall(analysis)) + 1
+    analysis = decompose.human_readable_analysis(human_readable)
+    return len(analysis.ig)
 
   def _aggregate_stats(result: _AnalysisResult) -> None:
     """Aggregates statistics for a word form."""
