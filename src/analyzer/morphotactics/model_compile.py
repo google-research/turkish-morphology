@@ -86,7 +86,7 @@ _SYMBOLS_REGEX = re.compile(
     # First inflectional group.
     r"\(.+?\[[A-Z\.,:\(\)\'\-\"`\$]+?\]|"
     # Inflectional group boundaries.
-    r"\)\(\[[A-Z]+?\]|"
+    r"\)?\(\[[A-Z]+?\]|"
     # Derivational morphemes.
     r"-(?:[^\W\d_]|')+?\[[A-z]+?=[A-z]+?\]|"
     # Inflectional morphemes and features.
