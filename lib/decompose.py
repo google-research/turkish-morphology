@@ -23,7 +23,6 @@ from lib import analysis_pb2
 
 _Affix = analysis_pb2.Affix
 _Analysis = analysis_pb2.Analysis
-_Ig = analysis_pb2.InflectionalGroup
 
 _AFFIX_REGEX = re.compile(
     # Derivation or inflection delimiter.
