@@ -1,4 +1,5 @@
-# Copyright 2019 The Google Research Authors.
+#! /bin/sh
+# Copyright 2020 The Google Research Authors.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,19 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-package(default_visibility = ["//visibility:public"])
-
-exports_files(["LICENSE"])
-
-sh_binary(
-    name = "setup",
-    srcs = ["setup.sh"],
-    data = [
-        "LICENSE",
-        "setup.py",
-        "//turkish_morphology:__init__.py",
-        "//turkish_morphology:analysis_py_pb2",
-        "//turkish_morphology:analyze",
-        "//turkish_morphology:decompose",
-    ],
-)
+cd "${0}.runfiles/turkish_morphology"
+python3 setup.py "$@"
