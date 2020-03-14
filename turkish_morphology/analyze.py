@@ -19,9 +19,7 @@ import os
 import pathlib
 from typing import Generator, List, Optional
 
-from src.analyzer.morphotactics import common
-
-import pywrapfst
+from external.openfst import pywrapfst
 
 _Arc = pywrapfst.Arc
 _Fst = pywrapfst.Fst
@@ -47,8 +45,8 @@ def _read_fst(far_path: str, fst_name: str) -> _Fst:
 # Finite-state archive that contains the Turkish morphological analyzer FST
 # is expected to be built into //src/analyzer/bin/turkish.far. See:
 # //src/analyzer/build.
-_BASE_DIR = pathlib.Path(__file__).parent.parent
-_FAR_PATH = os.path.join(_BASE_DIR, "src", "analyzer", "bin", "turkish.far")
+_ROOT_DIR = pathlib.Path(__file__).parent.parent
+_FAR_PATH = os.path.join(_ROOT_DIR, "src", "analyzer", "bin", "turkish.far")
 _FST_NAME = "turkish_morphological_analyzer"
 _MODEL = _read_fst(_FAR_PATH, _FST_NAME)
 
@@ -123,7 +121,7 @@ def _extract_analyses(output_fst: _Fst,
     new_symbols = [s for s in symbols]
     symbol = symbol_table.find(arc.olabel)
 
-    if symbol != common.EPSILON:
+    if symbol != "<eps>":
       new_symbols.append(symbol)
 
     yield from _extract_analyses(

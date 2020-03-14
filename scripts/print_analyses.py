@@ -16,7 +16,7 @@
 """Prints all possible morphological analysis strings for a given Turkish word.
 """
 
-from lib import analyze
+from turkish_morphology import analyze
 
 from absl import app
 from absl import flags

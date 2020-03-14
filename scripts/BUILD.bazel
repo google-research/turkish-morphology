@@ -25,8 +25,8 @@ py_binary(
     python_version = "PY3",
     srcs_version = "PY3",
     deps = [
-        "//lib:analyze",
-        "//lib:decompose",
+        "//turkish_morphology:analyze",
+        "//turkish_morphology:decompose",
         "@io_abseil_py//absl:app",
         "@io_abseil_py//absl/flags",
         "@io_abseil_py//absl/logging",
@@ -39,7 +39,7 @@ py_binary(
     python_version = "PY3",
     srcs_version = "PY3",
     deps = [
-        "//lib:analyze",
+        "//turkish_morphology:analyze",
         "@io_abseil_py//absl:app",
         "@io_abseil_py//absl/flags",
     ],

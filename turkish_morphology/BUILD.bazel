@@ -17,6 +17,8 @@ load("@rules_python//python:defs.bzl", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:public"])
 
+exports_files(["__init__.py"])
+
 py_proto_library(
     name = "analysis_py_pb2",
     srcs = ["analysis.proto"],
@@ -32,7 +34,6 @@ py_library(
     ],
     srcs_version = "PY3",
     deps = [
-        "//src/analyzer/morphotactics:common",
         "@openfst//:pywrapfst",
     ],
 )

@@ -32,8 +32,8 @@ import itertools
 import multiprocessing
 from typing import Generator, Iterable, List, Tuple, Sequence, Set
 
-from lib import analyze
-from lib import decompose
+from turkish_morphology import analyze
+from turkish_morphology import decompose
 
 from absl import app
 from absl import flags

@@ -19,7 +19,7 @@
 import re
 from typing import Generator
 
-from lib import analysis_pb2
+from turkish_morphology import analysis_pb2
 
 _Affix = analysis_pb2.Affix
 _Analysis = analysis_pb2.Analysis
@@ -144,7 +144,7 @@ def human_readable_analysis(human_readable: str) -> _Analysis:
 
   For the structure of the output analysis protobufs, see:
 
-      //lib/analysis.proto
+      //turkish_morphology/analysis.proto
 
   Args:
     human_readable: human-readable morphological analysis.

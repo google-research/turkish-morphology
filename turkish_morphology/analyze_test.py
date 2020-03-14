@@ -13,9 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Tests for lib.analyze."""
+"""Tests for turkish_morphology.analyze."""
 
-from lib import analyze
+from turkish_morphology import analyze
 
 from absl.testing import absltest
 from absl.testing import parameterized
