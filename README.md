@@ -207,7 +207,7 @@ Human-readable morphological analyses can be decomposed into parts:
 
 We also provide a [Python API][15] that can be used to morphologically analyze
 Turkish words and to parse human-readable morphological analyses into protobuf
-messages.
+messages. You can see some example use cases in [`//examples`][17].
 
 If you are using [Bazel][16], you can depend on this repository as an external
 dependency of your project by adding the following to your WORKSPACE file:
@@ -294,3 +294,4 @@ Unless otherwise noted, all original files are licensed under an
 [14]: https://pip.pypa.io/en/stable/installing/
 [15]: ./turkish_morphology
 [16]: https://bazel.build/
+[17]: ./examples
