@@ -15,6 +15,8 @@
 
 """Tests for turkish_morphology.decompose."""
 
+import os
+
 from turkish_morphology import analysis_pb2
 from turkish_morphology import decompose
 
@@ -22,216 +24,57 @@ from absl.testing import absltest
 from absl.testing import parameterized
 from google.protobuf import text_format
 
+_TESTDATA_DIR = "turkish_morphology/testdata"
+
+
+def _read_file(path):
+  with open(path, "r") as f:
+    read = f.read()
+  return read
+
+
+def _read_analysis(basename):
+  path = os.path.join(_TESTDATA_DIR, f"{basename}.pbtxt")
+  return text_format.Parse(_read_file(path), analysis_pb2.Analysis())
+
 
 class HumanReadableAnalysisTest(parameterized.TestCase):
 
   @parameterized.named_parameters([
       {
-          "testcase_name":
-              "SingleInflectionalGroupsWithProperFeature",
+          "testcase_name": "SingleInflectionalGroupsWithProperFeature",
           "human_readable":
               ("(araba[NN]+lAr[PersonNumber=A3pl]+[Possessive=Pnon]"
                "+DA[Case=Loc])+[Proper=True]"),
-          "expected_pbtxt":
-              """
-              ig {
-                pos: 'NN'
-                root {
-                  morpheme: 'araba'
-                }
-                inflection {
-                  feature {
-                    category: 'PersonNumber'
-                    value: 'A3pl'
-                  }
-                  meta_morpheme: 'lAr'
-                }
-                inflection {
-                  feature {
-                    category: 'Possessive'
-                    value: 'Pnon'
-                  }
-                }
-                inflection {
-                  feature {
-                    category: 'Case'
-                    value: 'Loc'
-                  }
-                  meta_morpheme: 'DA'
-                }
-                proper: true
-              }""",
+          "basename": "araba_with_proper",
       },
       {
-          "testcase_name":
-              "SingleInflectionalGroupsWithoutProperFeature",
+          "testcase_name": "SingleInflectionalGroupsWithoutProperFeature",
           "human_readable":
               ("(araba[NN]+lAr[PersonNumber=A3pl]+[Possessive=Pnon]"
                "+DA[Case=Loc])"),
-          "expected_pbtxt":
-              """
-              ig {
-                pos: 'NN'
-                root {
-                  morpheme: 'araba'
-                }
-                inflection {
-                  feature {
-                    category: 'PersonNumber'
-                    value: 'A3pl'
-                  }
-                  meta_morpheme: 'lAr'
-                }
-                inflection {
-                  feature {
-                    category: 'Possessive'
-                    value: 'Pnon'
-                  }
-                }
-                inflection {
-                  feature {
-                    category: 'Case'
-                    value: 'Loc'
-                  }
-                  meta_morpheme: 'DA'
-                }
-              }""",
+          "basename": "araba_without_proper",
       },
       {
-          "testcase_name":
-              "MultipleInflectionalGroupsWithProperFeature",
+          "testcase_name": "MultipleInflectionalGroupsWithProperFeature",
           "human_readable":
               ("(yaşa[VB]+[Polarity=Pos])([NOMP]-DHk[Derivation=PastNom]"
                "+lAr[PersonNumber=A3pl]+Hm[Possessive=P1sg]+NDAn[Case=Abl]"
                "+[Copula=PresCop]+[PersonNumber=V3pl])+[Proper=False]"),
-          "expected_pbtxt":
-              """
-              ig {
-                pos: 'VB'
-                root {
-                  morpheme: 'yaşa'
-                }
-                inflection {
-                  feature {
-                    category: 'Polarity'
-                    value: 'Pos'
-                  }
-                }
-              }
-              ig {
-                pos: 'NOMP'
-                derivation {
-                  feature {
-                    category: 'Derivation'
-                    value: 'PastNom'
-                  }
-                  meta_morpheme: 'DHk'
-                }
-                inflection {
-                  feature {
-                    category: 'PersonNumber'
-                    value: 'A3pl'
-                  }
-                  meta_morpheme: 'lAr'
-                }
-                inflection {
-                  feature {
-                    category: 'Possessive'
-                    value: 'P1sg'
-                  }
-                  meta_morpheme: 'Hm'
-                }
-                inflection {
-                  feature {
-                    category: 'Case'
-                    value: 'Abl'
-                  }
-                  meta_morpheme: 'NDAn'
-                }
-                inflection {
-                  feature {
-                    category: 'Copula'
-                    value: 'PresCop'
-                  }
-                }
-                inflection {
-                  feature {
-                    category: 'PersonNumber'
-                    value: 'V3pl'
-                  }
-                }
-                proper: false
-              }""",
+          "basename": "yasa_with_proper",
       },
       {
-          "testcase_name":
-              "MultipleInflectionalGroupsWithoutProperFeature",
+          "testcase_name": "MultipleInflectionalGroupsWithoutProperFeature",
           "human_readable":
               ("(yaşa[VB]+[Polarity=Pos])([NOMP]-DHk[Derivation=PastNom]"
                "+lAr[PersonNumber=A3pl]+Hm[Possessive=P1sg]+NDAn[Case=Abl]"
                "+[Copula=PresCop]+[PersonNumber=V3pl])"),
-          "expected_pbtxt":
-              """
-              ig {
-                pos: 'VB'
-                root {
-                  morpheme: 'yaşa'
-                }
-                inflection {
-                  feature {
-                    category: 'Polarity'
-                    value: 'Pos'
-                  }
-                }
-              }
-              ig {
-                pos: 'NOMP'
-                derivation {
-                  feature {
-                    category: 'Derivation'
-                    value: 'PastNom'
-                  }
-                  meta_morpheme: 'DHk'
-                }
-                inflection {
-                  feature {
-                    category: 'PersonNumber'
-                    value: 'A3pl'
-                  }
-                  meta_morpheme: 'lAr'
-                }
-                inflection {
-                  feature {
-                    category: 'Possessive'
-                    value: 'P1sg'
-                  }
-                  meta_morpheme: 'Hm'
-                }
-                inflection {
-                  feature {
-                    category: 'Case'
-                    value: 'Abl'
-                  }
-                  meta_morpheme: 'NDAn'
-                }
-                inflection {
-                  feature {
-                    category: 'Copula'
-                    value: 'PresCop'
-                  }
-                }
-                inflection {
-                  feature {
-                    category: 'PersonNumber'
-                    value: 'V3pl'
-                  }
-                }
-              }""",
+          "basename": "yasa_without_proper",
       },
   ])
-  def test_success(self, human_readable, expected_pbtxt):
+  def test_success(self, human_readable, basename):
     actual = decompose.human_readable_analysis(human_readable)
-    expected = text_format.Parse(expected_pbtxt, analysis_pb2.Analysis())
+    expected = _read_analysis(basename)
     self.assertEqual(expected, actual)
 
   @parameterized.named_parameters([

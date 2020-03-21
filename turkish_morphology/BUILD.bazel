@@ -64,6 +64,9 @@ py_test(
     name = "decompose_test",
     size = "small",
     srcs = ["decompose_test.py"],
+    data = [
+        ":test_analyses",
+    ],
     python_version = "PY3",
     srcs_version = "PY3",
     deps = [
@@ -72,4 +75,11 @@ py_test(
         "@io_abseil_py//absl/testing:absltest",
         "@io_abseil_py//absl/testing:parameterized",
     ],
+)
+
+filegroup(
+    name = "test_analyses",
+    srcs = glob([
+        "testdata/*.pbtxt",
+    ]),
 )

@@ -1,0 +1,27 @@
+ig {
+  pos: 'NN'
+  root {
+    morpheme: 'araba'
+  }
+  inflection {
+    feature {
+      category: 'PersonNumber'
+      value: 'A3pl'
+    }
+    meta_morpheme: 'lAr'
+  }
+  inflection {
+    feature {
+      category: 'Possessive'
+      value: 'Pnon'
+    }
+  }
+  inflection {
+    feature {
+      category: 'Case'
+      value: 'Loc'
+    }
+    meta_morpheme: 'DA'
+  }
+  proper: true
+}
