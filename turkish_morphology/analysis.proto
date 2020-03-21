@@ -16,7 +16,7 @@
 
 syntax = "proto2";
 
-package public;
+package turkish_morphology;
 
 
 message Root {
