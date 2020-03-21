@@ -20,23 +20,23 @@ package turkish_morphology;
 
 
 message Root {
-  // Morheme which is the root form of the word.
+  // Actually required. Morheme which is the root form of the word.
   optional string morpheme = 1;
 }
 
 message Feature {
-  // Feature category. For the feature category tagset, see:
+  // Actually required. Feature category. For the feature category tagset, see:
   //    //src/analyzer/morphotactics/README.md
   optional string category = 1;
 
-  // Feature value. For the valid set of feature values per feature category,
-  // see:
+  // Actually required. Feature value. For the valid set of feature values per
+  // feature category, see:
   //    //src/analuzer/morphotactics/README.md
   optional string value = 2;
 }
 
 message Affix {
-  // Morphological feature of the affix.
+  // Actually required. Morphological feature of the affix.
   optional Feature feature = 1;
 
   // Meta-morpheme of the affix.
@@ -44,7 +44,8 @@ message Affix {
 }
 
 message InflectionalGroup {
-  // Fine part-of-speech tag of the inflectional group. For the tagset, see:
+  // Actually required. Fine part-of-speech tag of the inflectional group.
+  // For the tagset, see:
   //    //src/analyzer/lexicon/README.md
   optional string pos = 1;
 
@@ -65,6 +66,6 @@ message InflectionalGroup {
 }
 
 message Analysis {
-  // Inflectional groups of the morphological analysis.
+  // Actually required. Inflectional groups of the morphological analysis.
   repeated InflectionalGroup ig = 1;
 }
