@@ -26,6 +26,7 @@ sh_binary(
         "//turkish_morphology:analysis_py_pb2",
         "//turkish_morphology:analyze",
         "//turkish_morphology:decompose",
+        "//turkish_morphology:fst",
         "//turkish_morphology:validate",
     ],
 )
