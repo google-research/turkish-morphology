@@ -30,11 +30,11 @@ class IllformedAnalysisError(Exception):
   """Raised when a human-readable analysis is structurally ill-formed."""
 
 
-def _validate_root(root: _Root) -> None:
+def _root(root: _Root) -> None:
   """Checks if root is structurally well-formed.
 
   Args:
-    root: root of the word.
+    root: root analysis.
 
   Raises:
     IllformedAnalysisError: root is missing the morpheme field, or its
@@ -47,7 +47,7 @@ def _validate_root(root: _Root) -> None:
     raise IllformedAnalysisError(f"Root morpheme is empty: '{root}'")
 
 
-def _validate_feature(feature: _Feature) -> None:
+def _feature(feature: _Feature) -> None:
   """Checks if feature is structurally well-formed.
 
   Args:
@@ -70,13 +70,12 @@ def _validate_feature(feature: _Feature) -> None:
     raise IllformedAnalysisError(f"Feature value is empty: '{feature}'")
 
 
-def _validate_affix(affix: _Affix,
-                    derivational: Optional[bool] = False) -> None:
+def _affix(affix: _Affix, derivational: Optional[bool] = False) -> None:
   """Checks if affix is structurally well-formed.
 
   Args:
     affix: affix analysis.
-    derivational: if true, affix corresponds to a derivational feature.
+    derivational: if True, affix corresponds to a derivational feature.
 
   Raises:
     IllformedAnalysisError: affix is missing the feature field, or affix is
@@ -86,7 +85,7 @@ def _validate_affix(affix: _Affix,
   if not affix.HasField("feature"):
     raise IllformedAnalysisError(f"Affix is missing feature: '{affix}'")
 
-  _validate_feature(affix.feature)
+  _feature(affix.feature)
 
   if not derivational:
     return
@@ -100,11 +99,11 @@ def _validate_affix(affix: _Affix,
         f"Derivational affix meta-morpheme is empty: '{affix}'")
 
 
-def _validate_inflectional_group(ig: _Ig, position: int) -> None:
+def _inflectional_group(ig: _Ig, position: int) -> None:
   """Checks if inflectional group is structurally well-formed.
 
   Args:
-    ig: inflectional group.
+    ig: inflectional group analysis.
     position: index of the inflectional group w.r.t. the array of inflectional
       groups of the morphological analysis it belongs to.
 
@@ -129,21 +128,21 @@ def _validate_inflectional_group(ig: _Ig, position: int) -> None:
       raise IllformedAnalysisError(
           f"Inflectional group {position + 1} is missing root: '{ig}'")
 
-    _validate_root(ig.root)
+    _root(ig.root)
   else:
     if not ig.HasField("derivation"):
       raise IllformedAnalysisError(
           f"Inflectional group {position + 1} is missing derivational affix:"
           f" '{ig}'")
 
-    _validate_affix(ig.derivation, derivational=True)
+    _affix(ig.derivation, derivational=True)
 
   for inflection in ig.inflection:
-    _validate_affix(inflection)
+    _affix(inflection)
 
 
 def analysis(analysis: _Analysis) -> None:
-  """Checks if analysis is structurally well-formed.
+  """Checks if analysis protobuf is structurally well-formed.
 
   Args:
     analysis: morphological analysis.
@@ -156,4 +155,4 @@ def analysis(analysis: _Analysis) -> None:
         "Analysis is missing inflectional groups: 'analysis'")
 
   for position, ig in enumerate(analysis.ig):
-    _validate_inflectional_group(ig, position)
+    _inflectional_group(ig, position)

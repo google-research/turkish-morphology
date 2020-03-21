@@ -95,6 +95,32 @@ filegroup(
 )
 
 py_library(
+    name = "pretty_print",
+    srcs = ["pretty_print.py"],
+    srcs_version = "PY3",
+    deps = [
+        ":analysis_py_pb2",
+    ],
+)
+
+py_test(
+    name = "pretty_print_test",
+    size = "small",
+    srcs = ["pretty_print_test.py"],
+    data = [
+        ":test_analyses",
+    ],
+    python_version = "PY3",
+    srcs_version = "PY3",
+    deps = [
+        ":analysis_py_pb2",
+        ":pretty_print",
+        "@io_abseil_py//absl/testing:absltest",
+        "@io_abseil_py//absl/testing:parameterized",
+    ],
+)
+
+py_library(
     name = "validate",
     srcs = ["validate.py"],
     srcs_version = "PY3",
