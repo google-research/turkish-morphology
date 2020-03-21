@@ -29,11 +29,9 @@ py_proto_library(
 py_library(
     name = "analyze",
     srcs = ["analyze.py"],
-    data = [
-        "//src/analyzer:build_fst",
-    ],
     srcs_version = "PY3",
     deps = [
+        ":fst",
         "@openfst//:pywrapfst",
     ],
 )
@@ -74,6 +72,18 @@ py_test(
         ":decompose",
         "@io_abseil_py//absl/testing:absltest",
         "@io_abseil_py//absl/testing:parameterized",
+    ],
+)
+
+py_library(
+    name = "fst",
+    srcs = ["fst.py"],
+    data = [
+        "//src/analyzer:build_fst",
+    ],
+    srcs_version = "PY3",
+    deps = [
+        "@openfst//:pywrapfst",
     ],
 )
 

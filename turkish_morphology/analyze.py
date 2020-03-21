@@ -15,9 +15,9 @@
 
 """Functions to morphologically analyze surface forms of Turkish words."""
 
-import os
-import pathlib
 from typing import Generator, List, Optional
+
+from turkish_morphology import fst
 
 from external.openfst import pywrapfst
 
@@ -25,30 +25,6 @@ _Arc = pywrapfst.Arc
 _Fst = pywrapfst.Fst
 _SymbolTable = pywrapfst.SymbolTable
 _Weight = pywrapfst.Weight
-
-
-def _read_fst(far_path: str, fst_name: str) -> _Fst:
-  """Reads FAR file from path and extracts the FST that has the sought name.
-
-  Args:
-    far_path: path to the finite-state archive that contains the sought FST.
-    fst_name: name of the FST that will extracted from the finite-state archive.
-
-  Returns:
-    FST that has the sought name, which is extracted from the finite-state
-    archive that is read from the path.
-  """
-  reader = pywrapfst.FarReader.open(far_path)
-  return reader[fst_name]
-
-
-# Finite-state archive that contains the Turkish morphological analyzer FST
-# is expected to be built into //src/analyzer/bin/turkish.far. See:
-# //src/analyzer/build.
-_ROOT_DIR = pathlib.Path(__file__).parent.parent
-_FAR_PATH = os.path.join(_ROOT_DIR, "src", "analyzer", "bin", "turkish.far")
-_FST_NAME = "turkish_morphological_analyzer"
-_MODEL = _read_fst(_FAR_PATH, _FST_NAME)
 
 
 def _input_fst(surface_form: str, symbol_table: _SymbolTable) -> _Fst:
@@ -67,26 +43,25 @@ def _input_fst(surface_form: str, symbol_table: _SymbolTable) -> _Fst:
   Returns:
     FST that is compiled from the surface form.
   """
-  fst = _Fst()
-  last_state_index = fst.add_state()
-  fst.set_start(last_state_index)
+  input_fst = _Fst()
+  last_state_index = input_fst.add_state()
+  input_fst.set_start(last_state_index)
 
   for symbol_index in surface_form.encode("utf-8"):
     arc = _Arc(symbol_index, symbol_index, 0, last_state_index + 1)
-    fst.add_arc(last_state_index, arc)
-    last_state_index = fst.add_state()
+    input_fst.add_arc(last_state_index, arc)
+    last_state_index = input_fst.add_state()
 
-  fst.set_final(last_state_index, 0)
-  fst.set_input_symbols(symbol_table)
-  fst.set_output_symbols(symbol_table)
-  return fst
+  input_fst.set_final(last_state_index, 0)
+  input_fst.set_input_symbols(symbol_table)
+  input_fst.set_output_symbols(symbol_table)
+  return input_fst
 
 
-def _output_fst(model_fst: _Fst, input_fst: _Fst) -> _Fst:
-  """Composes input FST with the model FST to create an FST with analyses."""
+def _output_fst(analyzer_fst: _Fst, input_fst: _Fst) -> _Fst:
+  """Composes input FST with the analyzer FST to create an FST with analyses."""
   input_fst.arcsort(sort_type="olabel")
-  fst = pywrapfst.compose(input_fst, model_fst)
-  return fst
+  return pywrapfst.compose(input_fst, analyzer_fst)
 
 
 def _extract_analyses(output_fst: _Fst,
@@ -102,7 +77,7 @@ def _extract_analyses(output_fst: _Fst,
   human-readable analyses.
 
   Args:
-    output_fst: FST that is yielded after composing input and model FST.
+    output_fst: FST that is yielded after composing input and analyzer FST.
     state_index: index of an FST state from which the paths to accept state will
       be traversed.
     symbol_table: symbol table of the Turkish morphological analyzer FST.
@@ -154,17 +129,14 @@ def surface_form(surface_form: str,
     analyzer yields for the given surface form. Returns an empty list if the
     given surface form is not accepted as a Turkish word form.
   """
-  input_ = _input_fst(surface_form, _MODEL.input_symbols())
-  output = _output_fst(_MODEL, input_)
+  symbols = fst.ANALYZER.input_symbols()
+  input_ = _input_fst(surface_form, symbols)
+  output = _output_fst(fst.ANALYZER, input_)
 
   if output.start() == -1:  # has no path to the accept state.
     return []
 
-  human_readable = _extract_analyses(
-      output,
-      output.start(),
-      _MODEL.input_symbols(),
-  )
+  human_readable = _extract_analyses(output, output.start(), symbols)
 
   if not use_proper_feature:
     human_readable = (_remove_proper_feature(hr) for hr in human_readable)
