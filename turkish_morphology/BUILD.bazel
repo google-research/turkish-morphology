@@ -83,3 +83,29 @@ filegroup(
         "testdata/*.pbtxt",
     ]),
 )
+
+py_library(
+    name = "validate",
+    srcs = ["validate.py"],
+    srcs_version = "PY3",
+    deps = [
+        ":analysis_py_pb2",
+    ],
+)
+
+py_test(
+    name = "validate_test",
+    size = "small",
+    srcs = ["validate_test.py"],
+    data = [
+        ":test_analyses",
+    ],
+    python_version = "PY3",
+    srcs_version = "PY3",
+    deps = [
+        ":analysis_py_pb2",
+        ":validate",
+        "@io_abseil_py//absl/testing:absltest",
+        "@io_abseil_py//absl/testing:parameterized",
+    ],
+)

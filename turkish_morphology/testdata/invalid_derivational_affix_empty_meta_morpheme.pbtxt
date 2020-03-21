@@ -1,0 +1,56 @@
+ig {
+  pos: 'VB'
+  root {
+    morpheme: 'yaşa'
+  }
+  inflection {
+    feature {
+      category: 'Polarity'
+      value: 'Pos'
+    }
+  }
+}
+ig {
+  pos: 'NOMP'
+  derivation {
+    feature {
+      category: 'Derivation'
+      value: 'PastNom'
+    }
+    meta_morpheme: ''
+  }
+  inflection {
+    feature {
+      category: 'PersonNumber'
+      value: 'A3pl'
+    }
+    meta_morpheme: 'lAr'
+  }
+  inflection {
+    feature {
+      category: 'Possessive'
+      value: 'P1sg'
+    }
+    meta_morpheme: 'Hm'
+  }
+  inflection {
+    feature {
+      category: 'Case'
+      value: 'Abl'
+    }
+    meta_morpheme: 'NDAn'
+  }
+  inflection {
+    feature {
+      category: 'Copula'
+      value: 'PresCop'
+    }
+  }
+  inflection {
+    feature {
+      category: 'PersonNumber'
+      value: 'V3pl'
+    }
+  }
+  proper: false
+}
