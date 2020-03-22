@@ -17,7 +17,7 @@ import setuptools
 
 setuptools.setup(
     name="turkish-morphology",
-    version="1.0.0",
+    version="1.1.0",
     description="Turkish Morphology",
     long_description="A two-level morphological analyzer for Turkish.",
     url="https://github.com/google-research/turkish-morphology",
