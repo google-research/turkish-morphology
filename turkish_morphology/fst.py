@@ -13,14 +13,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Functions to read Turkish morphological analyzer FST."""
+"""Turkish morphological analyzer FST utility functions."""
 
 import os
 import pathlib
+from typing import Generator, Iterable, List, Optional
 
 from external.openfst import pywrapfst
 
+_Arc = pywrapfst.Arc
 _Fst = pywrapfst.Fst
+_SymbolTable = pywrapfst.SymbolTable
 
 # Finite-state archive that contains the Turkish morphological analyzer FST
 # is expected to be built into //src/analyzer/bin/turkish.far. See:
@@ -46,3 +49,92 @@ def _read_fst(far_path: str, fst_name: str) -> _Fst:
 
 
 ANALYZER = _read_fst(_FAR_PATH, _FST_NAME)
+
+
+def compile(symbol_indices: Iterable[int], symbol_table: _SymbolTable) -> _Fst:
+  """Compiles given sequnce of symbols in an FST.
+
+  This function has similar behaviour to the StringCompiler that is initialized
+  with BYTE StringTokenType, see:
+
+      @openfst//src/include/fst/string.h
+
+  Args:
+    symbol_indices: indices of the sequence of symbols from the symbol table.
+    symbol_table: symbol table which will be used to set as the symbol table
+      of the compiled FST.
+
+  Returns:
+    FST that is compiled from the symbol indices.
+  """
+  fst = _Fst()
+  last_state_index = fst.add_state()
+  fst.set_start(last_state_index)
+
+  for symbol_index in symbol_indices:
+    arc = _Arc(symbol_index, symbol_index, 0, last_state_index + 1)
+    fst.add_arc(last_state_index, arc)
+    last_state_index = fst.add_state()
+
+  fst.set_final(last_state_index, 0)
+  fst.set_input_symbols(symbol_table)
+  fst.set_output_symbols(symbol_table)
+  return fst
+
+
+def compose(this_fst: _Fst, that_fst: _Fst) -> _Fst:
+  """Sorts the arcs of this FST and composes it with that FST."""
+  this_fst.arcsort(sort_type="olabel")
+  return pywrapfst.compose(this_fst, that_fst)
+
+
+def extract_parses(fst: _Fst,
+                   state_index: int,
+                   symbol_table: _SymbolTable,
+                   label_type: str,
+                   symbols: Optional[List[str]] = []
+                   ) -> Generator[str, None, None]:
+  """Recursively extracts parses from the FST.
+
+  This function extracts the parses by walking over all possible paths from the
+  start state of the FST to its accept state. Joining the labels of the state
+  transitions of these paths yield a parse.
+
+  Args:
+    fst: FST from which parses will be extracted.
+    state_index: index of an FST state from which the paths to accept state will
+      be traversed.
+    symbol_table: symbol table of the FST.
+    label_type: from which tape parse symbols will be extracted (one of 'ilabel'
+      or 'olabel').
+    symbols: tokens of a parse that are gathered from the start state of the
+      FST till the state that has the given state index.
+
+  Raises:
+    AttributeError: label type is invalid.
+
+  Yields:
+    Parses that are extracted from the FST.
+  """
+  if label_type not in ("ilabel", "olabel"):
+    raise AttributeError(f"Invalid label type: {label_type}")
+
+  arcs = list(fst.arcs(state_index))
+
+  if not arcs:  # is accept state, end of a parse.
+    yield "".join(symbols)
+
+  for arc in arcs:
+    new_symbols = [s for s in symbols]
+    symbol = symbol_table.find(getattr(arc, label_type))
+
+    if symbol != "<eps>":
+      new_symbols.append(symbol)
+
+    yield from extract_parses(
+        fst,
+        arc.nextstate,
+        symbol_table,
+        label_type,
+        new_symbols,
+    )
