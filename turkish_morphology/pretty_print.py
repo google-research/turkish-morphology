@@ -107,6 +107,10 @@ def _inflectional_group(ig: _Ig, position: int) -> str:
 def analysis(analysis: _Analysis) -> str:
   """Constructs human-readable analysis from analysis protobuf.
 
+  This function assumes that input analysis protobuf is structurally
+  well-formed, meaning that they should be first validated with
+  //turkish_morphology:validate.py.
+
   Args:
     analysis: morphological analysis.
 
