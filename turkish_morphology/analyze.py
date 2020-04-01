@@ -52,8 +52,8 @@ def surface_form(surface_form: str,
   human_readable = fst.extract_parses(
       output,
       output.start(),
-      symbol_table,
       "olabel",
+      symbol_table,
   )
 
   if not use_proper_feature:

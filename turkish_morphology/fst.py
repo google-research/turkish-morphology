@@ -90,9 +90,9 @@ def compose(this_fst: _Fst, that_fst: _Fst) -> _Fst:
 
 def extract_parses(fst: _Fst,
                    state_index: int,
-                   symbol_table: _SymbolTable,
                    label_type: str,
-                   symbols: Optional[List[str]] = []
+                   symbol_table: Optional[_SymbolTable] = None,
+                   symbol_indices: Optional[List[int]] = []
                    ) -> Generator[str, None, None]:
   """Recursively extracts parses from the FST.
 
@@ -104,11 +104,12 @@ def extract_parses(fst: _Fst,
     fst: FST from which parses will be extracted.
     state_index: index of an FST state from which the paths to accept state will
       be traversed.
-    symbol_table: symbol table of the FST.
     label_type: from which tape parse symbols will be extracted (one of 'ilabel'
       or 'olabel').
-    symbols: tokens of a parse that are gathered from the start state of the
-      FST till the state that has the given state index.
+    symbol_table: symbol table of the FST (only needed to look up complex
+      symbols when label type is specified as 'olabel').
+    symbol_indices: indices of symbols of a parse that are gathered from the
+      start state of the FST till the state that has the given state index.
 
   Raises:
     AttributeError: label type is invalid.
@@ -122,19 +123,22 @@ def extract_parses(fst: _Fst,
   arcs = list(fst.arcs(state_index))
 
   if not arcs:  # is accept state, end of a parse.
-    yield "".join(symbols)
+    if label_type == "ilabel":
+      yield bytes(symbol_indices).decode("utf-8")
+    else:
+      yield "".join(map(symbol_table.find, symbol_indices))
 
   for arc in arcs:
-    new_symbols = [s for s in symbols]
-    symbol = symbol_table.find(getattr(arc, label_type))
+    new_symbol_indices = [s for s in symbol_indices]
+    symbol_index = getattr(arc, label_type)
 
-    if symbol != "<eps>":
-      new_symbols.append(symbol)
+    if symbol_index != 0:  # skip <eps>.
+      new_symbol_indices.append(symbol_index)
 
     yield from extract_parses(
         fst,
         arc.nextstate,
-        symbol_table,
         label_type,
-        new_symbols,
+        symbol_table,
+        new_symbol_indices,
     )
