@@ -41,6 +41,18 @@ py_binary(
 )
 
 py_binary(
+    name = "generate_sentence",
+    srcs = ["generate_sentence.py"],
+    python_version = "PY3",
+    srcs_version = "PY3",
+    deps = [
+        "//turkish_morphology:decompose",
+        "//turkish_morphology:generate",
+        "@io_abseil_py//absl:app",
+    ],
+)
+
+py_binary(
     name = "inflection_distribution",
     srcs = ["inflection_distribution.py"],
     python_version = "PY3",
