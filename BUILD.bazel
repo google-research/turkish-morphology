@@ -27,6 +27,7 @@ sh_binary(
         "//turkish_morphology:analyze",
         "//turkish_morphology:decompose",
         "//turkish_morphology:fst",
+        "//turkish_morphology:generate",
         "//turkish_morphology:pretty_print",
         "//turkish_morphology:validate",
     ],
