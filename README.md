@@ -206,10 +206,10 @@ Human-readable morphological analyses can be decomposed into parts:
 ## Python API
 
 We also provide a [Python API][15] that can be used to morphologically analyze
-Turkish words, parse human-readable morphological analyses into protobuf
-messages, validate their structural well-formedness and to generate
-human-readable analyses from them. You can see some example use cases in
-[`//examples`][17].
+Turkish words, generate Turkish word forms from morphological analyses, parse
+human-readable morphological analyses into protobuf messages, validate their
+structural well-formedness and to generate human-readable analyses from them.
+You can see some example use cases in [`//examples`][17].
 
 If you are using [Bazel][16], you can depend on this repository as an external
 dependency of your project by adding the following to your WORKSPACE file:
