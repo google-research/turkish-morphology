@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-// Protocol buffer specification for rewrite rules of the morphotactics FST.
+// Protocol buffer specification for morphological analyses.
 
 syntax = "proto2";
 
