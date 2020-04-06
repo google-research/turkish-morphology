@@ -23,17 +23,13 @@ from absl import app
 
 def main(unused_argv):
   human_readables = [
-      ("(Ayşe[NNP]+[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Nom]"
-       ")+[Proper=True]"),
-      ("(ev[NN]+[PersonNumber=A3sg]+[Possessive=Pnon]+YA[Case=Dat]"
-       ")+[Proper=False]"),
+      "(Ayşe[NNP]+[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Nom])",
+      "(ev[NN]+[PersonNumber=A3sg]+[Possessive=Pnon]+YA[Case=Dat])",
       ("(gel[VB]+[Polarity=Pos])([VN]-DHk[Derivation=PastNom]"
-       "+[PersonNumber=A3sg]+SH[Possessive=P3sg]+NDA[Case=Loc]"
-       ")+[Proper=False]"),
-      ("(Ali[NNP]+[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Nom]"
-       ")+[Proper=True]"),
+       "+[PersonNumber=A3sg]+SH[Possessive=P3sg]+NDA[Case=Loc])"),
+      "(Ali[NNP]+[PersonNumber=A3sg]+[Possessive=Pnon]+[Case=Nom])",
       ("(git[VB]+[Polarity=Pos]+mHş[TenseAspectMood=Nar]+YDH[Copula=PastCop]"
-       "+[PersonNumber=V3sg])+[Proper=False]"),
+       "+[PersonNumber=V3sg])"),
   ]
   analyses = map(decompose.human_readable_analysis, human_readables)
   tokens = map(generate.surface_form, analyses)

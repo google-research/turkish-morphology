@@ -25,6 +25,7 @@ from turkish_morphology import pretty_print
 from external.openfst import pywrapfst
 
 _Analysis = analysis_pb2.Analysis
+_Ig = analysis_pb2.InflectionalGroup
 _SymbolTable = pywrapfst.SymbolTable
 
 _SYMBOLS_REGEX = re.compile(
@@ -58,7 +59,7 @@ def _add_proper(analysis: _Analysis) -> None:
 
   with_proper = _Analysis()
   with_proper.CopyFrom(analysis)
-  with_proper.ig[-1].proper = False
+  with_proper.ig[-1].proper = last_ig.pos == "NNP"
   return with_proper
 
 
