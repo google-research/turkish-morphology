@@ -33,10 +33,13 @@ http_archive(
 )
 
 # Google protocol buffers.
-git_repository(
+http_archive(
     name = "com_google_protobuf",
-    remote = "https://github.com/google/protobuf.git",
-    tag = "v3.11.4",
+    sha256 = "a79d19dcdf9139fa4b81206e318e33d245c4c9da1ffed21c87288ed4380426f9",
+    strip_prefix = "protobuf-3.11.4",
+    urls = [
+        "https://github.com/protocolbuffers/protobuf/archive/v3.11.4.tar.gz",
+    ],
 )
 
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
@@ -44,24 +47,36 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 
 # Abseil Python common libraries.
-git_repository(
+http_archive(
     name = "io_abseil_py",
-    remote = "https://github.com/abseil/abseil-py.git",
-    tag = "pypi-v0.9.0",
+    sha256 = "603febc9b95a8f2979a7bdb77d2f5e4d9b30d4e0d59579f88eba67d4e4cc5462",
+    strip_prefix = "abseil-py-pypi-v0.9.0",
+    urls = [
+        "https://github.com/abseil/abseil-py/archive/pypi-v0.9.0.tar.gz",
+    ],
 )
 
 # Bazel Python rules.
-git_repository(
+http_archive(
     name = "rules_python",
-    remote = "https://github.com/bazelbuild/rules_python.git",
-    tag = "0.0.1",
+    sha256 = "aa96a691d3a8177f3215b14b0edc9641787abaaa30363a080165d06ab65e1161",
+    urls = [
+        "https://github.com/bazelbuild/rules_python/releases/download/0.0.1/rules_python-0.0.1.tar.gz",
+    ],
 )
 
+load("@rules_python//python:repositories.bzl", "py_repositories")
+
+py_repositories()
+
 # gRpc (only used for detecting and configuring local Python).
-git_repository(
+http_archive(
     name = "com_github_grpc_grpc",
-    remote = "https://github.com/grpc/grpc.git",
-    tag = "v1.27.3",
+    sha256 = "4cbce7f708917b6e58b631c24c59fe720acc8fef5f959df9a58cdf9558d0a79b",
+    strip_prefix = "grpc-1.28.1",
+    urls = [
+        "https://github.com/grpc/grpc/archive/v1.28.1.tar.gz",
+    ],
 )
 
 load(
@@ -72,24 +87,33 @@ load(
 python_configure(name = "local_config_python")
 
 # Google i18n language resources.
-git_repository(
+http_archive(
     name = "language_resources",
-    commit = "5dc64ca8441b0e7b6d06fd08933f91452ab384d6",
-    remote = "https://github.com/google/language-resources.git",
+    sha256 = "95b42c933f34e8444182558eee3f0be15d5ab63cd759a4917034747fdb1dacfd",
+    strip_prefix = "language-resources-5dc64ca8441b0e7b6d06fd08933f91452ab384d6",
+    urls = [
+        "https://github.com/google/language-resources/archive/5dc64ca.tar.gz",
+    ],
 )
 
 # OpenFst.
-new_git_repository(
+http_archive(
     name = "openfst",
     build_file = "@//third_party:openfst.BUILD",
-    remote = "https://github.com/mjansche/openfst.git",
-    tag = "1.7.2",
+    sha256 = "eb57e469201b4813479527f0d4661ce3459e282ff7af643613ebe3ea71c79f27",
+    strip_prefix = "openfst-1.7.2",
+    urls = [
+        "https://github.com/mjansche/openfst/archive/1.7.2.tar.gz",
+    ],
 )
 
 # Thrax.
-new_git_repository(
+http_archive(
     name = "thrax",
     build_file = "@//third_party:thrax.BUILD",
-    commit = "c65fb3d51f9bd0299503f3289a124f52c3431eeb",
-    remote = "https://github.com/mjansche/thrax.git",
+    sha256 = "40caa83dc083abdb1b8603a7f74eccb6348877279ab37296a68a570469e3ecfb",
+    strip_prefix = "thrax-c65fb3d51f9bd0299503f3289a124f52c3431eeb",
+    urls = [
+        "https://github.com/mjansche/thrax/archive/c65fb3d.tar.gz",
+    ],
 )
