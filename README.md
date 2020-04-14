@@ -216,13 +216,14 @@ dependency of your project by adding the following to your WORKSPACE file:
 
 ```
 git_repository(
-  name = "turkish-morphology",
+  name = "google_research_turkish_morphology",
   remote = "https://github.com/google-research/turkish-morphology.git",
   tag = "{version-tag}",
 )
 ```
 
-Then, you can simply use `@turkish-morphology//turkish_morphology:analyze`
+Then, you can simply use
+`@google_research_turkish_morphology//turkish_morphology:analyze`
 (or other modules of the API) as a dependecy of your relevant `py_library` or
 `py_binary` BUILD targets.
 

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-workspace(name = "turkish_morphology")
+workspace(name = "google_research_turkish_morphology")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load(
