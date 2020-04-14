@@ -175,7 +175,8 @@ function compose_and_create_far() {
 }
 
 function main() {
-  readonly BASE_DIR=$(dirname $0)/build.runfiles/turkish_morphology
+  readonly PROJECT_NAME=google_research_turkish_morphology
+  readonly BASE_DIR=$(dirname $0)/build.runfiles/$PROJECT_NAME
   readonly SRC_DIR=$BASE_DIR/src/analyzer
   readonly OPENFST_DIR=$BASE_DIR/external/openfst
 

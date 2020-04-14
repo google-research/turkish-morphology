@@ -13,5 +13,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cd "${0}.runfiles/turkish_morphology"
+cd "${0}.runfiles/google_research_turkish_morphology"
 python3 setup.py "$@"
