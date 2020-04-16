@@ -243,12 +243,11 @@ bazel-bin/setup install
 
 ## Requirements
 
-To build and run the morphological analyzer install
-[Bazel version 2.2.0][9], [Python 3.7.5 (or a newer version)][10] and
-[G++][11]. All other intrinsic dependencies will be imported, built and taken
-care of by Bazel according to the [WORKSPACE][2] setup throughout the first
-invocation of the morphological analyzer runtime. If you are installing from
-PyPi, you need [pip][14].
+To build and run the morphological analyzer install [Bazel version 3.0.0][9],
+[Python 3.7.5 (or a newer version)][10]. All other intrinsic dependencies will
+be imported, built and taken care of by Bazel according to the [WORKSPACE][2]
+setup throughout the first invocation of the morphological analyzer runtime.
+If you are installing from PyPi, you need [pip][14].
 
 ## Citing
 
@@ -291,7 +290,6 @@ Unless otherwise noted, all original files are licensed under an
 [8]: ./src/analyzer/morphophonemics/model.grm
 [9]: https://docs.bazel.build/versions/master/install.html
 [10]: https://www.python.org/downloads/
-[11]: https://gcc.gnu.org/install/
 [12]: #interpreting-human-readable-morphological-analysis
 [13]: https://www.aclweb.org/anthology/W19-3110
 [14]: https://pip.pypa.io/en/stable/installing/
