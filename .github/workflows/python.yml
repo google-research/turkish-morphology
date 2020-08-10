@@ -26,10 +26,10 @@ jobs:
     - name: Install bazel
       run: |
         sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python3
-        wget "https://github.com/bazelbuild/bazel/releases/download/3.0.0/bazel-3.0.0-installer-linux-x86_64.sh"
-        chmod +x bazel-3.0.0-installer-linux-x86_64.sh
-        ./bazel-3.0.0-installer-linux-x86_64.sh --user
-        rm -f bazel-3.0.0-installer-linux-x86_64.sh
+        wget "https://github.com/bazelbuild/bazel/releases/download/3.4.1/bazel-3.4.1-installer-linux-x86_64.sh"
+        chmod +x bazel-3.4.1-installer-linux-x86_64.sh
+        ./bazel-3.4.1-installer-linux-x86_64.sh --user
+        rm -f bazel-3.4.1-installer-linux-x86_64.sh
     - name: Test with bazel
       run: |
         ~/bin/bazel test //... --test_output=all

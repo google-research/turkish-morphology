@@ -25,20 +25,20 @@ load(
 http_archive(
     name = "six_archive",
     build_file = "@//third_party:six.BUILD",
-    sha256 = "236bdbdce46e6e6a3d61a337c0f8b763ca1e8717c03b369e87a7ec7ce1319c0a",
-    strip_prefix = "six-1.14.0",
+    sha256 = "30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
+    strip_prefix = "six-1.15.0",
     urls = [
-        "https://pypi.python.org/packages/source/s/six/six-1.14.0.tar.gz",
+        "https://pypi.python.org/packages/source/s/six/six-1.15.0.tar.gz",
     ],
 )
 
 # Google protocol buffers.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "946ba5371e423e1220d2cbefc1f65e69a1e81ca5bab62a03d66894172983cfcd",
-    strip_prefix = "protobuf-3.12.0",
+    sha256 = "512e5a674bf31f8b7928a64d8adf73ee67b8fe88339ad29adaa3b84dbaa570d8",
+    strip_prefix = "protobuf-3.12.4",
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v3.12.0.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.12.4.tar.gz",
     ],
 )
 
@@ -73,10 +73,10 @@ py_repositories()
 # gRpc (only used for detecting and configuring local Python).
 http_archive(
     name = "com_github_grpc_grpc",
-    sha256 = "c0a6b40a222e51bea5c53090e9e65de46aee2d84c7fa7638f09cb68c3331b983",
-    strip_prefix = "grpc-1.29.0",
+    sha256 = "1236514199d3deb111a6dd7f6092f67617cd2b147f7eda7adbafccea95de7381",
+    strip_prefix = "grpc-1.31.0",
     urls = [
-        "https://github.com/grpc/grpc/archive/v1.29.0.tar.gz",
+        "https://github.com/grpc/grpc/archive/v1.31.0.tar.gz",
     ],
 )
 
