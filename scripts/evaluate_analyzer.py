@@ -97,7 +97,7 @@ def _read_tokens(treebank_dir: str) -> List[str]:
     logging.info(f"Reading tokens from '{path}'")
 
     with open(path, "r", encoding="utf-8") as reader:
-      line_tokens = (_extract_tokens_from(l) for l in reader)
+      line_tokens = (_extract_tokens_from(line) for line in reader)
       yield from itertools.chain.from_iterable(line_tokens)
 
   paths = glob.iglob(f"{treebank_dir}/*.conll")
