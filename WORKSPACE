@@ -49,10 +49,10 @@ protobuf_deps()
 # Abseil Python common libraries.
 http_archive(
     name = "io_abseil_py",
-    sha256 = "603febc9b95a8f2979a7bdb77d2f5e4d9b30d4e0d59579f88eba67d4e4cc5462",
-    strip_prefix = "abseil-py-pypi-v0.9.0",
+    sha256 = "588a23406b2e28ea368897dbebc1210165414e87212d4fdd4b2ee968f0a772c6",
+    strip_prefix = "abseil-py-pypi-v0.10.0",
     urls = [
-        "https://github.com/abseil/abseil-py/archive/pypi-v0.9.0.tar.gz",
+        "https://github.com/abseil/abseil-py/archive/pypi-v0.10.0.tar.gz",
     ],
 )
 
@@ -73,10 +73,10 @@ py_repositories()
 # gRpc (only used for detecting and configuring local Python).
 http_archive(
     name = "com_github_grpc_grpc",
-    sha256 = "1236514199d3deb111a6dd7f6092f67617cd2b147f7eda7adbafccea95de7381",
-    strip_prefix = "grpc-1.31.0",
+    sha256 = "f20f92a09f7245e2c437fbd729849ffe3b2dd39a46c9378d201f8f95cc9f12ea",
+    strip_prefix = "grpc-1.31.1",
     urls = [
-        "https://github.com/grpc/grpc/archive/v1.31.0.tar.gz",
+        "https://github.com/grpc/grpc/archive/v1.31.1.tar.gz",
     ],
 )
 
@@ -90,10 +90,10 @@ python_configure(name = "local_config_python")
 # Google i18n language resources.
 http_archive(
     name = "language_resources",
-    sha256 = "95b42c933f34e8444182558eee3f0be15d5ab63cd759a4917034747fdb1dacfd",
-    strip_prefix = "language-resources-5dc64ca8441b0e7b6d06fd08933f91452ab384d6",
+    sha256 = "8e2efff1123c07577c13b01e5ec6123cb02793fcbbc940fe5b70aa7be47f5c92",
+    strip_prefix = "language-resources-db54aa5e8dcdd65d22a45124edf6ec009fc7ad7d",
     urls = [
-        "https://github.com/google/language-resources/archive/5dc64ca.tar.gz",
+        "https://github.com/google/language-resources/archive/db54aa5.tar.gz",
     ],
 )
 
