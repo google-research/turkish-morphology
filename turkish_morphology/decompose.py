@@ -16,8 +16,9 @@
 """Functions to parse human-readable analyses into analysis protobuf messages.
 """
 
+import functools
 import re
-from typing import Generator
+from typing import List
 
 from turkish_morphology import analysis_pb2
 
@@ -57,7 +58,8 @@ class IllformedHumanReadableAnalysisError(Exception):
   """Raised when a human-readable analysis is structurally ill-formed."""
 
 
-def _make_affix(human_readable: str) -> Generator[_Affix, None, None]:
+@functools.lru_cache(maxsize=None)
+def _make_affix(human_readable: str) -> List[_Affix]:
   """Parses a sequence of human-readable affix analyses into affix protobuf.
 
   To illustrate, for the given human-readable analysis of below sequence of
@@ -87,11 +89,12 @@ def _make_affix(human_readable: str) -> Generator[_Affix, None, None]:
       inflectional morphemes (e.g. '-DHk[Derivation=PastNom]' or
       '+lAr[PersonNumber=A3pl]+Hm[Possessive=P1sg]+NDAn[Case=Abl]').
 
-  Yields:
+  Returns:
     Affix protobuf messages that are constructed from the human-readable affix
     analyses.
   """
   matches = (m.groupdict() for m in _AFFIX_REGEX.finditer(human_readable))
+  affixes = []
 
   for matching in matches:
     affix = _Affix()
@@ -101,7 +104,9 @@ def _make_affix(human_readable: str) -> Generator[_Affix, None, None]:
     if matching["meta_morpheme"]:
       affix.meta_morpheme = matching["meta_morpheme"]
 
-    yield affix
+    affixes.append(affix)
+
+  return affixes
 
 
 def human_readable_analysis(human_readable: str) -> _Analysis:
@@ -166,10 +171,10 @@ def human_readable_analysis(human_readable: str) -> _Analysis:
   igs = tuple(_IG_REGEX.finditer(human_readable))
   matches = [ig.groupdict() for ig in igs]
 
-  if not (igs and len(human_readable) == igs[-1].end() and matches[0]["root"]
-          and matches[0]["root_pos"]
-          and all(m["derivation"] for m in matches[1:])
-          and all(m["derivation_pos"] for m in matches[1:])):
+  if not (igs and len(human_readable) == igs[-1].end() and
+          matches[0]["root"] and matches[0]["root_pos"] and
+          all(m["derivation"] for m in matches[1:]) and
+          all(m["derivation_pos"] for m in matches[1:])):
     raise IllformedHumanReadableAnalysisError(
         f"Human-readable analysis is ill-formed: '{human_readable}'")
 
@@ -183,7 +188,7 @@ def human_readable_analysis(human_readable: str) -> _Analysis:
       ig.root.morpheme = matching["root"]
     else:
       ig.pos = matching["derivation_pos"]
-      derivation = tuple(_make_affix(matching["derivation"]))[0]
+      derivation = _make_affix(matching["derivation"])[0]
       ig.derivation.CopyFrom(derivation)
 
     inflections = _make_affix(matching["inflections"])
