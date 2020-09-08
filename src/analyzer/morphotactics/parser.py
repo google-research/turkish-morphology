@@ -24,8 +24,9 @@ _RewriteRuleSet = rule_pb2.RewriteRuleSet
 _RuleDefinition = List[str]
 
 
-def _normalize(rule_definitions: Iterable[_RuleDefinition]
-               ) -> Generator[_RuleDefinition, None, None]:
+def _normalize(
+    rule_definitions: Iterable[_RuleDefinition]
+) -> Generator[_RuleDefinition, None, None]:
   """Normalizes the tokens of morphotactics rewrite rule definition.
 
   This function converts the 'from_state' and 'to_state' values to uppercase,

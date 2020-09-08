@@ -171,10 +171,10 @@ def human_readable_analysis(human_readable: str) -> _Analysis:
   igs = tuple(_IG_REGEX.finditer(human_readable))
   matches = [ig.groupdict() for ig in igs]
 
-  if not (igs and len(human_readable) == igs[-1].end() and
-          matches[0]["root"] and matches[0]["root_pos"] and
-          all(m["derivation"] for m in matches[1:]) and
-          all(m["derivation_pos"] for m in matches[1:])):
+  if not (igs and len(human_readable) == igs[-1].end() and matches[0]["root"]
+          and matches[0]["root_pos"]
+          and all(m["derivation"] for m in matches[1:])
+          and all(m["derivation_pos"] for m in matches[1:])):
     raise IllformedHumanReadableAnalysisError(
         f"Human-readable analysis is ill-formed: '{human_readable}'")
 

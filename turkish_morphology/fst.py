@@ -88,12 +88,12 @@ def compose(this_fst: _Fst, that_fst: _Fst) -> _Fst:
   return pywrapfst.compose(this_fst, that_fst)
 
 
-def extract_parses(fst: _Fst,
-                   state_index: int,
-                   label_type: str,
-                   symbol_table: Optional[_SymbolTable] = None,
-                   symbol_indices: Optional[List[int]] = []
-                   ) -> Generator[str, None, None]:
+def extract_parses(
+    fst: _Fst,
+    state_index: int,
+    label_type: str,
+    symbol_table: Optional[_SymbolTable] = None,
+    symbol_indices: Optional[List[int]] = []) -> Generator[str, None, None]:
   """Recursively extracts parses from the FST.
 
   This function extracts the parses by walking over all possible paths from the

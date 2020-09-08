@@ -274,8 +274,8 @@ def _symbols_of_output(label: str) -> List[str]:
   return list(label)
 
 
-def _symbols_table_file_content(rule_set: _RewriteRuleSet
-                                ) -> Generator[str, None, None]:
+def _symbols_table_file_content(
+    rule_set: _RewriteRuleSet) -> Generator[str, None, None]:
   r"""Generates the content of the complex symbols table file.
 
   Generated file is in AT&T format. It defines the labels for state transition
@@ -317,8 +317,8 @@ def _symbols_table_file_content(rule_set: _RewriteRuleSet
   logging.info("generated complex symbols file content")
 
 
-def _text_fst_file_content(rule_set: _RewriteRuleSet
-                           ) -> Generator[str, None, None]:
+def _text_fst_file_content(
+    rule_set: _RewriteRuleSet) -> Generator[str, None, None]:
   r"""Generates the content of the text FST file.
 
   Generated file is in AT&T format. It defines the state transition arcs and

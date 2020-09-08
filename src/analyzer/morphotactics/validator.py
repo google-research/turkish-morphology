@@ -46,8 +46,8 @@ class InvalidMorphotacticsRuleError(Exception):
   """Raised when a morphotactics rewrite rule definition is illformed."""
 
 
-def _rule_has_expected_number_of_tokens(rule_definition: _RuleDefinition
-                                        ) -> None:
+def _rule_has_expected_number_of_tokens(
+    rule_definition: _RuleDefinition) -> None:
   """Checks if rule definition has 4 tokens (from, to, output, input)."""
   if len(rule_definition) != 4:
     raise InvalidMorphotacticsRuleError(
