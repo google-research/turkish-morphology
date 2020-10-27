@@ -32,4 +32,5 @@ jobs:
         rm -f bazel-3.7.0-installer-linux-x86_64.sh
     - name: Test with bazel
       run: |
+        ~/bin/bazel build //...
         ~/bin/bazel test //... --test_output=all
