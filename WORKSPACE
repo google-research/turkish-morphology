@@ -16,17 +16,6 @@ workspace(name = "google_research_turkish_morphology")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# Python 2/3 compatibility.
-http_archive(
-    name = "six_archive",
-    build_file = "@//third_party:six.BUILD",
-    sha256 = "30639c035cdb23534cd4aa2dd52c3bf48f06e5f4a941509c8bafd8ce11080259",
-    strip_prefix = "six-1.15.0",
-    urls = [
-        "https://pypi.python.org/packages/source/s/six/six-1.15.0.tar.gz",
-    ],
-)
-
 # Google protocol buffers.
 http_archive(
     name = "com_google_protobuf",
