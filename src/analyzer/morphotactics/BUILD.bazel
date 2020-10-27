@@ -14,6 +14,7 @@
 
 load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+load("@turkish_morphology_deps//:requirements.bzl", "requirement")
 
 package(default_visibility = ["//src/analyzer:__pkg__"])
 
@@ -51,9 +52,7 @@ py_binary(
         "//src/analyzer/lexicon:parser",
         "//src/analyzer/lexicon:reader",
         "//src/analyzer/lexicon:validator",
-        "@io_abseil_py//absl:app",
-        "@io_abseil_py//absl/flags",
-        "@io_abseil_py//absl/logging",
+        requirement("absl-py"),
     ],
 )
 
@@ -71,8 +70,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":model_compile",
-        "@io_abseil_py//absl/testing:absltest",
-        "@io_abseil_py//absl/testing:parameterized",
+        requirement("absl-py"),
     ],
 )
 
@@ -94,8 +92,7 @@ py_test(
     deps = [
         ":parser",
         ":rule_py_pb2",
-        "@io_abseil_py//absl/testing:absltest",
-        "@io_abseil_py//absl/testing:parameterized",
+        requirement("absl-py"),
     ],
 )
 
@@ -116,8 +113,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":reader",
-        "@io_abseil_py//absl/testing:absltest",
-        "@io_abseil_py//absl/testing:parameterized",
+        requirement("absl-py"),
     ],
 )
 
@@ -163,7 +159,6 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":validator",
-        "@io_abseil_py//absl/testing:absltest",
-        "@io_abseil_py//absl/testing:parameterized",
+        requirement("absl-py"),
     ],
 )

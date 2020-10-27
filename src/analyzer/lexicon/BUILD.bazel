@@ -13,6 +13,7 @@
 # limitations under the License.
 
 load("@rules_python//python:defs.bzl", "py_library", "py_test")
+load("@turkish_morphology_deps//:requirements.bzl", "requirement")
 
 package(default_visibility = ["//src/analyzer/morphotactics:__pkg__"])
 
@@ -51,8 +52,7 @@ py_test(
         ":parser",
         ":tags",
         "//src/analyzer/morphotactics:rule_py_pb2",
-        "@io_abseil_py//absl/testing:absltest",
-        "@io_abseil_py//absl/testing:parameterized",
+        requirement("absl-py"),
     ],
 )
 
@@ -73,8 +73,7 @@ py_test(
     srcs_version = "PY3",
     deps = [
         ":reader",
-        "@io_abseil_py//absl/testing:absltest",
-        "@io_abseil_py//absl/testing:parameterized",
+        requirement("absl-py"),
     ],
 )
 
@@ -109,7 +108,6 @@ py_test(
     deps = [
         ":tags",
         ":validator",
-        "@io_abseil_py//absl/testing:absltest",
-        "@io_abseil_py//absl/testing:parameterized",
+        requirement("absl-py"),
     ],
 )

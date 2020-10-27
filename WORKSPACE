@@ -41,16 +41,6 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
-# Abseil Python common libraries.
-http_archive(
-    name = "io_abseil_py",
-    sha256 = "588a23406b2e28ea368897dbebc1210165414e87212d4fdd4b2ee968f0a772c6",
-    strip_prefix = "abseil-py-pypi-v0.10.0",
-    urls = [
-        "https://github.com/abseil/abseil-py/archive/pypi-v0.10.0.tar.gz",
-    ],
-)
-
 # Bazel Python rules.
 http_archive(
     name = "rules_python",
@@ -107,4 +97,12 @@ http_archive(
     urls = [
         "https://github.com/mjansche/thrax/archive/c65fb3d.tar.gz",
     ],
+)
+
+# PyPi dependencies.
+load("@rules_python//python:pip.bzl", "pip_install")
+
+pip_install(
+    name = "turkish_morphology_deps",
+    requirements = "//:requirements.txt",
 )

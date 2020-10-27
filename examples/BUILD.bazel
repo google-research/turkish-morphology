@@ -13,6 +13,7 @@
 # limitations under the License.
 
 load("@rules_python//python:defs.bzl", "py_binary")
+load("@turkish_morphology_deps//:requirements.bzl", "requirement")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -23,7 +24,7 @@ py_binary(
     srcs_version = "PY3",
     deps = [
         "//turkish_morphology:analyze",
-        "@io_abseil_py//absl:app",
+        requirement("absl-py"),
     ],
 )
 
@@ -36,7 +37,7 @@ py_binary(
         "//turkish_morphology:analysis_py_pb2",
         "//turkish_morphology:analyze",
         "//turkish_morphology:decompose",
-        "@io_abseil_py//absl:app",
+        requirement("absl-py"),
     ],
 )
 
@@ -48,7 +49,7 @@ py_binary(
     deps = [
         "//turkish_morphology:decompose",
         "//turkish_morphology:generate",
-        "@io_abseil_py//absl:app",
+        requirement("absl-py"),
     ],
 )
 
@@ -61,7 +62,7 @@ py_binary(
         "//turkish_morphology:analysis_py_pb2",
         "//turkish_morphology:analyze",
         "//turkish_morphology:decompose",
-        "@io_abseil_py//absl:app",
+        requirement("absl-py"),
     ],
 )
 
@@ -74,6 +75,6 @@ py_binary(
         "//turkish_morphology:analysis_py_pb2",
         "//turkish_morphology:analyze",
         "//turkish_morphology:decompose",
-        "@io_abseil_py//absl:app",
+        requirement("absl-py"),
     ],
 )
