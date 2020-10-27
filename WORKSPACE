@@ -42,10 +42,10 @@ http_archive(
 # gRpc (only used for detecting and configuring local Python).
 http_archive(
     name = "com_github_grpc_grpc",
-    sha256 = "f20f92a09f7245e2c437fbd729849ffe3b2dd39a46c9378d201f8f95cc9f12ea",
-    strip_prefix = "grpc-1.31.1",
+    sha256 = "58eaee5c0f1bd0b92ebe1fa0606ec8f14798500620e7444726afcaf65041cb63",
+    strip_prefix = "grpc-1.33.1",
     urls = [
-        "https://github.com/grpc/grpc/archive/v1.31.1.tar.gz",
+        "https://github.com/grpc/grpc/archive/v1.33.1.tar.gz",
     ],
 )
 
