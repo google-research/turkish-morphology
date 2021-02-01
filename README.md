@@ -243,7 +243,7 @@ bazel-bin/setup install
 
 ## Requirements
 
-To build and run the morphological analyzer install [Bazel version 3.7.0][9],
+To build and run the morphological analyzer install [Bazel version 4.0.0][9],
 [Python 3.7.5 (or a newer version)][10]. All other intrinsic dependencies will
 be imported, built and taken care of by Bazel according to the [WORKSPACE][2]
 setup throughout the first invocation of the morphological analyzer runtime.
