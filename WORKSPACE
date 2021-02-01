@@ -19,10 +19,10 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Google protocol buffers.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "512e5a674bf31f8b7928a64d8adf73ee67b8fe88339ad29adaa3b84dbaa570d8",
-    strip_prefix = "protobuf-3.12.4",
+    sha256 = "d0f5f605d0d656007ce6c8b5a82df3037e1d8fe8b121ed42e536f569dec16113",
+    strip_prefix = "protobuf-3.14.0",
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v3.12.4.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz",
     ],
 )
 
@@ -42,10 +42,10 @@ http_archive(
 # gRpc (only used for detecting and configuring local Python).
 http_archive(
     name = "com_github_grpc_grpc",
-    sha256 = "58eaee5c0f1bd0b92ebe1fa0606ec8f14798500620e7444726afcaf65041cb63",
-    strip_prefix = "grpc-1.33.1",
+    sha256 = "27dd2fc5c9809ddcde8eb6fa1fa278a3486566dfc28335fca13eb8df8bd3b958",
+    strip_prefix = "grpc-1.35.0",
     urls = [
-        "https://github.com/grpc/grpc/archive/v1.33.1.tar.gz",
+        "https://github.com/grpc/grpc/archive/v1.35.0.tar.gz",
     ],
 )
 
@@ -59,10 +59,10 @@ python_configure(name = "local_config_python")
 # Google i18n language resources.
 http_archive(
     name = "language_resources",
-    sha256 = "8e2efff1123c07577c13b01e5ec6123cb02793fcbbc940fe5b70aa7be47f5c92",
-    strip_prefix = "language-resources-db54aa5e8dcdd65d22a45124edf6ec009fc7ad7d",
+    sha256 = "7598e58ba06b6fb64c1228ef54f8083a7fbf880fa03a4d1797298b00bb54d456",
+    strip_prefix = "language-resources-704f19ac404e49816c6e0d1dedee74f271539fcd",
     urls = [
-        "https://github.com/google/language-resources/archive/db54aa5.tar.gz",
+        "https://github.com/google/language-resources/archive/704f19a.tar.gz",
     ],
 )
 
