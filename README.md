@@ -281,7 +281,7 @@ Unless otherwise noted, all original files are licensed under an
 [Apache License, Version 2.0][1].
 
 [1]: LICENSE
-[2]: WORKSPACE
+[2]: WORKSPACE.bazel
 [3]: ./src/analyzer/lexicon/base
 [4]: ./src/analyzer/lexicon/README.md
 [5]: ./src/analyzer/morphotactics/model
