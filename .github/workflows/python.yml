@@ -25,7 +25,7 @@ jobs:
         flake8 . --count --exit-zero --statistics
     - name: Install bazel
       run: |
-        sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python3
+        sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python3 python-dev
         wget "https://github.com/bazelbuild/bazel/releases/download/4.1.0/bazel-4.1.0-installer-linux-x86_64.sh"
         chmod +x bazel-4.1.0-installer-linux-x86_64.sh
         ./bazel-4.1.0-installer-linux-x86_64.sh --user
