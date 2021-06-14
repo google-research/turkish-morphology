@@ -13,13 +13,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import setuptools
+
+_README_PATH = os.path.join(
+    os.path.abspath(os.path.dirname(__file__)),
+    "README.md")
+
+
+with open(_README_PATH, encoding='utf-8') as f:
+    long_description = f.read()
+
 
 setuptools.setup(
     name="turkish-morphology",
-    version="1.2.2",
+    version="1.2.3",
     description="Turkish Morphology",
-    long_description="A two-level morphological analyzer for Turkish.",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     url="https://github.com/google-research/turkish-morphology",
     download_url=("https://github.com/google-research/turkish-morphology/"
                   "releases"),

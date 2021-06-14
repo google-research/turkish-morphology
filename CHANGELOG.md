@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [1.2.3] - 2021-06-14
+
+### Fixed
+
+- Analyzer can now be built using Python 3.9.
+
 ## [1.2.2] - 2020-09-08
 
 ### Changed
@@ -53,7 +59,8 @@
   to morpholgically analyze word forms, and to parse human-readable analysis
   strings into protobuf messages.
 
-[unreleased]: https://github.com/google-research/turkish-morphology/compare/v1.2.2...HEAD
+[unreleased]: https://github.com/google-research/turkish-morphology/compare/v1.2.3...HEAD
+[1.2.3]: https://github.com/google-research/turkish-morphology/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/google-research/turkish-morphology/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/google-research/turkish-morphology/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/google-research/turkish-morphology/compare/v1.1.0...v1.2.0
