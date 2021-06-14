@@ -22,7 +22,7 @@ from turkish_morphology import analysis_pb2
 from turkish_morphology import fst
 from turkish_morphology import pretty_print
 
-from external.openfst import pywrapfst
+from external.org_openfst import pywrapfst
 
 _Analysis = analysis_pb2.Analysis
 _Ig = analysis_pb2.InflectionalGroup

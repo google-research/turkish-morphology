@@ -81,7 +81,7 @@ py_library(
     ],
     srcs_version = "PY3",
     deps = [
-        "@openfst//:pywrapfst",
+        "@org_openfst//:pywrapfst",
     ],
 )
 
@@ -93,7 +93,7 @@ py_library(
         ":analysis_py_pb2",
         ":fst",
         ":pretty_print",
-        "@openfst//:pywrapfst",
+        "@org_openfst//:pywrapfst",
     ],
 )
 

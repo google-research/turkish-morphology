@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//bazel:thrax.bzl", "grm_compile", "grm_test")
+load("//bazel:thrax.bzl", "grm_compile")
+load("@org_opengrm_thrax//:src/bazel/regression_test_build_defs.bzl", "grm_regression_test")
 
 package(default_visibility = [
     "//src/analyzer:__pkg__",
@@ -44,11 +45,9 @@ grm_compile(
     ],
 )
 
-grm_test(
+grm_regression_test(
     name = "case_conversion_test",
-    base_path = "src/analyzer/symbols/",
-    far_file = "case_conversion.far",
-    test_file = "case_conversion.tsv",
+    grammar = ":case_conversion",
 )
 
 grm_compile(

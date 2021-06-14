@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-load("//bazel:thrax.bzl", "grm_compile", "grm_test")
+load("//bazel:thrax.bzl", "grm_compile")
+load("@org_opengrm_thrax//:src/bazel/regression_test_build_defs.bzl", "grm_regression_test")
 
 package(default_visibility = ["//src/analyzer:__pkg__"])
 
@@ -38,6 +39,11 @@ grm_compile(
     ],
 )
 
+grm_regression_test(
+    name = "consonant_change_test",
+    grammar = ":consonant_change",
+)
+
 grm_compile(
     name = "consonant_drop",
     deps = [
@@ -48,6 +54,11 @@ grm_compile(
         "//src/analyzer/symbols:unicode.far",
         "//src/analyzer/symbols:unicode.grm",
     ],
+)
+
+grm_regression_test(
+    name = "consonant_drop_test",
+    grammar = ":consonant_drop",
 )
 
 grm_compile(
@@ -62,6 +73,11 @@ grm_compile(
     ],
 )
 
+grm_regression_test(
+    name = "consonant_voicing_test",
+    grammar = ":consonant_voicing",
+)
+
 grm_compile(
     name = "gemination",
     deps = [
@@ -72,6 +88,11 @@ grm_compile(
         "//src/analyzer/symbols:unicode.far",
         "//src/analyzer/symbols:unicode.grm",
     ],
+)
+
+grm_regression_test(
+    name = "gemination_test",
+    grammar = ":gemination",
 )
 
 grm_compile(
@@ -104,6 +125,11 @@ grm_compile(
     ],
 )
 
+grm_regression_test(
+    name = "model_test",
+    grammar = ":model",
+)
+
 grm_compile(
     name = "remove_markup",
     deps = [
@@ -114,6 +140,11 @@ grm_compile(
         "//src/analyzer/symbols:unicode.far",
         "//src/analyzer/symbols:unicode.grm",
     ],
+)
+
+grm_regression_test(
+    name = "remove_markup_test",
+    grammar = ":remove_markup",
 )
 
 grm_compile(
@@ -128,6 +159,11 @@ grm_compile(
     ],
 )
 
+grm_regression_test(
+    name = "vowel_change_test",
+    grammar = ":vowel_change",
+)
+
 grm_compile(
     name = "vowel_drop",
     deps = [
@@ -138,6 +174,11 @@ grm_compile(
         "//src/analyzer/symbols:unicode.far",
         "//src/analyzer/symbols:unicode.grm",
     ],
+)
+
+grm_regression_test(
+    name = "vowel_drop_test",
+    grammar = ":vowel_drop",
 )
 
 grm_compile(
@@ -152,6 +193,11 @@ grm_compile(
     ],
 )
 
+grm_regression_test(
+    name = "vowel_harmony_test",
+    grammar = ":vowel_harmony",
+)
+
 grm_compile(
     name = "y_insertion",
     deps = [
@@ -164,23 +210,7 @@ grm_compile(
     ],
 )
 
-[
-    grm_test(
-        name = grm + "_test",
-        base_path = "src/analyzer/morphophonemics/",
-        far_file = grm + ".far",
-        test_file = grm + ".tsv",
-    )
-    for grm in [
-        "consonant_change",
-        "consonant_drop",
-        "consonant_voicing",
-        "gemination",
-        "model",
-        "remove_markup",
-        "vowel_change",
-        "vowel_drop",
-        "vowel_harmony",
-        "y_insertion",
-    ]
-]
+grm_regression_test(
+    name = "y_insertion_test",
+    grammar = ":y_insertion",
+)

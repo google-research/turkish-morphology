@@ -178,7 +178,7 @@ function main() {
   readonly PROJECT_NAME=google_research_turkish_morphology
   readonly BASE_DIR=$(dirname $0)/build.runfiles/$PROJECT_NAME
   readonly SRC_DIR=$BASE_DIR/src/analyzer
-  readonly OPENFST_DIR=$BASE_DIR/external/openfst
+  readonly OPENFST_DIR=$BASE_DIR/external/org_openfst
 
   readonly OUT_DIR=$1
   readonly PREPROCESSOR_PATH=$OUT_DIR/preprocessor.fst

@@ -18,7 +18,7 @@
 # shortcomings, it will only work with grammars that use local (or relative)
 # imports, and it requires all transitive dependencies to be listed in deps.
 def grm_compile(name, src = None, deps = []):
-    thraxcompiler = "@thrax//:thraxcompiler"
+    thraxcompiler = "@org_opengrm_thrax//:compiler"
 
     if not src:
         src = name + ".grm"
@@ -40,28 +40,4 @@ def grm_compile(name, src = None, deps = []):
                 --output_far=$@ \
                 --print_rules=false
               """ % (thraxcompiler, src),
-    )
-
-# Experimental Bazel extension for running Thrax grammar tests.
-#
-# This macro assumes that all test data files are in a subdirectory
-# named 'testdata' relative to the location of the far file, which
-# is the base_path.
-def grm_test(name, far_file, test_file, base_path):
-    testdata_dir = "testdata/"
-
-    native.cc_test(
-        name = name,
-        size = "small",
-        args = [
-            "--far=" + base_path + far_file,
-            "--test_file=" + base_path + testdata_dir + test_file,
-        ],
-        data = [
-            far_file,
-            testdata_dir + test_file,
-        ],
-        deps = [
-            "@language_resources//utils:grm_tester_lib",
-        ],
     )

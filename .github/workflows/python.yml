@@ -9,10 +9,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Set up Python 3.7
+    - name: Set up Python 3.9
       uses: actions/setup-python@v1
       with:
-        python-version: 3.7
+        python-version: 3.9
     - name: Update pip
       run: |
         python -m pip install --upgrade pip
@@ -26,11 +26,11 @@ jobs:
     - name: Install bazel
       run: |
         sudo apt-get install pkg-config zip g++ zlib1g-dev unzip python3
-        wget "https://github.com/bazelbuild/bazel/releases/download/4.0.0/bazel-4.0.0-installer-linux-x86_64.sh"
-        chmod +x bazel-4.0.0-installer-linux-x86_64.sh
-        ./bazel-4.0.0-installer-linux-x86_64.sh --user
-        rm -f bazel-4.0.0-installer-linux-x86_64.sh
+        wget "https://github.com/bazelbuild/bazel/releases/download/4.1.0/bazel-4.1.0-installer-linux-x86_64.sh"
+        chmod +x bazel-4.1.0-installer-linux-x86_64.sh
+        ./bazel-4.1.0-installer-linux-x86_64.sh --user
+        rm -f bazel-4.1.0-installer-linux-x86_64.sh
     - name: Test with bazel
       run: |
-        ~/bin/bazel build //...
-        ~/bin/bazel test //... --test_output=all
+        ~/bin/bazel build -c opt //...
+        ~/bin/bazel test -c opt //... --test_output=errors

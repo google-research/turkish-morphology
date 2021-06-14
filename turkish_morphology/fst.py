@@ -19,10 +19,10 @@ import os
 import pathlib
 from typing import Generator, Iterable, List, Optional
 
-from external.openfst import pywrapfst
+from external.org_openfst import pywrapfst
 
 _Arc = pywrapfst.Arc
-_Fst = pywrapfst.Fst
+_Fst = pywrapfst.VectorFst
 _SymbolTable = pywrapfst.SymbolTable
 
 # Finite-state archive that contains the Turkish morphological analyzer FST

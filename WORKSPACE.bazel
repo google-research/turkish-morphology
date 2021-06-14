@@ -19,10 +19,10 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Google protocol buffers.
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "d0f5f605d0d656007ce6c8b5a82df3037e1d8fe8b121ed42e536f569dec16113",
-    strip_prefix = "protobuf-3.14.0",
+    sha256 = "c6003e1d2e7fefa78a3039f19f383b4f3a61e81be8c19356f85b6461998ad3db",
+    strip_prefix = "protobuf-3.17.3",
     urls = [
-        "https://github.com/protocolbuffers/protobuf/archive/v3.14.0.tar.gz",
+        "https://github.com/protocolbuffers/protobuf/archive/v3.17.3.tar.gz",
     ],
 )
 
@@ -30,22 +30,42 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
 
+# Google Abseil C++ (used by Thrax).
+http_archive(
+    name = "com_google_absl",
+    sha256 = "12352498cfca5d453cce375cfcb2a81984e1a0221e4a284a3cd13441e739c03c",
+    strip_prefix = "abseil-cpp-master",
+    urls = [
+        "https://github.com/abseil/abseil-cpp/archive/master.zip",
+    ],
+)
+
+# Google testing framework (used by Thrax).
+http_archive(
+    name = "com_google_googletest",
+    sha256 = "aa9efa9edaa3b06868c836666bb7b8901b084c9210746111565a02973cbb6d20",
+    strip_prefix = "googletest-master",
+    urls = [
+        "https://github.com/google/googletest/archive/master.zip",
+    ],
+)
+
 # Bazel Python rules.
 http_archive(
     name = "rules_python",
-    sha256 = "b6d46438523a3ec0f3cead544190ee13223a52f6a6765a29eae7b7cc24cc83a0",
+    sha256 = "778197e26c5fbeb07ac2a2c5ae405b30f6cb7ad1f5510ea6fdac03bded96cc6f",
     urls = [
-        "https://github.com/bazelbuild/rules_python/releases/download/0.1.0/rules_python-0.1.0.tar.gz",
+        "https://github.com/bazelbuild/rules_python/releases/download/0.2.0/rules_python-0.2.0.tar.gz",
     ],
 )
 
 # gRpc (only used for detecting and configuring local Python).
 http_archive(
     name = "com_github_grpc_grpc",
-    sha256 = "27dd2fc5c9809ddcde8eb6fa1fa278a3486566dfc28335fca13eb8df8bd3b958",
-    strip_prefix = "grpc-1.35.0",
+    sha256 = "abd9e52c69000f2c051761cfa1f12d52d8b7647b6c66828a91d462e796f2aede",
+    strip_prefix = "grpc-1.38.0",
     urls = [
-        "https://github.com/grpc/grpc/archive/v1.35.0.tar.gz",
+        "https://github.com/grpc/grpc/archive/v1.38.0.tar.gz",
     ],
 )
 
@@ -56,35 +76,24 @@ load(
 
 python_configure(name = "local_config_python")
 
-# Google i18n language resources.
-http_archive(
-    name = "language_resources",
-    sha256 = "7598e58ba06b6fb64c1228ef54f8083a7fbf880fa03a4d1797298b00bb54d456",
-    strip_prefix = "language-resources-704f19ac404e49816c6e0d1dedee74f271539fcd",
-    urls = [
-        "https://github.com/google/language-resources/archive/704f19a.tar.gz",
-    ],
-)
-
 # OpenFst.
 http_archive(
-    name = "openfst",
+    name = "org_openfst",
     build_file = "@//third_party:openfst.BUILD",
-    sha256 = "eb57e469201b4813479527f0d4661ce3459e282ff7af643613ebe3ea71c79f27",
-    strip_prefix = "openfst-1.7.2",
+    sha256 = "24fb53b72bb687e3fa8ee96c72a31ff2920d99b980a0a8f61dda426fca6713f0",
+    strip_prefix = "openfst-1.8.1",
     urls = [
-        "https://github.com/mjansche/openfst/archive/1.7.2.tar.gz",
+        "http://www.openfst.org/twiki/pub/FST/FstDownload/openfst-1.8.1.tar.gz",
     ],
 )
 
 # Thrax.
 http_archive(
-    name = "thrax",
-    build_file = "@//third_party:thrax.BUILD",
-    sha256 = "40caa83dc083abdb1b8603a7f74eccb6348877279ab37296a68a570469e3ecfb",
-    strip_prefix = "thrax-c65fb3d51f9bd0299503f3289a124f52c3431eeb",
+    name = "org_opengrm_thrax",
+    sha256 = "5f00a2047674753cba6783b010ab273366dd3dffc160bdb356f7236059a793ba",
+    strip_prefix = "thrax-1.3.6",
     urls = [
-        "https://github.com/mjansche/thrax/archive/c65fb3d.tar.gz",
+        "http://www.openfst.org/twiki/pub/GRM/ThraxDownload/thrax-1.3.6.tar.gz",
     ],
 )
 
