@@ -38,11 +38,10 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     package_data={
         "turkish_morphology": [
-            "../external/openfst/pywrapfst.so",
+            "../external/org_openfst/pywrapfst.so",
             "../src/analyzer/bin/turkish.far",
         ],
     },
-    include_package_data=True,
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
         "Natural Language :: Turkish",

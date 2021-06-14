@@ -1,0 +1,2 @@
+include ../external/org_openfst/pywrapfst.so
+include ../src/analyzer/bin/turkish.far
