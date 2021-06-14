@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+## [1.2.4] - 2021-06-14
+
+### Added
+
+- MANIFEST.in file to specify to-be-packaged data files.
+
+### Fixed
+
+- Ensures that OpenFST Python wrapper gets included in the release package.
+
 ## [1.2.3] - 2021-06-14
 
 ### Fixed
@@ -59,7 +69,8 @@
   to morpholgically analyze word forms, and to parse human-readable analysis
   strings into protobuf messages.
 
-[unreleased]: https://github.com/google-research/turkish-morphology/compare/v1.2.3...HEAD
+[unreleased]: https://github.com/google-research/turkish-morphology/compare/v1.2.4...HEAD
+[1.2.4]: https://github.com/google-research/turkish-morphology/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/google-research/turkish-morphology/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/google-research/turkish-morphology/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/google-research/turkish-morphology/compare/v1.2.0...v1.2.1
