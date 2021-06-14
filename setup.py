@@ -27,7 +27,7 @@ with open(_README_PATH, encoding='utf-8') as f:
 
 setuptools.setup(
     name="turkish-morphology",
-    version="1.2.3",
+    version="1.2.4",
     description="Turkish Morphology",
     long_description=long_description,
     long_description_content_type="text/markdown",
