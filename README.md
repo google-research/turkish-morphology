@@ -1,6 +1,6 @@
 # Turkish Morphology
 
-![](https://github.com/google-research/turkish-morphology/workflows/Build%20Status/badge.svg)
+![](https://github.com/google-research/turkish-morphology/workflows/Linux%20Build%20Status/badge.svg)
 
 A two-level morphological analyzer for Turkish.
 
@@ -243,7 +243,7 @@ bazel-bin/setup install
 
 ## Requirements
 
-To build and run the morphological analyzer install [Bazel version 4.1.0][9],
+To build and run the morphological analyzer install [Bazel version 5.0.0][9],
 [Python 3.9][10]. All other intrinsic dependencies will be imported, built and
 taken care of by Bazel according to the [WORKSPACE][2] setup throughout the
 first invocation of the morphological analyzer runtime. If you are installing
