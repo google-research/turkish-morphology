@@ -46,7 +46,6 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Natural Language :: Turkish",
         "Operating System :: POSIX :: Linux",
-        "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.9",
     ],
     install_requires=["absl-py", "protobuf"],
