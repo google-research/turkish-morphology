@@ -6,8 +6,8 @@
 
 ### Changed
 
-- MacOS and Windows support temporarily disabled, since OpenFST python extension
-  is platform dependant and pre-built for Linux only.
+- MacOS and Windows support temporarily disabled, since OpenFST Python extension
+  is platform dependent and pre-built for Linux only.
 
 ## [1.2.4] - 2021-06-14
 
