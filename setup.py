@@ -25,13 +25,6 @@ with open(_README_PATH, encoding='utf-8') as f:
   long_description = f.read()
 
 
-class _BinaryDistribution(setuptools.dist.Distribution):
-
-  def has_ext_modules(_):
-    # Below is a hack to force build platform dependent non-pure wheels.
-    return True
-
-
 setuptools.setup(
     name="turkish-morphology",
     version="1.2.5",
@@ -57,5 +50,4 @@ setuptools.setup(
     ],
     install_requires=["absl-py", "protobuf"],
     python_requires='>=3.9',
-    distclass=_BinaryDistribution,
 )
